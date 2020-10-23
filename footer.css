@@ -1,0 +1,32 @@
+.footer{
+    background-color: rgb(236, 236, 236);
+}
+
+.footer button:active, button:focus{
+    outline: none;
+}
+.footer input:active, input:focus{
+    outline: none;
+}
+.footer__feedback__input{
+    margin-right: 0%;
+    padding-right: 0%;
+    width: auto;
+    border: none;
+}
+.footer__feedback__button input{
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 50px;
+    border: 0pc;
+}
+.footer__feedback__button{
+    border-radius: 50px;
+    background-color: rgb(3,168,203);
+    border: none;
+    width: auto;
+    padding: 0mm;
+}
+.footer__feedback__button span{
+    padding: 3px;
+    color: white;
+}

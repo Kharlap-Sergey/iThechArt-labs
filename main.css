@@ -7,6 +7,7 @@
     padding-bottom: 30px;
 }
 .info__name{
+    text-align:  center;
     color: white;
     padding-top: 100px;
     font-size: 100px;
@@ -31,4 +32,33 @@
     padding-top: 15px;
     padding-bottom: 15px;
     border-radius: 100px;
+}
+
+.main__articles div button{
+    margin-bottom: 10%;
+    margin-top: 3%;
+    background-color:  rgb(3, 168, 203);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    vertical-align: bottom;
+}
+
+.main__articles{
+    margin-top: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+.main__articles div{
+    border: 1px solid rgb(230, 230, 230)
+}
+
+.main__articles div img~*{
+    margin-left: 20px;
+}
+.main__articles .article__text{
+    width: 220px;
+    word-wrap: break-word;
 }
