@@ -1,7 +1,21 @@
 .footer{
     background-color: rgb(236, 236, 236);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
-
+.footer>div:not(.footer__feedback){
+    display: flex;
+    flex-direction: column;
+}
+.footer a{
+    text-decoration: underline;
+    word-wrap: none;
+}
+.footer__feedback{
+    display: flex; 
+    justify-content: flex-end;
+}
 .footer button:active, button:focus{
     outline: none;
 }
@@ -25,8 +39,14 @@
     border: none;
     width: auto;
     padding: 0mm;
+    padding-right: 5px;
 }
 .footer__feedback__button span{
     padding: 3px;
     color: white;
+}
+
+.footer__feedback div h3{
+    word-wrap: normal;
+    width: 60%;
 }

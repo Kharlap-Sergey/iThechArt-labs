@@ -25,7 +25,7 @@
 .info__butt{
     font-size: 50px;
     color: white;
-    
+    border: none;
     background-color: rgb(3, 168, 203);
     padding-left: 25px;
     padding-right: 25px;
@@ -45,6 +45,7 @@
 }
 
 .main__articles{
+    width: auto;
     margin-top: 3%;
     display: flex;
     flex-wrap: wrap;
@@ -52,13 +53,15 @@
 
 }
 .main__articles div{
-    border: 1px solid rgb(230, 230, 230)
+    border: 1px solid rgb(230, 230, 230);
+    width: 600px;
 }
 
 .main__articles div img~*{
     margin-left: 20px;
 }
+
 .main__articles .article__text{
-    width: 220px;
+    width: 70%;
     word-wrap: break-word;
 }
