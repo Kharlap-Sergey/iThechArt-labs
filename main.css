@@ -37,10 +37,6 @@
 .main__articles div button{
     margin-bottom: 10%;
     margin-top: 3%;
-    background-color:  rgb(3, 168, 203);
-    border: none;
-    border-radius: 30px;
-    color: white;
     vertical-align: bottom;
 }
 
@@ -49,12 +45,12 @@
     margin-top: 3%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 
 }
 .main__articles div{
     border: 1px solid rgb(230, 230, 230);
-    width: 600px;
+    width: 350px;
 }
 
 .main__articles div img~*{

@@ -1,0 +1,33 @@
+.story-grid{
+    display: grid;
+    grid-template-areas: 
+    "img text1" 
+    "text2 text2"
+    "but1 but1";
+    grid-gap: 2vw;
+}
+@media all and (max-width: 700px){
+    
+    .story-grid{
+        display: grid;
+        grid-template-areas: 
+        "img" 
+        "text1" 
+        "text2"
+        "but1";
+        grid-gap: 2vw;
+    }
+}
+
+.story-grid > img{
+    grid-area: img;
+}
+.story-grid > .story-grid__div{
+    grid-area: text1;
+}
+.story-grid > .story-grid__artivle{
+    grid-area: text2;
+}
+.story-grid > button{
+    grid-area: but1;
+}
