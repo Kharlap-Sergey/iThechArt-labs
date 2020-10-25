@@ -1,6 +1,6 @@
 #main__grid__cont { 
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 
       "act1 act2"
@@ -12,7 +12,7 @@
       grid-area: article;
   }
   
-  @media all and (max-width: 1400px) 
+  @media all and (max-width: 1180px) 
   {
   #main__grid__cont { 
       grid-template-areas: 
@@ -22,13 +22,16 @@
       "stor2";
       grid-template-rows: auto;  
       grid-template-columns: 1fr;
+      grid-gap: 2vw;
        }
+  }
+  #act1{
+      margin-bottom: 50px;
   }
   #act1{
       grid-area: act1;
       display: grid;
-      grid-template-rows: repeat(1fr, 5);
-      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(1fr, 4);
       grid-template-areas: 
       "act1__header act1__header"
       "act1__img1  act1__img2"
@@ -38,18 +41,18 @@
   }
   @media all and (max-width: 700px) 
   {
-  #act1 { 
-      grid-template-areas: 
-      "act1__header"
-      "act1__img1"
-      "act1__img2"
-      "act1__img3"
-      "act1__img4"
-      "act1__img5"
-      "act1__img6";
-      grid-template-rows: auto;  
-      grid-template-columns: 1fr;
-       }
+    #act1 { 
+        grid-template-areas: 
+        "act1__header"
+        "act1__img1"
+        "act1__img2"
+        "act1__img3"
+        "act1__img4"
+        "act1__img5"
+        "act1__img6";
+        grid-template-rows: auto;  
+        grid-template-columns: 1fr;
+        }
   }
   #act1__header{
       grid-area: act1__header;
@@ -85,36 +88,5 @@
 
 .act1-cont-member{
       display: grid;
-      grid-template-columns: 120px 200px;
-}
-.act1-cont-member > div > h4{
-    margin-top: 0;
-    color: rgb(3,168,203);
-    font-weight: 900;
-}
-
-.question-butt input{
-    margin-right: 0%;
-    padding-right: 0%;
-    width: 350px;
-    border: none;
-    border: 0pc;
-}
-.question-butt{
-    background-color: rgb(3,168,203);
-    border: 0.5px solid gray;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-    width: fit-content;
-    height: fit-content;
-    padding: 0mm;
-    padding-right: 5px;
-}
-.question-butt span{
-    color: white;
-}
-.act2_val{
-    display: grid;
-    max-width: 500px;
-    grid-gap: 1px
+      grid-template-columns: 80px 200px;
 }
