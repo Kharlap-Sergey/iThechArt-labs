@@ -6,6 +6,7 @@
       "act1 act2"
       "stor1 stor2";
     grid-gap: 2vw;
+    margin-bottom: 20px;
     }
   
   #article{
@@ -22,7 +23,7 @@
       "stor2";
       grid-template-rows: auto;  
       grid-template-columns: 1fr;
-      grid-gap: 2vw;
+      grid-gap: 8vw;
        }
   }
   #act1{
@@ -90,3 +91,5 @@
       display: grid;
       grid-template-columns: 80px 200px;
 }
+
+

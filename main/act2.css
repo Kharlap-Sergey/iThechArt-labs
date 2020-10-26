@@ -5,22 +5,6 @@
     font-weight: 700;
     font-family: "Source Sans Pro";
 }
-.act2__info{
-    font-size: 18px;
-    letter-spacing: 1px;
-    color: #828282;
-    font-weight: 300;
-    font-family: "Source Sans Pro";
-}
-
-
-.act2__header{
-    font-size: 28px;
-    letter-spacing: 1px;
-    color: #454855;
-    font-weight: 700;
-    font-family: "Source Sans Pro";
-}
 .act2__subtitle{
     font-size: 18px;
     letter-spacing: 1px;
@@ -116,6 +100,8 @@
     border-radius: 5px;
     background-color: #03a8cb;
     border: 0;
+
+    color: white;
     
 }
 
@@ -133,10 +119,6 @@
         color: #828282;
         font-weight: 300;
         font-family: "Source Sans Pro";
-    }
-    
-    .act2__main{
-        margin-top: 50px;
     }
     
     .act2__quiz{
@@ -223,5 +205,11 @@
         background-color: #03a8cb;
         border: 0;
         
+    }
+}
+
+@media all and (max-width: 1180px) {
+    .act2__main{
+        margin-top: 20px;
     }
 }
