@@ -16,11 +16,13 @@
 	flex: 0 0 50%;
 	display: flex;
 	flex-flow: wrap;
-	justify-content: space-between;
+	justify-content: space-around;
+	padding-bottom: 40px;
  }
  .footer__colum{
 	 display: flex;
 	 flex-direction: column;
+	 margin-bottom: 20px;
  }
 
 
@@ -45,8 +47,6 @@
 	font-family: "Source Sans Pro";
  }
 
- .footer__asidee{
- }
  .feedback{
 	margin-top: 0px;
 	display: flex;
