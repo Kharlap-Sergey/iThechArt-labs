@@ -62,10 +62,14 @@
     <style>
       .text{
         text-align: center;
-        padding-left: 200px;
 
+        max-width: 700px;
+        height: 10000px;
+
+        position: relative;
         border: 2px solid red;
       }
+
       .text__box{
         margin-top: 20px;
         display: inline-block;
@@ -83,9 +87,9 @@
       .pos-a{
         position: absolute;
 
+        left: 0;
+        top: 0;
         background-color: burlywood;
-        margin-top: 1000px;
-
       }
       .pos-s{
         position: static;
@@ -95,7 +99,8 @@
       .pos-f{
         position: fixed;
         background-color: cyan;
-        margin-top: 500px;
+        left: 10px;
+        top: 10px;
       }
 
       .pos-r{
@@ -104,6 +109,13 @@
         top:20px;
         background-color: darkorange;
       }
+
+      pos-sti{
+        position: s;
+      }
+      .w-100{
+        width: 100%;
+      }
     </style>
 
     <div>
@@ -111,13 +123,13 @@
       <div class="block__2"></div>
       <div class="block__3"></div>
     </div>
-    <div class="text">
+    <div class="text ">
       <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt="">
       <div>Called though excuse length ye needed it he having. Their saved linen downs tears son add music. How</div>
-      <div class="text__box pos-r">Called though excuse length ye needed it he having. Their saved linen downs tears son add music. How</div>
-      <div class="text__box pos-r">Called though excuse length ye needed it he having. Their saved linen downs tears son add music. How</div>
-      <div class="text__box pos-f">Called though excuse length ye needed it he having. Their saved linen downs tears son add music. How</div>
-      <div class="text__box pos-f">Called though excuse length ye needed it he having. Their saved linen downs tears son add music. How</div>
+      <div class="text__box pos-a w-100">Called though excuse length ye needed it he having. Their saved linen downs tears son add music. How</div>
+      <div class="text__box pos-a"> ye needed it he having. Their saved linen downs tears son add music. How</div>
+      <div class="text__box w-100">Called though excuse length ye needed it he having. Their saved linen downs tears son add music. How</div>
+      <div class="text__box ">Called though excuse length ye needed it he having. Their saved linen downs tears son add music. How</div>
     </div>
 </body>
 </html>
