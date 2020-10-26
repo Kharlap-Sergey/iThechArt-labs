@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #grid { 
+          display: grid;
+          grid-template-rows: 1fr 1fr 1fr;
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas: 
+            "article article" 
+            "act1 act2"
+            "stor1 stor2";
+          grid-gap: 2vw;
+          }
+        
+        #article{
+            grid-area: article;
+        }
+        
+        @media all and (max-width: 575px) 
+        {
+        #grid { 
+            grid-template-areas: 
+            "article"
+            "act1"
+            "act2"
+            "stor1"
+            "stor2";
+            grid-template-rows: auto;  
+            grid-template-columns: 1fr;
+             }
+        }
+        #act1{
+            grid-area: act1;
+            display: grid;
+            grid-template-rows: repeat(1fr, 5);
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas: 
+            "act1__header act1__header"
+            "act1__img1  act1__img2"
+            "act1__img3  act1__img4"
+            "act1__img5  act1__img6";
+            grid-gap: 2vw;
+        }
+        @media all and (max-width: 400px) 
+        {
+        #act1 { 
+            grid-template-areas: 
+            "act1__header"
+            "act1__img1"
+            "act1__img2"
+            "act1__img3"
+            "act1__img4"
+            "act1__img5"
+            "act1__img6";
+            grid-template-rows: auto;  
+            grid-template-columns: 1fr;
+             }
+        }
+        #act1__header{
+            grid-area: act1__header;
+        }
+        #act1__img1{
+            grid-area: act1__img1;
+        }
+        #act1__img2{
+            grid-area: act1__img2;
+        }
+        #act1__img3{
+            grid-area: act1__img3;
+        }
+        #act1__img4{
+            grid-area: act1__img4;
+        }
+        #act1__img5{
+            grid-area: act1__img5;
+        }
+        #act1__img6{
+            grid-area: act1__img6;
+        }
+
+        #act1>*{
+            font-size: 5vw;
+            padding: .5em;
+            background: red;
+            text-align: center;
+        }
+        #act2{
+            grid-area: act2;
+        }
+        #stor1{
+            grid-area: stor1;
+        }
+        #stor2{
+            grid-area: stor2;
+        }
+        #grid > * {
+          font-size: 5vw;
+          padding: .5em;
+          background: gold;
+          text-align: center;
+        }
+        </style>
+</head>
+<body>
+    <div id="grid">
+        <div id="article">1</div>
+        <section id="act1">
+            <div id="act1__header"></div>
+            <div id="act1__img1"></div>
+            <div id="act1__img2"></div>
+            <div id="act1__img3"></div>
+            <div id="act1__img4"></div>
+            <div id="act1__img5"></div>
+            <div id="act1__img6"></div>
+        </section>
+        <div id="act2">3</div>
+        <div id="stor1">4</div>
+        <div id="stor2">5</div>
+      </div>
+</body>
+</html>
