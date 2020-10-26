@@ -9,7 +9,7 @@ footer img{
     border-radius: 30px;
     color: white;
 }
-h3+h4{
+h3 + h4{
     margin-top: 0;
 }
 h3{

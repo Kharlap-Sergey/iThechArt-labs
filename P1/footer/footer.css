@@ -34,7 +34,7 @@
 	font-family: "Source Sans Pro";
 	text-align: left;
  }
- .colum__link>a{
+ .colum__link > a{
 	word-wrap: none;
 	width: 172px;
 	height: 165px;
@@ -122,7 +122,7 @@
 	text-align: left;
  }
  .subscribe__input{
-	margin: 0; 
+	margin: 0;
 	padding: 0;
 	border: none;
 	font-size: 18px;
@@ -154,7 +154,7 @@
 		margin:0;
 	}
 	.subscribe__input{
-		margin: 0; 
+		margin: 0;
 		padding: 0;
 		border: none;
 		font-size: 18px;
@@ -163,7 +163,7 @@
 		font-weight: 700;
 		font-family: "Source Sans Pro";
 		text-align: left;
-	
+
 		border-top-left-radius: inherit;
 		border-bottom-left-radius: inherit;
 	 }
