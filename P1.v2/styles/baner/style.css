@@ -4,7 +4,7 @@
 
 .baner__box {
   padding-top: 150px;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
 }
 
 .baner__title {
@@ -21,27 +21,29 @@
 .baner__text {
   padding-left: 20%;
   padding-right: 20%;
+  padding-top: 20px;
   font-size: 2.8rem;
-  letter-spacing: 2px;
+  letter-spacing: 0.2rem;
   color: #ffffff;
-  font-weight: 300;
+  font-weight: 100;
   text-align: center;
-  -webkit-filter: drop-shadow(0px 3px 2.5px rgba(0, 0, 0, 0.2));
-          filter: drop-shadow(0px 3px 2.5px rgba(0, 0, 0, 0.2));
+  -webkit-filter: drop-shadow(0px 3pxv 2.5px rgba(0, 0, 0, 0.1));
+          filter: drop-shadow(0px 3pxv 2.5px rgba(0, 0, 0, 0.1));
 }
 
 .baner__action {
+  margin-top: 20px;
   text-align: center;
 }
 
 .baner__button {
-  margin-top: 20px;
   width: 135px;
   height: 49px;
   border-radius: 24px;
   -webkit-filter: drop-shadow(0px 3px 2.5px rgba(0, 0, 0, 0.2));
           filter: drop-shadow(0px 3px 2.5px rgba(0, 0, 0, 0.2));
   background-color: #03a8cb;
+  border: none;
   font-size: 2.2rem;
   letter-spacing: 2px;
   color: #ffffff;

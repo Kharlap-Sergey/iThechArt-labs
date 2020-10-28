@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.header__logo {
+  margin-bottom: 15px;
+}
+
 .header__menu {
   background-color: #03a8cb;
   margin-top: 15px;
@@ -54,7 +58,7 @@
 }
 
 .menu__item {
-  margin-left: 5px;
+  margin-left: 10px;
   font-size: 1.6rem;
   letter-spacing: 0.1rem;
   color: #ffffff;

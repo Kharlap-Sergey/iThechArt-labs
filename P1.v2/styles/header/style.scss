@@ -4,11 +4,11 @@
     text-align: center;
   }
   &__logo {
+    margin-bottom: 15px;
   }
   &__menu {
     background-color: #03a8cb;
     margin-top: 15px;
-
   }
 }
 
@@ -57,7 +57,7 @@
   filter: drop-shadow(0 0 2.5px rgba(0,0,0,0.12));
 
   &__item {
-    margin-left: 5px;
+    margin-left: 10px;
 
     font-size: 1.6rem;
     letter-spacing: 0.1rem;
