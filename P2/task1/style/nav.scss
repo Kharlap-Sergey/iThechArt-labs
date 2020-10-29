@@ -1,6 +1,7 @@
 .naw {
 	&__body {
     display: flex;
+    flex-wrap: wrap;
     background-color: red;
     border: 2px solid orangered;
     justify-content: space-evenly;
@@ -9,6 +10,7 @@
 	&__link {
     font-size: 4rem;
     a{
+      text-transform: uppercase;
       color: white;
       text-decoration: none;
       border: 2px lightcyan solid;
