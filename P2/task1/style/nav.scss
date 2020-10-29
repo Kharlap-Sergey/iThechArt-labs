@@ -1,0 +1,17 @@
+.naw {
+	&__body {
+    display: flex;
+    background-color: red;
+    border: 2px solid orangered;
+    justify-content: space-evenly;
+    padding: 20px 0 20px 0;
+  }
+	&__link {
+    font-size: 4rem;
+    a{
+      color: white;
+      text-decoration: none;
+      border: 2px lightcyan solid;
+    }
+   }
+}

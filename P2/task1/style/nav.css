@@ -1,0 +1,22 @@
+.naw__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: red;
+  border: 2px solid orangered;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  padding: 20px 0 20px 0;
+}
+
+.naw__link {
+  font-size: 4rem;
+}
+
+.naw__link a {
+  color: white;
+  text-decoration: none;
+  border: 2px lightcyan solid;
+}
+/*# sourceMappingURL=nav.css.map */
