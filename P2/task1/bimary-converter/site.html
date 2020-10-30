@@ -1,100 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="/P2/task1/style/style.css">
-    <link rel="stylesheet" href="/P2/task1/style/nav.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/P2/task1/style/style.css" />
+    <link rel="stylesheet" href="/P2/task1/style/nav.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>task1</title>
-</head>
+  </head>
 
-<body>
-  <div class="naw">
-    <div class="naw__body">
-      <div class="naw__link">
-        <a href="/P2/task1/array-processing-tool/site.html">array-processing-tool</a>
-      </div>
-      <div class="naw__link">
-        <a href="/P2/task1/array-sorter/site.html">array-sorter</a>
-      </div>
-      <div class="naw__link">
-        <a href="/P2/task1/bimary-converter/site.html">bimary-converter</a>
-      </div>
-      <div class="naw__link">
-        <a href="/P2/task1/caching-calculator/site.html">caching-calculator</a>
-      </div>
-      <div class="naw__link">
-        <a href="/P2/task1/date-display-formatter/site.html">ate-display-formatter</a>
-      </div>
-      <div class="naw__link">
-        <a href="/P2/task1/string-calculator/site.html">string-calculator</a>
-      </div>
-      <div class="naw__link">
-        <a href="/P2/task1/text-formatter/site.html">text-formatter</a>
-      </div>
-    </div>
-  </div>
-    <div class="tasks__content array-processing-tool">
-        <div class="array-processing-tool__body">
-            <div class="header array-processing-tool__header">
-              Binary Converter
-            </div>
-
-            <ol class="array-processing-tool__tasks" type="a">
-                <li>
-                    <div class="array-processing-tool__subtask sub-sum">
-                        <div class="sub-sum__body">
-                            <div class="subheader sub-sum__header">
-                              Sub Sum</div>
-                            <input class="data-input sub-sum__data-input"></input>
-                            <div class="sub-sum__o-natation-input">
-                                <select id="sub-sum__o-natation-input-selecter">
-                                          <option>O(n)</option>
-                                          <option>0(n&sup2)</option>
-                                        </select>
-                            </div>
-                            <div class="">
-                              <button class="sub-sum__exec exec">Execute</button>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="array-processing-tool__subtask search">
-                        <div class="search__body">
-                            <div class="subheader search__header">Search</div>
-                            <input class="data-input search__data-input"></input>
-                            <div class="search__type-input">
-                              <select id="ssearch__type-input-selecter">
-                                <option>max</option>
-                                <option>min</option>
-                                <option>median</option>
-                              </select>
-                            </div>
-                            <div class="">
-                            <button class="search__exec exec">Execute</button>
-
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="array-processing-tool__subtask selevtion">
-                        <div class="selevtion__body">
-                            <div class="subheader selevtion__header">Selection Task</div>
-                            <input class="data-input selevtion__data-input"></input>
-                            <div class="">
-                              <button class="selevtion__exec exec">Execute</button>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ol>
+  <body>
+    <div class="naw">
+      <div class="naw__body">
+        <div class="naw__link">
+          <a href="/P2/task1/array-processing-tool/site.html"
+            >array-processing-tool</a
+          >
         </div>
+        <div class="naw__link">
+          <a href="/P2/task1/array-sorter/site.html">array-sorter</a>
+        </div>
+        <div class="naw__link">
+          <a href="/P2/task1/bimary-converter/site.html">bimary-converter</a>
+        </div>
+        <div class="naw__link">
+          <a href="/P2/task1/caching-calculator/site.html"
+            >caching-calculator</a
+          >
+        </div>
+        <div class="naw__link">
+          <a href="/P2/task1/date-display-formatter/site.html"
+            >ate-display-formatter</a
+          >
+        </div>
+        <div class="naw__link">
+          <a href="/P2/task1/string-calculator/site.html">string-calculator</a>
+        </div>
+        <div class="naw__link">
+          <a href="/P2/task1/text-formatter/site.html">text-formatter</a>
+        </div>
+      </div>
     </div>
-    <script src="array.js"></script>
-</body>
 
+    <div class="numberal-converter">
+      <div class="numberal-converter__body">
+        <div class="numberal-converter__header">Binary Converter</div>
+        <div class="numberal-converter__data">
+          <input id="input" type="text">
+        </div>
+        <div class="numberal-converter__option options">
+          <div class="options__body">
+            <div class="options__opt">
+              <div class="options__lable">from</div>
+              <select name="" id="option-from">
+                 <option value="2">2</option>
+                 <option value="3">3</option>
+                 <option value="4">4</option>
+                 <option value="5">5</option>
+                 <option value="6">6</option>
+                 <option value="7">7</option>
+                 <option value="8">8</option>
+                 <option value="9">9</option>
+                 <option value="10">10</option>
+                 <option value="11">11</option>
+                 <option value="12">12</option>
+                 <option value="13">13</option>
+                 <option value="14">14</option>
+                 <option value="15">15</option>
+                 <option value="16">16</option>
+              </select>
+            </div>
+            <div class="options__opt">
+              <div class="options__lable">to</div>
+              <select name="" id="option-to">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="numberal-converter__executer">
+          <button id="executer">transform</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="converter.js"></script>
+  </body>
 </html>
