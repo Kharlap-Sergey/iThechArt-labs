@@ -1,34 +1,35 @@
-.array-processing-tool * {
+.string-calculator__body {
+  background-color: white;
+  padding-left: 40px;
+  padding-top: 20px;
+}
+
+.string-calculator__body * {
+  border-radius: 20px;
   margin-top: 10px;
 }
 
-.array-processing-tool .exec {
-  color: white;
-  background-color: red;
-  font-size: 2.5rem;
-  border-color: orangered;
+.string-calculator__header {
+  margin-left: -40px;
+  font-size: 4rem;
+  color: red;
 }
 
-.array-processing-tool select {
-  color: white;
-  font-size: 2.5rem;
-  background-color: red;
-  border-color: orangered;
+.string-calculator__input {
+  font-size: 3rem;
 }
 
-.array-processing-tool__body {
-  position: relative;
+.string-calculator__input input {
+  color: red;
+  background-color: white;
+  border: 4px solid red;
 }
 
-.sub-sum__data-input {
+.string-calculator__executer button {
   border: 2px solid red;
-}
-
-.search__data-input {
-  border: 2px solid red;
-}
-
-.selevtion__data-input {
-  border: 2px solid red;
+  font-size: 3rem;
+  color: red;
+  background-color: white;
+  text-transform: uppercase;
 }
 /*# sourceMappingURL=style.css.map */
