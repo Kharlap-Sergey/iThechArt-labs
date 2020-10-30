@@ -58,6 +58,8 @@ stringCalculator = {
                 }
             }
         }
+
+        console.log(buuf.split(/\b/));запушит
         return buf1;
     },
 };
