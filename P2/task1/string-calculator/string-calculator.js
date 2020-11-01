@@ -70,6 +70,23 @@ stringCalculator = {
     while (true) {
       var exite = true;
       for (let i = 0; i < cont.length - 1; i++) {
+        if (cont[i + 1] == "." || cont[i + 1] == ",") {
+          var res = +(cont[i]) + cont[i + 2] / 10;
+          console.log(`res ${res}`);
+          console.log(cont);
+          cont.splice(i, 3, res);
+          console.log(cont);
+          console.log("_---------_");
+          exite = false;
+          break;
+        }
+      }
+      if (exite) break;
+    }
+
+    while (true) {
+      var exite = true;
+      for (let i = 0; i < cont.length - 1; i++) {
         if (cont[i + 1] == "^") {
           var res = this.determAndCalc(cont[i + 1], cont[i], cont[i + 2]);
           console.log(`res ${res}`);
