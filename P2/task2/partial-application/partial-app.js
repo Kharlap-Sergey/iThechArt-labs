@@ -9,7 +9,7 @@ var partial = function(fn){
   return function(){
     return fn(args, arguments);
   }
-  //return fn.bind(null, args); можно так же
+  //return fn.bind(null, args); alternative
 }
 
 var someFunction = function() {
