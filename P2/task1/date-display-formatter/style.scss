@@ -24,9 +24,21 @@
   }
   &__input {
     font-size: 3rem;
-    #input1{
+    color: red;
+    background-color: white;
+    #input2{
       display: none;
     }
+    #input2-info{
+      display: none;
+    }
+    #input3{
+      display: none;
+    }
+    #input3-info{
+      display: none;
+    }
+
     input {
       color: red;
       background-color: white;

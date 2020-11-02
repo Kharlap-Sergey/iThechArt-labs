@@ -42,15 +42,19 @@
       <div class="date-formater__header">Date Display Formatter</div>
       <div class="date-formater__options">
         <select name="" id="options">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+          <option value="1">date from ms</option>
+          <option value="2">date from str</option>
+          <option value="3">date from str by regex</option>
+          <option value="4">date from str to str by regex</option>
         </select>
       </div>
       <div class="date-formater__input">
+        <div id="input1-info">enter a date string</div>
         <input type="text" id="input1">
+        <div id="input2-info">enter a regex expression for parsing</div>
         <input type="text" id="input2">
+        <div id="input3-info">enter a regex expression for outputing</div>
+        <input type="text" id="input3">
       </div>
 
       <div class="date-formater__executer">

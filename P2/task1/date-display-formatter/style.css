@@ -27,9 +27,23 @@
 
 .date-formater__input {
   font-size: 3rem;
+  color: red;
+  background-color: white;
 }
 
-.date-formater__input #input1 {
+.date-formater__input #input2 {
+  display: none;
+}
+
+.date-formater__input #input2-info {
+  display: none;
+}
+
+.date-formater__input #input3 {
+  display: none;
+}
+
+.date-formater__input #input3-info {
   display: none;
 }
 
