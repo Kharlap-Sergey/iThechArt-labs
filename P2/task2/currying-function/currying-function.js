@@ -1,19 +1,3 @@
-// var curry = function(fn, temp){
-//   return function(){
-//     var args = []
-//     for(var i = 0; i < arguments.length; i++){
-//       args.push(arguments[i]);
-//     }
-//     if(fn.length > args.length){
-//       const t = fn.bind(null, ...args);
-//       return curry(t);
-//     }
-//     else{
-//       return fn(args);
-//     }
-//   }
-// }
-
 var curry = function curry(fn) {
   return function cf() {
     //var args = [].slice.call(arguments);
