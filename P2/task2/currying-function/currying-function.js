@@ -14,32 +14,30 @@
 //   }
 // }
 
-var curry = function curry(fn, ctx){
-  return function cf(){
-    var args = []
-    for(var i = 0; i < arguments.length; i++){
+var curry = function curry(fn) {
+  return function cf() {
+    //var args = [].slice.call(arguments);
+    var args = [];
+    for (var i = 0; i < arguments.length; i++) {
       args.push(arguments[i]);
     }
-    return (args.length >= fn.length) ?
-      fn.apply(null, args) :
-      function () {
-        return cf.apply(ctx, args.concat([].slice.call(arguments)));
+    if (fn.length > args.length) {
+      return function () {
+        console.log(args);
+        for (var elem of arguments) {
+          args.push(elem);
+        }
+        return cf.apply(this, args);
       };
-  };
-}
-
-function sum(x, y, z, t){
-  result = 0;
-  for(elem of arguments){
-    if(elem[Symbol.iterator]){
-      for(elem2 of elem)
-        result += elem2;
+    } else {
+      return fn.apply(null, args);
     }
-    else result += elem;
-  }
-  return x+y+z+t;
-  return result;
+  };
+};
+
+function sum(x, y, z, t) {
+  return x + y + z + t;
 }
 
 var curry1 = curry(sum);
-console.log(curry1(1,2)(3, 4));
+console.log(curry1(1, 2)(4, 4));
