@@ -1,10 +1,10 @@
-export function unfold(callback, initialValue){
+export function unfold(callback, initialValue) {
   var result = [];
   var value = [initialValue];
-  while(true){
+  while (true) {
     value = callback(value[0]);
 
-    if(!value) break;
+    if (!value) break;
     result.push(value[1]);
   }
   return result;
