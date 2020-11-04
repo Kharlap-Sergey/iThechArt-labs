@@ -1,0 +1,45 @@
+.weather__body {
+  padding: 50px;
+  text-align: center;
+  background-image: url("https://cs.pikabu.ru/post_img/big/2013/06/21/8/1371815532_1112005964.jpg");
+}
+
+.weather__input {
+  margin-bottom: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.weather__input * {
+  margin-left: 20px;
+}
+
+.weather__input .lable {
+  font-size: 4rem;
+  text-align: left;
+}
+
+.weather__input select {
+  text-transform: uppercase;
+  font-size: 5rem;
+}
+
+.weather__input input {
+  background-image: inherit;
+  font-size: 5rem;
+}
+
+.info .accept-body {
+  margin-top: 20px;
+}
+/*# sourceMappingURL=weather.css.map */

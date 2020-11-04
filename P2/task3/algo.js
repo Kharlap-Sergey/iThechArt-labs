@@ -9,6 +9,10 @@ var infoCityNameDiv = document.getElementById("cityNameDiv");
 // var infoDateDiv = document.getElementById("dateDiv");
 // var infoTemperatureDiv = document.getElementById("temperatureDiv");
 
+function parseDate(){
+  
+}
+
 function update(cityName) {
   console.log("was called update function");
   console.log(cityInp.value);
@@ -44,11 +48,12 @@ function showData(data) {
     infoAcceptDiv.appendChild(infoCityNameDiv);
     for(var weather of data.list){
       console.log(weather);
-      var clone = document.importNode(acceptTemplat.content, true);
-      console.log(clone);
-      clone.querySelector(".dateDiv").textContent = weather.dt_txt;
-      clone.querySelector(".temperatureDiv").textContent = getTemp(weather.main.temp);
-      infoAcceptDiv.appendChild(clone);
+      var clone = document.importNode(acceptTemplat, true);
+      console.log(clone.content);
+      
+      clone.content.querySelector(".dateDiv").textContent = weather.dt_txt;
+      clone.content.querySelector(".temperatureDiv").textContent = getTemp(weather.main.temp);
+      infoAcceptDiv.appendChild(clone.content);
     }
     
     

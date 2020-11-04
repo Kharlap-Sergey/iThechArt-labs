@@ -4,7 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="weather.css">
+  <style>
+    html{
+      font-size: 62.5%;
+    }
+  </style>
   <title>Document</title>
 </head>
 
@@ -14,26 +19,29 @@
     <div class="weather__body">
       <div class="weather__input">
         <div class="weather__city">
+          <div class="lable">city</div>
           <input id="cityInp" type="text">
         </div>
-        <div class="weather__len">
+        <div class="weather__lan">
+          <div class="lable">language</div>
           <select name="" id="">
             <option value="en">English</option>
             <option value="ru">русский</option>
           </select>
         </div>
         <div class="weather__system">
+          <div class="lable">base unit</div>
           <select name="" id="systemOftemp">
-            <option value="C">C</option>
-            <option value="F">F</option>
-            <option value="K">K</option>
+            <option value="C">celsius</option>
+            <option value="F">fahrenheit</option>
+            <option value="K">kelvin</option>
           </select>
         </div>
-        <div class="weather__update">
-          <button class="weather__update-but" id="updateBut">
-            Update
-          </button>
-        </div>
+      </div>
+      <div class="weather__update">
+        <button class="weather__update-but" id="updateBut">
+          Update
+        </button>
       </div>
       <div class="weather__result">
         <div class="weather__info info" id="info">
@@ -47,8 +55,10 @@
   </div>
 
   <template class="info__accept-temp" id="acceptDiv-temp">
-    <div class="dateDiv"></div>
-    <div class="temperatureDiv"></div>
+    <div class="accept-body">
+      <div class="dateDiv"></div>
+      <div class="temperatureDiv"></div>
+    </div>
   </template>
 
   <script src="algo.js"></script>
