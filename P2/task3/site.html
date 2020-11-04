@@ -1,42 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="weather">
-      <div class="weather__body">
-        <div class="weather__input">
-          <div class="weather__city">
-            <input id="cityInp" type="text" >
-          </div>
-          <div class="weather__len">
-            <select name="" id="">
-              <option value="en">English</option>
-              <option value="ru">русский</option>
-            </select>
-          </div>
-          <div class="weather__system">
-            <select name="" id="">
-              <option value="C">C</option>
-              <option value="F">F</option>
-            </select>
-          </div>
-          <div class="weather__update">
-            <button class="weather__update-but" id="updateBut">
-              Update
-            </button>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="weather">
+    <div class="weather__body">
+      <div class="weather__input">
+        <div class="weather__city">
+          <input id="cityInp" type="text">
         </div>
-        <div class="weather__result">
-          <div class="weather__info" id="info"></div>
+        <div class="weather__len">
+          <select name="" id="">
+            <option value="en">English</option>
+            <option value="ru">русский</option>
+          </select>
+        </div>
+        <div class="weather__system">
+          <select name="" id="systemOftemp">
+            <option value="C">C</option>
+            <option value="F">F</option>
+            <option value="K">K</option>
+          </select>
+        </div>
+        <div class="weather__update">
+          <button class="weather__update-but" id="updateBut">
+            Update
+          </button>
+        </div>
+      </div>
+      <div class="weather__result">
+        <div class="weather__info info" id="info">
+          <div class="info__error" id="errorDiv">error</div>
+          <div class="info__accept" id="acceptDiv">
+            <div class="info__cityName" id="cityNameDiv"></div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="algo.js"></script>
-  </body>
+  <template class="info__accept-temp" id="acceptDiv-temp">
+    <div class="dateDiv"></div>
+    <div class="temperatureDiv"></div>
+  </template>
+
+  <script src="algo.js"></script>
+</body>
+
 </html>
