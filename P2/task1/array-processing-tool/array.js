@@ -1,48 +1,52 @@
-const executeSubSum = document.querySelector(".sub-sum__exec");
-const subSumInput = document.querySelector(".sub-sum__data-input");
+var executeSubSum = document.querySelector(".sub-sum__exec");
+var subSumInput = document.querySelector(".sub-sum__data-input");
 
-const executeSearch = document.querySelector(".search__exec");
-const searchInput = document.querySelector(".search__data-input");
-const searchOption = document.querySelector("#ssearch__type-input-selecter");
+var executeSearch = document.querySelector(".search__exec");
+var searchInput = document.querySelector(".search__data-input");
+var searchOption = document.querySelector("#ssearch__type-input-selecter");
 
-const executeSelect= document.querySelector(".selevtion__exec");
-const selectInput = document.querySelector(".selevtion__data-input");
+var executeSelect = document.querySelector(".selevtion__exec");
+var selectInput = document.querySelector(".selevtion__data-input");
 
 
-function toIntArray(arr){
-  let intArr = [];
-    for (elem of arr) {
-      intArr.push(+elem);
-    }
+function toIntArray(arr) {
+  var intArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    var elem = arr[i];
+    intArr.push(+elem);
+  }
 
   return intArr;
 }
 
-let array = {
+var array = {
   subSum: function (arr) {
-    let sum = 0;
-    let maxSum = +arr[0];
-    for (elem of arr) {
+    var sum = 0;
+    var maxSum = +arr[0];
+    for (var i = 0; i < arr.length; i++) {
+      var elem = arr[i];
       sum += +elem;
       maxSum = maxSum < sum ? sum : maxSum;
-      if(sum < 0) sum = 0;
+      if (sum < 0) sum = 0;
     }
 
     return maxSum;
   },
 
   findMax: function (arr) {
-    let res = arr[0];
-    for (elem of arr) {
+    var res = arr[0];
+    for (var i = 0; i < arr.length; i++) {
+      var elem = arr[i];
       res = res < +elem ? +elem : res;
     }
     return res;
   },
 
   findMin: function (arr) {
-    let res = arr[0];
+    var res = arr[0];
 
-    for (elem of arr) {
+    for (var i = 0; i < arr.length; i++) {
+      var elem = arr[i];
       res = res > +elem ? +elem : res;
     }
 
@@ -51,39 +55,40 @@ let array = {
 
   findMedian: function (arr) {
 
-    let intArr = toIntArray(arr);
+    var intArr = toIntArray(arr);
     intArr.sort();
 
     return intArr[Math.floor(intArr.length / 2)];
   },
 
-  selectMaxAscendingSubsequence: function(arr){
-    let intArr = toIntArray(arr);
+  selectMaxAscendingSubsequence: function (arr) {
+    var intArr = toIntArray(arr);
+    intArr.push(null);
+    var start = 0;
+    var end = 0;
 
-    let start = 0;
-    let end = 0;
-
-    for(let i = 0; i < intArr.length; i++){
-      let j = i;
-      while(j < intArr.length-1 && intArr[i] <= intArr[j+1]){
+    for (var i = 0; i < intArr.length; i++) {
+      var j = i;
+      while (j < intArr.length && intArr[j] <= intArr[j + 1]) {
         j++;
+        if(j+1 == null) break;
       }
 
-      if(j - i > end - start){
+      if (j - i > end - start) {
         start = i;
         end = j;
       }
     }
-    console.log(intArr.slice(start,end));
-    return intArr.slice(start,end);
+    console.log(intArr.slice(start, end+1));
+    return intArr.slice(start, end+1);
   }
 };
 
-let executer = {
+var executer = {
   subSum: function () {
     console.log("sub sum executer");
     console.log(subSumInput.value);
-    let arr = subSumInput.value.split(", ");
+    var arr = subSumInput.value.split(", ");
     console.log(arr);
 
     alert("Sub Sum: " + array.subSum(arr));
@@ -92,32 +97,32 @@ let executer = {
   search: function () {
     console.log("searching");
     console.log(searchOption.value);
-    let arr = searchInput.value.split(", ");
+    var arr = searchInput.value.split(", ");
     console.log(arr);
-    let res;
-    switch(searchOption.value){
+    var res;
+    switch (searchOption.value) {
       case 'max':
         res = "max: ";
         res += array.findMax(arr);
         break;
       case 'min':
         res = "nin: ";
-        res+=array.findMin(arr);
+        res += array.findMin(arr);
         break;
       case 'median':
         res = "median: "
-        res+=array.findMedian(arr);
+        res += array.findMedian(arr);
         break;
     }
     alert(res);
   },
 
-  select: function(){
+  select: function () {
     console.log("selecting");
     console.log(selectInput.value);
-    let arr = selectInput.value.split(", ");
+    var arr = selectInput.value.split(", ");
     console.log(arr);
-    let res = array.selectMaxAscendingSubsequence(arr);
+    var res = array.selectMaxAscendingSubsequence(arr);
     alert("ascending subsequence: " + res);
   }
 };
