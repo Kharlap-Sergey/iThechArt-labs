@@ -8,7 +8,11 @@ var input3Info = document.getElementById("input3-info");
 
 month = [];
 dateFormater = {
-  getDateStirngFromDate(date, regex = "MM/DD/YYYY") {
+  getDateStirngFromDate: function (date) {
+    var regex = "MM/DD/YYYY";
+    if (arguments[1]) {
+      regex = arguments[1];
+    }
     console.log("regex for outputing " + regex);
     var result = "";
     var mf = false,
@@ -45,7 +49,11 @@ dateFormater = {
     return result;
   },
 
-  getDateFromeString: function (str, regex = "MMDDYYYY") {
+  getDateFromeString: function (str) {
+    var regex = "MMDDYYYY";
+    if (arguments[1]) {
+      regex = arguments[1];
+    }
     console.log("string for format " + str);
     var month = 0,
       day = 0,

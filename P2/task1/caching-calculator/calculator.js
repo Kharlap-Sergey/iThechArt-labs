@@ -5,15 +5,14 @@ var operator = document.querySelector("#operation");
 
 cacheCalculator = {
     cache: {},
-    getOrSetCache: function (val1, val2, operatino, ...args) {
+    getOrSetCache: function (val1, val2, operatino) {
         var cacheKey = operatino + val1 + val2;
 
-        if (!args.length) {
+        if (arguments.length == 4) {
             return this.cache[cacheKey];
         }
 
-        this.cache[cacheKey] = args[0];
-
+        this.cache[cacheKey] = arguments[3];
     },
 
     executeOperation: function (val1, val2, opearation) {
@@ -41,7 +40,7 @@ cacheCalculator = {
     calculate: function (val1, val2, opearation) {
         var result = this.getOrSetCache(val1, val2, opearation);
 
-        if(!result){
+        if (!result) {
             var result = this.executeOperation(val1, val2, opearation);
             this.getOrSetCache(val1, val2, opearation, result);
         }
@@ -51,7 +50,7 @@ cacheCalculator = {
 }
 
 executer = {
-    calculate: function() {
+    calculate: function () {
         console.log("executin was started");
         var result = cacheCalculator.calculate(numberA.value, numberB.value, operator.value);
         alert("result is " + result);

@@ -2,7 +2,7 @@ const input = document.querySelector("#input");
 const executerBut = document.querySelector("#executer");
 
 stringCalculator = {
-  determAndCalc(operator, val1, val2) {
+  determAndCalc: function (operator, val1, val2) {
     val1 = +val1;
     val2 = +val2;
     switch (operator) {
@@ -31,7 +31,7 @@ stringCalculator = {
     return a / b;
   },
   pow: function (a, b) {
-    return a ** b;
+    return Math.pow(a, b);
   },
 
   calculate: function (str) {
@@ -72,7 +72,6 @@ stringCalculator = {
       for (let i = 0; i < cont.length - 1; i++) {
         if (cont[i + 1] == "." || cont[i + 1] == ",") {
           var res = +(cont[i]) + cont[i + 2] / 10;
-          console.log(`res ${res}`);
           console.log(cont);
           cont.splice(i, 3, res);
           console.log(cont);
@@ -89,7 +88,6 @@ stringCalculator = {
       for (let i = 0; i < cont.length - 1; i++) {
         if (cont[i + 1] == "^") {
           var res = this.determAndCalc(cont[i + 1], cont[i], cont[i + 2]);
-          console.log(`res ${res}`);
           console.log(cont);
           cont.splice(i, 3, res);
           console.log(cont);
@@ -108,7 +106,6 @@ stringCalculator = {
       for (let i = 0; i < cont.length - 1; i++) {
         if (cont[i + 1] == "*" || cont[i + 1] == "/") {
           var res = this.determAndCalc(cont[i + 1], cont[i], cont[i + 2]);
-          console.log(`res ${res}`);
           console.log(cont);
           cont.splice(i, 3, res);
           console.log(cont);
@@ -126,7 +123,6 @@ stringCalculator = {
       for (let i = 0; i < cont.length - 1; i++) {
         if (cont[i + 1] == "+" || cont[i + 1] == "-") {
           var res = this.determAndCalc(cont[i + 1], cont[i], cont[i + 2]);
-          console.log(`res ${res}`);
           console.log(cont);
           cont.splice(i, 3, res);
           console.log(cont);

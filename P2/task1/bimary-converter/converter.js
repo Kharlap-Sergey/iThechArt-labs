@@ -1,17 +1,17 @@
 const input = document.querySelector("#input");
 const executerBut = document.querySelector("#executer");
 const optionTo = document.querySelector("#option-to");
-const optionFrom= document.querySelector("#option-from");
+const optionFrom = document.querySelector("#option-from");
 
 converter = {
-  convertFromDec: function(value, to){
-      console.log(typeof value);
-      return value.toString(to);
+  convertFromDec: function (value, to) {
+    console.log(typeof value);
+    return value.toString(to);
   },
 }
 
 executer = {
-  transform: function(){
+  transform: function () {
     console.log("execution was started");
     console.log(input.value);
     console.log(optionFrom.value);

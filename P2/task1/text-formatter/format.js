@@ -12,7 +12,7 @@ formatter = {
     return res;
   },
   splitBySentances: function (str) {
-    let res = str.split(/[.?! ]+/);
+    let res = str.split(/[.?!]+/);
     console.log(res);
     return res;
   },
