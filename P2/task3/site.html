@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="weather.css">
   <style>
-    html{
+    html {
       font-size: 62.5%;
     }
   </style>
@@ -24,7 +24,7 @@
         </div>
         <div class="weather__lan">
           <div class="lable">language</div>
-          <select name="" id="">
+          <select name="" id="lang">
             <option value="en">English</option>
             <option value="ru">русский</option>
           </select>
@@ -48,18 +48,28 @@
           <div class="info__error" id="errorDiv">error</div>
           <div class="info__accept" id="acceptDiv">
             <div class="info__cityName" id="cityNameDiv"></div>
+            <div class="info__date" id="dateDiv"></div>
+            <div class="info__weather-body" id="weather-body"></div>
+          </div>
+          <div class="accept-element">
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <template class="info__accept-temp" id="acceptDiv-temp">
-    <div class="accept-body">
-      <div class="dateDiv"></div>
-      <div class="temperatureDiv"></div>
+  <div class="info__accept-temp" id="acceptDiv-temp"
+  style="display: none;">
+    <div class="accept-element">
+      <div class="accept-element__body">
+        <div class="accept-element__dateDiv"></div>
+        <div class="accept-element__weather"></div>
+        <div class="">
+          <div class="accept-element__temperatureDiv"></div>
+        </div>
+      </div>
     </div>
-  </template>
+  </div>
 
   <script src="algo.js"></script>
 </body>

@@ -2,7 +2,6 @@
   &__body {
     padding: 50px;
     text-align: center;
-    background-image: url("https://cs.pikabu.ru/post_img/big/2013/06/21/8/1371815532_1112005964.jpg");
   }
 
   &__input {
@@ -41,25 +40,57 @@
   &__update-but {
   }
   &__result {
+    margin-top: 40px;;
   }
   &__info {
   }
 }
 .info {
+  &__date{
+    font-size: 3rem;
+  }
   &__error {
+    font-size: 3rem;
+    display: none;
   }
   &__accept {
+    display: none;
   }
   &__cityName {
+    font-size: 3rem;
   }
-  &__accept-temp {
-      
-  }
-  .accept-body{
-    margin-top: 20px;
+  &__weather-body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
-.dateDiv {
-}
-.temperatureDiv {
+
+.accept-element {
+  &__body{
+    width: 100px;
+    height: 200px;
+    padding: 1%;
+    padding-top: 15px;
+
+    border: 1px solid gray;
+  }
+  &__dateDiv {
+    font-size: 2rem;
+  }
+  &__weather{
+    margin-top: 10px;
+    font-size: 2rem;
+  }
+  &__temperatureDiv {
+    font-size: 3rem;
+    margin-top: 50px;
+    display: inline-block;
+    text-align: center;
+    padding: 1px;
+    width: fit-content;
+    background-color: aqua;
+    border: 1px solid lightcyan;
+  }
 }
