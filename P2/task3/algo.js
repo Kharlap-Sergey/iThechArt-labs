@@ -12,7 +12,7 @@ var langOpt = document.getElementById("lang");
 dateFormater = {
   getDateStirngFromDate: function(date) {
     var regex = arguments[1];
-    if(regex == null){
+    if(!regex){
       regex = "MM/DD/YYYY";
     }
     console.log("regex for outputing " + regex);
@@ -53,7 +53,7 @@ dateFormater = {
 
   getDateFromeString: function (str) {
     var regex = arguments[1];
-    if(regex == null){
+    if(!regex){
       regex = "MMDDYYYY"
     }
     console.log("string for format " + str);

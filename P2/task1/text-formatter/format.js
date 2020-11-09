@@ -1,28 +1,28 @@
-const input = document.querySelector("#input");
-const executerBut = document.querySelector("#executeBut");
-const option = document.querySelector("#formatOpt");
+var input = document.querySelector("#input");
+var executerBut = document.querySelector("#executeBut");
+var option = document.querySelector("#formatOpt");
 
-formatter = {
+var formatter = {
   splitByChar: function (str) {
     return str.split("");
   },
   splitByWord: function (str) {
-    let res = str.split(/\W+/);
+    var res = str.split(/\W+/);
     console.log(res);
     return res;
   },
   splitBySentances: function (str) {
-    let res = str.split(/[.?!]+/);
+    var res = str.split(/[.?!]+/);
     console.log(res);
     return res;
   },
 };
 
-executer = {
+var executer = {
   format: function () {
     console.log("execution was started");
     console.log(input.value);
-    let result;
+    var result;
     switch (option.value) {
       case "none":
         result = input.value;
@@ -30,7 +30,7 @@ executer = {
       case "word":
         result = formatter.splitByWord(input.value).join("\n");
         break;
-      case "letter":
+      case "varter":
         result = formatter.splitByChar(input.value).join("\n");
         break;
       case "sentence":

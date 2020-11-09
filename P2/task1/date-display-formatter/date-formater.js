@@ -6,8 +6,7 @@ var input3 = document.getElementById("input3");
 var input2Info = document.getElementById("input2-info");
 var input3Info = document.getElementById("input3-info");
 
-month = [];
-dateFormater = {
+var dateFormater = {
   getDateStirngFromDate: function (date) {
     var regex = "MM/DD/YYYY";
     if (arguments[1]) {
@@ -82,7 +81,7 @@ dateFormater = {
     return new Date(ms);
   },
 };
-executer = {
+var executer = {
   format: function () {
     var result;
     switch (+options.value) {

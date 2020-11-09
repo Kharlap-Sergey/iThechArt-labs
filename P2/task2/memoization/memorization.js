@@ -17,7 +17,7 @@ function memoriztion(fn) {
     }
 
     var result = getCacheResult(cacheKey);
-    if (result == null) {
+    if (!result) {
       result = fn.apply(this, args);
       setCacheResult(cacheKey, result);
     }

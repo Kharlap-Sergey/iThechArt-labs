@@ -58,7 +58,7 @@ var array = {
     }
 
     console.log(buf);
-    sortedArr = [];
+    var sortedArr = [];
     for (i = 0; i < 10000; i++) {
       for (j = 0; j < buf[i]; j++) {
         sortedArr.push(i);

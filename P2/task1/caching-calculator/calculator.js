@@ -3,7 +3,7 @@ var numberA = document.querySelector("#input1");
 var numberB = document.querySelector("#input2");
 var operator = document.querySelector("#operation");
 
-cacheCalculator = {
+var cacheCalculator = {
     cache: {},
     getOrSetCache: function (val1, val2, operatino) {
         var cacheKey = operatino + val1 + val2;
@@ -49,7 +49,7 @@ cacheCalculator = {
     },
 }
 
-executer = {
+var executer = {
     calculate: function () {
         console.log("executin was started");
         var result = cacheCalculator.calculate(numberA.value, numberB.value, operator.value);

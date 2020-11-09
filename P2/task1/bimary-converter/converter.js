@@ -1,24 +1,24 @@
-const input = document.querySelector("#input");
-const executerBut = document.querySelector("#executer");
-const optionTo = document.querySelector("#option-to");
-const optionFrom = document.querySelector("#option-from");
+var input = document.querySelector("#input");
+var executerBut = document.querySelector("#executer");
+var optionTo = document.querySelector("#option-to");
+var optionFrom = document.querySelector("#option-from");
 
-converter = {
+var converter = {
   convertFromDec: function (value, to) {
     console.log(typeof value);
     return value.toString(to);
   },
 }
 
-executer = {
+var executer = {
   transform: function () {
     console.log("execution was started");
     console.log(input.value);
     console.log(optionFrom.value);
     console.log(optionTo.value);
 
-    let decNumbric = parseInt(input.value, +optionFrom.value);
-    let result = converter.convertFromDec(decNumbric, +optionTo.value);
+    var decNumbric = parseInt(input.value, +optionFrom.value);
+    var result = converter.convertFromDec(decNumbric, +optionTo.value);
 
     alert(result);
   }

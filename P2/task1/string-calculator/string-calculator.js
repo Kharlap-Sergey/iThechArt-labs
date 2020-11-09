@@ -1,7 +1,7 @@
-const input = document.querySelector("#input");
-const executerBut = document.querySelector("#executer");
+var input = document.querySelector("#input");
+var executerBut = document.querySelector("#executer");
 
-stringCalculator = {
+var stringCalculator = {
   determAndCalc: function (operator, val1, val2) {
     val1 = +val1;
     val2 = +val2;
@@ -36,13 +36,13 @@ stringCalculator = {
 
   calculate: function (str) {
     console.log("inp " + str);
-    let l = -1;
-    let r = -1;
-    let openBreckConunt = 0;
-    let buf1 = "";
+    var l = -1;
+    var r = -1;
+    var openBreckConunt = 0;
+    var buf1 = "";
     console.log("str len " + str.length);
     //execute (...)
-    for (let i = 0; i < str.length; i++) {
+    for (var i = 0; i < str.length; i++) {
       console.log(str[i] + " i " + i + " len " + str.length);
 
       if (str[i] == "(") {
@@ -58,7 +58,7 @@ stringCalculator = {
           r = i;
           subss = str.substr(l + 1, r - l - 1);
           console.log(subss);
-          let res = this.calculate(subss);
+          var res = this.calculate(subss);
           console.log("was ended calc part");
           buf1 += res;
         }
@@ -66,10 +66,10 @@ stringCalculator = {
     }
 
     //execute pows
-    let cont = buf1.split(/\b/);
+    var cont = buf1.split(/\b/);
     while (true) {
       var exite = true;
-      for (let i = 0; i < cont.length - 1; i++) {
+      for (var i = 0; i < cont.length - 1; i++) {
         if (cont[i + 1] == "." || cont[i + 1] == ",") {
           var res = +(cont[i]) + cont[i + 2] / 10;
           console.log(cont);
@@ -85,7 +85,7 @@ stringCalculator = {
 
     while (true) {
       var exite = true;
-      for (let i = 0; i < cont.length - 1; i++) {
+      for (var i = 0; i < cont.length - 1; i++) {
         if (cont[i + 1] == "^") {
           var res = this.determAndCalc(cont[i + 1], cont[i], cont[i + 2]);
           console.log(cont);
@@ -103,7 +103,7 @@ stringCalculator = {
     //execute multiply and divide
     while (true) {
       var exite = true;
-      for (let i = 0; i < cont.length - 1; i++) {
+      for (var i = 0; i < cont.length - 1; i++) {
         if (cont[i + 1] == "*" || cont[i + 1] == "/") {
           var res = this.determAndCalc(cont[i + 1], cont[i], cont[i + 2]);
           console.log(cont);
@@ -120,7 +120,7 @@ stringCalculator = {
     //execute add and subtract
     while (true) {
       var exite = true;
-      for (let i = 0; i < cont.length - 1; i++) {
+      for (var i = 0; i < cont.length - 1; i++) {
         if (cont[i + 1] == "+" || cont[i + 1] == "-") {
           var res = this.determAndCalc(cont[i + 1], cont[i], cont[i + 2]);
           console.log(cont);
@@ -144,7 +144,7 @@ executer = {
     console.log("execution was started");
     console.log(input.value);
 
-    let result = stringCalculator.calculate(input.value);
+    var result = stringCalculator.calculate(input.value);
 
     alert(result);
   },
