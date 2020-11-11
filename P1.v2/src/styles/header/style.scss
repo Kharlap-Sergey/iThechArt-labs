@@ -7,8 +7,8 @@
     margin-bottom: 15px;
   }
   &__menu {
-    background-color: #03a8cb;
     margin-top: 15px;
+    background-color: #03a8cb;
   }
 }
 
@@ -22,29 +22,26 @@
   }
   &__title {
     margin-top: 20px;
+    color: #3b3e4a;
+    font-weight: 700;
 
     font-size: 4.4rem;
     letter-spacing: 0.4rem;
-    color: #3b3e4a;
-    font-weight: 700;
     text-align: center;
     text-transform: uppercase;
   }
   &__subtitle {
     margin-top: 20px;
+    color: #828282;
+    font-weight: 300;
 
     font-size: 1.8rem;
     letter-spacing: 0.1rem;
-    color: #828282;
-    font-weight: 300;
     text-align: center;
   }
 }
 
 .menu {
-  padding-left: 20%;
-  padding-right: 20%;
-
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -52,17 +49,18 @@
 
   max-width: 1168px;
   min-height: 80px;
-
+  padding-right: 20%;
+  padding-left: 20%;
   border-radius: 5px;
-  filter: drop-shadow(0 0 2.5px rgba(0,0,0,0.12));
+  filter: drop-shadow(0 0 2.5px rgba(0, 0, 0, 0.12));
 
   &__item {
     margin-left: 10px;
+    color: #ffffff;
+    font-weight: 700;
 
     font-size: 1.6rem;
     letter-spacing: 0.1rem;
-    color: #ffffff;
-    font-weight: 700;
     text-transform: uppercase;
   }
 }

@@ -1,0 +1,13 @@
+import "./styles/header/style.scss";
+import "./styles/baner/style.scss";
+import "./styles/style.css";
+import "./styles/footer/style.scss";
+import "./styles/featured/style.scss";
+import "./styles/main/style.css";
+import "./styles/main/story.css";
+import "./styles/main/story-grid.css";
+import "./styles/main/main__grid__cont.css";
+import "./styles/main/main.css";
+import "./styles/main/aricle.css";
+import "./styles/main/act1.css";
+import "./styles/main/act2.css";
