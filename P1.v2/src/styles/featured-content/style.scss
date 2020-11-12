@@ -7,12 +7,13 @@
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
+    margin-bottom: 42px;
     padding-top: 39px;
   }
   &__column {
     position: relative;
     width: 270px;
-    padding-bottom: 50px;
+    padding-bottom: 70px;
     background-color: #ffffff;
     border: 1px solid #e6e6e6;
     border-radius: 5px;
@@ -30,7 +31,8 @@
   }
   &__text {
     margin-top: 20px;
-    padding-left: 15px;
+    padding-right: 5px;
+    padding-left: 25px;
   }
   &__title {
     color: $font-b;
@@ -49,9 +51,18 @@
   }
   &__href {
     position: absolute;
-    bottom: -15px;
-    left: 10px;
+    bottom: -5px;
+    left: 20px;
     margin-top: 15px;
     margin-bottom: 30px;
+  }
+}
+
+@media all and (max-width: 1103px) {
+  .featured-content {
+    &__row {
+      justify-content: center;
+      margin: 0 auto;
+    }
   }
 }

@@ -6,6 +6,9 @@ html {
   font-family: "Source Sans Pro", sans-serif;
 }
 
+hr {
+  max-width: 1250px;
+}
 .color-blue-white {
   color: $font-w;
   background-color: $back-blue;
