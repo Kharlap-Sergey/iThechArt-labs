@@ -10,3 +10,20 @@ html {
   color: $font-w;
   background-color: $back-blue;
 }
+
+.href-more {
+  padding: 5px 10px 5px 10px;
+  color: $font-w;
+  font-weight: 900;
+  font-size: 1.2rem;
+  line-height: 2.3rem;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: $back-blue;
+  border-radius: 13px;
+
+  &:hover {
+    background-color: grey;
+  }
+}
