@@ -1,21 +1,17 @@
-var executeButton = document.querySelector(".array-sorter__executer");
-var sorterType = document.querySelector("#sorter-type");
-var input = document.querySelector("#input");
+const executeButton = document.querySelector(".array-sorter__executer");
+const sorterType = document.querySelector("#sorter-type");
+const input = document.querySelector("#input");
 
-function ToIntArr(arr) {
-  var intArr = [];
-  for (var i = 0; i < arr.length; i++) {
-    var element = arr[i];
-    intArr.push(+element);
-  }
-  return intArr;
+function toIntArray(arr) {
+  return arr.map((currVal) => +currVal);
 }
-var array = {
+
+let array = {
   bubbleSort: function (arr) {
-    for (var i = 0; i < arr.length; i++) {
-      for (var j = 0; j < arr.length - 1; j++) {
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr.length - 1; j++) {
         if (arr[j] > arr[j + 1]) {
-          var t = arr[j];
+          let t = arr[j];
           arr[j] = arr[j + 1];
           arr[j + 1] = t;
         }
@@ -26,14 +22,14 @@ var array = {
   },
 
   quicksort: function (arr, l, r) {
-    var i = l,
+    let i = l,
       j = r;
-    var x = arr[Math.floor((l + r) / 2)];
+    let x = arr[Math.floor((l + r) / 2)];
     do {
       while (arr[i] < x) i++;
       while (arr[j] > x) j--;
       if (i <= j) {
-        var t = arr[j];
+        let t = arr[j];
         arr[j] = arr[i];
         arr[i] = t;
         i++;
@@ -47,18 +43,18 @@ var array = {
   },
 
   smartSort: function (arr) {
-    var buf = [];
+    let buf = [];
     for (i = 0; i < 10000; i++) {
       buf[i] = 0;
     }
 
-    for (var i = 0; i < arr.length; i++) {
-      var elem = arr[i];
+    for (let i = 0; i < arr.length; i++) {
+      let elem = arr[i];
       buf[elem]++;
     }
 
     console.log(buf);
-    var sortedArr = [];
+    let sortedArr = [];
     for (i = 0; i < 10000; i++) {
       for (j = 0; j < buf[i]; j++) {
         sortedArr.push(i);
@@ -70,9 +66,9 @@ var array = {
 
   InsertionSort: function (arr) {
     for (i = 1; i < arr.length; i++) {
-      var j = i;
+      let j = i;
       while (j > 0 && arr[j - 1] > arr[j]) {
-        var t = arr[j];
+        let t = arr[j];
         arr[j] = arr[j - 1];
         arr[j - 1] = t;
         j--;
@@ -82,15 +78,15 @@ var array = {
   },
 };
 
-var executor = {
+let executor = {
   sort: function () {
     console.log("sort-exequter");
     console.log("type: " + sorterType.value);
     console.log("input: " + input);
-    var arr = input.value.split(", ");
-    var intArr = ToIntArr(arr);
+    let arr = input.value.split(", ");
+    let intArr = ToIntArr(arr);
     console.log("int arr: " + intArr);
-    var sortedArr;
+    let sortedArr;
     switch (sorterType.value) {
       case "quicksort":
         sortedArr = array.quicksort(intArr, 0, intArr.length - 1);

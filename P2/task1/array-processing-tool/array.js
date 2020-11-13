@@ -1,30 +1,33 @@
 (function () {
-  var executeSubSum = document.querySelector(".sub-sum__exec");
-  var subSumInput = document.querySelector(".sub-sum__data-input");
+  const executeSubSum = document.querySelector(".sub-sum__exec");
+  const subSumInput = document.querySelector(".sub-sum__data-input");
 
-  var executeSearch = document.querySelector(".search__exec");
-  var searchInput = document.querySelector(".search__data-input");
-  var searchOption = document.querySelector("#ssearch__type-input-selecter");
+  const executeSearch = document.querySelector(".search__exec");
+  const searchInput = document.querySelector(".search__data-input");
+  const searchOption = document.querySelector("#ssearch__type-input-selecter");
 
-  var executeSelect = document.querySelector(".selevtion__exec");
-  var selectInput = document.querySelector(".selevtion__data-input");
+  const executeSelect = document.querySelector(".selevtion__exec");
+  const selectInput = document.querySelector(".selevtion__data-input");
 
+  // function toIntArray(arr) {
+  //   var intArr = [];
+  //   for (var i = 0; i < arr.length; i++) {
+  //     var elem = arr[i];
+  //     intArr.push(+elem);
+  //   }
+
+  //   return intArr;
+  // }
   function toIntArray(arr) {
-    var intArr = [];
-    for (var i = 0; i < arr.length; i++) {
-      var elem = arr[i];
-      intArr.push(+elem);
-    }
-
-    return intArr;
+    return arr.map((currVal) => +currVal);
   }
 
-  var array = {
+  let array = {
     subSum: function (arr) {
-      var sum = 0;
-      var maxSum = +arr[0];
-      for (var i = 0; i < arr.length; i++) {
-        var elem = arr[i];
+      let sum = 0;
+      let maxSum = +arr[0];
+      for (let i = 0; i < arr.length; i++) {
+        let elem = arr[i];
         sum = sum + +elem;
         maxSum = maxSum < sum ? sum : maxSum;
         if (sum < 0) {
@@ -36,40 +39,28 @@
     },
 
     findMax: function (arr) {
-      var res = arr[0];
-      for (var i = 0; i < arr.length; i++) {
-        var elem = arr[i];
-        res = res < +elem ? +elem : res;
-      }
-      return res;
+      return Math.max.apply(null, arr);
     },
 
     findMin: function (arr) {
-      var res = arr[0];
-
-      for (var i = 0; i < arr.length; i++) {
-        var elem = arr[i];
-        res = res > +elem ? +elem : res;
-      }
-
-      return res;
+      return Math.min.apply(null, arr);
     },
 
     findMedian: function (arr) {
-      var intArr = toIntArray(arr);
+      let intArr = toIntArray(arr);
       intArr.sort();
-      var median = intArr[Math.floor(intArr.length / 2)];
+      let median = intArr[Math.floor(intArr.length / 2)];
       return median;
     },
 
     selectMaxAscendingSubsequence: function (arr) {
-      var intArr = toIntArray(arr);
+      let intArr = toIntArray(arr);
       intArr.push(null);
-      var start = 0;
-      var end = 0;
+      let start = 0;
+      let end = 0;
 
-      for (var i = 0; i < intArr.length; i++) {
-        var j = i;
+      for (let i = 0; i < intArr.length; i++) {
+        let j = i;
         while (j < intArr.length && intArr[j] <= intArr[j + 1]) {
           j++;
           if (j + 1 == null) break;
@@ -85,11 +76,11 @@
     },
   };
 
-  var executer = {
+  let executer = {
     subSum: function () {
       console.log("sub sum executer");
       console.log(subSumInput.value);
-      var arr = subSumInput.value.split(", ");
+      let arr = subSumInput.value.split(", ");
       console.log(arr);
 
       alert("Sub Sum: " + array.subSum(arr));
@@ -98,9 +89,9 @@
     search: function () {
       console.log("searching");
       console.log(searchOption.value);
-      var arr = searchInput.value.split(", ");
+      let arr = searchInput.value.split(", ");
       console.log(arr);
-      var res;
+      let res;
       switch (searchOption.value) {
         case "max":
           res = "max: ";
@@ -121,14 +112,13 @@
     select: function () {
       console.log("selecting");
       console.log(selectInput.value);
-      var arr = selectInput.value.split(", ");
+      let arr = selectInput.value.split(", ");
       console.log(arr);
-      var res = array.selectMaxAscendingSubsequence(arr);
+      let res = array.selectMaxAscendingSubsequence(arr);
       alert("ascending subsequence: " + res);
     },
   };
 
-  
   executeSubSum.addEventListener("mousedown", executer.subSum);
   executeSearch.addEventListener("mousedown", executer.search);
   executeSelect.addEventListener("mousedown", executer.select);

@@ -15,18 +15,25 @@ var partial = function (fn) {
   };
 };
 
+function partial_modern(func, ...args){
+  console.log(args);
+  return function(...args2){
+    return func.apply(this, args.concat(args2));
+  }
+}
+
 var someFunction = function () {
   console.log(this);
   console.log(arguments);
   var result = "";
-  for (elem of arguments) {
+  for (let elem of arguments) {
     result += elem;
   }
   return result;
 };
 
-var someFunc1 = partial(someFunction, 2, 3, 4);
-var someFunc2 = partial(someFunction, 1, 2);
+var someFunc1 = partial_modern(someFunction, 2, 3, 4);
+var someFunc2 = partial_modern(someFunction, 1, 2);
 
 console.log(someFunc1(7, 8, 9));
 console.log(someFunc2(7, 8, 10));

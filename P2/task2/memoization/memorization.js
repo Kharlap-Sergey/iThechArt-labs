@@ -25,9 +25,24 @@ function memoriztion(fn) {
   };
 }
 
+function memoriztion__modern(func, hash){
+  let cache = {};
+  return function memorized(...args){
+    let key = hash(...args);
+    if(!cache[key]){
+      console.log("starting calculation");
+      cache[key] = func.apply(this, args);
+    }
+    return cache[key];
+  }
+}
+
 function sum(x, y) {
   return x + y;
 }
 
-var lazySum = memoriztion(sum);
+var lazySum = memoriztion__modern(sum, (...args)=>args.sort().join("$"));
 console.log(lazySum(10, 6));
+console.log(lazySum(10, 6));
+console.log(lazySum(10, 7));
+console.log(lazySum(7, 10));
