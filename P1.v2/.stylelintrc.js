@@ -4,6 +4,7 @@ module.exports = {
               "stylelint-prettier/recommended"],
     plugins: ["stylelint-order", "stylelint-scss"],
     rules: {
+      "linebreaks": ["unix"],
       // Дополнительные правила
     }
   };

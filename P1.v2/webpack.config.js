@@ -5,6 +5,7 @@ const CopyWebPackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
 const autoprefixer = require("autoprefixer");
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, "src"), // the file location for a building
@@ -60,6 +61,7 @@ module.exports = {
       template: "./index.html", // to use our html page as the frame
     }),
 
+    new ESLintPlugin(options),
     //copy static sources
     new CopyWebPackPlugin({
       patterns: [
@@ -83,6 +85,14 @@ module.exports = {
   //loaders to execute imports
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          // eslint options (if necessary)
+        },
+      },
       //bable rull
       {
         test: /\.m?js$/,
