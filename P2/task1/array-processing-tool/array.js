@@ -9,15 +9,6 @@
   const executeSelect = document.querySelector(".selevtion__exec");
   const selectInput = document.querySelector(".selevtion__data-input");
 
-  // function toIntArray(arr) {
-  //   var intArr = [];
-  //   for (var i = 0; i < arr.length; i++) {
-  //     var elem = arr[i];
-  //     intArr.push(+elem);
-  //   }
-
-  //   return intArr;
-  // }
   function toIntArray(arr) {
     return arr.map((currVal) => +currVal);
   }
