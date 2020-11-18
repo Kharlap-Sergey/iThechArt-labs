@@ -113,23 +113,13 @@ function update(cityName, lang) {
   var url = getUrl(cityName, lang);
   console.log("url: " + url);
 
-  var requester = new XMLHttpRequest();
-  requester.open("GET", url);
-  requester.onload = function(){
-    console.log("request was exequted");
-    var jsonResponse = JSON.parse(requester.response)
-    console.log(jsonResponse);
-    showData(jsonResponse);
-
-  }
-  requester.send(null);
-  // fetch(url)
-  //   .then( function (response){
-  //     return response.json();
-  //   })
-  //   .then(function(data){
-  //     showData(data);
-  //   });
+  fetch(url)
+    .then( function (response){
+      return response.json();
+    })
+    .then(function(data){
+      showData(data);
+    });
 }
 
 
@@ -147,7 +137,6 @@ function showDataForSucsess(data) {
 
   infoWeatherBody.innerHTML = "";
   console.log(infoWeatherBody);
-  //infoAcceptDiv.appendChild(infoCityNameDiv);
   for (var i = 0; i < data.list.length; i++) {
     var weather = data.list[i];
     //get date object from string
@@ -164,7 +153,6 @@ function showDataForSucsess(data) {
     console.log(date);
     console.log("weather");
     console.log(weather);
-    //var clone = document.importNode(acceptTemplat, true);
     var clone = acceptTemplat.querySelector(".accept-element").cloneNode(true);
     console.log(clone);
 
