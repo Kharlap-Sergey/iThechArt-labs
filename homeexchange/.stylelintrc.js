@@ -5,6 +5,7 @@ module.exports = {
     plugins: ["stylelint-order", "stylelint-scss"],
     rules: {
       "linebreaks": ["unix"],
+      "max-nesting-depth": 4,
       // Дополнительные правила
     }
   };

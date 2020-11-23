@@ -1,0 +1,41 @@
+.menu {
+  padding: 16px;
+  background: #f9f9f9;
+  &__Items {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+  }
+  &__item {
+    margin: 20px;
+  }
+  &__href {
+    position: relative;
+    color: #8f8f8f;
+    font-weight: 400;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.5s ease-in-out;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      overflow: hidden;
+      color: #8254ff;
+      transition: 0.5s;
+      content: attr(data-item-content);
+    }
+
+    &:hover {
+      &::before {
+        width: 100%;
+        transition: all 0.5s ease-in-out;
+      }
+    }
+  }
+}
