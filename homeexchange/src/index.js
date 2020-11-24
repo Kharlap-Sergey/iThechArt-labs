@@ -6,12 +6,16 @@ import reportWebVitals from "./reportWebVitals";
 import { rootReducer } from "./redux/rootReducer";
 import { Provider } from "react-redux";
 import { compose, createStore } from "redux";
+import { chengeRegFormInputAction, chengeLogFormInputAction } from "./redux/actionsCreator";
 const store = createStore(
   rootReducer,
   compose(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
+
+// store.dispatch(chengeRegFormInputAction ({c:"reg"} ));
+// надстройка для нашего <App с целью передачи нашего store
 
 const app = (
   <Provider store={store}>

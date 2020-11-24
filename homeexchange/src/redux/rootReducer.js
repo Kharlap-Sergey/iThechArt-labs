@@ -1,5 +1,7 @@
-import {combineReducers} from 'redux'
-import { accountFormReducer } from './accountFormReducer'
+import { combineReducers } from "redux";
+import { loginFormReducer } from "./loginFormReducer";
+import { registrationFormReducer } from "./registrationFormReducer";
 export const rootReducer = combineReducers({
-  accauntForm: accountFormReducer
-})
+  registrationForm: registrationFormReducer,
+  loginForm: loginFormReducer,
+});
