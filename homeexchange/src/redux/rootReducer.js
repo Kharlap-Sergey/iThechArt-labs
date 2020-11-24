@@ -1,5 +1,5 @@
-import {coombineReducers} from 'redux'
-import { accautFormReducer } from './accautFormReducer'
-export const rootReducer = coombineReducers({
-  accauntForm: accautFormReducer
+import {combineReducers} from 'redux'
+import { accountFormReducer } from './accountFormReducer'
+export const rootReducer = combineReducers({
+  accauntForm: accountFormReducer
 })
