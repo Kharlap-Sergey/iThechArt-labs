@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import InputBox from '../input/InputBox';
 import { connect } from "react-redux"
-import {chengeRegFormInputAction} from "../../redux/actionsCreator"
+import {chengeFormInputAction} from "../../redux/actionsCreator"
 import "./form.scss"
 
 class AccountForm extends Component {
@@ -24,7 +24,7 @@ class AccountForm extends Component {
         },
       };
     });
-    this.props.chengeRegFormInputAction({
+    this.props.chengeFormInputAction({
       [event.target.name]: event.target.value,
     })
   };
@@ -49,7 +49,7 @@ class AccountForm extends Component {
                 name={inputArguments.name}
                 id={index}
                 onChange={this.changeInputHandler}
-                val={this.props.registrationForm}
+                val={this.props}
               />
             ))}
 
@@ -68,11 +68,11 @@ class AccountForm extends Component {
 
 const mapStateToProps = state =>{
   console.log(state)
-  return state
+  return state.accountForm
 }
 
 const mapDispatchProps = {
-  chengeRegFormInputAction
+  chengeFormInputAction
 }
 
 export default connect(mapStateToProps, mapDispatchProps)(AccountForm);

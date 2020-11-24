@@ -1,15 +1,8 @@
-import { CHENGE_LOGIN, CHENGE_REG } from "./types";
+import { CHENGE} from "./types";
 
-export function chengeLogFormInputAction(newValue){
+export function chengeFormInputAction(newValue){
   return {
-    type: CHENGE_LOGIN,
-    value: newValue
-  }
-}
-
-export function chengeRegFormInputAction(newValue){
-  return {
-    type: CHENGE_REG,
+    type: CHENGE,
     value: newValue
   }
 }

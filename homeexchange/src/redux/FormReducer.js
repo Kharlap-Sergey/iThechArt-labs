@@ -1,10 +1,10 @@
-import {CHENGE_LOGIN} from "./types";
+import {CHENGE} from "./types";
 
 const initialState = {};
 
-export const loginFormReducer = (state = initialState, action) => {
+export const FormReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CHENGE_LOGIN:
+    case CHENGE:
       return {...state, ...action.value};
     default:
       return state;
