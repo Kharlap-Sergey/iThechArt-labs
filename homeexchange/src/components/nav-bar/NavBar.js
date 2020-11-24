@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./NavBar.scss";
 export default class NavBar extends React.Component {
   render() {
@@ -6,34 +7,34 @@ export default class NavBar extends React.Component {
       <nav className="menu">
         <ul className="menu__Items">
           <li className="menu__item" key="Home">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="menu__href"
               name="Home"
               data-item-content="Home"
             >
               Home
-            </a>
+            </Link>
           </li>
           <li className="menu__item" key="Register">
-            <a
-              href="/registration"
+            <Link
+              to="/registration"
               className="menu__href"
               name="Register"
               data-item-content="Register"
             >
               Register
-            </a>
+            </Link>
           </li>
           <li className="menu__item" key="login">
-            <a
-              href="/login"
+            <Link
+              to="/login"
               className="menu__href"
               name="login"
               data-item-content="log in"
             >
               log in
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

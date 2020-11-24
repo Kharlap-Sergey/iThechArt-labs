@@ -7,6 +7,13 @@ class Login extends Component {
     { placeholder: "password", name: "password" },
   ];
 
+  submeted(event){
+    console.log("form was submeted")
+    event.preventDefault();
+    //validate
+    //отправляем данные на сервер
+  }
+
   formText = (
     <div className="form__text">
       <p>or</p>
@@ -23,7 +30,11 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <AccountForm formText={this.formText} inputsArguments={this.inputsArguments} />
+        <AccountForm
+          formText={this.formText}
+          inputsArguments={this.inputsArguments}
+          submeted={this.submeted}
+        />
       </div>
     );
   }

@@ -1,43 +1,25 @@
-import React, { Component } from 'react';
-import InputBox from '../input/InputBox';
-import { connect } from "react-redux"
-import {chengeFormInputAction} from "../../redux/actionsCreator"
-import "./form.scss"
+import React, { Component } from "react";
+import InputBox from "../input/InputBox";
+import { connect } from "react-redux";
+import { chengeFormInputAction } from "../../redux/actionsCreator";
+import "./form.scss";
 
 class AccountForm extends Component {
-  constructor(props){
-    console.log(props)
+  constructor(props) {
+    console.log(props);
     super(props);
-
-    this.state = {};
   }
 
   changeInputHandler = (event) => {
     event.persist();
-    this.setState((prev) => {
-      console.log(prev);
-
-      return {
-        ...prev,
-        ...{
-          [event.target.name]: event.target.value,
-        },
-      };
-    });
     this.props.chengeFormInputAction({
       [event.target.name]: event.target.value,
-    })
+    });
   };
 
-  submeted(event){
-    console.log("form was submeted")
-    event.preventDefault();
-    //validate
-    //отправляем данные на сервер
-  }
-
-
   render() {
+    debugger;
+
     return (
       <div>
         <form action="" className="form">
@@ -53,7 +35,11 @@ class AccountForm extends Component {
               />
             ))}
 
-            <button type="submit" className="submit" onClick={this.submeted}>
+            <button
+              type="submit"
+              className="submit"
+              onClick={this.props.submeted}
+            >
               submit
             </button>
 
@@ -65,14 +51,17 @@ class AccountForm extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  console.log(state);
+  return state.accountForm;
+};
 
-const mapStateToProps = state =>{
-  console.log(state)
-  return state.accountForm
-}
+const mapDispatchToProps = { chengeFormInputAction };
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     // dispatching plain actions
+//     chengeFormInputAction: (va) => dispatch(chengeFormInputAction(va)),
+//   }
+// }
 
-const mapDispatchProps = {
-  chengeFormInputAction
-}
-
-export default connect(mapStateToProps, mapDispatchProps)(AccountForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountForm);

@@ -11,15 +11,19 @@ import Registration from "./pages/Registration";
 function App() {
   return (
     <div className="App">
-      <NavBar />
       <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/ads" component={Ads} />
-          <Route exact path="/account" component={Account} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/registration" component={Registration} />
-        </Switch>
+        <div>
+          <NavBar />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/ads" component={Ads} />
+            <Route exact path="/account" component={Account} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/registration" component={Registration} />
+          </Switch>
+        </div>
       </Router>
     </div>
   );

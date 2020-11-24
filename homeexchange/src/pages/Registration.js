@@ -7,6 +7,13 @@ class Registration extends Component {
 
     this.state = {};
   }
+  
+  submeted(event){
+    console.log("form was submeted")
+    event.preventDefault();
+    //validate
+    //отправляем данные на сервер
+  }
 
   inputsArguments = [
     { placeholder: "firstname", name: "firstname" },
@@ -30,6 +37,7 @@ class Registration extends Component {
         <AccountForm
           formText={this.formText}
           inputsArguments={this.inputsArguments}
+          submeted={this.submeted}
         />
       </div>
     );

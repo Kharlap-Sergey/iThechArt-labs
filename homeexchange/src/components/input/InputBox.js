@@ -3,10 +3,6 @@ import "./inputBox.scss";
 class InputBox extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      [props.name.toString()]: "",
-    };
   }
 
   render() {
