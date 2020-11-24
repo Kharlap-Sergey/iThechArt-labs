@@ -5,7 +5,7 @@ export default class NavBar extends React.Component {
     return (
       <nav className="menu">
         <ul className="menu__Items">
-          <li className="menu__item">
+          <li className="menu__item" key="Home">
             <a
               href="/"
               className="menu__href"
@@ -15,7 +15,7 @@ export default class NavBar extends React.Component {
               Home
             </a>
           </li>
-          <li className="menu__item">
+          <li className="menu__item" key="Register">
             <a
               href="/registration"
               className="menu__href"
@@ -25,7 +25,7 @@ export default class NavBar extends React.Component {
               Register
             </a>
           </li>
-          <li className="menu__item">
+          <li className="menu__item" key="login">
             <a
               href="/login"
               className="menu__href"
