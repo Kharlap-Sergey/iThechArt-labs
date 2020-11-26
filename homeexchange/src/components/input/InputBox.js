@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import "./inputBox.scss";
-class InputBox extends Component {
+class InputBox extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -15,7 +15,7 @@ class InputBox extends Component {
           className="input-box__input"
           name={this.props.name.toString()}
           placeholder={this.props.placeholder.toString()}
-          value={this.props.val[this.props.name] ?? ""}
+          value={this.props.val?? ""}
           onChange={this.props.onChange}
         />
       </div>

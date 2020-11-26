@@ -1,8 +1,9 @@
-import { CHENGE} from "./types";
+import {LOGIN_USER} from "./types";
 
-export function chengeFormInputAction(newValue){
-  return {
-    type: CHENGE,
-    value: newValue
-  }
+export const loginUserAction = (user) => {
+    console.log(user)
+    return {
+      type: LOGIN_USER,
+      payload: user
+    }
 }

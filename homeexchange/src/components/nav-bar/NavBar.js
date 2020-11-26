@@ -1,8 +1,29 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./NavBar.scss";
-export default class NavBar extends React.Component {
+
+class NavBar extends React.Component {
   render() {
+    let accauntAction = () => {
+      console.log(this.props.username);
+      if ( this.props && this.props.username) {
+        return (<p>{this.props.username}</p>);
+      }
+      return (
+        <li className="menu__item" key="login">
+          <Link
+            to="/login"
+            className="menu__href"
+            name="login"
+            data-item-content="log in"
+          >
+            log in
+          </Link>
+        </li>
+      );
+      
+    }
     return (
       <nav className="menu">
         <ul className="menu__Items">
@@ -16,28 +37,14 @@ export default class NavBar extends React.Component {
               Home
             </Link>
           </li>
-          <li className="menu__item" key="Register">
-            <Link
-              to="/registration"
-              className="menu__href"
-              name="Register"
-              data-item-content="Register"
-            >
-              Register
-            </Link>
-          </li>
-          <li className="menu__item" key="login">
-            <Link
-              to="/login"
-              className="menu__href"
-              name="login"
-              data-item-content="log in"
-            >
-              log in
-            </Link>
-          </li>
+          {accauntAction()}
         </ul>
       </nav>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return state.accountForm;
+};
+export default connect(mapStateToProps, null)(NavBar);

@@ -6,7 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import { rootReducer } from "./redux/rootReducer";
 import { Provider } from "react-redux";
 import { compose, createStore } from "redux";
-import { chengeRegFormInputAction, chengeLogFormInputAction } from "./redux/actionsCreator";
+import { loginUserAction } from "./redux/actionsCreator";
+import { auth } from "./auth/auth";
+
 const store = createStore(
   rootReducer,
   compose(
@@ -16,6 +18,35 @@ const store = createStore(
 
 // store.dispatch(chengeRegFormInputAction ({c:"reg"} ));
 // надстройка для нашего <App с целью передачи нашего store
+let jwt = auth.getToken();
+let setUserName = (token, url) => {
+  if (!token) {
+    return "";
+  }
+
+  async function setNameAsync() {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token, // передача токена в заголовке
+      },
+    });
+
+    if (response.ok === true) {
+      const data = await response.json();
+      store.dispatch(loginUserAction({username:data}));
+    } else {
+      console.log("Status: ", response.status);
+      console.log(response);
+
+    }
+  }
+
+  setNameAsync();
+};
+//setUserName(jwt, "https://localhost:44370/Login/GetLogin"); - обновление логина при обновлениии страницы
+
 
 const app = (
   <Provider store={store}>
