@@ -24,9 +24,6 @@ namespace serverApi.Models
         public DateTime DateOfPublication { get; set; }
 
         public Type Typ { get; set; }
-
-        [ForeignKey("User")]
-        public int AuthorID { get; set; }
         public User Author { get; set; }
 
         //public List<Subscriber> Subscribers { get; set; } = new List<Subscriber>();
