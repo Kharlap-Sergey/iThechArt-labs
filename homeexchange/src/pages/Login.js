@@ -45,8 +45,8 @@ class Login extends Component {
       if (response.ok) {
         let data = await response.json();
         auth.setToken(data.jwt);
-        this.props.loginUserAction({username: data.username});
-        alert(data.username);
+
+        this.props.loginUserAction({usename: data.user.email, userId: data.user.id});
         console.log(data)
       } else {
         console.log("Status: ", response.status);

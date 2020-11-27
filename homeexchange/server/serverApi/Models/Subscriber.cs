@@ -6,6 +6,6 @@ namespace serverApi.Models
     {
         public DateTime Date { set; get; }
 
-        public Messages Messages { set; get; }
+        //public Messages Messages { set; get; }
     }
 }

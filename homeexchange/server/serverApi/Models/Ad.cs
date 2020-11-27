@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace serverApi.Models
@@ -10,7 +13,8 @@ namespace serverApi.Models
             tenancy,
             toRent
         }
-        [JsonIgnore]
+
+        [Key]
         public int ID { get; set; }
 
         public string Title { get; set; }
@@ -21,10 +25,12 @@ namespace serverApi.Models
 
         public Type Typ { get; set; }
 
+        [ForeignKey("User")]
+        public int AuthorID { get; set; }
         public User Author { get; set; }
 
-        public IEquatable<Subscriber> Subscribers { get; set;}
+        //public List<Subscriber> Subscribers { get; set; } = new List<Subscriber>();
 
-        public IEquatable<Comment> Comments { get; set; }
+        //public IEquatable<Comment> Comments { get; set; }
     }
 }

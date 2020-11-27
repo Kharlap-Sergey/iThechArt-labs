@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using serverApi.Domain.Abstract;
 using serverApi.Infrastructure;
 using serverApi.Models;
 using System;
@@ -22,22 +23,19 @@ namespace serverApi.Controllers
     [Route("[controller]/{action=Login}")]
     public sealed class AccountController : Controller
     {
-        // тестовые данные вместо использования базы данных
-        private List<Account> people = new List<Account>
-                {
-                    new Account {Login="admin",Password="12345", Role = "admin" },
-                    new Account {Login="qwerty@gmail.com", Password="55555", Role = "user" }
-                };
+        IGenericRepository<User> userRep;
+        public AccountController(IGenericRepository<User> userContext)
+        {
+            userRep = userContext;
+        }
 
         [HttpPost]
-        public IActionResult Login([FromBody]Account account)
+        public IActionResult Login([FromBody] Account account)
         {
-            var username = account.Login;
-            var password = account.Password;
             ClaimsIdentity identity;
             try
             {
-                identity = GetIdentity(username, password);
+                identity = GetIdentity(account);
             }
             catch (InvalidCreadsExeption e)
             {
@@ -50,7 +48,7 @@ namespace serverApi.Controllers
             var response = new
             {
                 jwt = encodedJwt,
-                username = identity.Name
+                user = userRep.Get(u=>u.Email==account.Login).FirstOrDefault()
             };
             return Json(response);
         }
@@ -58,21 +56,21 @@ namespace serverApi.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] User user)
         {
-   
-            return null;
+            user = userRep.Create(user);
+            return Json(user);
         }
 
 
-
-        private ClaimsIdentity GetIdentity(string username, string password)
+        private ClaimsIdentity GetIdentity(Account account)
         {
-            Account person = people.FirstOrDefault(x => x.Login == username && x.Password == password);
+            var person = userRep.Get(u => u.Email == account.Login
+            && u.Password == account.Password).FirstOrDefault();
+            //Account person = null;//people.FirstOrDefault(x => x.Login == username && x.Password == password);
             if (person != null)
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Login),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, person.Role)
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Email),
                 };
                 ClaimsIdentity claimsIdentity =
                 new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
