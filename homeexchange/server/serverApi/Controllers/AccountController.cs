@@ -19,7 +19,7 @@ namespace serverApi.Controllers
         { }
     }
 
-    [Route("[controller]/{method=Login}")]
+    [Route("[controller]/{action=Login}")]
     public sealed class AccountController : Controller
     {
         // тестовые данные вместо использования базы данных
@@ -55,8 +55,10 @@ namespace serverApi.Controllers
             return Json(response);
         }
 
+        [HttpPost]
         public IActionResult Create([FromBody] User user)
         {
+   
             return null;
         }
 
