@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import {auth} from "../auth/auth";
 class CreateAd extends Component {
   state = {}
   userCreateFetch = ad => {
     let url = "https://localhost:44370/Ad/Create";
+    let token = auth.getToken();
     async function t() {
       let response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify(ad),
       });

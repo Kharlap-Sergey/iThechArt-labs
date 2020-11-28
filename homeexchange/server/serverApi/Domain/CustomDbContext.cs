@@ -21,7 +21,7 @@ namespace serverApi.Domain
             //modelBuilder.Entity<User>();
         }
         public DbSet<User> Users { get; set; }
-        public DbSet<Subscriber> Subscribers { get; set; }
+        //public DbSet<Subscriber> Subscribers { get; set; }
         public DbSet<Ad> Ads { get; set; }
         //public DbSet<Comment> Comments { get; set;}
         //public DbSet<Lang> Langs { get; set;}

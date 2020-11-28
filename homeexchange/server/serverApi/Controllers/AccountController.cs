@@ -70,7 +70,7 @@ namespace serverApi.Controllers
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Email),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.ID.ToString()),
                 };
                 ClaimsIdentity claimsIdentity =
                 new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using serverApi.Domain.Abstract;
 using serverApi.Models;
 using System;
@@ -12,13 +13,22 @@ namespace serverApi.Controllers
     public class AdController : Controller
     {
         IGenericRepository<Ad> adRep;
-        public AdController(IGenericRepository<Ad> adContext)
+        IGenericRepository<User> userRep;
+        public AdController(IGenericRepository<Ad> adContext,
+            IGenericRepository<User> userContext)
         {
             adRep = adContext;
+            userRep = userContext;
         }
 
+        [Authorize]
         public IActionResult Create([FromBody] Ad add) 
         {
+            var id = int.Parse(User.Identity.Name);
+            var user = userRep.FindById(id);
+
+            add.Author = user;
+
             return Json(adRep.Create(add));
         }
 
