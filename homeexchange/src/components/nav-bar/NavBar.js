@@ -22,7 +22,8 @@ class NavBar extends React.Component {
     if (username) {
 
       return (
-        <li className="menu__item--unauthorized account">
+        //todo define the account and author.. className
+        <li className="menu__item menu__item--authorized account">
           <div className="account__profile">
             <Link to=""
               className="menu__href"
@@ -72,7 +73,7 @@ class NavBar extends React.Component {
               Home
             </Link>
           </li>
-          <li class="menu__item menu__item--devider"></li>
+          <li className="menu__item menu__item--devider"></li>
           {this.accauntAction()}
         </ul>
       </nav>
