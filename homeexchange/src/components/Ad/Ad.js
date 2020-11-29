@@ -5,11 +5,13 @@ class Ad extends React.Component {
         super(props);
     }
     render() {
+        console.log(this.props.props)
+        let ad = this.props.props;
         return (
             <li className="ads__item ad">
                 <div className="ad__title">
-                    <span className="ad__title-text"></span>
-                    <span className="ad__creation-date"></span>
+                    <span className="ad__title-text">{ad.title}</span>
+                    <span className="ad__creation-date">{ad.dateOfPublication}</span>
                 </div>
                 <div className="ad__more">
                     <button className="ad__more-btn">more</button>
