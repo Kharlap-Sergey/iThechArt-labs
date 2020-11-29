@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Ad from '../components/Ad/Ad';
 
 class Home extends Component {
+  state={}
   getAllAds = () => {
     let url = "https://localhost:44370/Ad/getall";
     async function t() {
@@ -14,8 +16,8 @@ class Home extends Component {
       console.log(response);
 
       if (response.ok) {
-        let data = await response.json();    
-        console.log(data)
+        let data = await response.json();
+        this.setState(data);
       } else {
         console.log("Status: ", response.status);
         let data = await response.json();
@@ -24,12 +26,16 @@ class Home extends Component {
     }
     t.call(this);
   }
+
   render() {
-    let ads = this.getAllAds();
-    console.log(ads);
+    // this.getAllAds();
+    // console.log(ads);
+  //   <ul>
+  //   {ads.map((ad, index) => <Ad key={index} props={} />)}
+  // </ul>
     return (
       <div>
-        Home Page
+       
         <Link to="/ad/create">create AD</Link>
       </div>
     );

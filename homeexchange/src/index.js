@@ -5,13 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { rootReducer } from "./redux/rootReducer";
 import { Provider } from "react-redux";
-import { compose, createStore } from "redux";
+import thunk from "redux-thunk"
+import { applyMiddleware, compose, createStore } from "redux";
 import { loginUserAction } from "./redux/actionsCreator";
 import { auth } from "./auth/auth";
 
 const store = createStore(
   rootReducer,
   compose(
+    applyMiddleware(
+      thunk
+      ),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );

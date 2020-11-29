@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import InputBox from "../components/input/InputBox";
-import { loginUserAction } from "../redux/actionsCreator";
+import {loginUserPost} from "../redux/actionsCreator";
 import "./form.scss";
 import { connect } from "react-redux";
 import {auth} from "../auth/auth";
@@ -46,7 +46,7 @@ class Login extends Component {
         let data = await response.json();
         auth.setToken(data.jwt);
 
-        this.props.loginUserAction({usename: data.user.email, userId: data.user.id});
+        this.props.loginUserAction({username: data.user.email, userId: data.user.id});
         console.log(data)
       } else {
         console.log("Status: ", response.status);
@@ -66,7 +66,7 @@ class Login extends Component {
       password: this.state.password,
     };
 
-    this.userLoginFetch(user);
+    this.props.loginUserPost(user);
   };
 
   changeInputHandler = (event) => {
@@ -113,5 +113,5 @@ const mapStateToProps = (state) => {
   return state.accountForm;
 };
 
-const mapDispatchToProps = { loginUserAction };
+const mapDispatchToProps = { loginUserPost };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

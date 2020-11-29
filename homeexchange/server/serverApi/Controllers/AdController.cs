@@ -22,20 +22,21 @@ namespace serverApi.Controllers
         }
 
         [Authorize]
-        public IActionResult Create([FromBody] Ad add) 
+        public IActionResult Create([FromBody] Ad ad) 
         {
             var id = int.Parse(User.Identity.Name);
             var user = userRep.FindById(id);
 
-            add.Author = user;
+            ad.Author = user;
+            ad.DateOfPublication = DateTime.Now;
 
-            return Json(adRep.Create(add));
+            return Json(adRep.Create(ad));
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Json(adRep.Get());
+            return Json(adRep.Get().OrderBy(ad => ad.DateOfPublication));
         }
     }
 }
