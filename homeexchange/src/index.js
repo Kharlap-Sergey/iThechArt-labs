@@ -7,7 +7,7 @@ import { rootReducer } from "./redux/rootReducer";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk"
 import { applyMiddleware, compose, createStore } from "redux";
-import { loginUserAction } from "./redux/actionsCreator";
+import { loginUserAction } from "./redux/loginActionsCreator";
 import { auth } from "./auth/auth";
 
 const store = createStore(

@@ -22,6 +22,8 @@ export function loginUserPost(user) {
           username: data.user.email,
           userId: data.user.id
         }));
+    }else{
+      //todo logic
     }
   }
 }

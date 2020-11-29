@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import InputBox from "../components/input/InputBox";
-import { loginUserAction } from "../redux/actionsCreator";
 import "./form.scss";
 import { connect } from "react-redux";
-import {auth} from "../auth/auth";
-
+import {registrateUserPost} from "../redux/registrationActionCreater"
 class Registration extends Component {
   inputsArguments = [
     { placeholder: "firstname", name: "firstname" },
@@ -27,52 +25,24 @@ class Registration extends Component {
     </div>
   );
   state = {};
-  userRegFetch = user => {
-    console.log(user);
-    let url = "https://localhost:44370/Account/Create";
-    console.log(this.props);
-    console.log(JSON.stringify(user));
-    async function t() {
-      let response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(user),
-      });
-      console.log(response);
 
-      if (response.ok) {
-        let data = await response.json();    
-        alert(data.username);
-        console.log(data)
-      } else {
-        console.log("Status: ", response.status);
-        let data = await response.json();
-        alert(data.errorText)
-      }
-    }
-    t.call(this);
-  }
-  
   submeteHandler = (event) => {
     console.log("form was submeted");
     event.preventDefault();
 
+    
     let user = {
       ...this.state
     };
+    //validate
+
     console.log(user)
-    this.userRegFetch(user);
+    this.props.registrateUserPost(user);
   };
 
   changeInputHandler = (event) => {
     event.persist();
     this.setState({ [event.target.name]: event.target.value });
-    // this.props.chengeFormInputAction({
-    //   [event.target.name]: event.target.value,
-    // });
   };
 
   render() {
@@ -111,5 +81,5 @@ const mapStateToProps = (state) => {
   return state.accountForm;
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {registrateUserPost};
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);

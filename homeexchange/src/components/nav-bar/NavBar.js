@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./NavBar.scss";
-import { logoutAction } from "../../redux/actionsCreator"
+import { logoutAction } from "../../redux/loginActionsCreator"
 import { auth } from "../../auth/auth"
 
 class NavBar extends React.Component {

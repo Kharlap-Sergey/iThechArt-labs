@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import InputBox from "../components/input/InputBox";
-import {loginUserPost} from "../redux/actionsCreator";
+import {loginUserPost} from "../redux/loginActionsCreator";
 import "./form.scss";
 import { connect } from "react-redux";
 
