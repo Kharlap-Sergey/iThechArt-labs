@@ -1,7 +1,7 @@
 .menu {
   padding: 16px;
   background: #f9f9f9;
-  &__Items {
+  &__items {
     display: flex;
     align-items: center;
     width: 100%;
@@ -9,13 +9,16 @@
   }
   &__item {
     margin: 20px;
+    &--devider {
+			flex: 1 1;
+			border: none;
+    }
+    &--unauthorized{
+      display: flex;
+      flex-direction: column;
+    }
   }
-  &__item--unauthorized{
-    margin: 20px;
-    justify-self: end;
-    display: flex;
-    flex-direction: column;
-  }
+  
   &__href {
     position: relative;
     color: #8f8f8f;

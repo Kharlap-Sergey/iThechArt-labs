@@ -1,10 +1,12 @@
-import {LOGIN_USER, LOGOUT} from "./types";
+import {LOGIN_ERROR, LOGIN_USER, LOGOUT} from "./types";
 
 const initialState = {};
 
 export const FormReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_USER:
+      return {...state, ...action.payload};
+    case LOGIN_ERROR:
       return {...state, ...action.payload};
     case LOGOUT:
       return {}

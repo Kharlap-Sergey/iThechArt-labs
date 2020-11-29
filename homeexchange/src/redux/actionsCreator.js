@@ -1,5 +1,5 @@
 import { auth } from "../auth/auth";
-import { LOGIN_USER, LOGOUT } from "./types";
+import { LOGIN_ERROR, LOGIN_USER, LOGOUT } from "./types";
 
 export function loginUserPost(user) {
   return async dispatch => {
@@ -31,6 +31,13 @@ export const loginUserAction = (user) => {
   return {
     type: LOGIN_USER,
     payload: user
+  }
+}
+
+export const loginError = (error) =>{
+  return {
+    type: LOGIN_ERROR,
+    payload: error
   }
 }
 

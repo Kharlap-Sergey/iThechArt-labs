@@ -1,2 +1,3 @@
 export const LOGIN_USER = "login/loginuser"
-export const LOGOUT = "logout"
+export const LOGIN_ERROR = "login/error"
+export const LOGOUT = "login/logout"

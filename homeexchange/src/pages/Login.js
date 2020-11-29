@@ -4,7 +4,6 @@ import InputBox from "../components/input/InputBox";
 import {loginUserPost} from "../redux/actionsCreator";
 import "./form.scss";
 import { connect } from "react-redux";
-import {auth} from "../auth/auth";
 
 class Login extends Component {
   state = {};
@@ -25,41 +24,12 @@ class Login extends Component {
     { placeholder: "e-mail", name: "email" },
     { placeholder: "password", name: "password" },
   ];
-
-  userLoginFetch = user => {
-    console.log(user);
-    let url = "https://localhost:44370/Account/Login";
-    console.log(this.props);
-    console.log(JSON.stringify(user));
-    async function t() {
-      let response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(user),
-      });
-      console.log(response);
-
-      if (response.ok) {
-        let data = await response.json();
-        auth.setToken(data.jwt);
-
-        this.props.loginUserAction({username: data.user.email, userId: data.user.id});
-        console.log(data)
-      } else {
-        console.log("Status: ", response.status);
-        let data = await response.json();
-        alert(data.errorText)
-      }
-    }
-    t.call(this);
-  }
   
   submeteHandler = (event) => {
     console.log("form was submeted");
     event.preventDefault();
+    
+    //Todo validation
 
     let user = {
       login: this.state.email,
@@ -72,9 +42,6 @@ class Login extends Component {
   changeInputHandler = (event) => {
     event.persist();
     this.setState({ [event.target.name]: event.target.value });
-    // this.props.chengeFormInputAction({
-    //   [event.target.name]: event.target.value,
-    // });
   };
 
   render() {

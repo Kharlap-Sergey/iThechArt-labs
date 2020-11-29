@@ -35,7 +35,7 @@ class NavBar extends React.Component {
         </li>);
     }
     return (
-      <li className="menu__item--unauthorized" key="login">
+      <li className="menu__item menu__item--unauthorized" key="login">
         <Link
           to="/login"
           className="menu__href"
@@ -61,7 +61,7 @@ class NavBar extends React.Component {
 
     return (
       <nav className="menu">
-        <ul className="menu__Items">
+        <ul className="menu__items">
           <li className="menu__item" key="Home">
             <Link
               to="/"
@@ -72,6 +72,7 @@ class NavBar extends React.Component {
               Home
             </Link>
           </li>
+          <li class="menu__item menu__item--devider"></li>
           {this.accauntAction()}
         </ul>
       </nav>
