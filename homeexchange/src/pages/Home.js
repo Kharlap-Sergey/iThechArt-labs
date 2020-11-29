@@ -9,25 +9,35 @@ class Home extends Component {
     super(props);
     this.props.getAllAds();
   }
+
+  getUserName() {
+    console.log("try to get user name");
+    console.log(this.props);
+    if (this.props && this.props.username)
+      return this.props.username;
+    return undefined;
+  }
+
   render() {
     let ads = this.props.ads;
+    const username = this.getUserName();
     console.log(ads);
-    // this.getAllAds();
-    // console.log(ads);
-
+    console.log(username);
     return (
       <div>
         <ul>
           {ads.map((ad, index) => <Ad key={index} props={ad} />)}
         </ul>
-        <Link to="/ad/create">create AD</Link>
+        {this.getUserName() ?
+          (<Link to="/ad/create">create AD</Link>) :
+          null}
       </div>
     );
   }
 }
 const mapStateToProps = (state) => {
   console.log(state);
-  return state.ads;
+  return { ...state.ads, ...state.accountForm };
 };
 const mapDispatchToProps = { getAllAds };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
