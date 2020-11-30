@@ -22,15 +22,15 @@ class Login extends Component {
   );
 
   inputsArguments = [
-    { placeholder: "e-mail", name: "email" },
-    { placeholder: "password", name: "password" },
+    { placeholder: "e-mail", name: "email", type:"email" },
+    { placeholder: "password", name: "password", type:"password"},
   ];
 
   submeteHandler = (event) => {
     console.log("form was submeted");
     event.preventDefault();
 
-    //Todo validation
+
     let user = {
       login: this.state.email,
       password: this.state.password,
@@ -53,17 +53,19 @@ class Login extends Component {
       <div>
         <form action="" className="form" onSubmit={this.submeteHandler}>
           <div className="form__body">
-            {this.inputsArguments.map((inputArguments, index) => (
+            {this.inputsArguments.map((inputArgument, index) => (
               <InputBox
                 key={index}
                 //передаем placeholder для input
-                placeholder={inputArguments.placeholder}
+                placeholder={inputArgument.placeholder}
                 //передаем имя
-                name={inputArguments.name}
+                name={inputArgument.name}
                 //метод который будет вызываться при каждом изменнении input
                 onChange={this.changeInputHandler}
                 //значение
-                val={this.state[inputArguments.name]}
+                val={this.state[inputArgument.name]}
+                //тип
+                type={inputArgument.type}
               />
             ))}
 

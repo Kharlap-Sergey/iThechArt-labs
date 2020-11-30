@@ -11,7 +11,7 @@ class InputBox extends React.Component {
       <div className="form__input input-box">
         <input
           key={this.props.id}
-          type="text"
+          type={this.props.type}
           className="input-box__input"
           name={this.props.name.toString()}
           placeholder={this.props.placeholder.toString()}

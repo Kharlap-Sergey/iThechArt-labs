@@ -25,7 +25,7 @@ class NavBar extends React.Component {
         //todo define the account and author.. className
         <li className="menu__item menu__item--authorized account">
           <div className="account__profile">
-            <Link to=""
+            <Link to="/profile"
               className="menu__href"
               name="username"
               data-item-content={username}>{username}</Link>

@@ -38,5 +38,15 @@ namespace serverApi.Controllers
         {
             return Json(adRep.Get().OrderBy(ad => ad.DateOfPublication));
         }
+
+        [HttpDelete]
+        [Authorize]
+        public IActionResult Delete(int adId)
+        {
+            var userId = int.Parse(User.Identity.Name);
+            var ad = adRep.FindById(adId);
+            
+            return Json(adRep.Get().OrderBy(ad => ad.DateOfPublication));
+        }
     }
 }
