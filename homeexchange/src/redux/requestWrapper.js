@@ -20,5 +20,16 @@ export const requestWrapper = {
       body: JSON.stringify(dataJson),
     }
     return  fetch(url, options);
-  }
+  },
+  deleteByIdQueryParam:
+  (url,token="") => {
+    const options = {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }
+    return  fetch(url, options);
+  },
 }

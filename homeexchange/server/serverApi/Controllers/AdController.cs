@@ -51,14 +51,19 @@ namespace serverApi.Controllers
             return Json(ads);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [Authorize]
-        public IActionResult Delete(int adId)
+        public IActionResult Delete(int id)
         {
             var userId = int.Parse(User.Identity.Name);
-            var ad = adRep.FindById(adId);
-            
-            return Json(adRep.Get().OrderBy(ad => ad.DateOfPublication));
+            var ad = adRep.FindById(id);
+         
+            if(ad.AuthorId != userId)
+            {
+                return Unauthorized(new { errorText = "it isn't your ad" });
+            }
+            adRep.Remove(ad);
+            return new OkResult();
         }
     }
 }

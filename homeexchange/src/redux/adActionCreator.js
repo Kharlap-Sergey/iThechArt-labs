@@ -1,4 +1,5 @@
 import { auth } from "../auth/auth";
+import { redirectToHomeFromAction } from "./redirectActionCreator";
 import { requestWrapper } from "./requestWrapper";
 import { AD_CLEAR, AD_GETALL, AD_GETOWN } from "./types";
 
@@ -39,14 +40,14 @@ export function getOwnAds() {
     }
   }
 }
-export function deleteOwnAd(ad){
+export function deleteOwnAd(adId){
   return async dispatch => {
-    const url = "https://localhost:44370/Ad/getown";
+    //const url = "https://localhost:44370/Ad/delete" + "?id=" + adId;
+    const url = "https://localhost:44370/Ad/delete/" + adId;
     const token = auth.getToken();
-    const response = await requestWrapper.get(url, token);
+    const response = await requestWrapper.deleteByIdQueryParam(url, token);
     if (response.ok) {
-      const data = await response.json();
-      dispatch(getOwnAdsAction({ownAds: [...data]}));
+      
     }else{
       //todo logic
     }
@@ -64,9 +65,8 @@ export function getOwnAdsAction(ads){
       payload: ads
   }
 }
-export function clearAdsAction(ads){
+export function clearAdsAction(a){
     return {
         type: AD_CLEAR,
-        payload: ads
     }
 }

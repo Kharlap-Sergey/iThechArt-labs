@@ -8,16 +8,6 @@ export function loginUserPost(user) {
   return async (dispatch) => {
     try {
       const url = "https://localhost:44370/Account/Login";
-      // const options = {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Accept: "application/json",
-      //     Authorization: "Bearer "
-      //   },
-      //   body: JSON.stringify(user),
-      // }
-      // const response = await fetch(url, options);
       const response = await requestWrapper.post(url, user);
       console.log("send");
       console.log(response);

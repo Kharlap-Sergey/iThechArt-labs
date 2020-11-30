@@ -21,7 +21,7 @@ class Ad extends React.Component {
         </div>
         {this.props.removable ? (
           <div>
-            <button>remove</button>
+            <button onClick={this.props.removeHandler} data-id={ad.id}>remove</button>
           </div>
         ) : null}
       </li>

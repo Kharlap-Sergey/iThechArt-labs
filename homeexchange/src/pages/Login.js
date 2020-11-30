@@ -45,7 +45,10 @@ class Login extends Component {
   };
 
   render() {
-
+    if (this.props.path) {
+      this.props.redirectClear();
+      return <Redirect to={this.props.path} />;
+    }
     return (
       <div>
         <form action="" className="form" onSubmit={this.submeteHandler}>
