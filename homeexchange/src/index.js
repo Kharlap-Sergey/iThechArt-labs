@@ -9,6 +9,7 @@ import thunk from "redux-thunk"
 import { applyMiddleware, compose, createStore } from "redux";
 import { loginUserAction } from "./redux/loginActionsCreator";
 import { auth } from "./auth/auth";
+import ReduxToastr from 'react-redux-toastr'
 
 const store = createStore(
   rootReducer,
@@ -55,6 +56,16 @@ let setUserName = (token, url) => {
 const app = (
   <Provider store={store}>
     <App />
+    <ReduxToastr
+      timeOut={5000}
+      newestOnTop={false}
+      preventDuplicates
+      position="top-center"
+      getState={(state) => state.toastr} // This is the default
+      transitionIn="fadeIn"
+      transitionOut="fadeOut"
+      progressBar
+      closeOnToastrClick/>
   </Provider>
 );
 ReactDOM.render(

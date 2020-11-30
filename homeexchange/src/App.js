@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import "./app.scss";
 import { auth } from "./auth/auth";
 import NavBar from "./components/nav-bar/NavBar";
@@ -9,7 +9,8 @@ import CreateAd from "./pages/CreateAd";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
-
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
+import { connect } from "react-redux";
 function App() {
 
   return (
@@ -33,4 +34,7 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToPops = (state) =>{
+  return state.redirect;
+}
+export default connect(mapStateToPops, null)(App);

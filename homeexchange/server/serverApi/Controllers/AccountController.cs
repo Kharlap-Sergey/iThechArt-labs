@@ -39,7 +39,7 @@ namespace serverApi.Controllers
             }
             catch (InvalidCreadsExeption e)
             {
-                return BadRequest(new { errorText = e.Message });
+                return NotFound(new { errorText = e.Message });
             }
 
             // создаем JWT-токен

@@ -26,7 +26,7 @@ class Home extends Component {
     return (
       <div>
         <ul>
-          {ads.map((ad, index) => <Ad key={index} props={ad} />)}
+          {ads ? ads.map((ad, index) => <Ad key={index} props={ad} />) : null}
         </ul>
         {this.getUserName() ?
           (<Link to="/ad/create">create AD</Link>) :

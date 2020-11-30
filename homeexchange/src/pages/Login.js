@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import InputBox from "../components/input/InputBox";
-import {loginUserPost} from "../redux/loginActionsCreator";
+import { loginUserPost } from "../redux/loginActionsCreator";
+import {redirectClear} from "../redux/redirectActionCreator"
 import "./form.scss";
 import { connect } from "react-redux";
 
@@ -24,11 +25,11 @@ class Login extends Component {
     { placeholder: "e-mail", name: "email" },
     { placeholder: "password", name: "password" },
   ];
-  
+
   submeteHandler = (event) => {
     console.log("form was submeted");
     event.preventDefault();
-    
+
     //Todo validation
 
     let user = {
@@ -45,6 +46,10 @@ class Login extends Component {
   };
 
   render() {
+    if (this.props.path) {
+      this.props.redirectClear();
+      return <Redirect to={this.props.path} />;
+    }
     return (
       <div>
         <form action="" className="form" onSubmit={this.submeteHandler}>
@@ -77,8 +82,8 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  return state.accountForm;
+  return {...state.accountForm, ...state.redirect};
 };
 
-const mapDispatchToProps = { loginUserPost };
+const mapDispatchToProps = { loginUserPost, redirectClear };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

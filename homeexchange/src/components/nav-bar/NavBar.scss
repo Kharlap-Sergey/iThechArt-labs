@@ -10,15 +10,15 @@
   &__item {
     margin: 20px;
     &--devider {
-			flex: 1 1;
-			border: none;
+      flex: 1 1;
+      border: 0;
     }
-    &--unauthorized{
+    &--unauthorized {
       display: flex;
       flex-direction: column;
     }
   }
-  
+
   &__href {
     position: relative;
     color: #8f8f8f;

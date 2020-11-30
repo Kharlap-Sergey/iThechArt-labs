@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {auth} from "../auth/auth";
+import {createNewAd} from "../redux/adActionCreator";
+
 class CreateAd extends Component {
   state = {}
   userCreateFetch = ad => {
@@ -38,7 +40,7 @@ class CreateAd extends Component {
       ...this.state,
     };
     ad.authorId = this.props.userId;
-    this.userCreateFetch(ad);
+    this.props.createNewAd(ad);
   };
 
   changeInputHandler = (event) => {
@@ -62,7 +64,7 @@ class CreateAd extends Component {
             <label >text</label>
             <input
               className="form-control"
-              name="text"
+              name="descr"
               onChange = {this.changeInputHandler}
             />
           </div>
@@ -79,4 +81,7 @@ const mapStateToProps = (state) => {
   console.log(state);
   return state.accountForm;
 };
-export default connect(mapStateToProps, null)(CreateAd);
+const mapDispatchToProps = {
+  createNewAd
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAd);
