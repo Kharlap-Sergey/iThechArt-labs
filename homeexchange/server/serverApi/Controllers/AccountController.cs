@@ -57,7 +57,8 @@ namespace serverApi.Controllers
         public IActionResult Create([FromBody] User user)
         {
             user = userRep.Create(user);
-            return Json(user);
+            var res = Json(user);
+            return res;
         }
 
 
