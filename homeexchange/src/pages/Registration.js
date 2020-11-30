@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import InputBox from "../components/input/InputBox";
 import "./form.scss";
 import { connect } from "react-redux";
-import {registrateUserPost} from "../redux/registrationActionCreater"
+import { registrateUserPost } from "../redux/registrationActionCreater";
+import {  redirectClear } from "../redux/redirectActionCreator";
 class Registration extends Component {
   inputsArguments = [
     { placeholder: "firstname", name: "firstname" },
@@ -14,7 +15,6 @@ class Registration extends Component {
     { placeholder: "city", name: "city" },
     { placeholder: "password", name: "password" },
   ];
-
 
   formText = (
     <div className="form__text">
@@ -30,13 +30,12 @@ class Registration extends Component {
     console.log("form was submeted");
     event.preventDefault();
 
-    
     let user = {
-      ...this.state
+      ...this.state,
     };
     //validate
 
-    console.log(user)
+    console.log(user);
     this.props.registrateUserPost(user);
   };
 
@@ -46,6 +45,10 @@ class Registration extends Component {
   };
 
   render() {
+    if (this.props.path) {
+      this.props.redirectClear();
+      return <Redirect to={this.props.path} />;
+    }
     return (
       <div>
         <form action="" className="form" onSubmit={this.submeteHandler}>
@@ -78,8 +81,8 @@ class Registration extends Component {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  return state.accountForm;
+  return { ...state.accountForm, ...state.redirect };
 };
 
-const mapDispatchToProps = {registrateUserPost};
+const mapDispatchToProps = { registrateUserPost, redirectClear };
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);

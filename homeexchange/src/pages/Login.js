@@ -31,7 +31,6 @@ class Login extends Component {
     event.preventDefault();
 
     //Todo validation
-
     let user = {
       login: this.state.email,
       password: this.state.password,
