@@ -39,6 +39,18 @@ namespace serverApi.Controllers
             return Json(adRep.Get().OrderBy(ad => ad.DateOfPublication));
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult GetOwn()
+        {
+            var userId = int.Parse(User.Identity.Name);
+            var ads = adRep
+                .Get(ad => ad.AuthorId == userId)
+                .OrderBy(ad => ad.DateOfPublication);
+
+            return Json(ads);
+        }
+
         [HttpDelete]
         [Authorize]
         public IActionResult Delete(int adId)

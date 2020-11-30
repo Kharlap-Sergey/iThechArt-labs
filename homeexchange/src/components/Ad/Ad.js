@@ -5,7 +5,7 @@ class Ad extends React.Component {
     super(props);
   }
   render() {
-    console.log(this.props.props);
+    console.log(this.props);
     let ad = this.props.props;
     return (
       <li className="ads__item ad">
@@ -19,7 +19,7 @@ class Ad extends React.Component {
             <a href="" className="ad__author-href"></a>
           </div>
         </div>
-        {ad.authorId ? (
+        {this.props.removable ? (
           <div>
             <button>remove</button>
           </div>

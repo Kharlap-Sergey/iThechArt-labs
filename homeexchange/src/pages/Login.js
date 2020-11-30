@@ -22,7 +22,7 @@ class Login extends Component {
   );
 
   inputsArguments = [
-    { placeholder: "e-mail", name: "email", type:"email" },
+    { placeholder: "e-mail", name: "email", type:"text" },
     { placeholder: "password", name: "password", type:"password"},
   ];
 
@@ -45,10 +45,7 @@ class Login extends Component {
   };
 
   render() {
-    if (this.props.path) {
-      this.props.redirectClear();
-      return <Redirect to={this.props.path} />;
-    }
+
     return (
       <div>
         <form action="" className="form" onSubmit={this.submeteHandler}>

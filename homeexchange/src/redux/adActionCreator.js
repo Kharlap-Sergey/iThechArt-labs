@@ -1,6 +1,6 @@
 import { auth } from "../auth/auth";
 import { requestWrapper } from "./requestWrapper";
-import { AD_CLEAR, AD_GETALL } from "./types";
+import { AD_CLEAR, AD_GETALL, AD_GETOWN } from "./types";
 
 export function getAllAds() {
   return async dispatch => {
@@ -26,13 +26,44 @@ export function createNewAd(ad) {
     }
   }
 }
+export function getOwnAds() {
+  return async dispatch => {
+    const url = "https://localhost:44370/Ad/getown";
+    const token = auth.getToken();
+    const response = await requestWrapper.get(url, token);
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(getOwnAdsAction({ownAds: [...data]}));
+    }else{
+      //todo logic
+    }
+  }
+}
+export function deleteOwnAd(ad){
+  return async dispatch => {
+    const url = "https://localhost:44370/Ad/getown";
+    const token = auth.getToken();
+    const response = await requestWrapper.get(url, token);
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(getOwnAdsAction({ownAds: [...data]}));
+    }else{
+      //todo logic
+    }
+  }
+}
 export function getAllAdsAction(ads){
     return {
         type: AD_GETALL,
         payload: ads
     }
 }
-
+export function getOwnAdsAction(ads){
+  return {
+      type: AD_GETOWN,
+      payload: ads
+  }
+}
 export function clearAdsAction(ads){
     return {
         type: AD_CLEAR,

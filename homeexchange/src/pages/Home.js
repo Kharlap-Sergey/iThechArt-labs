@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { getAllAds } from "../redux/adActionCreator";
+import { redirectClear } from "../redux/redirectActionCreator";
 import Ad from "../components/Ad/Ad";
+
 
 class Home extends Component {
   constructor(props) {
@@ -19,6 +21,11 @@ class Home extends Component {
   }
 
   render() {
+    if (this.props.path) {
+      console.log("redirect");
+      this.props.redirectClear();
+      return <Redirect to={this.props.path} />;
+    }
     let ads = this.props.ads;
     const username = this.getUserName();
     console.log(ads);
@@ -37,7 +44,7 @@ class Home extends Component {
 }
 const mapStateToProps = (state) => {
   console.log(state);
-  return { ...state.ads, ...state.accountForm };
+  return { ...state.ads, ...state.accountForm, ...state.redirect };
 };
-const mapDispatchToProps = { getAllAds };
+const mapDispatchToProps = { getAllAds, redirectClear};
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

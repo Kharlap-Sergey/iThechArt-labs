@@ -29,6 +29,7 @@ namespace serverApi.Models
 
         [ForeignKey("AuthorId")]
         [Required]
+        public int AuthorId { get; set; }
         public User Author { get; set; }
 
         //public List<Subscriber> Subscribers { get; set; } = new List<Subscriber>();
