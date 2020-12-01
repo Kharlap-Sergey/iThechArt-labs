@@ -1,15 +1,23 @@
 import { auth } from "../auth/auth";
 import { redirectToHomeFromAction } from "./redirectActionCreator";
 import { requestWrapper } from "./requestWrapper";
-import { AD_CLEAR, AD_GETALL, AD_GETOWN, AD_ISUPDATING, AD_UPDATE } from "./types";
+import {
+  AD_CLEAR,
+  AD_GETALL,
+  AD_GETOWN,
+  AD_ISUPDATING,
+  AD_UPDATE,
+} from "./types";
 
 export function getAllAds() {
   return async (dispatch) => {
+    dispatch(isUpdateingAction(true));
     //dispatch(isUpdateAction(true));
     const url = "https://localhost:44370/Ad/getall";
     const response = await requestWrapper.get(url);
     if (response.ok) {
       const data = await response.json();
+      dispatch(isUpdateingAction(false));
       dispatch(setAllAdsAction({ ads: [...data] }));
     } else {
       //todo logic
@@ -68,7 +76,7 @@ export function isUpdateAction(flag) {
 export function isUpdateingAction(flag) {
   return {
     type: AD_ISUPDATING,
-    payload: { isUpdating: flag },
+    payload: { isLoading: flag },
   };
 }
 

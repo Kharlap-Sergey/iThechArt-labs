@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 import { getAllAds } from "../redux/adActionCreator";
 import { redirectClear } from "../redux/redirectActionCreator";
 import Ad from "../components/Ad/Ad";
-import Loader from '../components/Loader/Loader';
-
+import Loader from "../components/Loader/Loader";
 
 class Home extends Component {
   constructor(props) {
@@ -15,14 +14,13 @@ class Home extends Component {
   getUserName() {
     console.log("try to get user name");
     console.log(this.props);
-    if (this.props && this.props.username)
-      return this.props.username;
+    if (this.props && this.props.username) return this.props.username;
     return undefined;
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.getAllAds();
-  } 
+  }
 
   render() {
     if (this.props.path) {
@@ -37,20 +35,36 @@ class Home extends Component {
     console.log(username);
     return (
       <div>
-        
-        <ul>
-          {ads ? ads.map((ad, index) => <Ad key={index} props={ad} />) : (<Loader/>)}
-        </ul>
-        {this.getUserName() ?
-          (<Link to="/ad/create">create AD</Link>) :
-          null}
+        {!this.props.isLoading ? (
+          ads.length ? (
+            <ul>
+              {ads.map((ad, index) => (
+                <Ad
+                  key={index}
+                  props={ad}
+                />
+              ))}
+            </ul>
+          ) : (
+            <div>nothing to show</div>
+          )
+        ) : (
+          <Loader />
+        )}
+
+        {this.getUserName() ? <Link to="/ad/create">create AD</Link> : null}
       </div>
     );
   }
 }
 const mapStateToProps = (state) => {
   console.log(state);
-  return { ...state.ads, ...state.accountForm, ...state.redirect };
+  return {
+    ...state.ads,
+    ...state.accountForm,
+    ...state.redirect,
+    ...state.isLoading,
+  };
 };
-const mapDispatchToProps = { getAllAds, redirectClear};
+const mapDispatchToProps = { getAllAds, redirectClear };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

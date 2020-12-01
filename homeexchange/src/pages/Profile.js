@@ -43,11 +43,11 @@ class Profile extends Component {
     }
     let ads = this.props.ownAds;
     console.log(ads);
-    console.log(this.props.isUpdating)
+    console.log(this.props.isLoading)
     return (
       <div>
-        {!this.props.isUpdating ? (
-          ads.length ? (
+        {!this.props.isLoading ? (
+          ads.length ? <ul>{(
             ads.map((ad, index) => (
               <Ad
                 key={index}
@@ -56,7 +56,7 @@ class Profile extends Component {
                 removeHandler={this.removeHandler}
               />
             ))
-          ) : (
+          )}</ul> : (
             <div>nothing to show</div>
           )
         ) : (
@@ -73,7 +73,7 @@ const mapStateToProps = (state) => {
     ...state.redirect,
     ...state.ads,
     ...state.isShouldBeUpdate,
-    ...state.isUpdating,
+    ...state.isLoading,
   };
 };
 
