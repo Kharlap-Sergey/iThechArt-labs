@@ -2,7 +2,7 @@ import { auth } from "../auth/auth";
 import { LOGIN_ERROR, LOGIN_USER, LOGOUT } from "./types";
 import { toastr } from "react-redux-toastr";
 import { requestWrapper } from "./requestWrapper";
-import { redirectToHomeFromAction } from "./redirectActionCreator";
+import { redirectToAction } from "./redirectActionCreator";
 import { endLoadingAction, startLoadingAction } from "./remoteInteractionActionCreator";
 
 export function loginUserPost(user) {
@@ -22,7 +22,7 @@ export function loginUserPost(user) {
             userId: data.user.id,
           })
         );
-        dispatch(redirectToHomeFromAction("/"));
+        dispatch(redirectToAction("/"));
       } else {
         console.log("some");
         const data = await response.json();

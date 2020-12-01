@@ -1,9 +1,17 @@
 import React from "react";
-
-class Ad extends React.Component {
+import { connect } from "react-redux";
+import {redirectToAction} from "../../redux/redirectActionCreator"; 
+class ShortAd extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  moreClickHandler(event){   
+    const redirectPath = "/ad/"+event.target.dataset.adId;
+    console.log("redirect path", redirectPath)
+    this.props.redirectToAction(redirectPath);
+  }
+
   render() {
     console.log(this.props);
     let ad = this.props.props;
@@ -14,7 +22,7 @@ class Ad extends React.Component {
           <span className="ad__creation-date">{ad.dateOfPublication}</span>
         </div>
         <div className="ad__more">
-          <button className="ad__more-btn">more</button>
+          <button className="ad__more-btn" onClick={this.moreClickHandler.bind(this)} data-ad-id={ad.id}>more</button>
           <div className="ad__author-profile">
             <a href="" className="ad__author-href"></a>
           </div>
@@ -29,4 +37,5 @@ class Ad extends React.Component {
   }
 }
 
-export default Ad;
+const mapDispatchToProps = {redirectToAction}
+export default connect(null, mapDispatchToProps)(ShortAd);

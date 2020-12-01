@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { redirectClear } from "../redux/redirectActionCreator";
 import { getOwnAds } from "../redux/adActionCreator";
-import Ad from "../components/Ad/Ad";
+import ShortAd from "../components/Ad/ShortAd";
 import { deleteOwnAd } from "../redux/adActionCreator";
 import Loader from "../components/Loader/Loader";
 class Profile extends Component {
@@ -49,7 +49,7 @@ class Profile extends Component {
         {!this.props.isLoading ? (
           ads.length ? <ul>{(
             ads.map((ad, index) => (
-              <Ad
+              <ShortAd
                 key={index}
                 props={ad}
                 removable={true}

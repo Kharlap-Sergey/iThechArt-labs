@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./navBar.scss";
 import { logoutAction } from "../../redux/loginActionsCreator";
-import { redirectToHomeFromAction } from "../../redux/redirectActionCreator";
+import { redirectToAction } from "../../redux/redirectActionCreator";
 import { auth } from "../../auth/auth";
 
 class NavBar extends React.Component {
@@ -16,7 +16,7 @@ class NavBar extends React.Component {
     console.log(this.props);
     this.props.logoutAction();
     auth.clearToken();
-    this.props.redirectToHomeFromAction("/");
+    this.props.redirectToAction("/");
   }
   accauntAction = () => {
     let username = this.getUserName();
@@ -96,6 +96,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   logoutAction,
-  redirectToHomeFromAction,
+  redirectToAction,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

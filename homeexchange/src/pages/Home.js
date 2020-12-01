@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { getAllAds } from "../redux/adActionCreator";
 import { redirectClear } from "../redux/redirectActionCreator";
-import Ad from "../components/Ad/Ad";
+import ShortAd from "../components/Ad/ShortAd";
 import Loader from "../components/Loader/Loader";
 
 class Home extends Component {
@@ -33,7 +33,7 @@ class Home extends Component {
         {ads.length ? (
           <ul>
             {ads.map((ad, index) => (
-              <Ad key={index} props={ad} />
+              <ShortAd key={index} props={ad} />
             ))}
           </ul>
         ) : (

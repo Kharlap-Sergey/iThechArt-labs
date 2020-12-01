@@ -1,7 +1,7 @@
 import { toastr } from "react-redux-toastr";
 import { auth } from "../auth/auth";
 import { loginUserAction } from "./loginActionsCreator";
-import { redirectToHomeFromAction } from "./redirectActionCreator";
+import { redirectToAction } from "./redirectActionCreator";
 import { requestWrapper } from "./requestWrapper";
 import { REGISTRATE_ERROR } from "./types";
 
@@ -14,7 +14,7 @@ export function registrateUserPost(user) {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        dispatch(redirectToHomeFromAction("/login"));
+        dispatch(redirectToAction("/login"));
       } else {
         console.log("some");
         const data = await response.json();

@@ -1,6 +1,6 @@
 import { REDIRECT_CLEAR, REDIRECT_TO } from "./types"
 
-export const redirectToHomeFromAction = (path)=>
+export const redirectToAction = (path)=>
 {
   return {
     type: REDIRECT_TO,
