@@ -8,8 +8,10 @@ export const REGISTRATE_ERROR = "registrate/error";
 export const AD_GETALL = "ad/getall";
 export const AD_GETOWN = "ad/getown";
 export const AD_CLEAR = "ad/clear";
-export const AD_UPDATE = "ad/update";
-export const AD_ISUPDATING = "ad/isupdating";
 
 export const REDIRECT_TO = "redirect/redirectTo";
 export const REDIRECT_CLEAR = "redirect/clear";
+
+export const REMOTE_IS_SHOUL_BE_UPDATED = "remote/update";
+export const REMOTE_IS_LOADING = "remote/isloadign";
+export const REMOTE_CLEAR = "remote/clear";

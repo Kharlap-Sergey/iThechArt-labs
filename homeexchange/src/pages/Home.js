@@ -22,6 +22,28 @@ class Home extends Component {
     this.props.getAllAds();
   }
 
+  content() {
+    let ads = this.props.ads;
+    const username = this.getUserName();
+    console.log(ads);
+    console.log(username);
+
+    return (
+      <div>
+        {ads.length ? (
+          <ul>
+            {ads.map((ad, index) => (
+              <Ad key={index} props={ad} />
+            ))}
+          </ul>
+        ) : (
+          <div>nothing to show</div>
+        )}
+        {this.getUserName() ? <Link to="/ad/create">create AD</Link> : null}
+      </div>
+    );
+  }
+
   render() {
     if (this.props.path) {
       console.log("redirect");
@@ -29,32 +51,7 @@ class Home extends Component {
       return <Redirect to={this.props.path} />;
     }
 
-    let ads = this.props.ads;
-    const username = this.getUserName();
-    console.log(ads);
-    console.log(username);
-    return (
-      <div>
-        {!this.props.isLoading ? (
-          ads.length ? (
-            <ul>
-              {ads.map((ad, index) => (
-                <Ad
-                  key={index}
-                  props={ad}
-                />
-              ))}
-            </ul>
-          ) : (
-            <div>nothing to show</div>
-          )
-        ) : (
-          <Loader />
-        )}
-
-        {this.getUserName() ? <Link to="/ad/create">create AD</Link> : null}
-      </div>
-    );
+    return <div>{!this.props.isLoading ? this.content() : <Loader />}</div>;
   }
 }
 const mapStateToProps = (state) => {
@@ -63,7 +60,7 @@ const mapStateToProps = (state) => {
     ...state.ads,
     ...state.accountForm,
     ...state.redirect,
-    ...state.isLoading,
+    ...state.remoteInteraction,
   };
 };
 const mapDispatchToProps = { getAllAds, redirectClear };

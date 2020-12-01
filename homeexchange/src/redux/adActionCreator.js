@@ -1,27 +1,20 @@
 import { auth } from "../auth/auth";
-import { redirectToHomeFromAction } from "./redirectActionCreator";
 import { requestWrapper } from "./requestWrapper";
-import {
-  AD_CLEAR,
-  AD_GETALL,
-  AD_GETOWN,
-  AD_ISUPDATING,
-  AD_UPDATE,
-} from "./types";
+import { AD_CLEAR, AD_GETALL, AD_GETOWN } from "./types";
+import {startLoadingAction, endLoadingAction, isShouldBeUpdatedAction} from "./remoteInteractionActionCreator"
 
 export function getAllAds() {
   return async (dispatch) => {
-    dispatch(isUpdateingAction(true));
-    //dispatch(isUpdateAction(true));
+    dispatch(startLoadingAction());
     const url = "https://localhost:44370/Ad/getall";
     const response = await requestWrapper.get(url);
     if (response.ok) {
       const data = await response.json();
-      dispatch(isUpdateingAction(false));
       dispatch(setAllAdsAction({ ads: [...data] }));
     } else {
       //todo logic
     }
+    dispatch(endLoadingAction());
   };
 }
 export function createNewAd(ad) {
@@ -38,18 +31,19 @@ export function createNewAd(ad) {
 }
 export function getOwnAds() {
   return async (dispatch) => {
-    dispatch(isUpdateingAction(true));
+    dispatch(startLoadingAction());
     const url = "https://localhost:44370/Ad/getown";
     const token = auth.getToken();
     const response = await requestWrapper.get(url, token);
     if (response.ok) {
       const data = await response.json();
-      dispatch(isUpdateAction(false));
-      dispatch(isUpdateingAction(false));
+      dispatch(isShouldBeUpdatedAction(false));
+   
       dispatch(setOwnAdsAction({ ownAds: [...data] }));
     } else {
       //todo logic
     }
+    dispatch(endLoadingAction());
   };
 }
 export function deleteOwnAd(adId) {
@@ -60,23 +54,10 @@ export function deleteOwnAd(adId) {
     const response = await requestWrapper.deleteByIdQueryParam(url, token);
     if (response.ok) {
       //dispatch(clearAdsAction());
-      dispatch(isUpdateAction(true));
+      dispatch(isShouldBeUpdatedAction(true));
     } else {
       //todo logic
     }
-  };
-}
-
-export function isUpdateAction(flag) {
-  return {
-    type: AD_UPDATE,
-    payload: { isShouldBeUpdate: flag },
-  };
-}
-export function isUpdateingAction(flag) {
-  return {
-    type: AD_ISUPDATING,
-    payload: { isLoading: flag },
   };
 }
 
