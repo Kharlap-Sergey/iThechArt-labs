@@ -3,9 +3,11 @@ import { LOGIN_ERROR, LOGIN_USER, LOGOUT } from "./types";
 import { toastr } from "react-redux-toastr";
 import { requestWrapper } from "./requestWrapper";
 import { redirectToHomeFromAction } from "./redirectActionCreator";
+import { endLoadingAction, startLoadingAction } from "./remoteInteractionActionCreator";
 
 export function loginUserPost(user) {
   return async (dispatch) => {
+    dispatch(startLoadingAction())
     try {
       const url = "https://localhost:44370/Account/Login";
       const response = await requestWrapper.post(url, user);
@@ -32,7 +34,8 @@ export function loginUserPost(user) {
       console.log(e);
       toastr.error("try again later", e.toString());
     }
-  };
+    dispatch(endLoadingAction())
+  }; 
 }
 
 export const loginUserAction = (user) => {

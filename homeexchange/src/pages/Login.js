@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import InputBox from "../components/input/InputBox";
 import { loginUserPost } from "../redux/loginActionsCreator";
-import {redirectClear} from "../redux/redirectActionCreator"
+import { redirectClear } from "../redux/redirectActionCreator";
 import "./form.scss";
 import { connect } from "react-redux";
+import Loader from "../components/Loader/Loader";
 
 class Login extends Component {
   state = {};
@@ -22,14 +23,13 @@ class Login extends Component {
   );
 
   inputsArguments = [
-    { placeholder: "e-mail", name: "email", type:"text" },
-    { placeholder: "password", name: "password", type:"password"},
+    { placeholder: "e-mail", name: "email", type: "text" },
+    { placeholder: "password", name: "password", type: "password" },
   ];
 
   submeteHandler = (event) => {
     console.log("form was submeted");
     event.preventDefault();
-
 
     let user = {
       login: this.state.email,
@@ -44,11 +44,7 @@ class Login extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  render() {
-    if (this.props.path) {
-      this.props.redirectClear();
-      return <Redirect to={this.props.path} />;
-    }
+  content() {
     return (
       <div>
         <form action="" className="form" onSubmit={this.submeteHandler}>
@@ -79,11 +75,22 @@ class Login extends Component {
       </div>
     );
   }
+  render() {
+    if (this.props.path) {
+      this.props.redirectClear();
+      return <Redirect to={this.props.path} />;
+    }
+    return !this.props.isLoading ? this.content() : <div><Loader /></div>;
+  }
 }
 
 const mapStateToProps = (state) => {
   console.log(state);
-  return {...state.accountForm, ...state.redirect};
+  return {
+    ...state.accountForm,
+    ...state.redirect,
+    ...state.remoteInteraction,
+  };
 };
 
 const mapDispatchToProps = { loginUserPost, redirectClear };
