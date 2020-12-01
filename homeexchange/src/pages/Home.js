@@ -4,12 +4,12 @@ import { Link, Redirect } from 'react-router-dom';
 import { getAllAds } from "../redux/adActionCreator";
 import { redirectClear } from "../redux/redirectActionCreator";
 import Ad from "../components/Ad/Ad";
+import Loader from '../components/Loader/Loader';
 
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.props.getAllAds();
   }
 
   getUserName() {
@@ -20,20 +20,26 @@ class Home extends Component {
     return undefined;
   }
 
+  componentDidMount(){
+    this.props.getAllAds();
+  } 
+
   render() {
     if (this.props.path) {
       console.log("redirect");
       this.props.redirectClear();
       return <Redirect to={this.props.path} />;
     }
+
     let ads = this.props.ads;
     const username = this.getUserName();
     console.log(ads);
     console.log(username);
     return (
       <div>
+        
         <ul>
-          {ads ? ads.map((ad, index) => <Ad key={index} props={ad} />) : null}
+          {ads ? ads.map((ad, index) => <Ad key={index} props={ad} />) : (<Loader/>)}
         </ul>
         {this.getUserName() ?
           (<Link to="/ad/create">create AD</Link>) :

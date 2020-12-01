@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import "./NavBar.scss";
+import "./navBar.scss";
 import { logoutAction } from "../../redux/loginActionsCreator";
 import { redirectToHomeFromAction } from "../../redux/redirectActionCreator";
 import { auth } from "../../auth/auth";

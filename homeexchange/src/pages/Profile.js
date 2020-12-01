@@ -5,10 +5,10 @@ import { redirectClear } from "../redux/redirectActionCreator";
 import { getOwnAds } from "../redux/adActionCreator";
 import Ad from "../components/Ad/Ad";
 import { deleteOwnAd } from "../redux/adActionCreator";
+import Loader from "../components/Loader/Loader";
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.props.getOwnAds();
   }
 
   removeHandler = (event) => {
@@ -17,24 +17,38 @@ class Profile extends Component {
     console.log(event.target[Object.keys(event.target)[1]]);
     let adId = event.target[Object.keys(event.target)[1]]["data-id"];
     console.log(adId);
-    this.props.deleteOwnAd(adId)
-  }
+    this.props.deleteOwnAd(adId);
+  };
 
-  componentDidMount(){
+  componentDidMount() {
     console.log("didMOunt");
     this.props.getOwnAds();
   }
+  componentDidUpdate(prevProps) {
+    console.log("didUpdate");
+    console.log(prevProps);
+    console.log(this.props);
+
+    if (this.props.isShouldBeUpdate) {
+      this.props.getOwnAds();
+    }
+  }
+
   render() {
+    console.log("rerender");
     console.log(this.props);
     if (this.props.path) {
       this.props.redirectClear();
       return <Redirect to={this.props.path} />;
     }
     let ads = this.props.ownAds;
+    console.log(ads);
+    console.log(this.props.isUpdating)
     return (
       <div>
-        {ads
-          ? ads.map((ad, index) => (
+        {!this.props.isUpdating ? (
+          ads.length ? (
+            ads.map((ad, index) => (
               <Ad
                 key={index}
                 props={ad}
@@ -42,7 +56,12 @@ class Profile extends Component {
                 removeHandler={this.removeHandler}
               />
             ))
-          : null}
+          ) : (
+            <div>nothing to show</div>
+          )
+        ) : (
+          <Loader />
+        )}
       </div>
     );
   }
@@ -50,7 +69,12 @@ class Profile extends Component {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  return { ...state.redirect, ...state.ads};
+  return {
+    ...state.redirect,
+    ...state.ads,
+    ...state.isShouldBeUpdate,
+    ...state.isUpdating,
+  };
 };
 
 const mapDispatchToProps = { redirectClear, getOwnAds, deleteOwnAd };
