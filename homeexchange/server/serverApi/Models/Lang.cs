@@ -6,7 +6,7 @@ namespace serverApi.Models
     {
         
         [Key]
-        public int ID;
+        public int Id;
 
         public string Name;
         public Rang rang;

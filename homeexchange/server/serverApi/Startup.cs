@@ -28,7 +28,8 @@ namespace serverApi
         {
             services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
             services.AddScoped<IGenericRepository<Ad>, GenericRepository<Ad>>();
-
+            services.AddScoped<IGenericRepository<NotificationAboutResponseToAd>, GenericRepository<NotificationAboutResponseToAd>>();
+            services.AddScoped<IGenericRepository<ResponseToAd>, GenericRepository<ResponseToAd>>();
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<CustomDbContext>(options =>

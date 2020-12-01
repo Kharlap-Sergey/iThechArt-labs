@@ -14,15 +14,18 @@ namespace serverApi.Controllers
     {
         IGenericRepository<Ad> adRep;
         IGenericRepository<User> userRep;
+        IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdRep;
         public AdController(IGenericRepository<Ad> adContext,
-            IGenericRepository<User> userContext)
+            IGenericRepository<User> userContext,
+            IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdContext)
         {
             adRep = adContext;
             userRep = userContext;
+            notificationAboutResponseToAdRep = notificationAboutResponseToAdContext;
         }
 
         [Authorize]
-        public IActionResult Create([FromBody] Ad ad) 
+        public IActionResult Create([FromBody] Ad ad)
         {
             var id = int.Parse(User.Identity.Name);
             var user = userRep.FindById(id);
@@ -33,9 +36,44 @@ namespace serverApi.Controllers
             return Json(adRep.Create(ad));
         }
 
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var ad = adRep.FindById(id);
+            return Json(ad);
+
+        }
+
+        [HttpPost("{id}")]
+        [Authorize]
+        public IActionResult Subscribe(int id)
+        {
+            var userId = int.Parse(User.Identity.Name);
+            var ad = adRep.FindById(id);
+            var responseToAd = new ResponseToAd
+                            {
+                                Author = userRep.FindById(userId),
+                                Date = DateTime.Now,
+                                Message = ""
+                            };
+
+            ad.ResponseToAd = responseToAd;
+
+            var note = new NotificationAboutResponseToAd
+            {
+                TargetUserId = ad.AuthorId,
+                ResponseToAd = responseToAd
+            };
+            notificationAboutResponseToAdRep.Create(note);
+            adRep.Update(ad);
+            return Json(ad);
+        }
+
         [HttpGet]
         public IActionResult GetAll()
         {
+
             return Json(adRep.Get().OrderBy(ad => ad.DateOfPublication));
         }
 

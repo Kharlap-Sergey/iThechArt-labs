@@ -72,8 +72,7 @@ const mapStateToProps = (state) => {
   return {
     ...state.redirect,
     ...state.ads,
-    ...state.isShouldBeUpdate,
-    ...state.isLoading,
+    ...state.remoteInteraction,
   };
 };
 

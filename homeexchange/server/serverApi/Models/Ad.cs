@@ -32,7 +32,10 @@ namespace serverApi.Models
         public int AuthorId { get; set; }
         public User Author { get; set; }
 
-        //public List<Subscriber> Subscribers { get; set; } = new List<Subscriber>();
+        [ForeignKey("ResponseToAdId")]
+       
+        public int? ResponseToAdId { get; set; }
+        public ResponseToAd ResponseToAd { get; set; }
 
         //public IEquatable<Comment> Comments { get; set; }
     }

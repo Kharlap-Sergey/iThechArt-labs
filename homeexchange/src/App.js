@@ -14,7 +14,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import Profile from "./pages/Profile";
-import Ad from "./pages/Ad";
+import Ad from "./pages/Ad/Ad";
 function App() {
   return (
     <div className="App">

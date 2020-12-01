@@ -24,9 +24,12 @@ namespace serverApi.Controllers
     public sealed class AccountController : Controller
     {
         IGenericRepository<User> userRep;
-        public AccountController(IGenericRepository<User> userContext)
+        IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdRep;
+        public AccountController(IGenericRepository<User> userContext,
+            IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdContext)
         {
             userRep = userContext;
+            notificationAboutResponseToAdRep = notificationAboutResponseToAdContext;
         }
 
         [HttpPost]
@@ -44,11 +47,14 @@ namespace serverApi.Controllers
 
             // создаем JWT-токен
             var encodedJwt = CustomJWTCreator.CreateJWT(identity);
+            User user = userRep.Get(u => u.Email == account.Login).FirstOrDefault();
+            user.NotificationsAboutResponseToAd.AddRange(
+                notificationAboutResponseToAdRep.Get(n => n.TargetUserId == user.Id));
 
             var response = new
             {
                 jwt = encodedJwt,
-                user = userRep.Get(u=>u.Email==account.Login).FirstOrDefault()
+                user = user
             };
             return Json(response);
         }
@@ -71,7 +77,7 @@ namespace serverApi.Controllers
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.ID.ToString()),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Id.ToString()),
                 };
                 ClaimsIdentity claimsIdentity =
                 new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,

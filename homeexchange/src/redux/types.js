@@ -8,6 +8,7 @@ export const REGISTRATE_ERROR = "registrate/error";
 export const AD_GETALL = "ad/getall";
 export const AD_GETOWN = "ad/getown";
 export const AD_CLEAR = "ad/clear";
+export const AD_GET = "ad/get";
 
 export const REDIRECT_TO = "redirect/redirectTo";
 export const REDIRECT_CLEAR = "redirect/clear";

@@ -12,7 +12,7 @@ namespace serverApi.Models
     public class User
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [JsonPropertyName("firstname")]
         [Required]
@@ -38,7 +38,10 @@ namespace serverApi.Models
 
         [NotMapped]
         public List<Ad> Ads { get; set; } = new List<Ad>();
-        //public IEnumerable<Ad> Replies { get; set; }
+
+        [NotMapped]
+        public List<NotificationAboutResponseToAd> NotificationsAboutResponseToAd { get; set; } = 
+            new List<NotificationAboutResponseToAd>();
 
         //public Rating Rating { set; get; }
       

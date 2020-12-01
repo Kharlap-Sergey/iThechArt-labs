@@ -18,11 +18,18 @@ namespace serverApi.Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
+            base.OnModelCreating(modelBuilder);
             //modelBuilder.Entity<User>();
         }
         public DbSet<User> Users { get; set; }
-        //public DbSet<Subscriber> Subscribers { get; set; }
+        public DbSet<ResponseToAd> ResponsesToAd { get; set; }
         public DbSet<Ad> Ads { get; set; }
+        public DbSet<NotificationAboutResponseToAd> NotificationsAboutResponseToAd { get; set; }
         //public DbSet<Comment> Comments { get; set;}
         //public DbSet<Lang> Langs { get; set;}
     }
