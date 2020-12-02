@@ -5,6 +5,7 @@ class InputBox extends React.PureComponent {
     super(props);
   }
 
+  
   render() {
     console.log("render")
     console.log(this.props)
@@ -12,16 +13,13 @@ class InputBox extends React.PureComponent {
       <div className="input-box">
         <input
           className="input-box__input"
-          minlength="4"
-          key={this.props.id}
           type={this.props.typ ?? "text"}
-          
           name={this.props.name.toString()}
           placeholder={this.props.placeholder.toString()}
           value={this.props.val?? ""}
-          onChange={this.props.onChange}
-          
+          onChange={this.props.onChange}         
         />
+        
       </div>
   //       <div className="form__input input-box">
 //         <input
