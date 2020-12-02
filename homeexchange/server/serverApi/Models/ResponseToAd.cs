@@ -12,6 +12,10 @@ namespace serverApi.Models
         [Required]
         public int AuthorId { get; set; }
         public User Author { get; set; }
+
+        [ForeignKey("TargetAdId")]
+        [Required]
+        public int TargetAdId { get; set; }
         public DateTime Date { set; get; }
         public string Message { set; get;}
     }

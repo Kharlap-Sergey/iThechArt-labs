@@ -11,6 +11,7 @@ using serverApi.Domain.Abstract;
 using serverApi.Domain.Concrete;
 using serverApi.Infrastructure;
 using serverApi.Models;
+using serverApi.Services;
 
 namespace serverApi
 {
@@ -30,6 +31,8 @@ namespace serverApi
             services.AddScoped<IGenericRepository<Ad>, GenericRepository<Ad>>();
             services.AddScoped<IGenericRepository<NotificationAboutResponseToAd>, GenericRepository<NotificationAboutResponseToAd>>();
             services.AddScoped<IGenericRepository<ResponseToAd>, GenericRepository<ResponseToAd>>();
+            services.AddScoped<INotificationService, NotificationService>();
+
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<CustomDbContext>(options =>

@@ -77,7 +77,7 @@ export function deleteOwnAd(adId) {
 }
 export function replyOnAd(adId){
   return async (dispatch) => {
-    const url = "https://localhost:44370/Ad/subscribe/" + adId;
+    const url = "https://localhost:44370/Ad/reply/" + adId;
     const token = auth.getToken();
     const response = await requestWrapper.post(url, {}, token);
     if (response.ok) {

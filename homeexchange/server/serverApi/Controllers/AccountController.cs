@@ -23,13 +23,13 @@ namespace serverApi.Controllers
     [Route("[controller]/{action=Login}")]
     public sealed class AccountController : Controller
     {
-        IGenericRepository<User> userRep;
-        IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdRep;
+        IGenericRepository<User> userRepository;
+        IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdRepository;
         public AccountController(IGenericRepository<User> userContext,
             IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdContext)
         {
-            userRep = userContext;
-            notificationAboutResponseToAdRep = notificationAboutResponseToAdContext;
+            userRepository = userContext;
+            notificationAboutResponseToAdRepository = notificationAboutResponseToAdContext;
         }
 
         [HttpPost]
@@ -47,9 +47,9 @@ namespace serverApi.Controllers
 
             // создаем JWT-токен
             var encodedJwt = CustomJWTCreator.CreateJWT(identity);
-            User user = userRep.Get(u => u.Email == account.Login).FirstOrDefault();
-            //user.NotificationsAboutResponseToAd.AddRange(
-            //    notificationAboutResponseToAdRep.Get(n => n.TargetUserId == user.Id));
+            User user = userRepository.Get(u => u.Email == account.Login).FirstOrDefault();
+            user.NotificationsAboutResponseToAd.AddRange(
+                notificationAboutResponseToAdRepository.Get(n => n.TargetUserId == user.Id));
 
             var response = new
             {
@@ -62,7 +62,7 @@ namespace serverApi.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] User user)
         {
-            user = userRep.Create(user);
+            user = userRepository.Create(user);
             var res = Json(user);
             return res;
         }
@@ -70,7 +70,7 @@ namespace serverApi.Controllers
 
         private ClaimsIdentity GetIdentity(Account account)
         {
-            var person = userRep.Get(u => u.Email == account.Login
+            var person = userRepository.Get(u => u.Email == account.Login
             && u.Password == account.Password).FirstOrDefault();
             //Account person = null;//people.FirstOrDefault(x => x.Login == username && x.Password == password);
             if (person != null)

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using serverApi.Domain.Abstract;
 using serverApi.Models;
+using serverApi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,50 +13,51 @@ namespace serverApi.Controllers
     [Route("[controller]/{action=Login}")]
     public class AdController : Controller
     {
-        IGenericRepository<Ad> adRep;
-        IGenericRepository<User> userRep;
-        IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdRep;
+        IGenericRepository<Ad> adRepository;
+        IGenericRepository<User> userRepository;
+        INotificationService notificationService;
         public AdController(IGenericRepository<Ad> adContext,
             IGenericRepository<User> userContext,
-            IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdContext)
+            INotificationService notificationService)
         {
-            adRep = adContext;
-            userRep = userContext;
-            notificationAboutResponseToAdRep = notificationAboutResponseToAdContext;
+            adRepository = adContext;
+            userRepository = userContext;
+            this.notificationService = notificationService;
         }
 
         [Authorize]
         public IActionResult Create([FromBody] Ad ad)
         {
             var id = int.Parse(User.Identity.Name);
-            var user = userRep.FindById(id);
+            var user = userRepository.FindById(id);
 
             ad.Author = user;
             ad.DateOfPublication = DateTime.Now;
 
-            return Json(adRep.Create(ad));
+            return Json(adRepository.Create(ad));
         }
 
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var ad = adRep.FindById(id);
+            var ad = adRepository.FindById(id);
             return Json(ad);
 
         }
 
         [HttpPost("{id}")]
         [Authorize]
-        public IActionResult Subscribe(int id)
+        public IActionResult Reply(int adId)
         {
             var userId = int.Parse(User.Identity.Name);
-            var ad = adRep.FindById(id);
+            var ad = adRepository.FindById(adId);
             var responseToAd = new ResponseToAd
                             {
-                                Author = userRep.FindById(userId),
+                                Author = userRepository.FindById(userId),
                                 Date = DateTime.Now,
-                                Message = ""
+                                Message = "",
+                                TargetAdId = adId
                             };
 
             ad.ResponseToAd = responseToAd;
@@ -65,8 +67,10 @@ namespace serverApi.Controllers
                 TargetUserId = ad.AuthorId,
                 ResponseToAd = responseToAd
             };
-            notificationAboutResponseToAdRep.Create(note);
-            adRep.Update(ad);
+
+            notificationService.Create(note);
+
+            adRepository.Update(ad);
             return Json(ad);
         }
 
@@ -74,7 +78,7 @@ namespace serverApi.Controllers
         public IActionResult GetAll()
         {
 
-            return Json(adRep.Get().OrderBy(ad => ad.DateOfPublication));
+            return Json(adRepository.Get().OrderBy(ad => ad.DateOfPublication));
         }
 
         [HttpGet]
@@ -82,7 +86,7 @@ namespace serverApi.Controllers
         public IActionResult GetOwn()
         {
             var userId = int.Parse(User.Identity.Name);
-            var ads = adRep
+            var ads = adRepository
                 .Get(ad => ad.AuthorId == userId)
                 .OrderBy(ad => ad.DateOfPublication);
 
@@ -94,13 +98,13 @@ namespace serverApi.Controllers
         public IActionResult Delete(int id)
         {
             var userId = int.Parse(User.Identity.Name);
-            var ad = adRep.FindById(id);
+            var ad = adRepository.FindById(id);
          
             if(ad.AuthorId != userId)
             {
                 return Unauthorized(new { errorText = "it isn't your ad" });
             }
-            adRep.Remove(ad);
+            adRepository.Remove(ad);
             return new OkResult();
         }
     }
