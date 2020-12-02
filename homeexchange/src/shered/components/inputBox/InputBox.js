@@ -17,7 +17,8 @@ class InputBox extends React.PureComponent {
           name={this.props.name.toString()}
           placeholder={this.props.placeholder.toString()}
           value={this.props.val?? ""}
-          onChange={this.props.onChange}         
+          onChange={this.props.onChange}
+          {...this.props.validationAttributes}         
         />
         
       </div>

@@ -42,7 +42,7 @@ class AccoutForm extends PureComponent {
                 name={input.name}
                 val={this.state[input.name] ?? ""}
                 typ={input.type}
-           
+                validationAttributes={input.validationAttributes}
                 //метод который будет вызываться при каждом изменнении input
                 onChange={this.changeInputHandler}
               />

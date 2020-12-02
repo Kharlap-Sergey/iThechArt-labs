@@ -1,6 +1,5 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import InputBox from "../components/input/InputBox";
 import { connect } from "react-redux";
 
 import { registrateUserPost } from "../redux/registrationActionCreater";
@@ -16,7 +15,7 @@ class Registration extends React.PureComponent {
     { placeholder: "e-mail", name: "email" },
     { placeholder: "country", name: "country" },
     { placeholder: "city", name: "city" },
-    { placeholder: "password", name: "password" },
+    { placeholder: "password", name: "password", type: "password", validationAttributes: {minLength: "4", maxLength: "8"} },
   ];
 
   formText = (
