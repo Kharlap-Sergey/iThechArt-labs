@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using serverApi.Domain.Abstract;
 using serverApi.Infrastructure;
 using serverApi.Models;
+using serverApi.Services;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -24,12 +25,12 @@ namespace serverApi.Controllers
     public sealed class AccountController : Controller
     {
         IGenericRepository<User> userRepository;
-        IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdRepository;
+        INotificationService notificationService;
         public AccountController(IGenericRepository<User> userContext,
-            IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdContext)
+            INotificationService notificationService)
         {
             userRepository = userContext;
-            notificationAboutResponseToAdRepository = notificationAboutResponseToAdContext;
+            this.notificationService = notificationService;
         }
 
         [HttpPost]
@@ -48,8 +49,7 @@ namespace serverApi.Controllers
             // создаем JWT-токен
             var encodedJwt = CustomJWTCreator.CreateJWT(identity);
             User user = userRepository.Get(u => u.Email == account.Login).FirstOrDefault();
-            user.NotificationsAboutResponseToAd.AddRange(
-                notificationAboutResponseToAdRepository.Get(n => n.TargetUserId == user.Id));
+            user.NotificationsAboutResponseToAd.AddRange(notificationService.GetAllNotificationForUser(user.Id));
 
             var response = new
             {

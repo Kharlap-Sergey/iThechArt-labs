@@ -9,5 +9,6 @@ namespace serverApi.Services
     public interface INotificationService
     {
         public void Create(NotificationAboutResponseToAd notification);
+        public IEnumerable<NOt>
     }
 }
