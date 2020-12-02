@@ -1,29 +1,29 @@
 import React, { PureComponent } from "react";
-import InputBox from "../../../components/input/InputBox";
+import InputBox from "../inputBox/InputBox";
 import SubmitButton from "./components/submitButton/SubmitButton";
-import "./account-form.scss"
+import "./account-form.scss";
 class AccoutForm extends PureComponent {
   // props = {submitHandler, inputs, footer, header}
   constructor(props) {
-    super(props);   
-    this.state = {}
-    
+    super(props);
+    this.state = {};
+
     this.submiteHandler = this.submiteHandler.bind(this);
     this.changeInputHandler = this.changeInputHandler.bind(this);
   }
-  
-  submiteHandler(e){
+
+  submiteHandler(e) {
     e.preventDefault();
     console.log("submit handler was occured", e);
-    console.log("props", this.props);  
+    console.log("props", this.props);
     console.log("the form state is ", this.state);
     this.props.onSubmit(this.state);
   }
 
-  changeInputHandler(e){
+  changeInputHandler(e) {
     e.preventDefault();
     console.log("changes in input was occured", e);
-    console.log("props", this.props);  
+    console.log("props", this.props);
     console.log("the form state was ", this.state);
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -35,17 +35,18 @@ class AccoutForm extends PureComponent {
           {this.props.header}
 
           {this.props.inputs.map((input, index) => (
+            <div className="form__input">
               <InputBox
                 key={input.name}
-
                 placeholder={input.placeholder}
                 name={input.name}
                 val={this.state[input.name] ?? ""}
+                typ={input.type}
                 //метод который будет вызываться при каждом изменнении input
                 onChange={this.changeInputHandler}
-                
               />
-            ))}
+            </div>
+          ))}
 
           <SubmitButton></SubmitButton>
 

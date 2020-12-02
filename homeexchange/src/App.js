@@ -11,7 +11,7 @@ import "./app.scss";
 import NavBar from "./components/nav-bar/NavBar";
 import CreateAd from "./pages/CreateAd";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import Login from "./login/Login";
 import Registration from "./registration/Registration";
 import Profile from "./pages/Profile";
 import Ad from "./pages/Ad/Ad";
