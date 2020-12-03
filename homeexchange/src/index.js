@@ -1,15 +1,16 @@
 import React from "react";
+import thunk from "redux-thunk"
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import ReduxToastr from 'react-redux-toastr'
+
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { rootReducer } from "./redux/rootReducer";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk"
+import { rootReducer } from "./shared/redux/rootReducer";
 import { applyMiddleware, compose, createStore } from "redux";
 import { loginUserAction } from "./redux/loginActionsCreator";
 import { auth } from "./auth/auth";
-import ReduxToastr from 'react-redux-toastr'
 const store = createStore(
   rootReducer,
   compose(

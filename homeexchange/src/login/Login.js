@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { loginUserPost } from "../redux/loginActionsCreator";
-import { redirectClear } from "../redux/redirectActionCreator";
+import { redirectClear } from "../shared/redux/redirect/redirectActionCreator";
 import { connect } from "react-redux";
 import Loader from "../shared/components/Loader/Loader";
 import AccountForm from "../shared/components/accountForm/AccoutForm";

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { auth } from '../../../auth/auth';
 import {logoutAction} from '../../../redux/loginActionsCreator'
-import {redirectToAction} from '../../../redux/redirectActionCreator'
+import {redirectToAction} from '../../redux/redirect/redirectActionCreator'
 import "./logout-btn.scss"
 class LogoutBtn extends PureComponent {
   logout() {

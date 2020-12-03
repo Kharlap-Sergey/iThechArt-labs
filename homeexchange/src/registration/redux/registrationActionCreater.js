@@ -1,9 +1,9 @@
 import { toastr } from "react-redux-toastr";
-import { auth } from "../auth/auth";
-import { loginUserAction } from "./loginActionsCreator";
-import { redirectToAction } from "./redirectActionCreator";
-import { requestWrapper } from "./requestWrapper";
-import { REGISTRATE_ERROR } from "./types";
+import { auth } from "../../auth/auth";
+import { loginUserAction } from "../../redux/loginActionsCreator";
+import { redirectToAction } from "../../shared/redux/redirect/redirectActionCreator";
+import { requestWrapper } from "../../shared/utils/requestWrapper";
+import { REGISTRATE_ERROR } from "../../redux/types";
 
 export function registrateUserPost(user) {
   return async (dispatch) => {
@@ -28,9 +28,9 @@ export function registrateUserPost(user) {
   };
 }
 
-export const registrationErrorAction = (error) => {
-  return {
-    type: REGISTRATE_ERROR,
-    payload: error,
-  };
-};
+// export const registrationErrorAction = (error) => {
+//   return {
+//     type: REGISTRATE_ERROR,
+//     payload: error,
+//   };
+// };

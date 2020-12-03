@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createNewAd } from "../redux/adActionCreator";
+import { createNewAd } from "../shared/redux/ad/adActionCreator";
 
 class CreateAd extends Component {
   state = {type: "tenancy"};

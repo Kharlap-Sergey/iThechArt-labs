@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import { getAllAds } from "../redux/adActionCreator";
-import { redirectClear } from "../redux/redirectActionCreator";
+import { getAllAds } from "../shared/redux/ad/adActionCreator";
+import { redirectClear } from "../shared/redux/redirect/redirectActionCreator";
 import ShortAd from "../components/Ad/ShortAd";
 import Loader from "../shared/components/Loader/Loader";
 

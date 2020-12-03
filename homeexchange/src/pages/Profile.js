@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { redirectClear } from "../redux/redirectActionCreator";
-import { getOwnAds } from "../redux/adActionCreator";
+import { redirectClear } from "../shared/redux/redirect/redirectActionCreator";
 import ShortAd from "../components/Ad/ShortAd";
-import { deleteOwnAd } from "../redux/adActionCreator";
+import { deleteOwnAd,  getOwnAds  } from "../shared/redux/ad/adActionCreator";
 import Loader from "../shared/components/Loader/Loader";
 class Profile extends Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {redirectToAction} from "../../redux/redirectActionCreator"; 
+import {redirectToAction} from "../../shared/redux/redirect/redirectActionCreator"; 
 class ShortAd extends React.Component {
   constructor(props) {
     super(props);

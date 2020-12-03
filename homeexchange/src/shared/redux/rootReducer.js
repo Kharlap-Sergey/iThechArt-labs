@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
-import { FormReducer } from "./FormReducer";
-import { adReducer } from "./adReducer";
+import { FormReducer } from "../../redux/FormReducer";
 import { reducer as toastrReducer } from "react-redux-toastr";
-import { redirectReducer } from "./redirectReducer";
-import { remoteInteractionReducer } from "./remoteInteractionReducer";
+import { adReducer } from "./ad/adReducer";
+import { redirectReducer } from "./redirect/redirectReducer";
+import { remoteInteractionReducer } from "./remoteInteraciton/remoteInteractionReducer";
+
 export const rootReducer = combineReducers({
   accountForm: FormReducer,
   ads: adReducer,

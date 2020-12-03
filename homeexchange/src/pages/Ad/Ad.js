@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Loader from "../../shared/components/Loader/Loader";
-import {getAd, replyOnAd} from "../../redux/adActionCreator";
-import {redirectClear} from "../../redux/redirectActionCreator";
+import {getAd, replyOnAd} from "../../shared/redux/ad/adActionCreator";
+import {redirectClear} from "../../shared/redux/redirect/redirectActionCreator";
 
 class Ad extends Component {
   componentDidMount() {
