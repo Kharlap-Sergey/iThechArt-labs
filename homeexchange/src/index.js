@@ -10,7 +10,6 @@ import { applyMiddleware, compose, createStore } from "redux";
 import { loginUserAction } from "./redux/loginActionsCreator";
 import { auth } from "./auth/auth";
 import ReduxToastr from 'react-redux-toastr'
-
 const store = createStore(
   rootReducer,
   compose(

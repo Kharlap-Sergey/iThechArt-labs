@@ -4,7 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { getAllAds } from "../redux/adActionCreator";
 import { redirectClear } from "../redux/redirectActionCreator";
 import ShortAd from "../components/Ad/ShortAd";
-import Loader from "../components/Loader/Loader";
+import Loader from "../shared/components/Loader/Loader";
 
 class Home extends Component {
   constructor(props) {

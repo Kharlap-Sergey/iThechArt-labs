@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 
 import { registrateUserPost } from "../redux/registrationActionCreater";
 import { redirectClear } from "../redux/redirectActionCreator";
-import PaintedLink from "../shered/components/paintedLink/PaintedLink";
-import AccountForm from "../shered/components/accountForm/AccoutForm";
-import { inputAttributes } from "../shered/utils/inputArguments";
+import PaintedLink from "../shared/components/paintedLink/PaintedLink";
+import AccountForm from "../shared/components/accountForm/AccoutForm";
+import { inputAttributes } from "../shared/utils/inputArguments";
 
 class Registration extends React.PureComponent {
   inputsArguments = [

@@ -3,10 +3,10 @@ import { Link, Redirect } from "react-router-dom";
 import { loginUserPost } from "../redux/loginActionsCreator";
 import { redirectClear } from "../redux/redirectActionCreator";
 import { connect } from "react-redux";
-import Loader from "../components/Loader/Loader";
-import AccountForm from "../shered/components/accountForm/AccoutForm";
-import PaintedLink from "../shered/components/paintedLink/PaintedLink";
-import { inputAttributes } from "../shered/utils/inputArguments";
+import Loader from "../shared/components/Loader/Loader";
+import AccountForm from "../shared/components/accountForm/AccoutForm";
+import PaintedLink from "../shared/components/paintedLink/PaintedLink";
+import { inputAttributes } from "../shared/utils/inputArguments";
 
 class Login extends PureComponent {
   state = {};

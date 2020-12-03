@@ -5,7 +5,7 @@ import { redirectClear } from "../redux/redirectActionCreator";
 import { getOwnAds } from "../redux/adActionCreator";
 import ShortAd from "../components/Ad/ShortAd";
 import { deleteOwnAd } from "../redux/adActionCreator";
-import Loader from "../components/Loader/Loader";
+import Loader from "../shared/components/Loader/Loader";
 class Profile extends Component {
   constructor(props) {
     super(props);
