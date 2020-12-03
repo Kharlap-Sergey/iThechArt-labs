@@ -1,18 +1,28 @@
-import React, { Component } from 'react';
-import {redirectToAction} from '../shared/redux/redirect/redirectActionCreator';
-
-class Profile extends Component {
+import React, { PureComponent } from "react";
+import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
+import {getProfileById} from '../shared/redux/profile/profileActionCreator';
+import { connect } from "react-redux";
+class Profile extends PureComponent {
   constructor(props) {
     super(props);
   }
-  
-  componentDidMount(){
-  
+
+  componentDidMount() {
+    let url = window.location.href;
+    let parts = url.split("/");
+    let userId = parts[parts.length - 1];
+    if (!userId) {
+      return;
+    }
+    console.log("fetch profile for ", userId)
+    this.props.getProfileById(userId);
+    //this.props.getAdsForUserByUserId(userId);
   }
 
   render() {
     return (
       <div className="profile profile__body">
+        profile
         <div className="profile__inf">
           <div className="profile__avatar"></div>
           <div className="profile__information"></div>
@@ -26,5 +36,6 @@ class Profile extends Component {
 
 const mapDispatchToProps = {
   redirectToAction,
-}
-export default Profile;
+  getProfileById
+};
+export default connect(null, mapDispatchToProps)(Profile);

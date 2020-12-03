@@ -67,6 +67,14 @@ namespace serverApi.Controllers
             return res;
         }
 
+        [HttpGet("{userID}")]
+        public IActionResult Get(int userId)
+        {
+            var user = userRepository.FindById(userId);
+            var res = Json(user);
+            return res;
+        }
+
 
         private ClaimsIdentity GetIdentity(Account account)
         {

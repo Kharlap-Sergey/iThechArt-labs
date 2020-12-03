@@ -15,34 +15,19 @@ class NavBar extends React.Component {
     return undefined;
   }
 
-  logout() {
-    console.log("log out event");
-    console.log(this.props);
-    this.props.logoutAction();
-    auth.clearToken();
-    this.props.redirectToAction("/");
-  }
   accauntAction = () => {
     let username = this.getUserName();
     if (username) {
+      const userId = this.props.userId;
+      console.log("user Id", userId);
       return (
         //todo define the account and author.. className
         <li className="menu__item menu__item--authorized account">
-          <Authorized></Authorized>
-          {/* <div className="account__logout">
-            <button
-              className="account__logout-btn"
-              onClick={this.logout.bind(this)}
-            >
-              log out
-            </button>
-          </div> */}
+          <Authorized userId={userId}></Authorized>
         </li>
       );
     }
-    return (
-      <Unauthorized></Unauthorized>
-    );
+    return <Unauthorized></Unauthorized>;
   };
 
   render() {
@@ -50,7 +35,7 @@ class NavBar extends React.Component {
       <nav className="menu">
         <ul className="menu__items">
           <li className="menu__item" key="Home">
-            <PaintedLink to="/" value="Home"/>
+            <PaintedLink to="/" value="Home" />
           </li>
           <li className="menu__item menu__item--devider"></li>
           {this.accauntAction()}

@@ -13,7 +13,7 @@ import CreateAd from "./pages/CreateAd";
 import Home from "./pages/Home";
 import Login from "./login/Login";
 import Registration from "./registration/Registration";
-import Profile from "./pages/Profile";
+import Profile from "./profile/Profile";
 import Ad from "./pages/Ad/Ad";
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
             <Route exact path="/" component={Home}></Route>
             <Route exact path="/ad/create" component={CreateAd} />
             <Route exact path="/ad/:id" component={Ad} />
-            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/profile/:id" component={Profile} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/registration" component={Registration} />
           </Switch>

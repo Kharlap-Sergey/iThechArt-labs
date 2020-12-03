@@ -87,6 +87,20 @@ export function replyOnAd(adId){
     }
   };
 }
+export function getAdsForUserByUserId(userId){
+  return async (dispatch) => {
+    dispatch(startLoadingAction());
+    const url = "https://localhost:44370/Ad/get/" + userId;
+    const token = auth.getToken();
+    const response = await requestWrapper.post(url, {}, token);
+    if (response.ok) {
+      //dispatch(isShouldBeUpdatedAction(true));
+    } else {
+      //todo logic
+    }
+    dispatch(endLoadingAction());
+  };
+}
 export function setAllAdsAction(ads) {
   return {
     type: AD_GETALL,
