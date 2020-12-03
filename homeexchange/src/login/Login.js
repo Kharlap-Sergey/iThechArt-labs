@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Loader from "../components/Loader/Loader";
 import AccountForm from "../shered/components/accountForm/AccoutForm";
 import PaintedLink from "../shered/components/paintedLink/PaintedLink";
+import { inputAttributes } from "../shered/utils/inputArguments";
 
 class Login extends PureComponent {
   state = {};
@@ -17,19 +18,17 @@ class Login extends PureComponent {
   );
 
   inputsArguments = [
-    { placeholder: "e-mail", name: "email", type: "text" },
-    { placeholder: "password", name: "password", type: "password" },
+    inputAttributes.email,
+    inputAttributes.getPasswordAttributesForLogin(),
   ];
-
-  submeteHandler = (event) => {
+  submeteHandler = (state) => {
     console.log("form was submeted");
-    event.preventDefault();
-
+    console.log("with arguments", state)
+    
     let user = {
-      login: this.state.email,
-      password: this.state.password,
+      login: state.email,
+      password: state.password,
     };
-
     this.props.loginUserPost(user);
   };
 

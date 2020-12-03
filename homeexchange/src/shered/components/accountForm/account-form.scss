@@ -2,12 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   &__body {
     box-sizing: border-box;
     width: 320px;
     padding: 20px;
-    background-color: #15172b;
+    background-color: #7a80c0;
     border-radius: 20px;
   }
   &__input {

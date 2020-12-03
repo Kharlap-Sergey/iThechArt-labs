@@ -6,16 +6,17 @@ import { registrateUserPost } from "../redux/registrationActionCreater";
 import { redirectClear } from "../redux/redirectActionCreator";
 import PaintedLink from "../shered/components/paintedLink/PaintedLink";
 import AccountForm from "../shered/components/accountForm/AccoutForm";
+import { inputAttributes } from "../shered/utils/inputArguments";
 
 class Registration extends React.PureComponent {
   inputsArguments = [
-    { placeholder: "firstname", name: "firstname" },
-    { placeholder: "lastname", name: "lastname" },
-    { placeholder: "nickname", name: "nickname" },
-    { placeholder: "e-mail", name: "email" },
-    { placeholder: "country", name: "country" },
-    { placeholder: "city", name: "city" },
-    { placeholder: "password", name: "password", type: "password", validationAttributes: {minLength: "4", maxLength: "8"} },
+    inputAttributes.firstname ,
+    inputAttributes.lastname,
+    inputAttributes.nickname,
+    inputAttributes.email,
+    inputAttributes.country,
+    inputAttributes.city,
+    inputAttributes.getPasswordAttributesForRegistration(),
   ];
 
   formText = (

@@ -6,12 +6,12 @@
   color: #eee;
   font-size: 18px;
   text-align: center;
-  background-color: #08d;
+  text-transform: uppercase;
+  background-color: rgb(0, 33, 221);
   border: 0;
   border-radius: 12px;
   cursor: pointer;
-
   &:active {
-    background-color: #06b;
+    background-color: rgb(0, 33, 221);
   }
 }

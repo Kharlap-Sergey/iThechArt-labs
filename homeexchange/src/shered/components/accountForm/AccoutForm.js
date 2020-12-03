@@ -35,7 +35,7 @@ class AccoutForm extends PureComponent {
           {this.props.header}
 
           {this.props.inputs.map((input, index) => (
-            <div className="form__input">
+            <div className="form__input" key={input.name}>
               <InputBox
                 key={input.name}
                 placeholder={input.placeholder}
