@@ -1,7 +1,4 @@
-html,
-body {
-  height: 100%;
-}
+@import "../../variables.scss";
 #cube-loader {
   position: fixed;
   display: flex;
@@ -33,7 +30,7 @@ body {
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(52, 73, 94, 1);
+      background-color: $background-color;
       transform-origin: 100% 100%;
       animation: cube-loader 2.76s infinite linear both;
       content: "";

@@ -1,0 +1,22 @@
+@import "../shared/variables.scss";
+.menu {
+  padding: 5px;
+  background: $nav-bar-background-color;
+  &__items {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    list-style: none;
+  }
+  &__item {
+    margin: 10px;
+    &--devider {
+      flex: 1 1;
+      border: 0;
+    }
+    &--unauthorized {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

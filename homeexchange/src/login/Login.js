@@ -7,37 +7,33 @@ import Loader from "../shared/components/Loader/Loader";
 import AccountForm from "../shared/components/accountForm/AccoutForm";
 import PaintedLink from "../shared/components/paintedLink/PaintedLink";
 import { inputAttributes } from "../shared/utils/inputArguments";
-
+import "./login.scss"
+import FooterForForm from "./components/FooterForForm";
 class Login extends PureComponent {
   state = {};
-  formText = (
-    <div className="form__text">
-      <p>or</p>
-      <PaintedLink to="/registration" value="registrate"/>
-    </div>
-  );
-
   inputsArguments = [
     inputAttributes.email,
     inputAttributes.getPasswordAttributesForLogin(),
   ];
+
   submeteHandler = (state) => {
     console.log("form was submeted");
     console.log("with arguments", state)
     
-    let user = {
+    let account = {
       login: state.email,
       password: state.password,
     };
-    this.props.loginUserPost(user);
-  };
 
+    this.props.loginUserPost(account);
+  };
+  footerForeForm = (<FooterForForm/>)
   content() {
     return (
-      <div>
+      <div className="loginFormContainer">
         <AccountForm
           onSubmit={this.submeteHandler}
-          footer={this.formText}
+          footer={this.footerForeForm}
           inputs={this.inputsArguments}
         />
       </div>

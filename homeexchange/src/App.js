@@ -8,7 +8,7 @@ import {
 import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 
 import "./app.scss";
-import NavBar from "./components/nav-bar/NavBar";
+import NavBar from "./nav-bar/NavBar";
 import CreateAd from "./pages/CreateAd";
 import Home from "./pages/Home";
 import Login from "./login/Login";
