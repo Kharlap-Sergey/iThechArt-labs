@@ -42,7 +42,7 @@ class Registration extends React.PureComponent {
       return <Redirect to={this.props.path} />;
     }
     return (
-      <div>
+      <div className>
         <AccountForm
           onSubmit={this.submeteHandler}
           footer={this.formText}

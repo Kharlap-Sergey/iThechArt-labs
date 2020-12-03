@@ -1,0 +1,13 @@
+.dropdown-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  color: white;
+  vertical-align: middle;
+  border-top-width: 6px;
+  border-top-style: solid;
+  border-right: 6px solid transparent;
+  border-bottom: 0 solid transparent;
+  border-left: 6px solid transparent;
+  content: "";
+}

@@ -7,6 +7,7 @@ import { redirectToAction } from "../redux/redirectActionCreator";
 import { auth } from "../auth/auth";
 import PaintedLink from "../shared/components/paintedLink/PaintedLink";
 import Unauthorized from "./components/Unauthorized";
+import Authorized from "./components/Authorized";
 
 class NavBar extends React.Component {
   getUserName() {
@@ -27,17 +28,15 @@ class NavBar extends React.Component {
       return (
         //todo define the account and author.. className
         <li className="menu__item menu__item--authorized account">
-          <div className="account__profile">
-            <PaintedLink to="/profile" value="username" />
-          </div>
-          <div className="account__logout">
+          <Authorized></Authorized>
+          {/* <div className="account__logout">
             <button
               className="account__logout-btn"
               onClick={this.logout.bind(this)}
             >
               log out
             </button>
-          </div>
+          </div> */}
         </li>
       );
     }
