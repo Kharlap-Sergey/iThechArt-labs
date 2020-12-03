@@ -3,12 +3,32 @@ import "./input-box.scss";
 class InputBox extends React.PureComponent {
   constructor(props) {
     super(props);
+    this.onChange = this.onChange.bind(this);
+    this.show_hide_password = this.show_hide_password.bind(this);
   }
 
-  
+  show_hide_password(event) {
+    event.preventDefault();
+    console.log(event);
+    var input = document.querySelector('[name=password]');
+    if (input.getAttribute('type') == 'password') {
+      event.target.classList.add("view");
+      input.setAttribute('type', 'text');
+    } else {
+      event.target.classList.remove("view")
+      input.setAttribute('type', 'password');
+    }
+    return false;
+  }
+
+  onChange(event) {
+    console.log(event);
+    this.props.onChange(event);
+  }
+
   render() {
-    console.log("render")
-    console.log(this.props)
+    console.log("render");
+    console.log(this.props);
     return (
       <div className="input-box">
         <input
@@ -16,23 +36,18 @@ class InputBox extends React.PureComponent {
           type={this.props.typ ?? "text"}
           name={this.props.name.toString()}
           placeholder={this.props.placeholder.toString()}
-          value={this.props.val?? ""}
-          onChange={this.props.onChange}
-          {...this.props.validationAttributes}         
+          value={this.props.val ?? ""}
+          onChange={this.onChange}
+          {...this.props.validationAttributes}
         />
-        
+        {this.props.name == "password" && (
+          <a
+            href="#"
+            className="password-control"
+            onClick={this.show_hide_password}
+          ></a>
+        )}
       </div>
-  //       <div className="form__input input-box">
-//         <input
-//           key={this.props.id}
-//           type={this.props.type}
-//           className="input-box__input"
-//           name={this.props.name.toString()}
-//           placeholder={this.props.placeholder.toString()}
-//           value={this.props.val?? ""}
-//           onChange={this.props.onChange}
-//         />
-//       </div>    
     );
   }
 }
