@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
-import {getProfileById, getAdsForProfileByUserId} from '../shared/redux/profile/profileActionCreator';
+import {getProfileById} from '../shared/redux/profile/profileActionCreator';
 import { connect } from "react-redux";
 import AdsPageList from "../shared/components/adsPageList/AdsPageList";
 import AccountIformation from "./components/AccountIformation";

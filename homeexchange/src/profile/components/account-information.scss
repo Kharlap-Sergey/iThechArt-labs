@@ -5,7 +5,13 @@
   background-color: $account-info-bg-color;
   border-radius: 4px;
   &__avatar {
+    width: fit-content;
+    height: fit-content;
     margin: 0 auto;
+    border-radius: 100%;
+    img {
+      border-radius: inherit;
+    }
   }
   &__information {
     color: #1c222a;
