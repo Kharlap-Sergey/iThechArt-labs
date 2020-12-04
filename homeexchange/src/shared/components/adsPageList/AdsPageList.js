@@ -1,31 +1,38 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import ShordAd from '../shortAd/ShordAd';
-import { getAds } from './redux/adsPageListActionCreatior';
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import ShortAd from "../shortAd/ShortAd";
+import { getAds } from "./redux/adsPageListActionCreatior";
 
 class AdsPageList extends PureComponent {
-  componentDidMount(){
+  componentDidMount() {
     this.props.getAds(8);
   }
   render() {
-    console.log(this.props)
+    console.log(this.props);
     const ads = this.props.ads;
     return (
       <div>
         {ads.map((ad) => {
-          return (<ShordAd title={ad.title}/>)
-        } )
-        }
+          return (
+            <ShortAd
+              key={ad.id}
+              title={ad.title}
+              typ={ad.type}
+              description={ad.description}
+              date={ad.dateOfPublication}
+            />
+          );
+        })}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
   console.log(state);
-  return {...state.adsPageList}
-}
+  return { ...state.adsPageList };
+};
 const mapDispatchToProps = {
-  getAds
-}
+  getAds,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(AdsPageList);
