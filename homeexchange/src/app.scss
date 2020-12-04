@@ -1,7 +1,5 @@
-.App {
-  color: red;
-}
+@import "./shared/variables.scss";
 body {
   font-size: 62.5%;
-  background-color: #1c222a;
+  background-color: $app-background-color;
 }

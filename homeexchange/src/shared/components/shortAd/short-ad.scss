@@ -1,11 +1,14 @@
 @import "../../variables.scss";
 
+$separator-bg-color: #825b00 !default;
+$radiant-color: #dcdcdc !default;
 .short-ad {
   display: flex;
   width: 450px;
   padding: 5px;
-  background-color: rgb(96, 219, 209);
-  border: 1px solid gray;
+  font-size: 1rem;
+  background-color: $short-ad-bg-color;
+  border: 1px solid #825b00;
   border-radius: 5px;
   &__aside {
     width: 60px;
@@ -21,21 +24,32 @@
   &__date {
     margin-top: 0;
     padding-top: 0;
+    color: $radiant-color;
+  }
+  &__type {
+    color: $radiant-color;
   }
   &__title {
     margin-bottom: 0;
-    color: black;
-    border-bottom: 1px solid gray;
+    color: white;
+    border-bottom: 1px solid $separator-bg-color;
   }
   &__discription {
     margin-top: 5px;
-    color: black;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+    color: white;
+    font-size: 1.4rem;
+    border-top: 1px solid $separator-bg-color;
+    border-bottom: 1px solid $separator-bg-color;
   }
   &__more {
     position: absolute;
     bottom: 0;
     left: 0;
+    font-size: 1rem;
+    button {
+      color: $more-btn-color;
+      background-color: $more-btn-bg-color;
+      border-radius: 5px;
+    }
   }
 }

@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .input-box {
   height: 100%;
   &__input {
@@ -5,15 +7,15 @@
     width: 100%;
     height: 100%;
     padding: 4px 20px 0;
-    color: rgb(51, 4, 8);
+    color: $input-valid-color;
     font-size: 18px;
-    background-color: lightgreen !important;
+    background-color: $input-valid-bg-color !important;
     border: 0;
     border-radius: 12px;
     outline: 0;
     &:invalid {
       color: white;
-      background-color: lightpink !important;
+      background-color: $input-invalid-bg-color !important;
     }
   }
 }

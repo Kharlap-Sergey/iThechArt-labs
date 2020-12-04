@@ -1,3 +1,6 @@
+@import "../../../../variables.scss";
+
+//$submit-btn-bg: rgb(0, 33, 221) !default;
 .submit {
   box-sizing: border-box;
   width: 100%;
@@ -7,11 +10,11 @@
   font-size: 18px;
   text-align: center;
   text-transform: uppercase;
-  background-color: rgb(0, 33, 221);
+  background-color: $submit-btn-bg;
   border: 0;
   border-radius: 12px;
   cursor: pointer;
   &:active {
-    background-color: rgb(0, 33, 221);
+    background-color: $submit-btn-bg;
   }
 }

@@ -1,5 +1,8 @@
+@import "../../variables.scss";
+
 .logout-btn {
   width: inherit;
-  background-color: lightpink;
+  color: $logout-btn-color;
+  background-color: $logout-btn-bg;
   border-radius: 5px;
 }

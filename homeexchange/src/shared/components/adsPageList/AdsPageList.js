@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import ShortAd from "../shortAd/ShortAd";
 import { getAds } from "./redux/adsPageListActionCreatior";
-
+import "./ads-page-list.scss"
 class AdsPageList extends PureComponent {
   componentDidMount() {
     this.props.getAds(8);
@@ -14,13 +14,15 @@ class AdsPageList extends PureComponent {
       <div>
         {ads.map((ad) => {
           return (
-            <ShortAd
+            <div className="ads-list__element">
+              <ShortAd
               key={ad.id}
               title={ad.title}
               typ={ad.type}
               description={ad.description}
               date={ad.dateOfPublication}
             />
+            </div>
           );
         })}
       </div>
