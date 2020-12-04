@@ -21,7 +21,7 @@ namespace serverApi.Services
             notificationAboutResponseToAdRepository.Create(notification);
         }
 
-        public IEnumerable<NotificationAboutResponseToAd> GetAllNotificationForUser(int userID)
+        public IEnumerable<NotificationAboutResponseToAd> GetAllNotificationForUserByUserId(int userID)
         {
             return notificationAboutResponseToAdRepository.Get(n => n.TargetUserId == userID);
         }

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
+
 namespace serverApi.Controllers
 {
     public sealed class InvalidCreadsExeption : Exception
@@ -49,7 +50,7 @@ namespace serverApi.Controllers
             // создаем JWT-токен
             var encodedJwt = CustomJWTCreator.CreateJWT(identity);
             User user = userRepository.Get(u => u.Email == account.Login).FirstOrDefault();
-            user.NotificationsAboutResponseToAd.AddRange(notificationService.GetAllNotificationForUser(user.Id));
+            user.NotificationsAboutResponseToAd.AddRange(notificationService.GetAllNotificationForUserByUserId(user.Id));
 
             var response = new
             {

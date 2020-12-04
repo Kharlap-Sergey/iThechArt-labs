@@ -14,6 +14,7 @@ class Authorized extends PureComponent {
   }
 
   handleClick(event) {
+    event.preventDefault();
     console.log("clicked");
     this.setState({ showMenu: !this.state.showMenu });
   }
