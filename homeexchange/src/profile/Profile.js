@@ -3,6 +3,9 @@ import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator
 import {getProfileById, getAdsForProfileByUserId} from '../shared/redux/profile/profileActionCreator';
 import { connect } from "react-redux";
 import AdsPageList from "../shared/components/adsPageList/AdsPageList";
+import AccountIformation from "./components/AccountIformation";
+import "./profile.scss";
+
 class Profile extends PureComponent {
   constructor(props) {
     super(props);
@@ -16,18 +19,15 @@ class Profile extends PureComponent {
       return;
     }
     console.log("fetch profile for ", userId)
-    //this.props.getProfileById(userId);
-    //this.props.getAdsForProfileByUserId(userId);
+    this.props.getProfileById(userId);
   }
 
   render() {
+    console.log(this.props);
     return (
-      <div className="profile profile__body">
-        profile
+      <div className="profile">
         <div className="profile__inf">
-          <div className="profile__avatar"></div>
-          <div className="profile__information"></div>
-          <div className="profile__editor"></div>
+          <AccountIformation {...this.props.profile} />
         </div>
         <div className="profile__ads">
           <AdsPageList></AdsPageList>
@@ -37,9 +37,11 @@ class Profile extends PureComponent {
   }
 }
 
+const mapStateToPropos = (state) => {
+  return {profile: state.profile};
+}
 const mapDispatchToProps = {
   redirectToAction,
   getProfileById,
-  getAdsForProfileByUserId
 };
-export default connect(null, mapDispatchToProps)(Profile);
+export default connect(mapStateToPropos, mapDispatchToProps)(Profile);

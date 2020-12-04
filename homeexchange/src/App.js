@@ -1,10 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  Route,
-  BrowserRouter as Router,
-  Switch,
-} from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 
 import "./app.scss";
@@ -21,14 +17,16 @@ function App() {
       <Router>
         <div>
           <NavBar />
-          <Switch>
-            <Route exact path="/" component={Home}></Route>
-            <Route exact path="/ad/create" component={CreateAd} />
-            <Route exact path="/ad/:id" component={Ad} />
-            <Route exact path="/profile/:id" component={Profile} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/registration" component={Registration} />
-          </Switch>
+          <div className="main">
+            <Switch>
+              <Route exact path="/" component={Home}></Route>
+              <Route exact path="/ad/create" component={CreateAd} />
+              <Route exact path="/ad/:id" component={Ad} />
+              <Route exact path="/profile/:id" component={Profile} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/registration" component={Registration} />
+            </Switch>
+          </div>
         </div>
       </Router>
     </div>

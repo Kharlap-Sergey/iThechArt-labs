@@ -3,3 +3,10 @@ body {
   font-size: 62.5%;
   background-color: $app-background-color;
 }
+
+.main {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  height: inherit;
+}

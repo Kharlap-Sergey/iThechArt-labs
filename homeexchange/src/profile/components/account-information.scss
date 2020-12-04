@@ -1,0 +1,19 @@
+@import "../../shared/variables.scss";
+
+.account-info {
+  padding: 10px;
+  background-color: $account-info-bg-color;
+  border-radius: 4px;
+  &__avatar {
+    margin: 0 auto;
+  }
+  &__information {
+    color: #1c222a;
+  }
+  &__editor {
+  }
+  &__nickname {
+  }
+  &__email {
+  }
+}
