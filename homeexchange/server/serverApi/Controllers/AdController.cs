@@ -46,6 +46,16 @@ namespace serverApi.Controllers
 
         }
 
+        [HttpGet("{userId=-1}")]
+        public IActionResult GetAds(int userId)
+        {
+            var ads = adRepository
+                .Get(ad => ad.AuthorId == userId)
+                .OrderBy(ad => ad.DateOfPublication);
+
+            return Json(ads);
+        }
+        
         [HttpPost("{id}")]
         [Authorize]
         public IActionResult Reply(int adId)
@@ -53,12 +63,12 @@ namespace serverApi.Controllers
             var userId = int.Parse(User.Identity.Name);
             var ad = adRepository.FindById(adId);
             var responseToAd = new ResponseToAd
-                            {
-                                Author = userRepository.FindById(userId),
-                                Date = DateTime.Now,
-                                Message = "",
-                                TargetAdId = adId
-                            };
+            {
+                Author = userRepository.FindById(userId),
+                Date = DateTime.Now,
+                Message = "",
+                TargetAdId = adId
+            };
 
             ad.ResponseToAd = responseToAd;
 
@@ -86,6 +96,16 @@ namespace serverApi.Controllers
         public IActionResult GetOwn()
         {
             var userId = int.Parse(User.Identity.Name);
+            var ads = adRepository
+                .Get(ad => ad.AuthorId == userId)
+                .OrderBy(ad => ad.DateOfPublication);
+
+            return Json(ads);
+        }
+
+        [HttpGet("{userId}")]
+        public IActionResult GetForUser(int userId)
+        {
             var ads = adRepository
                 .Get(ad => ad.AuthorId == userId)
                 .OrderBy(ad => ad.DateOfPublication);

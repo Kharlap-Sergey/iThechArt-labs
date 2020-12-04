@@ -1,2 +1,3 @@
-export const USER_GET_BY_ID = "profile/getByID";
-export const USER_CLEAR = "profile/clear";
+export const PROFILE_GET_BY_ID = "profile/getByID";
+export const PROFILE_GET_ADS_FOR_PROFILE = "profile/getAdsForProfile"
+export const PROFILE_CLEAR = "profile/clear";

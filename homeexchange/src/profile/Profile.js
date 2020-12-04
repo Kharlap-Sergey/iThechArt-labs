@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
-import {getProfileById} from '../shared/redux/profile/profileActionCreator';
+import {getProfileById, getAdsForProfileByUserId} from '../shared/redux/profile/profileActionCreator';
 import { connect } from "react-redux";
+import AdsPageList from "../shared/components/adsPageList/AdsPageList";
 class Profile extends PureComponent {
   constructor(props) {
     super(props);
@@ -15,8 +16,8 @@ class Profile extends PureComponent {
       return;
     }
     console.log("fetch profile for ", userId)
-    this.props.getProfileById(userId);
-    //this.props.getAdsForUserByUserId(userId);
+    //this.props.getProfileById(userId);
+    //this.props.getAdsForProfileByUserId(userId);
   }
 
   render() {
@@ -28,7 +29,9 @@ class Profile extends PureComponent {
           <div className="profile__information"></div>
           <div className="profile__editor"></div>
         </div>
-        <div className="profile__ads"></div>
+        <div className="profile__ads">
+          <AdsPageList></AdsPageList>
+        </div>
       </div>
     );
   }
@@ -36,6 +39,7 @@ class Profile extends PureComponent {
 
 const mapDispatchToProps = {
   redirectToAction,
-  getProfileById
+  getProfileById,
+  getAdsForProfileByUserId
 };
 export default connect(null, mapDispatchToProps)(Profile);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,7 +28,8 @@ namespace serverApi.Models
         [JsonPropertyName("nickname")]
         public string Nickname { get; set; }
         [Required]
-        [JsonPropertyName("password")]
+        //[JsonPropertyName("password")]
+        [JsonProperty("password", NullValueHandling = NullValueHandling.Ignore)]
         public string Password { get; set; }
 
         public string Country { get; set; }
