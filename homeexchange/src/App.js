@@ -6,7 +6,7 @@ import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 import "./app.scss";
 import NavBar from "./nav-bar/NavBar";
 import CreateAd from "./pages/CreateAd";
-import Home from "./pages/Home";
+import Home from "./home/Home";
 import Login from "./login/Login";
 import Registration from "./registration/Registration";
 import Profile from "./profile/Profile";

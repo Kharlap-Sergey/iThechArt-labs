@@ -8,31 +8,35 @@ class AdsPageList extends PureComponent {
     super(props);
 
     this.state = { currentPage: 1 }
-
   }
+
+  loadPage() {
+    this.props.getAds(this.state.currentPage, this.props.userId);
+  }
+
   handleNext = (event) => {
     event.preventDefault();
-    this.setState((state)=>{
-      return {currentPage: state.currentPage + 1}
+    this.setState((state) => {
+      return { currentPage: state.currentPage + 1 }
     });
     console.log(this.state);
   }
   handlePrevious = (event) => {
     event.preventDefault();
-    this.setState((state)=>{
-      return {currentPage: state.currentPage - 1}
+    this.setState((state) => {
+      return { currentPage: state.currentPage - 1 }
     });
-      
+
   }
   componentDidMount() {
-    console.log("did mount")
-    this.props.getAds(this.state.currentPage, 2);
+    console.log("did mount");
+    this.loadPage();
   }
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate(prevProps, prevState) {
     console.log("did update&&");
-    if(prevState.currentPage !== this.state.currentPage){
+    if (prevState.currentPage !== this.state.currentPage) {
       console.log("should be updated")
-      this.props.getAds(this.state.currentPage, 2);
+      this.loadPage();
     }
   }
   render() {

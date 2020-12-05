@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
-import {getProfileById} from '../shared/redux/profile/profileActionCreator';
+import { getProfileById } from '../shared/redux/profile/profileActionCreator';
 import { connect } from "react-redux";
 import AdsPageList from "../shared/components/adsPageList/AdsPageList";
 import AccountIformation from "./components/AccountIformation";
@@ -9,17 +9,16 @@ import "./profile.scss";
 class Profile extends PureComponent {
   constructor(props) {
     super(props);
-  }
 
-  componentDidMount() {
     let url = window.location.href;
     let parts = url.split("/");
     let userId = parts[parts.length - 1];
-    if (!userId) {
-      return;
-    }
-    console.log("fetch profile for ", userId)
-    this.props.getProfileById(userId);
+    this.state = {userId: userId}
+  }
+
+  componentDidMount() {
+    console.log("fetch profile for ", this.state.userId);
+    this.props.getProfileById(this.state.userId);
   }
 
   render() {
@@ -30,7 +29,7 @@ class Profile extends PureComponent {
           <AccountIformation {...this.props.profile} />
         </div>
         <div className="profile__ads">
-          <AdsPageList></AdsPageList>
+          <AdsPageList userId={this.state.userId}></AdsPageList>
         </div>
       </div>
     );
@@ -38,7 +37,7 @@ class Profile extends PureComponent {
 }
 
 const mapStateToPropos = (state) => {
-  return {profile: state.profile};
+  return { profile: state.profile };
 }
 const mapDispatchToProps = {
   redirectToAction,

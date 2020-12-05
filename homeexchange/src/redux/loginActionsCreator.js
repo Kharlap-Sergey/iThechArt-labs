@@ -21,7 +21,7 @@ export function loginUserPost(user) {
         dispatch(
           loginUserAction({
             email: data.user.email,
-            id: data.user.id,
+            userId: data.user.id,
           })
         );
         dispatch(redirectToAction("/"));
