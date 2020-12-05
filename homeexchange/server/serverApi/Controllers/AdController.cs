@@ -52,7 +52,7 @@ namespace serverApi.Controllers
             int pageSize = 3;
             var ads = adRepository
                 .Get(ad => (userId < 0 ||  ad.AuthorId == userId))
-                .OrderBy(ad => ad.DateOfPublication).ToList();
+                .OrderByDescending(ad => ad.DateOfPublication).ToList();
             var adsToSend = ads.Skip((page - 1) * pageSize).Take(pageSize);
             var result = new
             {
