@@ -8,7 +8,7 @@ import { profileReducer } from "./profile/profileReducer";
 import { adsPageListReducer } from "../components/adsPageList/redux/adsPageListReducer";
 
 export const rootReducer = combineReducers({
-  accountForm: FormReducer,
+  user: FormReducer,
   ads: adReducer,
   toastr: toastrReducer,
   redirect: redirectReducer,

@@ -11,7 +11,7 @@ import Authorized from "./components/Authorized";
 
 class NavBar extends React.Component {
   getUserName() {
-    if (this.props && this.props.username) return this.props.username;
+    if (this.props && this.props.email) return this.props.email;
     return undefined;
   }
 
@@ -46,8 +46,7 @@ class NavBar extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.accountForm);
-  return state.accountForm;
+  return state.user;
 };
 
 const mapDispatchToProps = {

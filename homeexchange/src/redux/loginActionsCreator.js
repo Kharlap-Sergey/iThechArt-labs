@@ -20,8 +20,8 @@ export function loginUserPost(user) {
         auth.setToken(data.jwt);
         dispatch(
           loginUserAction({
-            username: data.user.email,
-            userId: data.user.id,
+            email: data.user.email,
+            id: data.user.id,
           })
         );
         dispatch(redirectToAction("/"));
@@ -30,7 +30,6 @@ export function loginUserPost(user) {
         const data = await response.json();
         toastr.error(data.errorText, "");
         console.log(data.errorText)
-        //todo logic
       }
     } catch (e) {
       console.log(e);
