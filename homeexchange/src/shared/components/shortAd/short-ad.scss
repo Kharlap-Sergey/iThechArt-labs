@@ -11,7 +11,12 @@ $radiant-color: #dcdcdc !default;
   border: 1px solid #825b00;
   border-radius: 5px;
   &__aside {
+    width: 80px;
+  }
+  &__account-avatar{
+    margin: 0 auto;
     width: 60px;
+    height: 60px;
   }
   &__main {
     position: relative;
