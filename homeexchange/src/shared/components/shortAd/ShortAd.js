@@ -4,7 +4,7 @@ import AccountAvatar from "../accountAvatar/AccountAvatar";
 import "./short-ad.scss";
 
 class ShortAd extends PureComponent {
-  formatDate(dateString){
+  formatDate(dateString) {
     const date = new Date(dateString)
     const day = date.getDate();
     const year = date.getFullYear();
@@ -16,11 +16,15 @@ class ShortAd extends PureComponent {
     console.log(this.props);
     return (
       <div className="short-ad">
-        <div className="short-ad__aside">
-          <div className="short-ad__account-avatar">
-            <AccountAvatar/>
-          </div>
-        </div>
+        {
+          this.props.shouldAvatarDisplay && (
+            <div className="short-ad__aside">
+              <div className="short-ad__account-avatar">
+                <AccountAvatar />
+              </div>
+            </div>
+          )
+        }
         <div className="short-ad__main">
           <h2 className="short-ad__title">{this.props.title}</h2>
           <div className="short-ad__date">{this.formatDate(this.props.date)}</div>

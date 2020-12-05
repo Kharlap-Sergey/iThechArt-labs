@@ -5,8 +5,10 @@
   justify-content: center;
   &__inf {
     margin-right: 70px;
+    align-self: flex-start;
     font-size: 1.5rem;
   }
   &__ads {
+    margin-top: -10px;
   }
 }

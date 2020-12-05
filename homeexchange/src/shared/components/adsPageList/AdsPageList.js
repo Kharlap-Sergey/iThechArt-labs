@@ -4,27 +4,58 @@ import ShortAd from "../shortAd/ShortAd";
 import { getAds } from "./redux/adsPageListActionCreatior";
 import "./ads-page-list.scss"
 class AdsPageList extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = { currentPage: 1 }
+
+  }
+  handleNext = (event) => {
+    event.preventDefault();
+    this.setState((state)=>{
+      return {currentPage: state.currentPage + 1}
+    });
+    console.log(this.state);
+  }
+  handlePrevious = (event) => {
+    event.preventDefault();
+    this.setState((state)=>{
+      return {currentPage: state.currentPage - 1}
+    });
+      
+  }
   componentDidMount() {
-    this.props.getAds(1);
+    console.log("did mount")
+    this.props.getAds(this.state.currentPage, 2);
+  }
+  componentDidUpdate(prevProps, prevState){
+    console.log("did update&&");
+    if(prevState.currentPage !== this.state.currentPage){
+      console.log("should be updated")
+      this.props.getAds(this.state.currentPage, 2);
+    }
   }
   render() {
+    console.log("render");
     console.log(this.props);
     const ads = this.props.ads;
     return (
       <div>
         {ads.map((ad) => {
           return (
-            <div className="ads-list__element">
+            <div className="ads-list__element" key={ad.id}>
               <ShortAd
-              key={ad.id}
-              title={ad.title}
-              typ={ad.type}
-              description={ad.description}
-              date={ad.dateOfPublication}
-            />
+                key={ad.id}
+                title={ad.title}
+                typ={ad.type}
+                description={ad.description}
+                date={ad.dateOfPublication}
+              />
             </div>
           );
         })}
+        {this.props.havePrevious && <button onClick={this.handlePrevious}>Prev</button>}
+        {this.props.haveNext && <button onClick={this.handleNext}>Next</button>}
       </div>
     );
   }

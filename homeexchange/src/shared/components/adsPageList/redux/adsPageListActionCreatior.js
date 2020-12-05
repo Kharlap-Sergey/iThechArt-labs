@@ -1,8 +1,8 @@
 import { requestWrapper } from "../../../utils/requestWrapper";
 import {GET_ADS} from "./types";
-export function getAds(userId){
+export function getAds(page, userId){
   return async dispatch =>{
-    const url = "https://localhost:44370/ad/getAds/" + userId;
+    const url = "https://localhost:44370/ad/getAds/" + `${page}/${userId}`;
     console.log("try to recieve data form", url )
     const response = await requestWrapper.get(url);
     if (response.ok) {

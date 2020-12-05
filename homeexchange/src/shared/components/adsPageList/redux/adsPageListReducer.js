@@ -1,11 +1,11 @@
 import { CLEAR, GET_ADS } from "./types";
 
-const initialState = {ads: []};
+const initialState = {ads: [], haveNext: false, havePrevious: false};
 
 export const adsPageListReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ADS:
-      return {ads:[...action.payload]};
+      return {...action.payload};
     case CLEAR:
       return initialState;
     default:

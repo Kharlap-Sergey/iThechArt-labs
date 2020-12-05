@@ -46,14 +46,21 @@ namespace serverApi.Controllers
 
         }
 
-        [HttpGet("{userId=-1}")]
-        public IActionResult GetAds(int userId)
+        [HttpGet("{page=1}/{userId=-1}")]
+        public IActionResult GetAds(int userId, int page)
         {
+            int pageSize = 3;
             var ads = adRepository
                 .Get(ad => (userId < 0 ||  ad.AuthorId == userId))
-                .OrderBy(ad => ad.DateOfPublication);
-
-            return Json(ads);
+                .OrderBy(ad => ad.DateOfPublication).ToList();
+            var adsToSend = ads.Skip((page - 1) * pageSize).Take(pageSize);
+            var result = new
+            {
+                haveNext = ads.Count > (page - 1) * pageSize + adsToSend.Count(),
+                havePrevious = (page-1)*pageSize > 0,
+                ads = adsToSend
+            };
+            return Json(result);
         }
         
         [HttpPost("{id}")]
