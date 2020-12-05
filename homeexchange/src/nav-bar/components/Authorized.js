@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import Avatar from "../../shared/components/avatar/Avatar";
 import DropdownCaret from "../../shared/components/dropdownCaret/DropdownCaret";
 import DropdownMenu from "../../shared/components/dropdownMenu/DropdownMenu";
 import LogoutBtn from "../../shared/components/logoutBtn/LogoutBtn";
@@ -29,7 +30,9 @@ class Authorized extends PureComponent {
       <li className="menu__item" key="authorizedProfile">
         <div className="authorized-container">
           <div className="profile" onClick={this.handleClick}>
-            <img src={imgSrc} alt="" className="avatar avatar--mini" />
+            <div className="avatar--mini">
+              <Avatar source={imgSrc} />
+            </div>
             <DropdownCaret />
           </div>
           {this.state.showMenu && (

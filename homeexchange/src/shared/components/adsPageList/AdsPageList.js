@@ -5,7 +5,7 @@ import { getAds } from "./redux/adsPageListActionCreatior";
 import "./ads-page-list.scss"
 class AdsPageList extends PureComponent {
   componentDidMount() {
-    this.props.getAds(8);
+    this.props.getAds(1);
   }
   render() {
     console.log(this.props);

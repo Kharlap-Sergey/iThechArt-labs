@@ -50,7 +50,7 @@ namespace serverApi.Controllers
         public IActionResult GetAds(int userId)
         {
             var ads = adRepository
-                .Get(ad => ad.AuthorId == userId)
+                .Get(ad => (userId < 0 ||  ad.AuthorId == userId))
                 .OrderBy(ad => ad.DateOfPublication);
 
             return Json(ads);
