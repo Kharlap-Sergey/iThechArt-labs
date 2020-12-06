@@ -1,6 +1,6 @@
 import { auth } from "../../../auth/auth";
 import { requestWrapper } from "../../utils/requestWrapper";
-import { AD_CLEAR, AD_GET, AD_GETALL, AD_GETOWN } from "./types";
+import { AD_CLEAR, AD_GET, AD_GETALL} from "./types";
 import {startLoadingAction, endLoadingAction, isShouldBeUpdatedAction} from "../remoteInteraciton/remoteInteractionActionCreator"
 
 export function getAllAds() {
@@ -27,23 +27,6 @@ export function createNewAd(ad) {
     } else {
       //todo logic
     }
-  };
-}
-export function getOwnAds() {
-  return async (dispatch) => {
-    dispatch(startLoadingAction());
-    const url = "https://localhost:44370/Ad/getown";
-    const token = auth.getToken();
-    const response = await requestWrapper.get(url, token);
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(isShouldBeUpdatedAction(false));
-   
-      dispatch(setOwnAdsAction({ ownAds: [...data] }));
-    } else {
-      //todo logic
-    }
-    dispatch(endLoadingAction());
   };
 }
 export function getAd(adId){
@@ -104,12 +87,6 @@ export function getAdsForUserByUserId(userId){
 export function setAllAdsAction(ads) {
   return {
     type: AD_GETALL,
-    payload: ads,
-  };
-}
-export function setOwnAdsAction(ads) {
-  return {
-    type: AD_GETOWN,
     payload: ads,
   };
 }

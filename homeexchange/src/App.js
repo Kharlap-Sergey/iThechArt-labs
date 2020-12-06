@@ -10,7 +10,7 @@ import Home from "./home/Home";
 import Login from "./login/Login";
 import Registration from "./registration/Registration";
 import Profile from "./profile/Profile";
-import Ad from "./pages/Ad/Ad";
+import Ad from "./ad/Ad";
 import RouteCatcher from "./shared/components/routeCatcher/RouteCatcher";
 function App() {
   return (
@@ -21,12 +21,12 @@ function App() {
           <div className="main">
             <Switch>
               <RouteCatcher>
-                <Route exact path="/" component={Home}></Route>
                 <Route exact path="/ad/create" component={CreateAd} />
                 <Route exact path="/ad/:id" component={Ad} />
-                <Route exact path="/profile/:id" component={Profile}></Route>
+                <Route exact path="/profile/:id" component={Profile}/>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />
+                <Route exact path="/" component={Home}/>
               </RouteCatcher>
             </Switch>
           </div>
