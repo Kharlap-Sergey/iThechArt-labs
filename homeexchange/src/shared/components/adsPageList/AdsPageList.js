@@ -54,7 +54,7 @@ class AdsPageList extends PureComponent {
                 typ={ad.type}
                 description={ad.description}
                 date={ad.dateOfPublication}
-                shouldAvatarDisplay={this.props.shouldAvatarDisplay}
+                shouldAvatarDisplay={!this.props.userID}
               />
             </div>
           );

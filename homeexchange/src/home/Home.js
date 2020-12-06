@@ -5,7 +5,7 @@ export class Home extends PureComponent {
     render() {
         return (
             <div>
-                <AdsPageList shouldAvatarDisplay={true}></AdsPageList>
+                <AdsPageList></AdsPageList>
             </div>
         )
     }
