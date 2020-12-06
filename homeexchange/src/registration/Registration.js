@@ -37,10 +37,6 @@ class Registration extends React.PureComponent {
   };
 
   render() {
-    if (this.props.path) {
-      this.props.redirectClear();
-      return <Redirect to={this.props.path} />;
-    }
     return (
       <div>
         <AccountForm
@@ -55,8 +51,8 @@ class Registration extends React.PureComponent {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  return { ...state.accountForm, ...state.redirect };
+  return { ...state.accountForm};
 };
 
-const mapDispatchToProps = { registrateUserPost, redirectClear };
+const mapDispatchToProps = { registrateUserPost};
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);

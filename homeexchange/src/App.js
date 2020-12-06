@@ -11,6 +11,7 @@ import Login from "./login/Login";
 import Registration from "./registration/Registration";
 import Profile from "./profile/Profile";
 import Ad from "./pages/Ad/Ad";
+import RouteCatcher from "./shared/components/routeCatcher/RouteCatcher";
 function App() {
   return (
     <div className="App">
@@ -19,12 +20,14 @@ function App() {
           <NavBar />
           <div className="main">
             <Switch>
-              <Route exact path="/" component={Home}></Route>
-              <Route exact path="/ad/create" component={CreateAd} />
-              <Route exact path="/ad/:id" component={Ad} />
-              <Route exact path="/profile/:id" component={Profile} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/registration" component={Registration} />
+              <RouteCatcher>
+                <Route exact path="/" component={Home}></Route>
+                <Route exact path="/ad/create" component={CreateAd} />
+                <Route exact path="/ad/:id" component={Ad} />
+                <Route exact path="/profile/:id" component={Profile}></Route>
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/registration" component={Registration} />
+              </RouteCatcher>
             </Switch>
           </div>
         </div>

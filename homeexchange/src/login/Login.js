@@ -40,10 +40,6 @@ class Login extends PureComponent {
     );
   }
   render() {
-    if (this.props.path) {
-      this.props.redirectClear();
-      return <Redirect to={this.props.path} />;
-    }
     return !this.props.isLoading ? this.content() : <div><Loader /></div>;
   }
 }
@@ -52,10 +48,9 @@ const mapStateToProps = (state) => {
   console.log(state);
   return {
     ...state.accountForm,
-    ...state.redirect,
     ...state.remoteInteraction,
   };
 };
 
-const mapDispatchToProps = { loginUserPost, redirectClear };
+const mapDispatchToProps = { loginUserPost};
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
