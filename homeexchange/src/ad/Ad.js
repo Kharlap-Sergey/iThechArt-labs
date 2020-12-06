@@ -40,7 +40,9 @@ class Ad extends PureComponent {
     </div>)
 
     render() {
+        console.log("render");
         const ad = this.props.ad
+        console.log(ad);
         return (
             ad
             ? this.getAdContent(ad)
@@ -51,7 +53,8 @@ class Ad extends PureComponent {
 
 const mapStateToProps = (state) => {
     return {
-        ...state.user
+        ...state.user,
+        ad: state.ads.ad
     }
 }
 const mapDispatchToProps = {

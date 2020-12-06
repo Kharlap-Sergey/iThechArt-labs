@@ -1,9 +1,15 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import { redirectToAction } from "../../redux/redirect/redirectActionCreator";
 import AccountAvatar from "../accountAvatar/AccountAvatar";
 import "./short-ad.scss";
 
 class ShortAd extends PureComponent {
+  constructor(props) {
+    super(props)
+
+    this.clickHandler = this.clickHandler.bind(this)
+  }
   formatDate(dateString) {
     const date = new Date(dateString)
     const day = date.getDate();
@@ -12,6 +18,11 @@ class ShortAd extends PureComponent {
 
     return `${month}/${day}/${year}`;
   }
+
+  clickHandler(event) {
+    this.props.redirectToAction(`/ad/${this.props.adId}`)
+  }
+
   render() {
     console.log(this.props);
     return (
@@ -31,7 +42,7 @@ class ShortAd extends PureComponent {
           <div className="short-ad__type">{this.props.typ}</div>
           <div className="short-ad__discription">{this.props.description}</div>
           <div className="short-ad__more">
-            <button>more</button>
+            <button onClick={this.clickHandler}>more</button>
           </div>
         </div>
       </div>
@@ -39,4 +50,8 @@ class ShortAd extends PureComponent {
   }
 }
 
-export default connect(null)(ShortAd);
+const mapDispatchToProps = {
+  redirectToAction
+}
+
+export default connect(null, mapDispatchToProps)(ShortAd);

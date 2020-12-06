@@ -50,6 +50,7 @@ class AdsPageList extends PureComponent {
             <div className="ads-list__element" key={ad.id}>
               <ShortAd
                 key={ad.id}
+                adId ={ad.id}
                 title={ad.title}
                 typ={ad.type}
                 description={ad.description}
