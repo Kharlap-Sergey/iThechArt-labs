@@ -1,0 +1,47 @@
+@import "../shared/variables.scss";
+
+.ad {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  &__aside {
+    margin-right: 40px;
+  }
+  &__main {
+    min-width: 400px;
+    padding: 5px;
+    color: white;
+    background-color: $ad-main-bg-color;
+    border-radius: 5px;
+  }
+}
+
+.ad-main {
+  font-size: 1.4rem;
+  &__title {
+    width: fit-content;
+    margin: 0 auto;
+    border-bottom: 1px solid #6a655d;
+  }
+  &__type {
+    width: fit-content;
+    margin: 0 auto;
+    border-bottom: 1px solid #6a655d;
+  }
+  &__description {
+    margin: 5px;
+    padding: 2px;
+    border: 1px dashed #6a655d;
+  }
+  &__auth {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__btn {
+    color: white;
+    background-color: $ad-main-btn-bg-color;
+  }
+}
