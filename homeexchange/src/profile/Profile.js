@@ -10,10 +10,7 @@ class Profile extends PureComponent {
   constructor(props) {
     super(props);
 
-    let url = window.location.href;
-    let parts = url.split("/");
-    let userId = parts[parts.length - 1];
-    this.state = {userId: userId}
+    this.state = {userId: this.props.match.params.id }
   }
 
   componentDidMount() {

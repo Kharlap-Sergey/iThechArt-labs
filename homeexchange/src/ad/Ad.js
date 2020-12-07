@@ -8,10 +8,7 @@ class Ad extends PureComponent {
     constructor(props) {
         super(props);
 
-        let url = window.location.href;
-        let parts = url.split("/");
-        let id = parts[parts.length - 1];
-        this.state = { adId: id }
+        this.state = { adId: this.props.match.params.id }
     }
 
     componentDidMount() {
