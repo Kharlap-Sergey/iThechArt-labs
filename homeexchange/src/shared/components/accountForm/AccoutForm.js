@@ -6,7 +6,7 @@ class AccoutForm extends PureComponent {
   // props = {submitHandler, inputs, footer, header}
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = this.props.initialState ?? {};
 
     this.submiteHandler = this.submiteHandler.bind(this);
     this.changeInputHandler = this.changeInputHandler.bind(this);

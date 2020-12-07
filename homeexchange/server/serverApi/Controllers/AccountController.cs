@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -62,6 +63,7 @@ namespace serverApi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create([FromBody] User user)
         {
             user = userRepository.Create(user);
@@ -79,6 +81,23 @@ namespace serverApi.Controllers
         }
 
 
+
+        [HttpPost]
+        public IActionResult Update([FromBody] User user)
+        {
+            var userId = int.Parse(User.Identity.Name);
+
+            if(userId != user.Id)
+            {
+                return new StatusCodeResult(405);
+            }
+
+            user.Password = userRepository.Get(u => u.Id == userId).FirstOrDefault().Password;
+            
+            userRepository.Update(user);
+
+            return Ok();
+        }
         private ClaimsIdentity GetIdentity(Account account)
         {
             var person = userRepository.Get(u => u.Email == account.Login

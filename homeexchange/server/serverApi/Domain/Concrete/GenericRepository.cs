@@ -55,6 +55,7 @@ namespace serverApi.Domain.Concrete
         public void Update(TEntity item)
         {
             //var entry = entities.F;
+            var entry = dbContext.Entry(item);
             dbContext.Entry(item).State = EntityState.Modified;
             dbContext.SaveChanges();
         }

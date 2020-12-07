@@ -13,7 +13,9 @@ class AccountIformation extends PureComponent {
           <div className="account-info__nickname">{this.props.nickname}</div>
           <div className="account-info__email">{this.props.email}</div>
         </div>
-        <div className="account-info__editor"></div>
+        <div className="account-info__editor">
+          {this.props.children}
+        </div>
       </div>
     );
   }

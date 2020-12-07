@@ -12,6 +12,7 @@ import Registration from "./registration/Registration";
 import Profile from "./profile/Profile";
 import Ad from "./ad/Ad";
 import RouteCatcher from "./shared/components/routeCatcher/RouteCatcher";
+import EditProfile from "./editProfile/EditProfile";
 function App() {
   return (
     <div className="App">
@@ -22,6 +23,7 @@ function App() {
             <Switch>
               <RouteCatcher>
                 <Route exact path="/ad/create" component={CreateAd} />
+                <Route exact path="/edit/profile/:id" component={EditProfile} />
                 <Route exact path="/ad/:id" component={Ad} />
                 <Route exact path="/profile/:id" component={Profile}/>
                 <Route exact path="/login" component={Login} />
