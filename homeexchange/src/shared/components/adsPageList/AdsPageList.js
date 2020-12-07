@@ -43,6 +43,7 @@ class AdsPageList extends PureComponent {
     console.log("render");
     console.log(this.props);
     const ads = this.props.ads;
+    const userWasDefinedFlag = Boolean(this.props.userId)
     return (
       <div>
         {ads.map((ad) => {
@@ -55,7 +56,7 @@ class AdsPageList extends PureComponent {
                 typ={ad.type}
                 description={ad.description}
                 date={ad.dateOfPublication}
-                shouldAvatarDisplay={!this.props.userID}
+                shouldAvatarDisplay={!userWasDefinedFlag}
               />
             </div>
           );
@@ -69,7 +70,7 @@ class AdsPageList extends PureComponent {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  return { ...state.adsPageList };
+  return { ...state.adsPageList};
 };
 const mapDispatchToProps = {
   getAds,
