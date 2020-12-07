@@ -1,0 +1,29 @@
+.ad-form {
+  &__title {
+    font-size: 1.4rem;
+    width: 100%;
+  }
+
+  &__title-input {
+    width: 100%;
+  }
+
+  &__type {
+  }
+  &__description {
+    width: inherit;
+    height: 150px;
+    font-size: 1.2rem;
+
+    textarea {
+      width: 100%;
+      height: inherit;
+      overflow-y: scroll;
+    }
+  }
+  &__submit {
+  }
+  &__body {
+    width: 400px;
+  }
+}

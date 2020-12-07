@@ -5,7 +5,6 @@ import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 
 import "./app.scss";
 import NavBar from "./nav-bar/NavBar";
-import CreateAd from "./pages/CreateAd";
 import Home from "./home/Home";
 import Login from "./login/Login";
 import Registration from "./registration/Registration";
@@ -13,6 +12,7 @@ import Profile from "./profile/Profile";
 import Ad from "./ad/Ad";
 import RouteCatcher from "./shared/components/routeCatcher/RouteCatcher";
 import EditProfile from "./editProfile/EditProfile";
+import AdCreation from './adCreation/AdCreation';
 function App() {
   return (
     <div className="App">
@@ -22,9 +22,9 @@ function App() {
           <div className="main">
             <Switch>
               <RouteCatcher>
-                <Route exact path="/ad/create" component={CreateAd} />
                 <Route exact path="/edit/profile/:id" component={EditProfile} />
-                <Route exact path="/ad/:id" component={Ad} />
+                <Route exact path="/ad/id:id" component={Ad} />
+                <Route exact path="/ad/create" component={AdCreation} />
                 <Route exact path="/profile/:id" component={Profile}/>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />

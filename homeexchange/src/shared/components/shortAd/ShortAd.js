@@ -20,7 +20,7 @@ class ShortAd extends PureComponent {
   }
 
   clickHandler(event) {
-    this.props.redirectToAction(`/ad/${this.props.adId}`)
+    this.props.redirectToAction(`/ad/id${this.props.adId}`)
   }
 
   render() {
