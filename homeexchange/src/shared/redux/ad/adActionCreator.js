@@ -59,6 +59,18 @@ export function deleteAd(adId) {
     }
   };
 }
+export function updateAd(adId) {
+  return async (dispatch) => {
+    const url = "https://localhost:44370/Ad/update/";
+    const token = auth.getToken();
+    const response = await requestWrapper.deleteByIdQueryParam(url, token);
+    if (response.ok) {
+      dispatch(redirectToAction('/'));
+    } else {
+      //todo logic
+    }
+  };
+}
 export function replyOnAd(adId){
   return async (dispatch) => {
     const url = "https://localhost:44370/Ad/reply/" + adId;

@@ -31,6 +31,7 @@ class AdForm extends PureComponent {
 
   render() {
     console.log("render");
+    console.log(this.props);
     return (
       <form action="" className="adform" onSubmit={this.submiteHandler}>
         <div className="ad-form__body">
@@ -43,6 +44,7 @@ class AdForm extends PureComponent {
               name="title"
               required
               maxLength="30"
+              value={this.state.title}
               onChange={this.changeInputHandler}
             />
           </div>
@@ -70,7 +72,7 @@ class AdForm extends PureComponent {
             ></textarea>
           </div>
           <div className="ad-form__submit">
-            <button type="submit">create</button>
+            <button type="submit">submit</button>
           </div>
         </div>
       </form>

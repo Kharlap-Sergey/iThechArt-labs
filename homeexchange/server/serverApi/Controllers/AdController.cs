@@ -134,5 +134,20 @@ namespace serverApi.Controllers
             adRepository.Remove(ad);
             return new OkResult();
         }
+
+        [Authorize]
+        public IActionResult Update([FromBody] Ad ad)
+        {
+            var authorId = int.Parse(User.Identity.Name);
+
+            if (authorId != ad.AuthorId)
+            {
+                return new StatusCodeResult(405);
+            }
+
+            adRepository.Update(ad);
+
+            return Ok();
+        }
     }
 }
