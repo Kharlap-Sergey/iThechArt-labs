@@ -2,6 +2,7 @@ import { auth } from "../../../auth/auth";
 import { requestWrapper } from "../../utils/requestWrapper";
 import { AD_CLEAR, AD_GET, AD_GETALL} from "./types";
 import {startLoadingAction, endLoadingAction, isShouldBeUpdatedAction} from "../remoteInteraciton/remoteInteractionActionCreator"
+import { redirectToAction } from './../redirect/redirectActionCreator';
 
 export function getAllAds() {
   return async (dispatch) => {
@@ -46,13 +47,13 @@ export function getAd(adId){
   };
 }
 
-export function deleteOwnAd(adId) {
+export function deleteAd(adId) {
   return async (dispatch) => {
     const url = "https://localhost:44370/Ad/delete/" + adId;
     const token = auth.getToken();
     const response = await requestWrapper.deleteByIdQueryParam(url, token);
     if (response.ok) {
-      dispatch(isShouldBeUpdatedAction(true));
+      dispatch(redirectToAction('/'));
     } else {
       //todo logic
     }

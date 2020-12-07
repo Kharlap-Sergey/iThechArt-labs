@@ -29,7 +29,7 @@ class Ad extends PureComponent {
         <h2 className="ad-main__title">{ad.title}</h2>
         <div className="ad-main__type">{ad.type}</div>
         <div className="ad-main__description">{ad.description}</div>
-        {this.props.userId ? <Authorized authorId={ad.authorId} /> : null}
+        {this.props.userId ? <Authorized authorId={ad.authorId} adId={ad.id}/> : null}
       </div>
     </div>
   );
