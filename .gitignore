@@ -1,5 +1,4 @@
 ﻿*.map
-.eslintcache
 dist
 test
 # Created by https://www.toptal.com/developers/gitignore/api/vscode,vs,webstorm,git,web
@@ -505,3 +504,4 @@ fabric.properties
 .idea/codestream.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/vscode,vs,webstorm,git,web
+homeexchange/.eslintcache
