@@ -1,4 +1,6 @@
-﻿using serverApi.Domain.Abstract;
+﻿using Microsoft.AspNetCore.SignalR;
+using serverApi.Domain.Abstract;
+using serverApi.Hubs;
 using serverApi.Models;
 using System;
 using System.Collections.Generic;
@@ -9,16 +11,28 @@ namespace serverApi.Services
 {
     public sealed class NotificationService : INotificationService
     {
+        public static Dictionary<int, string> Subscribers = new Dictionary<int, string>();
+
         IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdRepository;
+        IHubContext<NotificationHub> hubContext;
         public NotificationService(
+            IHubContext<NotificationHub> hubContext,
             IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdContext)
         {
             notificationAboutResponseToAdRepository = notificationAboutResponseToAdContext;
+            this.hubContext = hubContext;
         }
 
+        private async Task NotifySubscribers(NotificationAboutResponseToAd notification)
+        {
+            var targetId = notification.TargetUserId;
+            var habCLientId = NotificationService.Subscribers[targetId];
+            await hubContext.Clients.Client(habCLientId).SendAsync("Notify", notification);
+        }
         public void Create(NotificationAboutResponseToAd notification)
         {
-            notificationAboutResponseToAdRepository.Create(notification);
+            var notif = notificationAboutResponseToAdRepository.Create(notification);
+            NotifySubscribers(notif);
         }
 
         public IEnumerable<NotificationAboutResponseToAd> GetAllNotificationForUserByUserId(int userID)

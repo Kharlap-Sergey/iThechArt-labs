@@ -10,6 +10,7 @@ class Authorized extends PureComponent {
     this.props.redirectToAction(`/ad/edite/id${this.props.adId}`);
   }
   replyClickHandler(event) {
+    console.log(this.props.adId);
     this.props.replyOnAd(this.props.adId);
   }
   render() {

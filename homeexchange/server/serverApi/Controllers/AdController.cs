@@ -63,7 +63,7 @@ namespace serverApi.Controllers
             return Json(result);
         }
         
-        [HttpPost("{id}")]
+        [HttpPost("{adId}")]
         [Authorize]
         public IActionResult Reply(int adId)
         {

@@ -9,14 +9,22 @@ class Notifications extends PureComponent {
     this.state = { notifications: [] };
   }
   hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl("https://localhost:44370/notification", { accessTokenFactory: () => auth.getToken() })
+    .withUrl("https://localhost:44370/notification", {
+      accessTokenFactory: () => auth.getToken(),
+    })
     .build();
 
   componentDidMount() {
     this.hubConnection.start().catch((err) => {
       console.log(err);
     });
-    
+    this.hubConnection.on("Notify", (notification) => {
+      console.log(notification);
+      console.log(this.state)
+      this.setState((state) => ({
+        notifications: [...state.notifications, notification],
+      }));
+    });
   }
   render() {
     return <div style={{ color: "red" }}>Notifications</div>;
