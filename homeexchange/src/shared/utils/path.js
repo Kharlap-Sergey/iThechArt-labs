@@ -1,8 +1,12 @@
+const api = "https://localhost:44370"
 export const path = {
-  api: "https://localhost:44370",
   ad: {
-    adPath: ()=>path.api+"/ad",
-    update: ()=>this.adPath+"/update",
+    ad: api+"/ad",
+    update: api+"/ad/update",
     create: ""
+  },
+  accocunt: {
+    account: api+"/account",
+    login: api+"/account/login",
   }
 }
