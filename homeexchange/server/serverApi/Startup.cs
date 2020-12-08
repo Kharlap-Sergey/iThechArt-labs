@@ -35,6 +35,8 @@ namespace serverApi
             services.AddScoped<IGenericRepository<NotificationAboutResponseToAd>, GenericRepository<NotificationAboutResponseToAd>>();
             services.AddScoped<IGenericRepository<ResponseToAd>, GenericRepository<ResponseToAd>>();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAdService, AdService>();
 
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");

@@ -13,37 +13,41 @@ namespace serverApi.Controllers
     [Route("[controller]/{action=Login}")]
     public class AdController : Controller
     {
-        IGenericRepository<Ad> adRepository;
-        IGenericRepository<User> userRepository;
+        //IGenericRepository<Ad> adRepository;
+        //IGenericRepository<User> userRepository;
+        IUserService userService;
+        IAdService adService;
         INotificationService notificationService;
-        public AdController(IGenericRepository<Ad> adContext,
-            IGenericRepository<User> userContext,
+        public AdController(
+            //IGenericRepository<Ad> adContext,
+            //IGenericRepository<User> userContext,
+            IAdService adService,
+            IUserService userService,
             INotificationService notificationService)
         {
-            adRepository = adContext;
-            userRepository = userContext;
+           
+            //adRepository = adContext;
+            //userRepository = userContext;
+            this.userService = userService;
+            this.adService = adService;
             this.notificationService = notificationService;
         }
 
         [Authorize]
-        public IActionResult Create([FromBody] Ad ad)
+        public Task<IActionResult> Create([FromBody] Ad ad)
         {
-            var id = int.Parse(User.Identity.Name);
-            var user = userRepository.FindById(id);
+            var authorId = int.Parse(User.Identity.Name);
+            var author = userService.FindById(authorId);
 
-            ad.Author = user;
-            ad.DateOfPublication = DateTime.Now;
-
-            return Json(adRepository.Create(ad));
+            return new Task<IActionResult>(() => Json(adService.Create(ad, author)));
         }
 
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public Task<IActionResult> Get(int id)
         {
-            var ad = adRepository.FindById(id);
-            return Json(ad);
-
+            var ad = adService.FindById(id);
+            return new Task<IActionResult>(() => Json(ad));
         }
 
         [HttpGet("{page=1}/{userId=-1}")]
@@ -94,30 +98,7 @@ namespace serverApi.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-
             return Json(adRepository.Get().OrderBy(ad => ad.DateOfPublication));
-        }
-
-        [HttpGet]
-        [Authorize]
-        public IActionResult GetOwn()
-        {
-            var userId = int.Parse(User.Identity.Name);
-            var ads = adRepository
-                .Get(ad => ad.AuthorId == userId)
-                .OrderBy(ad => ad.DateOfPublication);
-
-            return Json(ads);
-        }
-
-        [HttpGet("{userId}")]
-        public IActionResult GetForUser(int userId)
-        {
-            var ads = adRepository
-                .Get(ad => ad.AuthorId == userId)
-                .OrderBy(ad => ad.DateOfPublication);
-
-            return Json(ads);
         }
 
         [HttpDelete("{id}")]
