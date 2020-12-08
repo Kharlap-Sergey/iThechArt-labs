@@ -1,8 +1,8 @@
-import { auth } from "../../../auth/auth";
 import { requestWrapper } from "../../utils/requestWrapper";
 import { AD_CLEAR, AD_GET, AD_GETALL} from "./types";
 import {startLoadingAction, endLoadingAction, isShouldBeUpdatedAction} from "../remoteInteraciton/remoteInteractionActionCreator"
 import { redirectToAction } from './../redirect/redirectActionCreator';
+import { auth } from './../../utils/auth';
 
 export function getAllAds() {
   return async (dispatch) => {

@@ -1,12 +1,15 @@
-import { auth } from './../../auth/auth';
+import { auth } from '../../shared/utils/auth';
 import { requestWrapper } from './../../shared/utils/requestWrapper';
 import { redirectToAction } from './../../shared/redux/redirect/redirectActionCreator';
 import { toastr } from 'react-redux-toastr';
+import { path } from './../../shared/utils/path';
+
 export function updateAd(ad) {
   return async (dispatch) => {
     try {
-      const url = "https://localhost:44370/ad/update";
+      const url = path.ad.update;
       const token = auth.getToken();
+
       const response = await requestWrapper.post(url, ad, token);
       console.log(response);
       if (response.ok) {

@@ -1,10 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import "./nav-bar.scss";
 import { logoutAction } from "../redux/loginActionsCreator";
 import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
-import { auth } from "../auth/auth";
 import PaintedLink from "../shared/components/paintedLink/PaintedLink";
 import Unauthorized from "./components/Unauthorized";
 import Authorized from "./components/Authorized";

@@ -1,5 +1,4 @@
 import { toastr } from "react-redux-toastr";
-import { auth } from "../../auth/auth";
 import { loginUserAction } from "../../redux/loginActionsCreator";
 import { redirectToAction } from "../../shared/redux/redirect/redirectActionCreator";
 import { requestWrapper } from "../../shared/utils/requestWrapper";

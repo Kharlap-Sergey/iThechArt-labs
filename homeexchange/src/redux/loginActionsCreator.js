@@ -1,10 +1,10 @@
 import { toastr } from "react-redux-toastr";
-import { auth } from "../auth/auth";
 
 import { LOGIN_ERROR, LOGIN_USER, LOGOUT } from "./types";
 import { requestWrapper } from "../shared/utils/requestWrapper";
 import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
 import { endLoadingAction, startLoadingAction } from "../shared/redux/remoteInteraciton/remoteInteractionActionCreator";
+import { auth } from './../shared/utils/auth';
 
 export function loginUserPost(user) {
   return async (dispatch) => {
