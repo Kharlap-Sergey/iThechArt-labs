@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,9 +10,11 @@ using Microsoft.IdentityModel.Tokens;
 using serverApi.Domain;
 using serverApi.Domain.Abstract;
 using serverApi.Domain.Concrete;
+using serverApi.Hubs;
 using serverApi.Infrastructure;
 using serverApi.Models;
 using serverApi.Services;
+using System.Threading.Tasks;
 
 namespace serverApi
 {
@@ -62,8 +65,27 @@ namespace serverApi
                             // валидация ключа безопасности
                             ValidateIssuerSigningKey = true,
                         };
+
+                        options.Events = new JwtBearerEvents
+                        {
+                            OnMessageReceived = context =>
+                            {
+                                var accessToken = context.Request.Query["access_token"];
+
+                                // если запрос направлен хабу
+                                var path = context.HttpContext.Request.Path;
+                                if (!string.IsNullOrEmpty(accessToken) &&
+                                    (path.StartsWithSegments("/notification")))
+                                {
+                                    // получаем токен из строки запроса
+                                    context.Token = accessToken;
+                                }
+                                return Task.CompletedTask;
+                            }
+                        };
                     });
 
+            services.AddSignalR();
             services.AddControllers();
         }
 
@@ -80,7 +102,7 @@ namespace serverApi
 
             app.UseRouting();
             //include CORS
-            app.UseCors(builder => builder.AllowAnyOrigin()
+            app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowCredentials()
                             .AllowAnyMethod()
                             .AllowAnyHeader());
 
@@ -90,6 +112,11 @@ namespace serverApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<NotificationHub>("/notification",
+                    options=>
+                    {
+                        options.Transports = HttpTransportType.ServerSentEvents;
+                    });
             });
         }
     }

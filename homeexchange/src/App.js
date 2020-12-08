@@ -14,6 +14,7 @@ import RouteCatcher from "./shared/components/routeCatcher/RouteCatcher";
 import EditProfile from "./editProfile/EditProfile";
 import AdCreation from './adCreation/AdCreation';
 import AdEditor from './adEditor/AdEditor';
+import Notifications from './notifications/Notifications';
 function App() {
   return (
     <div className="App">
@@ -24,6 +25,7 @@ function App() {
             <Switch>
               <RouteCatcher>
                 <Route exact path="/edit/profile/:id" component={EditProfile} />
+                <Route exact path="/notifications" component={Notifications} />
                 <Route exact path="/ad/id:id" component={Ad} />
                 <Route exact path="/ad/create" component={AdCreation} />
                 <Route exact path="/ad/edite/id:id" component={AdEditor} />
