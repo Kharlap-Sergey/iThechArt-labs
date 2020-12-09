@@ -37,7 +37,7 @@ namespace serverApi
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAdService, AdService>();
-
+            services.AddScoped<IUserService, UserService>();
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<CustomDbContext>(options =>

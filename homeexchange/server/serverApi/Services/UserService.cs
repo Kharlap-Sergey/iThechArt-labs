@@ -16,22 +16,25 @@ namespace serverApi.Services
         }
         public User Create(User user)
         {
-            throw new NotImplementedException();
+            return userRepository.Create(user);
         }
 
-        public User Delete(User user)
-        {
-            throw new NotImplementedException();
-        }
 
         public User FindById(int userId)
         {
             return userRepository.FindById(userId);
         }
 
-        public User Update(User user)
+        public User Update(User user, int commiterId)
         {
-            throw new NotImplementedException();
+            if (commiterId != user.Id)
+            {
+                throw new Exception();
+            }
+
+            user.Password = userRepository.Get(u => u.Id == commiterId).FirstOrDefault().Password;
+
+            return userRepository.Update(user);
         }
     }
 }

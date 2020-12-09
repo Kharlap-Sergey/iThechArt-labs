@@ -1,4 +1,5 @@
 ﻿using serverApi.Models;
+using serverApi.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace serverApi.Services
 {
-    public interface IUserService
+    public interface IAccounService
     {
-        public User FindById(int userId);
-        public User Create(User user);
-        public User Update(User user, int commiterId);
+        public User Registrate(User user);
+        public LoginResponse Login(Account account);
     }
 }

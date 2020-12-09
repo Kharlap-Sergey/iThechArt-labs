@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using serverApi.Domain.Abstract;
+using serverApi.Exeptions;
 using serverApi.Infrastructure;
 using serverApi.Models;
+using serverApi.Responses;
 using serverApi.Services;
 using System;
 using System.Collections.Generic;
@@ -16,106 +18,56 @@ using System.Threading.Tasks;
 
 namespace serverApi.Controllers
 {
-    public sealed class InvalidCreadsExeption : Exception
-    {
-        public InvalidCreadsExeption(string message)
-        : base(message)
-        { }
-    }
-
     [Route("[controller]/{action=Login}")]
     public sealed class AccountController : Controller
     {
-        IGenericRepository<User> userRepository;
-        INotificationService notificationService;
-        public AccountController(IGenericRepository<User> userContext,
-            INotificationService notificationService)
+        IAccounService accounService;
+        IUserService userService;
+        public AccountController(
+             IUserService userService,
+             IAccounService accounService)
         {
-            userRepository = userContext;
-            this.notificationService = notificationService;
+            this.userService = userService;
+            this.accounService = accounService;
         }
 
         [HttpPost]
         public IActionResult Login([FromBody] Account account)
         {
-            ClaimsIdentity identity;
+            LoginResponse response;
             try
             {
-                identity = GetIdentity(account);
+                response = accounService.Login(account);
             }
-            catch (InvalidCreadsExeption e)
+            catch (InvalidCredentialExeption e)
             {
                 return NotFound(new { errorText = e.Message });
             }
-
-            // создаем JWT-токен
-            var encodedJwt = CustomJWTCreator.CreateJWT(identity);
-            User user = userRepository.Get(u => u.Email == account.Login).FirstOrDefault();
-            //user.NotificationsAboutResponseToAd.AddRange(
-            //    notificationService.GetAllNotificationForUserByUserId(user.Id));
-
-            var response = new
-            {
-                jwt = encodedJwt,
-                user = user
-            };
             return Json(response);
         }
 
         [HttpPost]
         public IActionResult Create([FromBody] User user)
         {
-            user = userRepository.Create(user);
-            var res = Json(user);
-            return res;
+            try
+            {
+                user = accounService.Registrate(user);
+                var res = Json(user);
+                return res;
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(400);
+            }
         }
-
-        [HttpGet("{userID}")]
-        public IActionResult Get(int userId)
-        {
-            var user = userRepository.FindById(userId);
-            user.Password = null;
-            var res = Json(user);
-            return res;
-        }
-
-
 
         [HttpPost]
+        [Authorize]
         public IActionResult Update([FromBody] User user)
         {
-            var userId = int.Parse(User.Identity.Name);
-
-            if(userId != user.Id)
-            {
-                return new StatusCodeResult(405);
-            }
-
-            user.Password = userRepository.Get(u => u.Id == userId).FirstOrDefault().Password;
-            
-            userRepository.Update(user);
-
+            var commiterId = int.Parse(User.Identity.Name);
+            user = userService.Update(user, commiterId);
             return Ok();
-        }
-        private ClaimsIdentity GetIdentity(Account account)
-        {
-            var person = userRepository.Get(u => u.Email == account.Login
-            && u.Password == account.Password).FirstOrDefault();
-            //Account person = null;//people.FirstOrDefault(x => x.Login == username && x.Password == password);
-            if (person != null)
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Id.ToString()),
-                };
-                ClaimsIdentity claimsIdentity =
-                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType);
-                return claimsIdentity;
-            }
-
-            // если пользователя не найдено
-            throw new InvalidCreadsExeption("Invalid username or password.");
         }
     }
 }
