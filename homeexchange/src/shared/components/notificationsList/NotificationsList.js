@@ -7,7 +7,7 @@ import {
 } from "./../../redux/notifications/notificationActions";
 import { connect } from "react-redux";
 import { getNotificationsFetch } from "./../../redux/notifications/notifications";
-
+import Notification from './../notification/Notification';
 class NotificationsList extends PureComponent {
   constructor(props) {
     super(props);
@@ -40,7 +40,9 @@ class NotificationsList extends PureComponent {
       <div>
         <ul>
           {notifics.map((not) => (
-            <li key={not.id}>{not.id}</li>
+            <li key={not.id}>
+              <Notification notification={not}/>
+            </li>
           ))}
         </ul>
       </div>
