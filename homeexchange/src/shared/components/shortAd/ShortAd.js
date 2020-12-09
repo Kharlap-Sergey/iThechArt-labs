@@ -31,7 +31,7 @@ class ShortAd extends PureComponent {
           this.props.shouldAvatarDisplay && (
             <div className="short-ad__aside">
               <div className="short-ad__account-avatar">
-                <AccountAvatar />
+                <AccountAvatar profileId={this.props.authorId}/>
               </div>
             </div>
           )
