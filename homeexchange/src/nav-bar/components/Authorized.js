@@ -14,7 +14,6 @@ class Authorized extends PureComponent {
     this.state = { showActionMenu: false, showNotificationsMenu: false };
     this.handleClick = this.handleClick.bind(this);
     this.handleNotificClick = this.handleNotificClick.bind(this);
-    this.handleDropdownMenuClick = this.handleDropdownMenuClick.bind(this);
   }
 
   handleClick(event) {
@@ -27,11 +26,6 @@ class Authorized extends PureComponent {
     event.preventDefault();
     console.log("clicked");
     this.setState({ showNotificationsMenu: !this.state.showNotificationsMenu });
-  }
-  handleDropdownMenuClick(event) {
-    event.preventDefault();
-    console.log("fragemtn click");
-    this.setState({ showActionMenu: false, showNotificationsMenu: false });
   }
   render() {
     console.log(this.props.userId);
@@ -50,7 +44,7 @@ class Authorized extends PureComponent {
               </div>
             </div>
             {this.state.showNotificationsMenu && (
-              <DropdownMenu onClick={this.handleDropdownMenuClick}>
+              <DropdownMenu>
                 {console.log("should draw")}
                 <PaintedLink
                   to={"/profile/" + this.props.userId}
@@ -73,7 +67,7 @@ class Authorized extends PureComponent {
               {/* <DropdownCaret /> */}
             </div>
             {this.state.showActionMenu && (
-              <DropdownMenu onClick={this.handleDropdownMenuClick}>
+              <DropdownMenu>
                 {console.log("should draw")}
                 <PaintedLink
                   to={"/profile/" + this.props.userId}

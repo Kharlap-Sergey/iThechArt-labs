@@ -21,10 +21,8 @@ class LogoutBtn extends PureComponent {
     );
   }
 }
-const mapStateToProps = (state) => {
-  console.log(state.accountForm);
-  return state.accountForm;
-};
+const mapStateToProps = (state) => ({
+});
 
 const mapDispatchToProps = {
   logoutAction,
