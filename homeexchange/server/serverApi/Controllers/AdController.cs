@@ -48,7 +48,7 @@ namespace serverApi.Controllers
                    ? null
                    : userService.FindById(userId);
 
-            return Json(adService.GetAdsPage(page, forUser));
+            return Json(adService.GetAdsPageShortDesc(page, forUser));
         }
         
         [HttpPost("{adId}")]

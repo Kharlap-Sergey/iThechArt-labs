@@ -44,17 +44,22 @@ namespace serverApi.Services
         {
             return adRepository.FindById(adId);
         }
-
-        public AdsPage GetAdsPage(int page, User author)
+        public AdsPage GetAdsPageShortDesc(int page, User author)
         {
             int pageSize = 3;
+            int descriptionLength = 20;
 
             var ads = adRepository
                 .Get(ad => (author == null || ad.AuthorId == author.Id))
                 .OrderByDescending(ad => ad.DateOfPublication).ToList();
 
-            var adsToSend = ads.Skip((page - 1) * pageSize).Take(pageSize);
-
+            var adsBuf = ads.Skip((page - 1) * pageSize).Take(pageSize);
+            var adsToSend = adsBuf.Select(ad =>
+            {
+                ad.Desc = ad.Desc.Substring(0, Math.Min(ad.Desc.Length, descriptionLength))
+                + "...";
+                return ad;
+            });
             var result = new AdsPage
             {
                 HasNext = ads.Count > (page - 1) * pageSize + adsToSend.Count(),
