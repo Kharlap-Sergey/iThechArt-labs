@@ -56,12 +56,6 @@ namespace serverApi.Controllers
             return Json(adService.ReplyOnAd(ad, responder));
         }
 
-        //[HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //    return Json(adRepository.Get().OrderBy(ad => ad.DateOfPublication));
-        //}
-
         [HttpDelete("{adId}")]
         [Authorize]
         public IActionResult Delete(int adId)
@@ -81,12 +75,6 @@ namespace serverApi.Controllers
             adService.Update(ad, committer);
 
             return Ok();
-        }
-
-        private User GetCommitter()
-        {
-            var userId = int.Parse(User.Identity.Name);
-            return userService.FindById(userId);
         }
     }
 }
