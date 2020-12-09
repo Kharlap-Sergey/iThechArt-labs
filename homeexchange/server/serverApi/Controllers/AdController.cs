@@ -13,21 +13,15 @@ namespace serverApi.Controllers
     [Route("[controller]/{action=Login}")]
     public class AdController : Controller
     {
-        //IGenericRepository<Ad> adRepository;
-        //IGenericRepository<User> userRepository;
         IUserService userService;
         IAdService adService;
         INotificationService notificationService;
         public AdController(
-            //IGenericRepository<Ad> adContext,
-            //IGenericRepository<User> userContext,
             IAdService adService,
             IUserService userService,
             INotificationService notificationService)
         {
            
-            //adRepository = adContext;
-            //userRepository = userContext;
             this.userService = userService;
             this.adService = adService;
             this.notificationService = notificationService;
@@ -51,20 +45,13 @@ namespace serverApi.Controllers
         }
 
         [HttpGet("{page=1}/{userId=-1}")]
-        public IActionResult GetAds(int userId, int page)
+        public IActionResult GetAdsPage(int userId, int page)
         {
-            int pageSize = 3;
-            var ads = adRepository
-                .Get(ad => (userId < 0 ||  ad.AuthorId == userId))
-                .OrderByDescending(ad => ad.DateOfPublication).ToList();
-            var adsToSend = ads.Skip((page - 1) * pageSize).Take(pageSize);
-            var result = new
-            {
-                haveNext = ads.Count > (page - 1) * pageSize + adsToSend.Count(),
-                havePrevious = (page-1)*pageSize > 0,
-                ads = adsToSend
-            };
-            return Json(result);
+            User forUser = userId == -1
+                   ? null
+                   : userService.FindById(userId);
+
+            return Json(adService.GetAdsPage(page, forUser));
         }
         
         [HttpPost("{adId}")]
@@ -72,63 +59,42 @@ namespace serverApi.Controllers
         public IActionResult Reply(int adId)
         {
             var userId = int.Parse(User.Identity.Name);
-            var ad = adRepository.FindById(adId);
-            var responseToAd = new ResponseToAd
-            {
-                Author = userRepository.FindById(userId),
-                Date = DateTime.Now,
-                Message = "",
-                TargetAdId = adId
-            };
-
-            ad.ResponseToAd = responseToAd;
-
-            var note = new NotificationAboutResponseToAd
-            {
-                TargetUserId = ad.AuthorId,
-                ResponseToAd = responseToAd
-            };
-
-            notificationService.Create(note);
-
-            adRepository.Update(ad);
-            return Json(ad);
+            var responder = userService.FindById(userId);
+            var ad = adService.FindById(adId);
+            return Json(adService.ReplyOnAd(ad, responder));
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            return Json(adRepository.Get().OrderBy(ad => ad.DateOfPublication));
-        }
+        //[HttpGet]
+        //public IActionResult GetAll()
+        //{
+        //    return Json(adRepository.Get().OrderBy(ad => ad.DateOfPublication));
+        //}
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{adId}")]
         [Authorize]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int adId)
         {
             var userId = int.Parse(User.Identity.Name);
-            var ad = adRepository.FindById(id);
-         
-            if(ad.AuthorId != userId)
-            {
-                return Unauthorized(new { errorText = "it isn't your ad" });
-            }
-            adRepository.Remove(ad);
+            var committer = userService.FindById(userId);
+            var ad = adService.Delete(adId, committer);
             return new OkResult();
         }
 
         [Authorize]
         public IActionResult Update([FromBody] Ad ad)
         {
-            var authorId = int.Parse(User.Identity.Name);
+            var userId = int.Parse(User.Identity.Name);
+            var committer = userService.FindById(userId);
 
-            if (authorId != ad.AuthorId)
-            {
-                return new StatusCodeResult(405);
-            }
-
-            adRepository.Update(ad);
+            adService.Update(ad, committer);
 
             return Ok();
+        }
+
+        private User GetCommitter()
+        {
+            var userId = int.Parse(User.Identity.Name);
+            return userService.FindById(userId);
         }
     }
 }

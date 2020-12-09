@@ -10,16 +10,13 @@ namespace serverApi.Services
     public sealed class AdService : IAdService
     {
         IGenericRepository<Ad> adRepository;
-        //IGenericRepository<User> userRepository;
         INotificationService notificationService;
         public AdService(
                 IGenericRepository<Ad> adContext,
-                //IGenericRepository<User> userContext,
                 INotificationService notificationService
                         )
         {
             adRepository = adContext;
-            //userRepository = userContext;
             this.notificationService = notificationService;
         }
 
@@ -31,34 +28,72 @@ namespace serverApi.Services
             return adRepository.Create(ad);
         }
 
-        public Ad Delete(int adId)
+        public Ad Delete(int adId, User commiter)
         {
-            throw new NotImplementedException();
+            var ad = adRepository.FindById(adId);
+
+            if (ad.AuthorId != commiter.Id)
+            {
+                throw new Exception("you do not have permition");
+            }
+
+            return adRepository.Remove(ad);
         }
 
         public Ad FindById(int adId)
         {
-            throw new NotImplementedException();
+            return adRepository.FindById(adId);
         }
 
-        public IEnumerable<Ad> GetAdsPage(int page)
+        public AdsPage GetAdsPage(int page, User author)
         {
-            throw new NotImplementedException();
+            int pageSize = 3;
+
+            var ads = adRepository
+                .Get(ad => (author == null || ad.AuthorId == author.Id))
+                .OrderByDescending(ad => ad.DateOfPublication).ToList();
+
+            var adsToSend = ads.Skip((page - 1) * pageSize).Take(pageSize);
+
+            var result = new AdsPage
+            {
+                HasNext = ads.Count > (page - 1) * pageSize + adsToSend.Count(),
+                HasPrevious = (page - 1) * pageSize > 0,
+                Ads = adsToSend
+            };
+
+            return result;
         }
 
-        public IEnumerable<Ad> GetAdsPage(int page, int authorId)
+        public Ad Update(Ad ad, User commiter)
         {
-            throw new NotImplementedException();
+            if (commiter.Id != ad.AuthorId)
+            {
+                throw new Exception();
+            }
+
+            return adRepository.Update(ad);
         }
 
-        public Ad Update(Ad ad)
+        public Ad ReplyOnAd(Ad ad, User responder, string message = "")
         {
-            throw new NotImplementedException();
-        }
+            var responseToAd = new ResponseToAd
+            {
+                Responder = responder,
+                Date = DateTime.Now,
+                Message = message,
+                TargetAdId = ad.Id
+            };
+            ad.ResponseToAd = responseToAd;
 
-        public Ad Update(Ad ad, int responderId)
-        {
-            throw new NotImplementedException();
+            var notification = new NotificationAboutResponseToAd
+            {
+                TargetUserId = ad.AuthorId,
+                ResponseToAd = responseToAd
+            };
+            notificationService.Create(notification);
+
+            return adRepository.Update(ad);
         }
     }
 }

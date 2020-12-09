@@ -46,18 +46,20 @@ namespace serverApi.Domain.Concrete
             return entities.AsNoTracking().ToList().Where(predicate);
         }
 
-        public void Remove(TEntity item)
+        public TEntity Remove(TEntity item)
         {
             dbContext.Entry(item).State = EntityState.Deleted;
             dbContext.SaveChanges();
+            return item;
         }
 
-        public void Update(TEntity item)
+        public TEntity Update(TEntity item)
         {
             //var entry = entities.F;
-            var entry = dbContext.Entry(item);
+            //var entry = dbContext.Entry(item);
             dbContext.Entry(item).State = EntityState.Modified;
             dbContext.SaveChanges();
+            return item;
         }
     }
 }

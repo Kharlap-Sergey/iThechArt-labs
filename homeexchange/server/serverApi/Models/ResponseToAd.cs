@@ -8,10 +8,10 @@ namespace serverApi.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("AuthorId")]
+        [ForeignKey("ResponderId")]
         [Required]
-        public int AuthorId { get; set; }
-        public User Author { get; set; }
+        public int ResponderId { get; set; }
+        public User Responder { get; set; }
 
         [ForeignKey("TargetAdId")]
         [Required]

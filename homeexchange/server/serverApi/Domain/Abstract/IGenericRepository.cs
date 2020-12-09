@@ -11,7 +11,7 @@ namespace serverApi.Domain.Abstract
         TEntity FindById(int id);
         IEnumerable<TEntity> Get();
         IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
-        void Remove(TEntity item);
-        void Update(TEntity item);
+        TEntity Remove(TEntity item);
+        TEntity Update(TEntity item);
     }
 }

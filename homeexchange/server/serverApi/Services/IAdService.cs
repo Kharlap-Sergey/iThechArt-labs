@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace serverApi.Services
 {
-    interface IAdService
+    public interface IAdService
     {
         public Ad Create(Ad ad, User author);
         public Ad FindById(int adId);
-        public IEnumerable<Ad> GetAdsPage(int page);
-        public IEnumerable<Ad> GetAdsPage(int page, int authorId);
-        public Ad Delete(int adId);
-        public Ad Update(Ad ad);
-        public Ad Update(Ad ad, int responderId);
+        public AdsPage GetAdsPage(int page, User author);
+        public Ad Delete(int adId, User commiter);
+        public Ad Update(Ad ad, User commiter);
+        public Ad ReplyOnAd(Ad ad, User responder, string message = "");
     }
 }

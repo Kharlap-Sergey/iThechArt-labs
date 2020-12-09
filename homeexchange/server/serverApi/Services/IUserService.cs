@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace serverApi.Services
 {
-    interface IUserService
+    public interface IUserService
     {
         public User FindById(int userId);
         public User Create(User user);
