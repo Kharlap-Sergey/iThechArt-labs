@@ -19,13 +19,13 @@ class Authorized extends PureComponent {
         {this.props.userId === this.props.authorId ? (
           <>
             <button
-              className="ad-main__btn"
+              className="ad-main__btn my-btn"
               onClick={this.editClickHandler.bind(this)}
             >
               edit
             </button>
             <button
-              className="ad-main__btn"
+              className="ad-main__btn my-btn"
               onClick={this.removeClickHandler.bind(this)}
             >
               remove
@@ -33,7 +33,7 @@ class Authorized extends PureComponent {
           </>
         ) : (
           <button
-            className="ad-main__btn"
+            className="ad-main__btn my-btn"
             onClick={this.replyClickHandler.bind(this)}
           >
             reply

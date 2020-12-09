@@ -10,3 +10,9 @@ body {
   justify-content: center;
   height: inherit;
 }
+
+.my-btn {
+  color: white;
+  background-color: $btn-bg;
+  border-radius: 10px;
+}

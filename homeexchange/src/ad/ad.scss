@@ -10,7 +10,7 @@
     margin-right: 40px;
   }
   &__main {
-    min-width: 400px;
+    width: 700px;
     padding: 5px;
     color: white;
     background-color: $ad-main-bg-color;
@@ -33,6 +33,7 @@
   &__description {
     margin: 5px;
     padding: 2px;
+    word-wrap: break-word;
     border: 1px dashed #6a655d;
   }
   &__auth {
@@ -41,7 +42,6 @@
   }
 
   &__btn {
-    color: white;
-    background-color: $ad-main-btn-bg-color;
+    padding: 1px 7px;
   }
 }
