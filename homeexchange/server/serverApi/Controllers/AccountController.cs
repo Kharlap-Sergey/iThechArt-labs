@@ -1,24 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using serverApi.Domain.Abstract;
 using serverApi.Exeptions;
-using serverApi.Infrastructure;
 using serverApi.Models;
 using serverApi.Responses;
 using serverApi.Services;
 using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Net;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 
 namespace serverApi.Controllers
 {
-    [Route("[controller]/{action=Login}")]
+    [Route("[controller]/{action}")]
     public sealed class AccountController : Controller
     {
         IAccounService accounService;
@@ -47,7 +38,7 @@ namespace serverApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] User user)
+        public IActionResult Registrate([FromBody] User user)
         {
             try
             {

@@ -2,12 +2,10 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { registrateUserPost } from "./redux/registrationActionCreater";
-import { redirectClear } from "../shared/redux/redirect/redirectActionCreator";
 import PaintedLink from "../shared/components/paintedLink/PaintedLink";
 import AccountForm from "../shared/components/accountForm/AccoutForm";
 import { inputAttributes } from "../shared/utils/inputArguments";
-
+import { registrateUserPost } from "../shared/redux/account/account";
 class Registration extends React.PureComponent {
   inputsArguments = [
     inputAttributes.firstname ,

@@ -1,14 +1,12 @@
 import React, { PureComponent } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { loginUserPost } from "../redux/loginActionsCreator";
-import { redirectClear } from "../shared/redux/redirect/redirectActionCreator";
+import { loginUserPost } from "../shared/redux/account/account";
 import { connect } from "react-redux";
 import Loader from "../shared/components/Loader/Loader";
 import AccountForm from "../shared/components/accountForm/AccoutForm";
-import PaintedLink from "../shared/components/paintedLink/PaintedLink";
 import { inputAttributes } from "../shared/utils/inputArguments";
 import "./login.scss"
 import FooterForForm from "./components/FooterForForm";
+
 class Login extends PureComponent {
   state = {};
   inputsArguments = [
@@ -52,5 +50,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { loginUserPost};
+const mapDispatchToProps = { loginUserPost };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

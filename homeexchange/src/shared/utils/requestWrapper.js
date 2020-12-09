@@ -14,6 +14,7 @@ export const requestWrapper = {
     return fetch(url, options);
   },
   post: (url, dataJson) => {
+    console.log(dataJson);
     const options = {
       method: "POST",
       headers: {

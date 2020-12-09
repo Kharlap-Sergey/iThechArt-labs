@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import "./nav-bar.scss";
-import { logoutAction } from "../redux/loginActionsCreator";
+import { logoutAction } from "../shared/redux/account/accountActions";
 import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
 import PaintedLink from "../shared/components/paintedLink/PaintedLink";
 import Unauthorized from "./components/Unauthorized";

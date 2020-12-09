@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {logoutAction} from '../../../redux/loginActionsCreator'
 import {redirectToAction} from '../../redux/redirect/redirectActionCreator'
 import "./logout-btn.scss"
 import { auth } from './../../utils/auth';
+import { logoutAction } from './../../redux/account/accountActions';
 class LogoutBtn extends PureComponent {
   logout() {
     console.log("log out event");

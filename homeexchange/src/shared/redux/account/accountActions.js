@@ -1,3 +1,4 @@
+import { LOGIN_ERROR, LOGIN_USER, LOGOUT } from "./types";
 export const loginUserAction = (user) => {
   console.log(user);
   return {

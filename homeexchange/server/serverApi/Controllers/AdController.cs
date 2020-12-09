@@ -5,7 +5,7 @@ using serverApi.Services;
 
 namespace serverApi.Controllers
 {
-    [Route("[controller]/{action=Login}")]
+    [Route("[controller]/{action}")]
     public class AdController : Controller
     {
         IUserService userService;

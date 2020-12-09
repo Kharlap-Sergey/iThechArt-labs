@@ -37,7 +37,7 @@ namespace serverApi
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAdService, AdService>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAccounService, AccounService>();
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<CustomDbContext>(options =>
@@ -86,6 +86,11 @@ namespace serverApi
                             }
                         };
                     });
+
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
 
             services.AddSignalR();
             services.AddControllers();
