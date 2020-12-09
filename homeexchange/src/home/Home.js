@@ -2,6 +2,9 @@ import React, { PureComponent } from "react";
 import AdsPageList from "../shared/components/adsPageList/AdsPageList";
 import { connect } from "react-redux";
 import { redirectToAction } from "./../shared/redux/redirect/redirectActionCreator";
+
+import "./home.scss";
+
 export class Home extends PureComponent {
   createAdClickHandler(event) {
     event.preventDefault();
@@ -13,9 +16,14 @@ export class Home extends PureComponent {
   }
   render() {
     return (
-      <div>
+      <div className="home">
         <AdsPageList></AdsPageList>
-        <button onClick={this.createAdClickHandler.bind(this)}>CreateAd</button>
+        <button
+          className="my-btn"
+          onClick={this.createAdClickHandler.bind(this)}
+        >
+          CreateAd
+        </button>
         <button onClick={this.notificationsClickHandler.bind(this)}>
           notifications
         </button>

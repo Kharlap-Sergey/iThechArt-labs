@@ -22,7 +22,7 @@ class Ad extends PureComponent {
     <div className="ad">
       <div className="ad__aside">
         {this.props.userId != ad.authorId ? (
-          <AccountAvatar></AccountAvatar>
+          <AccountAvatar profileId={ad.authorId}></AccountAvatar>
         ) : null}
       </div>
       <div className="ad__main ad-main">
