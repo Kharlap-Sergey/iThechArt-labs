@@ -15,33 +15,30 @@ namespace serverApi.Controllers
     {
         IUserService userService;
         IAdService adService;
-        INotificationService notificationService;
         public AdController(
             IAdService adService,
-            IUserService userService,
-            INotificationService notificationService)
+            IUserService userService)
         {
            
             this.userService = userService;
             this.adService = adService;
-            this.notificationService = notificationService;
         }
 
         [Authorize]
-        public Task<IActionResult> Create([FromBody] Ad ad)
+        public IActionResult Create([FromBody] Ad ad)
         {
             var authorId = int.Parse(User.Identity.Name);
             var author = userService.FindById(authorId);
 
-            return new Task<IActionResult>(() => Json(adService.Create(ad, author)));
+            return Json(adService.Create(ad, author));
         }
 
 
         [HttpGet("{id}")]
-        public Task<IActionResult> Get(int id)
+        public IActionResult Get(int id)
         {
             var ad = adService.FindById(id);
-            return new Task<IActionResult>(() => Json(ad));
+            return Json(ad);
         }
 
         [HttpGet("{page=1}/{userId=-1}")]

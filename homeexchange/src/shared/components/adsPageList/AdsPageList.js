@@ -61,8 +61,8 @@ class AdsPageList extends PureComponent {
             </div>
           );
         })}
-        {this.props.havePrevious && <button onClick={this.handlePrevious}>Prev</button>}
-        {this.props.haveNext && <button onClick={this.handleNext}>Next</button>}
+        {this.props.hasPrevious && <button onClick={this.handlePrevious}>Prev</button>}
+        {this.props.hasNext && <button onClick={this.handleNext}>Next</button>}
       </div>
     );
   }

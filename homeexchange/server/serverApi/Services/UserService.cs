@@ -1,4 +1,5 @@
-﻿using serverApi.Models;
+﻿using serverApi.Domain.Abstract;
+using serverApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,11 @@ namespace serverApi.Services
 {
     public sealed class UserService : IUserService
     {
+        IGenericRepository<User> userRepository;
+        public UserService(IGenericRepository<User> userRepository)
+        {
+            this.userRepository = userRepository;
+        }
         public User Create(User user)
         {
             throw new NotImplementedException();
@@ -20,7 +26,7 @@ namespace serverApi.Services
 
         public User FindById(int userId)
         {
-            throw new NotImplementedException();
+            return userRepository.FindById(userId);
         }
 
         public User Update(User user)
