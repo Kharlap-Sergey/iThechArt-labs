@@ -12,7 +12,7 @@ namespace serverApi.Domain
         public CustomDbContext(DbContextOptions<CustomDbContext> options)
             : base(options)
         {
-            //Database.EnsureDeleted();
+           // Database.EnsureDeleted();
             Database.EnsureCreated();   // создаем базу данных при первом обращении
         }
 

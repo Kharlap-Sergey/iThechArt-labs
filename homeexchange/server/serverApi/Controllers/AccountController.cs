@@ -63,7 +63,6 @@ namespace serverApi.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public IActionResult Create([FromBody] User user)
         {
             user = userRepository.Create(user);

@@ -19,7 +19,9 @@ class Authorized extends PureComponent {
   handleClick(event) {
     event.preventDefault();
     console.log("clicked");
+    const notificationsList = this.notificationListRef.current;
     this.setState({ showActionMenu: !this.state.showActionMenu });
+    notificationsList.classList.add("display-none")
   }
 
   handleNotificClick(event) {
@@ -28,6 +30,7 @@ class Authorized extends PureComponent {
     //this.setState({ showNotificationsMenu: !this.state.showNotificationsMenu });
     const notificationsList = this.notificationListRef.current;
     notificationsList.classList.toggle("display-none")
+    this.setState({ showActionMenu: false });
   }
   
   componentDidMount(){
