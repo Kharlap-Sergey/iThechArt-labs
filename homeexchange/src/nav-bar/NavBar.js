@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import "./nav-bar.scss";
 import { logoutAction } from "../redux/loginActionsCreator";
@@ -20,9 +20,9 @@ class NavBar extends React.Component {
       console.log("user Id", userId);
       return (
         //todo define the account and author.. className
-        <li className="menu__item menu__item--authorized account">
+        <Fragment className="account">
           <Authorized userId={userId}></Authorized>
-        </li>
+        </Fragment>
       );
     }
     return <Unauthorized></Unauthorized>;
