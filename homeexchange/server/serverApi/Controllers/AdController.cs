@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using serverApi.Domain.Abstract;
 using serverApi.Models;
 using serverApi.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace serverApi.Controllers
 {
@@ -19,7 +14,7 @@ namespace serverApi.Controllers
             IAdService adService,
             IUserService userService)
         {
-           
+
             this.userService = userService;
             this.adService = adService;
         }
@@ -50,7 +45,7 @@ namespace serverApi.Controllers
 
             return Json(adService.GetAdsPageShortDesc(page, forUser));
         }
-        
+
         [HttpPost("{adId}")]
         [Authorize]
         public IActionResult Reply(int adId)

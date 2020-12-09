@@ -77,7 +77,7 @@ namespace serverApi
                                 // если запрос направлен хабу
                                 var path = context.HttpContext.Request.Path;
                                 if (!string.IsNullOrEmpty(accessToken) &&
-                                    (path.StartsWithSegments("/notification")))
+                                    (path.StartsWithSegments("/hub/notification")))
                                 {
                                     // получаем токен из строки запроса
                                     context.Token = accessToken;
@@ -114,7 +114,7 @@ namespace serverApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<NotificationHub>("/notification",
+                endpoints.MapHub<NotificationHub>("/hub/notification",
                     options=>
                     {
                         options.Transports = HttpTransportType.ServerSentEvents;

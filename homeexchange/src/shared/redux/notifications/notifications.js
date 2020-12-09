@@ -1,6 +1,7 @@
 import { pathApi } from "../../utils/path";
 import { requestWrapper } from "./../../utils/requestWrapper";
-import { addNotificationAction } from "./notificationActions";
+import { addNotificationsAction } from "./notificationActions";
+import { toastr } from 'react-redux-toastr';
 
 export function getNotificationsFetch() {
   return async (dispatch) => {

@@ -1,11 +1,10 @@
 import React, { Fragment, PureComponent } from "react";
 import Avatar from "../../shared/components/avatar/Avatar";
-import DropdownCaret from "../../shared/components/dropdownCaret/DropdownCaret";
 import DropdownMenu from "../../shared/components/dropdownMenu/DropdownMenu";
 import LogoutBtn from "../../shared/components/logoutBtn/LogoutBtn";
 import PaintedLink from "../../shared/components/paintedLink/PaintedLink";
 import "./authorized.scss";
-import Notifications from "./../../notifications/Notifications";
+import NotificationsList from "./../../shared/components/notificationsList/NotificationsList";
 
 class Authorized extends PureComponent {
   constructor(props) {
@@ -14,6 +13,7 @@ class Authorized extends PureComponent {
     this.state = { showActionMenu: false, showNotificationsMenu: false };
     this.handleClick = this.handleClick.bind(this);
     this.handleNotificClick = this.handleNotificClick.bind(this);
+    this.notificationListRef = React.createRef();
   }
 
   handleClick(event) {
@@ -25,7 +25,14 @@ class Authorized extends PureComponent {
   handleNotificClick(event) {
     event.preventDefault();
     console.log("clicked");
-    this.setState({ showNotificationsMenu: !this.state.showNotificationsMenu });
+    //this.setState({ showNotificationsMenu: !this.state.showNotificationsMenu });
+    const notificationsList = this.notificationListRef.current;
+    notificationsList.classList.toggle("display-none")
+  }
+  
+  componentDidMount(){
+    
+    this.notificationsList = (<NotificationsList></NotificationsList>);
   }
   render() {
     console.log(this.props.userId);
@@ -43,19 +50,11 @@ class Authorized extends PureComponent {
                 <Avatar source={imgNotificationSrc} />
               </div>
             </div>
-            {this.state.showNotificationsMenu && (
+            <div ref={this.notificationListRef} className="display-none">
               <DropdownMenu>
-                {console.log("should draw")}
-                <PaintedLink
-                  to={"/profile/" + this.props.userId}
-                  value="profile"
-                />
-                <PaintedLink to={"/ad/create"} value="create ad" />
-                <div className="logout-part-of-nav">
-                  <LogoutBtn></LogoutBtn>
-                </div>
+                <NotificationsList/>
               </DropdownMenu>
-            )}
+            </div>
           </div>
         </li>
         <li className="menu__item" key="authorizedProfile">

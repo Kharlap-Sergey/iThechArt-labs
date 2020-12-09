@@ -51,8 +51,8 @@ namespace serverApi.Controllers
             // создаем JWT-токен
             var encodedJwt = CustomJWTCreator.CreateJWT(identity);
             User user = userRepository.Get(u => u.Email == account.Login).FirstOrDefault();
-            user.NotificationsAboutResponseToAd.AddRange(
-                notificationService.GetAllNotificationForUserByUserId(user.Id));
+            //user.NotificationsAboutResponseToAd.AddRange(
+            //    notificationService.GetAllNotificationForUserByUserId(user.Id));
 
             var response = new
             {

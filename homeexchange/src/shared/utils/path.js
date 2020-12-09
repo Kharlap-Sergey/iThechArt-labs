@@ -13,6 +13,6 @@ export const path = {
 
 export const pathApi = {
   notifications: {
-    get: api + "/notification"
+    get: api + "/notification/getNotifications"
   }
 }

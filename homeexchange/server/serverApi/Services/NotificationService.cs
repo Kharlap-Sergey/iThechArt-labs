@@ -39,5 +39,6 @@ namespace serverApi.Services
         {
             return notificationAboutResponseToAdRepository.Get(n => n.TargetUserId == userID);
         }
+
     }
 }
