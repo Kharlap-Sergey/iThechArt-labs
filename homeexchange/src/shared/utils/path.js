@@ -10,3 +10,9 @@ export const path = {
     login: api+"/account/login",
   }
 }
+
+export const pathApi = {
+  notifications: {
+    get: api + "/notification"
+  }
+}

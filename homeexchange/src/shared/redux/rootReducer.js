@@ -6,9 +6,11 @@ import { remoteInteractionReducer } from "./remoteInteraciton/remoteInteractionR
 import { profileReducer } from "./profile/profileReducer";
 import { adsPageListReducer } from "../components/adsPageList/redux/adsPageListReducer";
 import { accountReducer } from './account/accountReducer';
+import { notificationsReducer } from './notifications/notificationsReducer';
 
 export const rootReducer = combineReducers({
   user: accountReducer,
+  notifications: notificationsReducer,
   ads: adReducer,
   toastr: toastrReducer,
   redirect: redirectReducer,

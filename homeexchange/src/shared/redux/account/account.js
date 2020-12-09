@@ -4,7 +4,7 @@ export function loginUserPost(user) {
   return async (dispatch) => {
     dispatch(startLoadingAction())
     try {
-      const url = path.account.login();
+      const url = path.account.login;
       const response = await requestWrapper.post(url, user);
       console.log(response);
       if (response.ok) {
