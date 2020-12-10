@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using serverApi.Models;
+using HomeexchangeApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace serverApi.Domain.Configurations
+namespace HomeexchangeApi.Domain.Configurations
 {
     public sealed class UserConfiguration : IEntityTypeConfiguration<User>
     {

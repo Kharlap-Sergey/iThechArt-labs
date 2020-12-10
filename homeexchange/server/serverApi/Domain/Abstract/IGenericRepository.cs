@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace serverApi.Domain.Abstract
+namespace HomeexchangeApi.Domain.Abstract
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {

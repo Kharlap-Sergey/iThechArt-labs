@@ -1,12 +1,12 @@
-﻿using serverApi.Domain.Abstract;
-using serverApi.Exceptions;
-using serverApi.Models;
+﻿using HomeexchangeApi.Domain.Abstract;
+using HomeexchangeApi.Exceptions;
+using HomeexchangeApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace serverApi.Services
+namespace HomeexchangeApi.Services
 {
     public sealed class AdService : IAdService
     {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using serverApi.Models;
+using HomeexchangeApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace serverApi.Services
+namespace HomeexchangeApi.Services
 {
     public interface INotificationService
     {

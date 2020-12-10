@@ -7,16 +7,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using serverApi.Domain;
-using serverApi.Domain.Abstract;
-using serverApi.Domain.Concrete;
-using serverApi.Hubs;
-using serverApi.Infrastructure;
-using serverApi.Models;
-using serverApi.Services;
+using HomeexchangeApi.Domain;
+using HomeexchangeApi.Domain.Abstract;
+using HomeexchangeApi.Domain.Concrete;
+using HomeexchangeApi.Hubs;
+using HomeexchangeApi.Infrastructure;
+using HomeexchangeApi.Models;
+using HomeexchangeApi.Services;
 using System.Threading.Tasks;
 
-namespace serverApi
+namespace HomeexchangeApi
 {
     public class Startup
     {
@@ -34,10 +34,12 @@ namespace serverApi
             services.AddScoped<IGenericRepository<Ad>, GenericRepository<Ad>>();
             services.AddScoped<IGenericRepository<NotificationAboutResponseToAd>, GenericRepository<NotificationAboutResponseToAd>>();
             services.AddScoped<IGenericRepository<ResponseToAd>, GenericRepository<ResponseToAd>>();
+
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAdService, AdService>();
             services.AddScoped<IAccounService, AccounService>();
+            services.AddScoped<IChatService, ChatService>();
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<CustomDbContext>(options =>

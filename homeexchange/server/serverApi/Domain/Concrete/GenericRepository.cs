@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using serverApi.Domain.Abstract;
+using HomeexchangeApi.Domain.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace serverApi.Domain.Concrete
+namespace HomeexchangeApi.Domain.Concrete
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {

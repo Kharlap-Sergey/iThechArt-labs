@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace serverApi.Models
+namespace HomeexchangeApi.Models
 {
     public sealed class Account
     {

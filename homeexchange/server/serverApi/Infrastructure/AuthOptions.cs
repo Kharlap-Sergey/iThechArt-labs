@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace serverApi.Infrastructure
+namespace HomeexchangeApi.Infrastructure
 {
     public sealed class AuthOptions
     {

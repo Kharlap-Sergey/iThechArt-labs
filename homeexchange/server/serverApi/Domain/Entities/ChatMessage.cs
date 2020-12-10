@@ -1,9 +1,9 @@
-﻿using serverApi.Models;
+﻿using HomeexchangeApi.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace serverApi.Domain.Entities
+namespace HomeexchangeApi.Domain.Entities
 {
     public sealed class ChatMessage
     {

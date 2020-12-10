@@ -1,11 +1,11 @@
-﻿using serverApi.Models;
-using serverApi.Responses;
+﻿using HomeexchangeApi.Models;
+using HomeexchangeApi.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace serverApi.Services
+namespace HomeexchangeApi.Services
 {
     public interface IAccounService
     {

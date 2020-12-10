@@ -1,15 +1,15 @@
-﻿using serverApi.Domain.Abstract;
-using serverApi.Exceptions;
-using serverApi.Infrastructure;
-using serverApi.Models;
-using serverApi.Responses;
+﻿using HomeexchangeApi.Domain.Abstract;
+using HomeexchangeApi.Exceptions;
+using HomeexchangeApi.Infrastructure;
+using HomeexchangeApi.Models;
+using HomeexchangeApi.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace serverApi.Services
+namespace HomeexchangeApi.Services
 {
     public class AccounService : IAccounService
     {

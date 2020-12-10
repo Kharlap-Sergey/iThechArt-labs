@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using serverApi.Domain.Configurations;
-using serverApi.Domain.Entities;
-using serverApi.Models;
+using HomeexchangeApi.Domain.Configurations;
+using HomeexchangeApi.Domain.Entities;
+using HomeexchangeApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace serverApi.Domain
+namespace HomeexchangeApi.Domain
 {
     public class CustomDbContext : DbContext
     {

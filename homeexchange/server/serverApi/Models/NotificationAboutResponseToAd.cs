@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace serverApi.Models
+namespace HomeexchangeApi.Models
 {
     public sealed class NotificationAboutResponseToAd
     {

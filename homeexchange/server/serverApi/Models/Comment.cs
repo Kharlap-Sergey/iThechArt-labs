@@ -1,4 +1,4 @@
-﻿namespace serverApi.Models
+﻿namespace HomeexchangeApi.Models
 {
     public sealed class Comment : Messages
     {

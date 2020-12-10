@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace serverApi.Infrastructure
+namespace HomeexchangeApi.Infrastructure
 {
     public static class CustomJWTCreator
     {

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace serverApi.Models
+namespace HomeexchangeApi.Models
 {
     public sealed class Ad
     {

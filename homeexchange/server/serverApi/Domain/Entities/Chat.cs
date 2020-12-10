@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace serverApi.Domain.Entities
+namespace HomeexchangeApi.Domain.Entities
 {
     public sealed class Chat
     {
