@@ -5,18 +5,24 @@ import { connect } from "react-redux";
 import AdsPageList from "../shared/components/adsPageList/AdsPageList";
 import AccountIformation from "./components/AccountIformation";
 import "./profile.scss";
+import { loadChatId } from "../shared/redux/chat/chat";
 
 class Profile extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { userId: this.props.match.params.id };
-    this.editClickHandler = this.editClickHandler.bind(this)
+    this.state = { userId: +this.props.match.params.id };
+    this.editClickHandler = this.editClickHandler.bind(this);
+    this.handleToChatClick = this.handleToChatClick.bind(this);
   }
 
   componentDidMount() {
     console.log("fetch profile for ", this.state.userId);
     this.props.getProfileById(this.state.userId);
+  }
+
+  handleToChatClick(event) {
+    this.props.loadChatId(this.state.userId, this.props.userId);
   }
 
   editClickHandler(event) {
@@ -37,6 +43,8 @@ class Profile extends PureComponent {
               </button>
             ) : null}
           </AccountIformation>
+
+          <button onClick={this.handleToChatClick}>ToChat</button>
         </div>
         <div className="profile__ads">
           <AdsPageList userId={this.state.userId}></AdsPageList>
@@ -52,5 +60,6 @@ const mapStateToPropos = (state) => {
 const mapDispatchToProps = {
   redirectToAction,
   getProfileById,
+  loadChatId,
 };
 export default connect(mapStateToPropos, mapDispatchToProps)(Profile);

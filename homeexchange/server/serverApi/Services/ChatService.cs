@@ -87,11 +87,16 @@ namespace HomeexchangeApi.Services
                 member1 = member2;
                 member2 = temp;
             }
-            var chat = CreateChat($"{member1}/{member2}");
+            var pw = privateRoomRepository.Get(pw => pw.Member1Id == member1 && pw.Member2Id == member2).FirstOrDefault();
+            if(pw == null)
+            {
+                var chat = CreateChat($"{member1}/{member2}");
 
-            CreatePrivateRoom(chat.Id, member1, member2);
+                pw = CreatePrivateRoom(chat.Id, member1, member2);
+            }
 
-           return chat;
+
+            return chatRepository.FindById(pw.ChatId) ;
         }
     }
 }

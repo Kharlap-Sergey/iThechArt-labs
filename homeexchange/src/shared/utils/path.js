@@ -2,7 +2,7 @@ const api = "https://localhost:44370"
 export const path = {
   home: "/",
 
-  // ../caht/id:chatId
+  /// ../chat/id:chatId
   chat: "/chat",
 
   chatList: "/chatlist",
@@ -29,6 +29,7 @@ export const pathApi = {
   },
 
   chat: {
-    loadChatList: api + "/chat/getChatList"
+    loadChatList: api + "/chat/getChatList",
+    loadChatId: api + "/chat/getPrivateRoomId"
   }
 }

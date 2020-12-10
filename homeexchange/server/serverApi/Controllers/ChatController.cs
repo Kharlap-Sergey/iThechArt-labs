@@ -1,4 +1,5 @@
-﻿using HomeexchangeApi.Services;
+﻿using HomeexchangeApi.Requests;
+using HomeexchangeApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,6 +27,14 @@ namespace HomeexchangeApi.Controllers
             var userId = GetUserId();
             var chatList = chatService.GetChatList(userId); 
             return Json(chatList);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult GetPrivateRoomId([FromBody]GetPrivateRoomIdRequest request)
+        {
+            var chat= chatService.GetChatOrCreateForTowMembers(request.Member1Id, request.Member2Id);
+            return Json(chat.Id);
         }
 
         [HttpGet("{chatId}")]
