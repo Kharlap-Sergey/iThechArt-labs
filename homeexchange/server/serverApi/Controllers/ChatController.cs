@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using HomeexchangeApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,28 @@ using System.Threading.Tasks;
 namespace HomeexchangeApi.Controllers
 {
     [Route("[controller]/{action}")]
-    public class ChatController : Controller
+    public sealed class ChatController : Controller
     {
+        IChatService chatService;
+        public ChatController(
+            IChatService chatService
+            )
+        {
+            this.chatService = chatService;
+        }
+ 
         [HttpGet]
         [Authorize]
         public IActionResult GetChatList()
         {
-            return Ok();
+            var userId = GetUserId();
+            var chatList = chatService.GetChatList(userId); 
+            return Json(chatList);
+        }
+
+        int GetUserId()
+        {
+            return int.Parse(User.Identity.Name);
         }
     }
 }

@@ -15,6 +15,9 @@ using HomeexchangeApi.Infrastructure;
 using HomeexchangeApi.Models;
 using HomeexchangeApi.Services;
 using System.Threading.Tasks;
+using HomeexchangeApi.Domain.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace HomeexchangeApi
 {
@@ -30,10 +33,15 @@ namespace HomeexchangeApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
             services.AddScoped<IGenericRepository<Ad>, GenericRepository<Ad>>();
             services.AddScoped<IGenericRepository<NotificationAboutResponseToAd>, GenericRepository<NotificationAboutResponseToAd>>();
             services.AddScoped<IGenericRepository<ResponseToAd>, GenericRepository<ResponseToAd>>();
+            services.AddScoped<IGenericRepository<Chat>, GenericRepository<Chat>>();
+            services.AddScoped<IGenericRepository<ChatMessage>, GenericRepository<ChatMessage>>();
+            services.AddScoped<IGenericRepository<Messages>, GenericRepository<Messages>>();
+
 
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUserService, UserService>();
@@ -79,7 +87,9 @@ namespace HomeexchangeApi
                                 // если запрос направлен хабу
                                 var path = context.HttpContext.Request.Path;
                                 if (!string.IsNullOrEmpty(accessToken) &&
-                                    (path.StartsWithSegments("/hub/notification")))
+                                    (path.StartsWithSegments("/hub/notification")
+                                    | path.StartsWithSegments("/hub/chat"))
+                                    )
                                 {
                                     // получаем токен из строки запроса
                                     context.Token = accessToken;
@@ -122,9 +132,14 @@ namespace HomeexchangeApi
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<NotificationHub>("/hub/notification",
-                    options=>
+                    options =>
                     {
                         options.Transports = HttpTransportType.ServerSentEvents;
+                    });
+                endpoints.MapHub<NotificationHub>("/hub/chat",
+                    options =>
+                    {
+                        options.Transports = HttpTransportType.WebSockets;
                     });
             });
         }
