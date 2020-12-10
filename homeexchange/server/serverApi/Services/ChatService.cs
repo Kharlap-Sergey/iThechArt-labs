@@ -69,6 +69,11 @@ namespace HomeexchangeApi.Services
             return chatRepository.Get().Where(chat =>  chatIds.Contains(chat.Id));
         }
 
+        public IEnumerable<int> GetChatMembersId(int chatId)
+        {
+            return chatMemberRepository.Get(cm => cm.ChatId == chatId).Select(cm => cm.UserId);
+        }
+
         public IEnumerable<ChatMessage> GetChatMessages(int chatId)
         {
             return chatMessageRepository.Get(chatMessage => chatMessage.ChatId == chatId);

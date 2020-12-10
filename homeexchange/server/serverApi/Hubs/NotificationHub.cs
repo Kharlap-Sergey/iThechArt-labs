@@ -9,28 +9,15 @@ namespace HomeexchangeApi.Hubs
     [Authorize]
     public sealed class NotificationHub : Hub
     {
-        IChatService chatService;
-        public NotificationHub(
-            IChatService chatService
-            )
-        {
-            this.chatService = chatService;
-        }
-        public async Task Send(Message message)
-        {
-            int commiterId = GetCommiterId();
-            chatService.AddMessage(message, commiterId);
-        }
-
         public override async Task OnConnectedAsync()
         {
-            int userId = GetCommiterId();
+            int userId = GetCommitterId();
             string connectionId = this.Context.ConnectionId;
             NotificationService.Subscribers[userId] = connectionId;
             await base.OnConnectedAsync();
         }
 
-        int GetCommiterId()
+        int GetCommitterId()
         {
             return int.Parse(Context.User.Identity.Name);
         }
