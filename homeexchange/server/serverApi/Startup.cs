@@ -40,7 +40,8 @@ namespace HomeexchangeApi
             services.AddScoped<IGenericRepository<ResponseToAd>, GenericRepository<ResponseToAd>>();
             services.AddScoped<IGenericRepository<Chat>, GenericRepository<Chat>>();
             services.AddScoped<IGenericRepository<ChatMessage>, GenericRepository<ChatMessage>>();
-            services.AddScoped<IGenericRepository<Messages>, GenericRepository<Messages>>();
+            services.AddScoped<IGenericRepository<ChatMember>, GenericRepository<ChatMember>>();
+            services.AddScoped<IGenericRepository<PrivateRoom>, GenericRepository<PrivateRoom>>();
 
 
             services.AddScoped<INotificationService, NotificationService>();

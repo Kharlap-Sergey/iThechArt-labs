@@ -2,23 +2,38 @@
 using Microsoft.AspNetCore.SignalR;
 using HomeexchangeApi.Services;
 using System.Threading.Tasks;
+using HomeexchangeApi.Requests;
 
 namespace HomeexchangeApi.Hubs
 {
     [Authorize]
     public sealed class NotificationHub : Hub
     {
-        public async Task Send(string message)
+        IChatService chatService;
+        public NotificationHub(
+            IChatService chatService
+            )
         {
-            await Clients.Caller.SendAsync("Recieve", message);
+            this.chatService = chatService;
+        }
+        public async Task Send(Message message)
+        {
+            int commiterId = GetCommiterId();
+            chatService.AddMessage(message, commiterId);
         }
 
         public override async Task OnConnectedAsync()
         {
-            int userId = int.Parse(Context.User.Identity.Name);
+            int userId = GetCommiterId();
             string connectionId = this.Context.ConnectionId;
             NotificationService.Subscribers[userId] = connectionId;
             await base.OnConnectedAsync();
         }
+
+        int GetCommiterId()
+        {
+            return int.Parse(Context.User.Identity.Name);
+        }
+
     }
 }

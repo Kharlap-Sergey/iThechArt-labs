@@ -26,6 +26,8 @@ namespace HomeexchangeApi.Domain
             }
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ChatMemberConfiguration());
+            modelBuilder.ApplyConfiguration(new PrivateRoomConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<User> Users { get; set; }
@@ -36,5 +38,6 @@ namespace HomeexchangeApi.Domain
         public DbSet<Chat> Chats { get; set; }
         public DbSet<ChatMember> ChatMembers { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<PrivateRoom> PrivateRooms { get; set; }
     }
 }
