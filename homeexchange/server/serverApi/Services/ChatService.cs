@@ -27,6 +27,12 @@ namespace HomeexchangeApi.Services
             this.privateRoomRepository = privateRoomRepository;
         }
 
+        public void AddMemberToChat(int chatId, int memberId)
+        {
+            var chatMember = new ChatMember { ChatId = chatId, UserId = memberId };
+            chatMemberRepository.Create(chatMember);
+        }
+
         public ChatMessage AddMessage(Message message, int comnitterId)
         {
             var chatMessage = new ChatMessage
@@ -63,9 +69,9 @@ namespace HomeexchangeApi.Services
             return chatRepository.Get().Where(chat =>  chatIds.Contains(chat.Id));
         }
 
-        public IEnumerable<ChatMessage> GetChatMessages(Chat chat)
+        public IEnumerable<ChatMessage> GetChatMessages(int chatId)
         {
-            return chatMessageRepository.Get(chatMessage => chatMessage.ChatId == chat.Id);
+            return chatMessageRepository.Get(chatMessage => chatMessage.ChatId == chatId);
         }
 
         public Chat GetChatOrCreateForTowMembers(int member1, int member2)

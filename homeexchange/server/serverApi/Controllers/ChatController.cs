@@ -28,6 +28,14 @@ namespace HomeexchangeApi.Controllers
             return Json(chatList);
         }
 
+        [HttpGet("{chatId}")]
+        [Authorize]
+        public IActionResult GetChatMessages(int chatId)
+        {
+            var chatMessages = chatService.GetChatMessages(chatId);
+            return Json(chatMessages);
+        }
+
         int GetUserId()
         {
             return int.Parse(User.Identity.Name);

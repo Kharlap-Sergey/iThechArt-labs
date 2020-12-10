@@ -14,7 +14,7 @@ namespace HomeexchangeApi.Services
 
         public PrivateRoom CreatePrivateRoom(int chatId, int member1, int member2);
 
-        public IEnumerable<ChatMessage> GetChatMessages(Chat chat);
+        public IEnumerable<ChatMessage> GetChatMessages(int chatId);
 
         public Chat GetChatOrCreateForTowMembers(int member1, int member2);
 
