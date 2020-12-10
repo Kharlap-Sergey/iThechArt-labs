@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HomeexchangeApi.Controllers
 {
-    [Route("[controller]/{action}")]
+    [Route("[controller]/{action = GetChatList}")]
     public sealed class ChatController : Controller
     {
         IChatService chatService;

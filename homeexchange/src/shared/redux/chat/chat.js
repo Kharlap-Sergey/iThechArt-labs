@@ -5,7 +5,8 @@ import { requestWrapper } from "./../../utils/requestWrapper";
 export function loadChatList() {
   return async (dispatch) => {
     try {
-      const url = pathApi.loadChatList;
+      const url = pathApi.chat.loadChatList;
+      console.log(url);
       const response = await requestWrapper.get(url);
       console.log(response);
       if (response.ok) {

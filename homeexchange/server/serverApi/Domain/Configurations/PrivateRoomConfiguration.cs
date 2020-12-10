@@ -13,7 +13,7 @@ namespace HomeexchangeApi.Domain.Configurations
     {
         public void Configure(EntityTypeBuilder<PrivateRoom> builder)
         {
-            builder.HasKey(pr => new { pr.Member1, pr.Member2 });
+            builder.HasKey(pr => new { pr.Member1Id, pr.Member2Id });
         }
     }
 }

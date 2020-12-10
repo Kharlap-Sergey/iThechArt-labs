@@ -16,6 +16,7 @@ import AdCreation from "./adCreation/AdCreation";
 import AdEditor from "./adEditor/AdEditor";
 import { path } from './shared/utils/path';
 import Chat from './chat/Chat';
+import ChatList from './chatList/ChatList';
 function App() {
   return (
     <div className="App">
@@ -27,7 +28,7 @@ function App() {
               <RouteCatcher>
                 <Route exact path="/edit/profile/:id" component={EditProfile} />
                 <Route exact path="/ad/id:id" component={Ad} />
-                
+                <Route exact path={path.chatList} component={ChatList} />
                 <Route exact path={path.chat+"/id:chatId"} component={Chat} />
                 <Route exact path="/ad/create" component={AdCreation} />
                 <Route exact path="/ad/edite/id:id" component={AdEditor} />

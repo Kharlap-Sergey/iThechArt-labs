@@ -7,7 +7,7 @@ namespace HomeexchangeApi.Services
     public interface IChatService
     {
         public IEnumerable<Chat> GetChatList(int userId);
-        public IEnumerable<int> GetChatMembersId(int memberId);
+        public IEnumerable<int> GetChatMembersId(int chatId);
 
         public ChatMessage AddMessage(Message message, int comnitterId);
 

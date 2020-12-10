@@ -5,6 +5,8 @@ export const path = {
   // ../caht/id:chatId
   chat: "/chat",
 
+  chatList: "/chatlist",
+
   ad: {
     ad: api+"/ad",
     update: api+"/ad/update",
@@ -27,6 +29,6 @@ export const pathApi = {
   },
 
   chat: {
-    loadChatList: api + "chat/getChatList"
+    loadChatList: api + "/chat/getChatList"
   }
 }
