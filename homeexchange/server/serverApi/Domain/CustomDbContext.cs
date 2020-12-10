@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using serverApi.Domain.Configurations;
 using serverApi.Domain.Entities;
 using serverApi.Models;
 using System;
@@ -24,9 +25,8 @@ namespace serverApi.Domain
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
-            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
-            modelBuilder.Entity<User>().HasIndex(u => u.Nickname).IsUnique();
-            modelBuilder.Entity<ChatMember>().HasKey(e => new { e.ChatId, e.UserId });
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new ChatMemberConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -38,8 +38,5 @@ namespace serverApi.Domain
         public DbSet<Chat> Chats { get; set; }
         public DbSet<ChatMember> ChatMembers { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }
-
-        //public DbSet<Comment> Comments { get; set;}
-        //public DbSet<Lang> Langs { get; set;}
     }
 }
