@@ -24,5 +24,9 @@ export const pathApi = {
   account: {
     registrate: api + "/account/registrate",
     login: api+"/account/login"
+  },
+
+  chat: {
+    loadChatList: api + "chat/getChatList"
   }
 }

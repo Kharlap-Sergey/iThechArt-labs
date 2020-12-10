@@ -5,8 +5,9 @@ import { redirectReducer } from "./redirect/redirectReducer";
 import { remoteInteractionReducer } from "./remoteInteraciton/remoteInteractionReducer";
 import { profileReducer } from "./profile/profileReducer";
 import { adsPageListReducer } from "../components/adsPageList/redux/adsPageListReducer";
-import { accountReducer } from './account/accountReducer';
-import { notificationsReducer } from './notifications/notificationsReducer';
+import { accountReducer } from "./account/accountReducer";
+import { notificationsReducer } from "./notifications/notificationsReducer";
+import { chatReducer } from "./chat/chatReducer";
 
 export const rootReducer = combineReducers({
   user: accountReducer,
@@ -17,4 +18,5 @@ export const rootReducer = combineReducers({
   remoteInteraction: remoteInteractionReducer,
   profile: profileReducer,
   adsPageList: adsPageListReducer,
+  сhat: chatReducer,
 });
