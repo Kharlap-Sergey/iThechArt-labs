@@ -1,4 +1,5 @@
 ﻿using serverApi.Domain.Abstract;
+using serverApi.Exceptions;
 using serverApi.Models;
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,7 @@ namespace serverApi.Services
             int descriptionLength = 20;
 
             var ads = adRepository
-                .Get(ad => (author == null || ad.AuthorId == author.Id))
+                .Get(ad => ad.ResponseToAdId == null && (author == null || ad.AuthorId == author.Id))
                 .OrderByDescending(ad => ad.DateOfPublication).ToList();
 
             var adsBuf = ads.Skip((page - 1) * pageSize).Take(pageSize);
@@ -82,6 +83,10 @@ namespace serverApi.Services
 
         public Ad ReplyOnAd(Ad ad, User responder, string message = "")
         {
+            if(ad.ResponseToAd != null)
+            {
+                throw new AdAlreadyHasRepliedException();
+            }
             var responseToAd = new ResponseToAd
             {
                 Responder = responder,

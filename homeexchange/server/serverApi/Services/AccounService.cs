@@ -1,5 +1,5 @@
 ﻿using serverApi.Domain.Abstract;
-using serverApi.Exeptions;
+using serverApi.Exceptions;
 using serverApi.Infrastructure;
 using serverApi.Models;
 using serverApi.Responses;

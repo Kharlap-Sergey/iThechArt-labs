@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace serverApi.Exeptions
+namespace serverApi.Exceptions
 {
     public sealed class InvalidCredentialExeption : Exception
     {

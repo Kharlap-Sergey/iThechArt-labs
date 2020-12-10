@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using serverApi.Exeptions;
+using serverApi.Exceptions;
 using serverApi.Models;
 using serverApi.Responses;
 using serverApi.Services;
