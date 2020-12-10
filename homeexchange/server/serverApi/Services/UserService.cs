@@ -25,6 +25,13 @@ namespace serverApi.Services
             return userRepository.FindById(userId);
         }
 
+        public User GetProfile(int userId)
+        {
+            var profile = userRepository.FindById(userId);
+            profile.Password = null;
+            return profile;
+        }
+
         public User Update(User user, int commiterId)
         {
             if (commiterId != user.Id)

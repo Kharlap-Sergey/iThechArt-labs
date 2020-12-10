@@ -60,5 +60,13 @@ namespace serverApi.Controllers
             user = userService.Update(user, commiterId);
             return Ok();
         }
+
+        [HttpGet("{userId}")]
+        public IActionResult Get(int userId)
+        {
+            var user = userService.GetProfile(userId);
+            return Json(user);
+        }
+
     }
 }

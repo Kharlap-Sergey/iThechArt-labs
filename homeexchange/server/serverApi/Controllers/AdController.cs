@@ -19,6 +19,7 @@ namespace serverApi.Controllers
             this.adService = adService;
         }
 
+        [HttpPost]
         [Authorize]
         public IActionResult Create([FromBody] Ad ad)
         {

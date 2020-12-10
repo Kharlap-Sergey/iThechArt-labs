@@ -11,5 +11,6 @@ namespace serverApi.Services
         public User FindById(int userId);
         public User Create(User user);
         public User Update(User user, int commiterId);
+        public User GetProfile(int userId);
     }
 }
