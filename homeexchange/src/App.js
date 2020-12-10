@@ -12,8 +12,10 @@ import Profile from "./profile/Profile";
 import Ad from "./ad/Ad";
 import RouteCatcher from "./shared/components/routeCatcher/RouteCatcher";
 import EditProfile from "./editProfile/EditProfile";
-import AdCreation from './adCreation/AdCreation';
-import AdEditor from './adEditor/AdEditor';
+import AdCreation from "./adCreation/AdCreation";
+import AdEditor from "./adEditor/AdEditor";
+import { path } from './shared/utils/path';
+import Chat from './chat/Chat';
 function App() {
   return (
     <div className="App">
@@ -25,12 +27,14 @@ function App() {
               <RouteCatcher>
                 <Route exact path="/edit/profile/:id" component={EditProfile} />
                 <Route exact path="/ad/id:id" component={Ad} />
+                
+                <Route exact path={path.chat+"/id:chatId"} component={Chat} />
                 <Route exact path="/ad/create" component={AdCreation} />
                 <Route exact path="/ad/edite/id:id" component={AdEditor} />
-                <Route exact path="/profile/:id" component={Profile}/>
+                <Route exact path="/profile/:id" component={Profile} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />
-                <Route exact path="/" component={Home}/>
+                <Route exact path="/" component={Home} />
               </RouteCatcher>
             </Switch>
           </div>

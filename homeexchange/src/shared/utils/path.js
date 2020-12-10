@@ -1,6 +1,10 @@
 const api = "https://localhost:44370"
 export const path = {
   home: "/",
+
+  // ../caht/id:chatId
+  chat: "/chat",
+
   ad: {
     ad: api+"/ad",
     update: api+"/ad/update",
