@@ -14,7 +14,6 @@ namespace HomeexchangeApi.Controllers
             IAdService adService,
             IUserService userService)
         {
-
             this.userService = userService;
             this.adService = adService;
         }

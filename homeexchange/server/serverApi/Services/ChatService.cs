@@ -77,7 +77,9 @@ namespace HomeexchangeApi.Services
 
         public IEnumerable<ChatMessage> GetChatMessages(int chatId)
         {
-            return chatMessageRepository.Get(chatMessage => chatMessage.ChatId == chatId);
+           // var result = chatMessageRepository.Get(chatMessage => chatMessage.ChatId == chatId);
+            var result = chatMessageRepository.Get(m => m.ChatId == chatId);
+            return result;
         }
 
         public Chat GetChatOrCreateForTowMembers(int member1, int member2)

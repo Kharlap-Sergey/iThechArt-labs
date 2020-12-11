@@ -30,7 +30,8 @@ export const pathApi = {
 
   chat: {
     loadChatList: api + "/chat/getChatList",
-    loadChatId: api + "/chat/getPrivateRoomId"
+    loadChatId: api + "/chat/getPrivateRoomId",
+    loadChatMessages: api + "/chat/getChatMessages"
   }
 }
 

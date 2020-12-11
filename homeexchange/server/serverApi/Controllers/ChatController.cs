@@ -1,4 +1,6 @@
-﻿using HomeexchangeApi.Requests;
+﻿using HomeexchangeApi.Domain.Abstract;
+using HomeexchangeApi.Domain.Entities;
+using HomeexchangeApi.Requests;
 using HomeexchangeApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +15,14 @@ namespace HomeexchangeApi.Controllers
     public sealed class ChatController : Controller
     {
         IChatService chatService;
+        IGenericRepository<ChatMessage> mesRep;
         public ChatController(
+            IGenericRepository<ChatMessage> mesRep,
             IChatService chatService
             )
         {
             this.chatService = chatService;
+            this.mesRep = mesRep;
         }
  
         [HttpGet]
