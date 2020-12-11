@@ -137,7 +137,7 @@ namespace HomeexchangeApi
                     {
                         options.Transports = HttpTransportType.ServerSentEvents;
                     });
-                endpoints.MapHub<NotificationHub>("/hub/chat",
+                endpoints.MapHub<ChatHub>("/hub/chat",
                     options =>
                     {
                         options.Transports = HttpTransportType.WebSockets;

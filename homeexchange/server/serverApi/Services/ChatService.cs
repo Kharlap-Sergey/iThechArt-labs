@@ -71,7 +71,8 @@ namespace HomeexchangeApi.Services
 
         public IEnumerable<int> GetChatMembersId(int chatId)
         {
-            return chatMemberRepository.Get(cm => cm.ChatId == chatId).Select(cm => cm.UserId);
+            var members = chatMemberRepository.Get(cm => cm.ChatId == chatId);
+            return members.Select(cm => cm.UserId);
         }
 
         public IEnumerable<ChatMessage> GetChatMessages(int chatId)
@@ -93,6 +94,8 @@ namespace HomeexchangeApi.Services
                 var chat = CreateChat($"{member1}/{member2}");
 
                 pw = CreatePrivateRoom(chat.Id, member1, member2);
+                AddMemberToChat(chat.Id, member1);
+                if(member1 != member2) AddMemberToChat(chat.Id, member2);
             }
 
 

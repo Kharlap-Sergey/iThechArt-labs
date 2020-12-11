@@ -8,13 +8,13 @@ export const path = {
   chatList: "/chatlist",
 
   ad: {
-    ad: api+"/ad",
-    update: api+"/ad/update",
+    ad: api + "/ad",
+    update: api + "/ad/update",
     create: ""
   },
   accocunt: {
-    account: api+"/account",
-    login: api+"/account/login",
+    account: api + "/account",
+    login: api + "/account/login",
   }
 }
 
@@ -25,11 +25,15 @@ export const pathApi = {
 
   account: {
     registrate: api + "/account/registrate",
-    login: api+"/account/login"
+    login: api + "/account/login"
   },
 
   chat: {
     loadChatList: api + "/chat/getChatList",
     loadChatId: api + "/chat/getPrivateRoomId"
   }
+}
+
+export const pathHub = {
+  chat: api + "/hub/chat",
 }

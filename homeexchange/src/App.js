@@ -29,7 +29,7 @@ function App() {
                 <Route exact path="/edit/profile/:id" component={EditProfile} />
                 <Route exact path="/ad/id:id" component={Ad} />
                 <Route exact path={path.chatList} component={ChatList} />
-                <Route exact path={path.chat+"/id:chatId"} component={Chat} />
+                <Route exact path={path.chat+"/id:id"} component={Chat} />
                 <Route exact path="/ad/create" component={AdCreation} />
                 <Route exact path="/ad/edite/id:id" component={AdEditor} />
                 <Route exact path="/profile/:id" component={Profile} />

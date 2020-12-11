@@ -1,6 +1,7 @@
 ﻿using HomeexchangeApi.Requests;
 using HomeexchangeApi.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace HomeexchangeApi.Hubs
     [Authorize]
     public class ChatHub : Hub
     {
-        Dictionary<int, string> Subscribers = new Dictionary<int, string>();
+        static Dictionary<int, string> Subscribers = new Dictionary<int, string>();
 
         IChatService chatService;
         public ChatHub(
@@ -23,7 +24,7 @@ namespace HomeexchangeApi.Hubs
         }
 
 
-        public async Task AddMessage(Message message)
+        public async Task Send(Message message)
         {
             var mes = chatService.AddMessage(message, GetCommitterId());
             var members = chatService.GetChatMembersId(mes.ChatId);
