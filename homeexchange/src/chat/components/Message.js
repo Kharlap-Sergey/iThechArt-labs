@@ -8,7 +8,7 @@ class Message extends PureComponent {
 
   render() {
     console.log("this.props", this.props);
-    return <div style={{color: "white"}}>{this.props.content}</div>;
+    return <div className="message">{this.props.content}</div>;
   }
 }
 export default Message;

@@ -6,6 +6,7 @@ import { loadChatMessages } from "./../shared/redux/chat/chat";
 import { addChatMessagesAction } from "./../shared/redux/chat/chatActionCreator";
 import { connect } from "react-redux";
 import MessageList from "./components/MessageList";
+import "./chat.scss";
 
 class Chat extends PureComponent {
   constructor(props) {
@@ -56,8 +57,12 @@ class Chat extends PureComponent {
     console.log("this.props", this.props);
     console.log("this.props", this.props.messages);
     return (
-      <div>
-        <MessageList messages={this.props.messages} />
+      <div className="chat">
+        <MessageList
+          messages={this.props.messages}
+          chatId={this.state.chatId}
+          currentUserId={this.props.userId}
+        />
         <form onSubmit={this.handleSendClick}>
           <textarea name="message"></textarea>
           <button>Send</button>
@@ -71,6 +76,7 @@ const mapStateToProps = (state) => {
   console.log("state", state);
   return {
     ...state.chat,
+    ...state.user,
   };
 };
 

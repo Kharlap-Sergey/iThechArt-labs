@@ -1,0 +1,46 @@
+@import "../shared/variables.scss";
+
+.chat {
+  width: 500px;
+  font-size: 1rem;
+  ::-webkit-scrollbar {
+    /* chrome based */
+    width: 0px; /* ширина scrollbar'a */
+    background: transparent; /* опционально */
+  }
+  &__message-list {
+    height: 600px;
+    padding: 4px;
+    overflow-y: scroll;
+    background-color: $chat-bg-color;
+    border-radius: 10px;
+  }
+}
+.message-list {
+  padding-bottom: 40px;
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+  }
+}
+
+.message {
+  width: fit-content;
+  max-width: 250px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  word-wrap: break-word;
+  background-color: $chat-message-bg-color;
+  border-radius: 10px;
+  &--right {
+    flex: 1 1;
+    order: 2;
+    border: 0;
+  }
+  &--left {
+    flex: 1 1;
+    order: -1;
+    border: 0;
+  }
+}
