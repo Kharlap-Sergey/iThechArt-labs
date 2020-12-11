@@ -5,6 +5,7 @@ import { pathHub } from "../shared/utils/path";
 import { loadChatMessages } from "./../shared/redux/chat/chat";
 import { addChatMessagesAction } from "./../shared/redux/chat/chatActionCreator";
 import { connect } from "react-redux";
+import MessageList from "./components/MessageList";
 
 class Chat extends PureComponent {
   constructor(props) {
@@ -52,8 +53,11 @@ class Chat extends PureComponent {
     //this.props.clearNotificationsAction();
   }
   render() {
+    console.log("this.props", this.props);
+    console.log("this.props", this.props.messages);
     return (
       <div>
+        <MessageList messages={this.props.messages} />
         <form onSubmit={this.handleSendClick}>
           <textarea name="message"></textarea>
           <button>Send</button>
@@ -63,11 +67,16 @@ class Chat extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  console.log("state", state);
+  return {
+    ...state.chat,
+  };
+};
 
 const mapDispatchToProps = {
   loadChatMessages,
-  addChatMessagesAction
+  addChatMessagesAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

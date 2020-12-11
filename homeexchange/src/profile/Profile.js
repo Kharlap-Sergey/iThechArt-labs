@@ -22,6 +22,7 @@ class Profile extends PureComponent {
   }
 
   handleToChatClick(event) {
+    console.log(this.state.userId, this.props.userId)
     this.props.loadChatId(this.state.userId, this.props.userId);
   }
 

@@ -56,7 +56,7 @@ namespace HomeexchangeApi.Services
             var privateRoom = new PrivateRoom
             {
                 Member1Id = Math.Min(member1, member2),
-                Member2Id = Math.Min(member1, member2),
+                Member2Id = Math.Max(member1, member2),
                 ChatId = chatId
             };
 

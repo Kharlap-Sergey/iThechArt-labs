@@ -18,5 +18,5 @@ export const rootReducer = combineReducers({
   remoteInteraction: remoteInteractionReducer,
   profile: profileReducer,
   adsPageList: adsPageListReducer,
-  сhat: chatReducer,
+  chat: chatReducer,
 });
