@@ -92,7 +92,7 @@ namespace HomeexchangeApi.Services
             }
 
             var chat = chatService.GetChatOrCreateForTowMembers(responder.Id, ad.AuthorId);
-            
+            var chatMess = chatService.AddReply(chat.Id, responder.Id, $"{ad.Id}");
             var notification = new Notification
             {
                 TargetUserId = ad.AuthorId,

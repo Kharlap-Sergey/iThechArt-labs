@@ -10,7 +10,7 @@ namespace HomeexchangeApi.Services
         public IEnumerable<int> GetChatMembersId(int chatId);
 
         public ChatMessage AddMessage(Message message, int comnitterId);
-
+        public ChatMessage AddReply(int chatId, int comnitterId, string message);
         public Chat CreateChat(string title);
 
         public PrivateRoom CreatePrivateRoom(int chatId, int member1, int member2);

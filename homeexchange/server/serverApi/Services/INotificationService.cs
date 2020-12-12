@@ -14,6 +14,6 @@ namespace HomeexchangeApi.Services
 
         public Notification Delete(int notificationId, int commiterId);
         public IEnumerable<Notification> GetAllNotificationForUserByUserId(int userID);
- 
+        
     }
 }

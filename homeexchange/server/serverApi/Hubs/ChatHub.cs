@@ -1,4 +1,5 @@
-﻿using HomeexchangeApi.Requests;
+﻿using HomeexchangeApi.Models;
+using HomeexchangeApi.Requests;
 using HomeexchangeApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,28 +17,24 @@ namespace HomeexchangeApi.Hubs
         static Dictionary<int, string> Subscribers = new Dictionary<int, string>();
 
         IChatService chatService;
+        INotificationService notificationService;
         public ChatHub(
-            IChatService chatService
+            IChatService chatService,
+            INotificationService notificationService
             )
         {
             this.chatService = chatService;
+            this.notificationService = notificationService;
         }
 
+        public static Dictionary<int, string> GetSubscribers()
+        {
+            return Subscribers;
+        }
 
         public async Task Send(Message message)
         {
             var mes = chatService.AddMessage(message, GetCommitterId());
-            var members = chatService.GetChatMembersId(mes.ChatId);
-            var recievers = new List<string>();
-            foreach(var member in members)
-            {
-                if (Subscribers.ContainsKey(member))
-                {
-                    recievers.Add(Subscribers[member]);
-                }
-            }
-
-            await Clients.Clients(recievers).SendAsync("Recieve", mes);
         }
 
         public override async Task OnConnectedAsync()

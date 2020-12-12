@@ -1,6 +1,8 @@
 ﻿using HomeexchangeApi.Domain.Abstract;
 using HomeexchangeApi.Domain.Entities;
+using HomeexchangeApi.Hubs;
 using HomeexchangeApi.Requests;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,18 +15,21 @@ namespace HomeexchangeApi.Services
         IGenericRepository<ChatMember> chatMemberRepository;
         IGenericRepository<ChatMessage> chatMessageRepository;
         IGenericRepository<PrivateRoom> privateRoomRepository;
+        IHubContext<ChatHub> chatHubContext;
 
         public ChatService(
             IGenericRepository<Chat> chatRepository,
             IGenericRepository<ChatMember> chatMemberRepository,
             IGenericRepository<ChatMessage> chatMessageRepository,
-            IGenericRepository<PrivateRoom> privateRoomRepository
+            IGenericRepository<PrivateRoom> privateRoomRepository,
+            IHubContext<ChatHub> chatHubContext
             )
         {
             this.chatMemberRepository = chatMemberRepository;
             this.chatRepository = chatRepository;
             this.chatMessageRepository = chatMessageRepository;
             this.privateRoomRepository = privateRoomRepository;
+            this.chatHubContext = chatHubContext;
         }
 
         public void AddMemberToChat(int chatId, int memberId)
@@ -33,6 +38,35 @@ namespace HomeexchangeApi.Services
             chatMemberRepository.Create(chatMember);
         }
 
+        public async void SendMessageToChat(ChatMessage message)
+        {
+            var members = GetChatMembersId(message.ChatId);
+            var recievers = new List<string>();
+            var subscribers = ChatHub.GetSubscribers();
+            foreach (var memberId in members)
+            {
+                if (subscribers.ContainsKey(memberId))
+                {
+                    recievers.Add(subscribers[memberId]);
+                    //var not = new Notification
+                    //{
+                    //    Type = Notification.NotificationType.NewMessage,
+                    //    TargetUserId = memberId,
+                    //    ChatId = mes.ChatId
+                    //};
+                    //notificationService.Create(not);
+                }
+            }
+
+            await this.chatHubContext.Clients.Clients(recievers).SendAsync("Recieve", message);
+        }
+
+        private ChatMessage AddChatMessage(ChatMessage message)
+        {
+            var chatMessage = chatMessageRepository.Create(message);
+            SendMessageToChat(chatMessage);
+            return chatMessage;
+        } 
         public ChatMessage AddMessage(Message message, int comnitterId)
         {
             var chatMessage = new ChatMessage
@@ -43,7 +77,20 @@ namespace HomeexchangeApi.Services
                 PublicationDate = DateTime.Now
             };
 
-            return chatMessageRepository.Create(chatMessage);
+            return AddChatMessage(chatMessage);
+        }
+
+        public ChatMessage AddReply(int chatId, int comnitterId, string message)
+        {
+            var chatMessage = new ChatMessage
+            {
+                ChatId = chatId,
+                UserId = comnitterId,
+                Content = message,
+                PublicationDate = DateTime.Now
+            };
+
+            return AddChatMessage(chatMessage);
         }
 
         public Chat CreateChat(string title)
