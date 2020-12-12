@@ -12,10 +12,10 @@ namespace HomeexchangeApi.Services
     {
         IGenericRepository<Ad> adRepository;
         INotificationService notificationService;
-        ChatService chatService;
+        IChatService chatService;
         public AdService(
                 IGenericRepository<Ad> adContext,
-                ChatService chatService,
+                IChatService chatService,
                 INotificationService notificationService
                         )
         {

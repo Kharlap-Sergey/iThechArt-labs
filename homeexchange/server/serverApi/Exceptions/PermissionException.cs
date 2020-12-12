@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HomeexchangeApi.Exceptions
 {
-    public class PermissionException : Exception
+    public sealed class PermissionException : Exception
     {
         public PermissionException(string message)
        : base(message)

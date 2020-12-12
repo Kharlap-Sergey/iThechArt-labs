@@ -29,7 +29,7 @@ namespace HomeexchangeApi.Controllers
 
         [HttpDelete("{notificationId}")]
         [Authorize]
-        public IAccounResult DeleteNotificaton(int notificationId)
+        public IActionResult DeleteNotificaton(int notificationId)
         {
             int commiterId = GetCommitter();
             return Json(notificationService.Delete(notificationId, commiterId));

@@ -4,7 +4,6 @@ export const path = {
 
   /// ../chat/id:chatId
   chat: "/chat",
-
   chatList: "/chatlist",
 
   ad: {

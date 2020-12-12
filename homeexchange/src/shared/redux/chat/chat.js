@@ -14,6 +14,7 @@ export function loadChatList() {
       console.log(response);
       if (response.ok) {
         const data = await response.json();
+        console.log('chats', data)
         ///
       } else {
         const data = await response.json();

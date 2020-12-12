@@ -5,6 +5,7 @@ import LogoutBtn from "../../shared/components/logoutBtn/LogoutBtn";
 import PaintedLink from "../../shared/components/paintedLink/PaintedLink";
 import "./authorized.scss";
 import NotificationsList from "./../../shared/components/notificationsList/NotificationsList";
+import { path } from "../../shared/utils/path";
 
 class Authorized extends PureComponent {
   constructor(props) {
@@ -76,6 +77,7 @@ class Authorized extends PureComponent {
                   value="profile"
                 />
                 <PaintedLink to={"/ad/create"} value="create ad" />
+                <PaintedLink to={path.chatList} value="my chats" />
                 <div className="logout-part-of-nav">
                   <LogoutBtn></LogoutBtn>
                 </div>

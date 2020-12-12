@@ -46,9 +46,9 @@ namespace HomeexchangeApi
 
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IChatService, ChatService>();
             services.AddScoped<IAdService, AdService>();
             services.AddScoped<IAccounService, AccounService>();
-            services.AddScoped<IChatService, ChatService>();
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<CustomDbContext>(options =>

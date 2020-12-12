@@ -11,6 +11,8 @@ namespace HomeexchangeApi.Services
     {
         //public static Dictionary<int, string> Subscribers;
         public void Create(Notification notification);
+
+        public Notification Delete(int notificationId, int commiterId);
         public IEnumerable<Notification> GetAllNotificationForUserByUserId(int userID);
  
     }
