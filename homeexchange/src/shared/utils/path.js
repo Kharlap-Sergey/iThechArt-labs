@@ -19,7 +19,10 @@ export const path = {
 
 export const pathApi = {
   notifications: {
-    get: api + "/notification/getNotifications"
+    get: api + "/notification/getNotifications",
+    delete: (id) =>{
+      return api + `/notification/deleteNotificaton/${id}`;
+    }
   },
 
   account: {

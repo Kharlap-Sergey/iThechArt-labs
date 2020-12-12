@@ -51,7 +51,7 @@ export function deleteAd(adId) {
   return async (dispatch) => {
     const url = "https://localhost:44370/Ad/delete/" + adId;
     const token = auth.getToken();
-    const response = await requestWrapper.deleteByIdQueryParam(url, token);
+    const response = await requestWrapper.delete(url, token);
     if (response.ok) {
       dispatch(redirectToAction('/'));
     } else {
@@ -63,7 +63,7 @@ export function updateAd(adId) {
   return async (dispatch) => {
     const url = "https://localhost:44370/Ad/update/";
     const token = auth.getToken();
-    const response = await requestWrapper.deleteByIdQueryParam(url, token);
+    const response = await requestWrapper.delete(url, token);
     if (response.ok) {
       dispatch(redirectToAction('/'));
     } else {

@@ -26,7 +26,7 @@ export const requestWrapper = {
     };
     return fetch(url, options);
   },
-  deleteByIdQueryParam: (url) => {
+  delete: (url) => {
     const options = {
       method: "DELETE",
       headers: {

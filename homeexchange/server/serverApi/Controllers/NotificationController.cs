@@ -32,7 +32,8 @@ namespace HomeexchangeApi.Controllers
         public IActionResult DeleteNotificaton(int notificationId)
         {
             int commiterId = GetCommitter();
-            return Json(notificationService.Delete(notificationId, commiterId));
+            var not = Json(notificationService.Delete(notificationId, commiterId));
+            return not;
         }
 
         int GetCommitter()
