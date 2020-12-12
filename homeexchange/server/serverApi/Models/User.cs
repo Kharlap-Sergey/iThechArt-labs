@@ -42,8 +42,8 @@ namespace HomeexchangeApi.Models
         public List<Ad> Ads { get; set; } = new List<Ad>();
 
         [NotMapped]
-        public List<NotificationAboutResponseToAd> NotificationsAboutResponseToAd { get; set; } = 
-            new List<NotificationAboutResponseToAd>();
+        public List<Notification> NotificationsAboutResponseToAd { get; set; } = 
+            new List<Notification>();
 
         //public Rating Rating { set; get; }
       

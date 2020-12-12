@@ -23,8 +23,21 @@ namespace HomeexchangeApi.Controllers
         [Authorize]
         public IActionResult GetNotifications()
         {
-            var targetUserId = int.Parse(User.Identity.Name);
+            var targetUserId = GetCommitter();
             return Json(notificationService.GetAllNotificationForUserByUserId(targetUserId));
+        }
+
+        [HttpDelete("{notificationId}")]
+        [Authorize]
+        public IAccounResult DeleteNotificaton(int notificationId)
+        {
+            int commiterId = GetCommitter();
+            return Json(notificationService.Delete(notificationId, commiterId));
+        }
+
+        int GetCommitter()
+        {
+            return int.Parse(User.Identity.Name);
         }
     }
 }

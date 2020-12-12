@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HomeexchangeApi.Exceptions;
 
 namespace HomeexchangeApi.Services
 {
@@ -13,32 +14,43 @@ namespace HomeexchangeApi.Services
     {
         public static Dictionary<int, string> Subscribers = new Dictionary<int, string>();
 
-        IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdRepository;
+        IGenericRepository<Notification> notificationRepository;
         IHubContext<NotificationHub> hubContext;
         public NotificationService(
             IHubContext<NotificationHub> hubContext,
-            IGenericRepository<NotificationAboutResponseToAd> notificationAboutResponseToAdContext)
+            IGenericRepository<Notification> notificationRepository)
         {
-            notificationAboutResponseToAdRepository = notificationAboutResponseToAdContext;
+            this.notificationRepository = notificationRepository;
             this.hubContext = hubContext;
         }
 
-        private async Task NotifySubscribers(NotificationAboutResponseToAd notification)
+        private async Task NotifySubscribers(Notification notification)
         {
             var targetId = notification.TargetUserId;
             var habCLientId = NotificationService.Subscribers[targetId];
             await hubContext.Clients.Client(habCLientId).SendAsync("Notify", notification);
         }
-        public void Create(NotificationAboutResponseToAd notification)
+        public void Create(Notification notification)
         {
-            var notif = notificationAboutResponseToAdRepository.Create(notification);
+            var notif = notificationRepository.Create(notification);
             NotifySubscribers(notif);
         }
 
-        public IEnumerable<NotificationAboutResponseToAd> GetAllNotificationForUserByUserId(int userID)
+        public IEnumerable<Notification> GetAllNotificationForUserByUserId(int userID)
         {
-            return notificationAboutResponseToAdRepository.Get(n => n.TargetUserId == userID);
+            return notificationRepository.Get(n => n.TargetUserId == userID);
         }
 
+        public Notification Delete(int notificationId, int commiterId)
+        {
+            var notification = notificationRepository.FindById(notificationId);
+
+            if(commiterId != notification.TargetUserId)
+            {
+                throw new PermissionException("this isn't your notification");
+            }
+
+            return notificationRepository.Remove(notification);
+        }
     }
 }

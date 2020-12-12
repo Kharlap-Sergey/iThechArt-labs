@@ -10,8 +10,8 @@ namespace HomeexchangeApi.Services
     public interface INotificationService
     {
         //public static Dictionary<int, string> Subscribers;
-        public void Create(NotificationAboutResponseToAd notification);
-        public IEnumerable<NotificationAboutResponseToAd> GetAllNotificationForUserByUserId(int userID);
+        public void Create(Notification notification);
+        public IEnumerable<Notification> GetAllNotificationForUserByUserId(int userID);
  
     }
 }

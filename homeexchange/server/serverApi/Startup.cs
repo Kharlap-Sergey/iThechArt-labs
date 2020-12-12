@@ -36,7 +36,7 @@ namespace HomeexchangeApi
 
             services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
             services.AddScoped<IGenericRepository<Ad>, GenericRepository<Ad>>();
-            services.AddScoped<IGenericRepository<NotificationAboutResponseToAd>, GenericRepository<NotificationAboutResponseToAd>>();
+            services.AddScoped<IGenericRepository<Notification>, GenericRepository<Notification>>();
             services.AddScoped<IGenericRepository<ResponseToAd>, GenericRepository<ResponseToAd>>();
             services.AddScoped<IGenericRepository<Chat>, GenericRepository<Chat>>();
             services.AddScoped<IGenericRepository<ChatMessage>, GenericRepository<ChatMessage>>();

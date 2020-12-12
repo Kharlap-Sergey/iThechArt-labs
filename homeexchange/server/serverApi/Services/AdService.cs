@@ -12,12 +12,15 @@ namespace HomeexchangeApi.Services
     {
         IGenericRepository<Ad> adRepository;
         INotificationService notificationService;
+        ChatService chatService;
         public AdService(
                 IGenericRepository<Ad> adContext,
+                ChatService chatService,
                 INotificationService notificationService
                         )
         {
             adRepository = adContext;
+            this.chatService = chatService;
             this.notificationService = notificationService;
         }
 
@@ -51,7 +54,7 @@ namespace HomeexchangeApi.Services
             int descriptionLength = 20;
 
             var ads = adRepository
-                .Get(ad => ad.ResponseToAdId == null && (author == null || ad.AuthorId == author.Id))
+                .Get(ad => !ad.IsResponded && (author == null || ad.AuthorId == author.Id))
                 .OrderByDescending(ad => ad.DateOfPublication).ToList();
 
             var adsBuf = ads.Skip((page - 1) * pageSize).Take(pageSize);
@@ -83,26 +86,22 @@ namespace HomeexchangeApi.Services
 
         public Ad ReplyOnAd(Ad ad, User responder, string message = "")
         {
-            if(ad.ResponseToAd != null)
+            if(ad.IsResponded)
             {
                 throw new AdAlreadyHasRepliedException();
             }
-            var responseToAd = new ResponseToAd
-            {
-                Responder = responder,
-                Date = DateTime.Now,
-                Message = message,
-                TargetAdId = ad.Id
-            };
-            ad.ResponseToAd = responseToAd;
 
-            var notification = new NotificationAboutResponseToAd
+            var chat = chatService.GetChatOrCreateForTowMembers(responder.Id, ad.AuthorId);
+            
+            var notification = new Notification
             {
                 TargetUserId = ad.AuthorId,
-                ResponseToAd = responseToAd
+                ChatId = chat.Id,
+                Type = Notification.NotificationType.NewResponse
             };
             notificationService.Create(notification);
 
+            ad.IsResponded = true;
             return adRepository.Update(ad);
         }
     }

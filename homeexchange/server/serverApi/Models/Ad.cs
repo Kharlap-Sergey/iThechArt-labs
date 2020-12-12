@@ -32,10 +32,7 @@ namespace HomeexchangeApi.Models
         public int AuthorId { get; set; }
         public User Author { get; set; }
 
-        [ForeignKey("ResponseToAdId")]
-       
-        public int? ResponseToAdId { get; set; }
-        public ResponseToAd ResponseToAd { get; set; }
+        public bool IsResponded { get; set; } = false;
 
         //public IEquatable<Comment> Comments { get; set; }
     }
