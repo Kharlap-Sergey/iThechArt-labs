@@ -3,7 +3,7 @@ import { toastr } from "react-redux-toastr";
 import { requestWrapper } from "./../../utils/requestWrapper";
 import { redirectToAction } from './../redirect/redirectActionCreator';
 import { path } from './../../utils/path';
-import { addChatMessagesAction } from "./chatActionCreator";
+import { addChatListAction, addChatMessagesAction } from "./chatActionCreator";
 
 export function loadChatList() {
   return async (dispatch) => {
@@ -15,7 +15,7 @@ export function loadChatList() {
       if (response.ok) {
         const data = await response.json();
         console.log('chats', data)
-        ///
+        dispatch(addChatListAction(data))
       } else {
         const data = await response.json();
         toastr.error(data.errorText, "");
