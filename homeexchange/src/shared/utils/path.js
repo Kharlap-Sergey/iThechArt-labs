@@ -34,11 +34,12 @@ export const pathApi = {
   chat: {
     loadChatList: api + "/chat/getChatList",
     loadChatId: api + "/chat/getPrivateRoomId",
-    loadChatMessages: api + "/chat/getChatMessages"
+    loadChatMessages: api + "/chat/getChatMessages",
   },
 
   ad: {
     loadPage: (page, userId) => api + `/ad/getadspage/${page}/${userId ?? ""}`,
+    get: (adId) => api+ `/Ad/get/${adId}`,
   },
 }
 
