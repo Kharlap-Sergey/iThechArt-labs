@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
 import { path } from "../shared/utils/path";
 import { loadChatList } from "./../shared/redux/chat/chat";
-
+import "./chat-list.scss";
 class ChatList extends PureComponent {
   componentDidMount() {
     this.props.loadChatList();
@@ -15,10 +15,12 @@ class ChatList extends PureComponent {
   }
   render() {
     console.log('', this.props.chats)
-    return <div style={{ color: "white" }}>
+    return <ul className="chat-list">
       {this.props.chats.map(chat =>
-        <button onClick={this.handleChatClick.bind(this,null, chat.id)}>{chat.title}</button>)}
-    </div>;
+        (<li className="chat-list__item" key={chat.id}>
+          <button onClick={this.handleChatClick.bind(this, null, chat.id)}>{chat.title}</button>
+        </li>))}
+    </ul>;
   }
 }
 

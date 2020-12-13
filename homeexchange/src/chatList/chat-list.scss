@@ -1,0 +1,26 @@
+@import "../shared/variables.scss";
+
+.chat-list {
+  padding: 10px 30px;
+  border-radius: 20px;
+  background-color: $chat-list-bg-color;
+  &__item {
+    margin-top: 10px;
+    border-radius: inherit;
+    button {
+      cursor: pointer;
+      border: 0;
+      font-size: 1.2rem;
+      padding: 1px 6px 3px 6px;
+      width: 150px;
+      white-space: normal;
+      word-wrap: break-word;
+      background-color: $chat-list-btn-bg-color;
+      border-radius: inherit;
+    }
+  }
+
+  :first-child {
+    margin-top: 0 !important;
+  }
+}
