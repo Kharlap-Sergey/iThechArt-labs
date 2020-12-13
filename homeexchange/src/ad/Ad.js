@@ -34,7 +34,7 @@ class Ad extends PureComponent {
         <div className="ad-main__type">{formateNumberToTypeOfAd(ad.type)}</div>
         <div className="ad-main__date">{formateDate(ad.dateOfPublication)}</div>
         <div className="ad-main__description">{ad.description}</div>
-        {this.props.userId ? <Authorized authorId={ad.authorId} adId={ad.id} /> : null}
+        {this.props.userId && !ad.isResponded ? <Authorized authorId={ad.authorId} adId={ad.id} /> : null}
       </div>
     </div>
   );
