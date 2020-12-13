@@ -48,8 +48,10 @@ class Profile extends PureComponent {
               </button>
             ) : null}
           </AccountIformation>
-
-          <button onClick={this.handleToChatClick}>ToChat</button>
+            {this.props.userId 
+            ? <button onClick={this.handleToChatClick} className="profile__chat-btn">ToChat</button>
+            : null}
+          
         </div>
         <div className="profile__ads">
           <AdsPageList userId={this.state.userId}></AdsPageList>
