@@ -3,7 +3,7 @@ import * as signalR from "@microsoft/signalr";
 import { auth } from "../shared/utils/auth";
 import { pathHub } from "../shared/utils/path";
 import { loadChatMessages } from "./../shared/redux/chat/chat";
-import { addChatMessagesAction } from "./../shared/redux/chat/chatActionCreator";
+import { addChatMessagesAction, clearChatAction } from "./../shared/redux/chat/chatActionCreator";
 import { connect } from "react-redux";
 import MessageList from "./components/MessageList";
 import "./chat.scss";
@@ -38,6 +38,8 @@ class Chat extends PureComponent {
   }
 
   componentDidMount() {
+    console.log('DIDMOUNT')
+    this.props.clearChatAction();
     this.props.loadChatMessages(this.state.chatId);
     this.hubConnection.start().catch((err) => {
       console.log(err);
@@ -50,6 +52,7 @@ class Chat extends PureComponent {
   }
 
   componentWillUnmount() {
+    this.props.clearChatAction();
     //this.hubConnection.stop();
     //this.props.clearNotificationsAction();
   }
@@ -83,6 +86,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   loadChatMessages,
   addChatMessagesAction,
+  clearChatAction,
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

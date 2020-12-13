@@ -12,6 +12,7 @@ export const chatReducer = (state = initialState, action) => {
     case ADD_MESSAGES:
       return { ...state, messages: [...state.messages, ...action.payload] }
     case CLEAR:
+      console.log('clear', initialState)
       return initialState;
     default:
       return state;

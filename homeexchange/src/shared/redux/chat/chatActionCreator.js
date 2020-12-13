@@ -1,4 +1,4 @@
-import {  ADD_MESSAGES, ADD_CHATS } from "./types";
+import {  ADD_MESSAGES, ADD_CHATS, CLEAR } from "./types";
 export function addChatMessagesAction(messages) {
   return {
     type: ADD_MESSAGES,
@@ -9,5 +9,10 @@ export function addChatListAction(chats) {
   return {
     type: ADD_CHATS,
     payload: chats,
+  };
+}
+export function clearChatAction() {
+  return {
+    type: CLEAR,
   };
 }
