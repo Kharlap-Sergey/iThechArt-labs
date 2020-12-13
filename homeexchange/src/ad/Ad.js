@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import AccountAvatar from "../shared/components/accountAvatar/AccountAvatar";
 import Loader from "../shared/components/Loader/Loader";
 import { getAd } from "../shared/redux/ad/adActionCreator";
+import { formateDate, formateNumberToTypeOfAd } from "../shared/utils/formater";
 
 import "./ad.scss";
 import Authorized from "./components/Authorized";
@@ -27,7 +28,8 @@ class Ad extends PureComponent {
       </div>
       <div className="ad__main ad-main">
         <h2 className="ad-main__title">{ad.title}</h2>
-        <div className="ad-main__type">{ad.type}</div>
+        <div className="ad-main__type">{formateNumberToTypeOfAd(ad.type)}</div>
+        <div className="ad-main__date">{formateDate(ad.dateOfPublication)}</div>
         <div className="ad-main__description">{ad.description}</div>
         {this.props.userId ? <Authorized authorId={ad.authorId} adId={ad.id}/> : null}
       </div>
