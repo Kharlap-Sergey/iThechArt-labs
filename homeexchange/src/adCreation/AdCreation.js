@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import AdForm from "../shared/components/adForm/AdForm";
 import { createNewAd } from "../shared/redux/ad/adActionCreator";
 import { connect } from 'react-redux';
+import Loader from "../shared/components/Loader/Loader";
 
 class AdCreation extends PureComponent {
   submitHandler(state){
@@ -11,14 +12,16 @@ class AdCreation extends PureComponent {
   render() {
     return (
       <div>
-        <AdForm onSubmit={this.submitHandler.bind(this)} ></AdForm>
+        {this.props.isLoading 
+        ? <Loader/>
+        :<AdForm onSubmit={this.submitHandler.bind(this)} ></AdForm>}    
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  
+  isLoading: state.loader.adForm
 })
 
 const mapDispatchToProps = {

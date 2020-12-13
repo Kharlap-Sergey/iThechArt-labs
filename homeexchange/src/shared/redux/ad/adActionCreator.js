@@ -3,8 +3,9 @@ import { AD_CLEAR, AD_GET, AD_GETALL} from "./types";
 import {startLoadingAction, endLoadingAction} from "../remoteInteraciton/remoteInteractionActionCreator"
 import { redirectToAction } from './../redirect/redirectActionCreator';
 import { auth } from './../../utils/auth';
-import { pathApi } from "../../utils/path";
+import { pathApi, path } from "../../utils/path";
 import { toastr } from 'react-redux-toastr';
+import { enableAdFromtActin, disableAllAction } from "../loader/loaderActionCreator";
 
 export function getAllAds() {
   return async (dispatch) => {
@@ -22,13 +23,23 @@ export function getAllAds() {
 }
 export function createNewAd(ad) {
   return async (dispatch) => {
+    try{
+    dispatch(enableAdFromtActin())
     const url = "https://localhost:44370/Ad/Create";
     const token = auth.getToken();
     const response = await requestWrapper.post(url, ad, token);
     if (response.ok) {
       const data = await response.json();
+      dispatch(redirectToAction(path.home));
     } else {
+      const data = await response.json();
+      toastr.error(data);
       //todo logic
+    }
+    }catch (e){
+      toastr.error("try again later", e.message);
+    }finally{
+      dispatch(disableAllAction())
     }
   };
 }

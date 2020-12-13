@@ -1,29 +1,82 @@
+@import "../../variables.scss";
+
 .ad-form {
   &__title {
     width: 100%;
     font-size: 1.4rem;
+    background-color: #fff;
+    border-radius: inherit;
   }
 
   &__title-input {
     width: 100%;
+    padding: 4px 20px 0;
+    color: $input-valid-color;
+    font-size: 18px;
+    background-color: $input-valid-bg-color !important;
+    border: 0;
+    border-radius: inherit;
+    outline: 0;
+    &:invalid {
+      color: white;
+      background-color: $input-invalid-bg-color !important;
+    }
   }
 
   &__type {
+    margin: 5px 0px;
+  }
+  .form-control{
+    background-color: $input-valid-bg-color !important;
+    border:0px;
+    width: 100%;height: 100%;
+    outline:none;
   }
   &__description {
-    width: inherit;
+    width: 100%;
     height: 150px;
     font-size: 1.2rem;
-
+    border-radius: inherit;
     textarea {
+      &:invalid {
+        color: white;
+        background-color: $input-invalid-bg-color !important;
+      }
+      border-radius: inherit;
+      padding: 10px;
       width: 100%;
       height: inherit;
       overflow-y: scroll;
+      background-color: $input-valid-bg-color !important;
+      &::-webkit-scrollbar {
+        /* chrome based */
+        width: 0px; /* ширина scrollbar'a */
+        background: transparent; /* опционально */
+      }
     }
   }
   &__submit {
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: inherit;
+    background-color: $ad-form-btn-gb-color;
+    button{
+      font-size: 1.2rem;
+      border-radius: inherit;
+      border: 0;
+      padding: 1px 8px 3px 8px;
+      color: white;
+      &:hover{
+        color: $ad-neon;
+      }
+    }
   }
   &__body {
     width: 400px;
+    background-color: $ad-form-gb-color;
+    padding: 20px;
+    border-radius: 20px;
   }
 }

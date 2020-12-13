@@ -1,4 +1,4 @@
-import { DISABLE_ALL, ENABLE_LOGIN, ENABLE_PAGE_LIST, ENABLE_REGISTRATION } from "./types";
+import { DISABLE_ALL, ENABLE_ADFORM, ENABLE_LOGIN, ENABLE_PAGE_LIST, ENABLE_REGISTRATION } from "./types";
 
 export const disableAllAction = () => ({
   type: DISABLE_ALL,
@@ -8,6 +8,9 @@ export const enableRegistrationActin = () => ({
 });
 export const enablePageListActin = () => ({
   type: ENABLE_PAGE_LIST,
+});
+export const enableAdFromtActin = () => ({
+  type: ENABLE_ADFORM,
 });
 export const enableLoginAction = () =>({
   type: ENABLE_LOGIN,
