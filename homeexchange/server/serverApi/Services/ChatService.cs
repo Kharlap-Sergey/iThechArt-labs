@@ -86,7 +86,7 @@ namespace HomeexchangeApi.Services
             {
                 ChatId = chatId,
                 UserId = comnitterId,
-                Content = $"reply on your ad @{message}@",
+                Content = $"reply on the ad @{message}@",
                 PublicationDate = DateTime.Now
             };
 
