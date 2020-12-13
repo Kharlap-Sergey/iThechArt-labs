@@ -69,7 +69,7 @@ class Authorized extends PureComponent {
             </DropdownMenu>} />
           </div>
         </li>
-        <li className="menu__item " key="authorizedProfileNotig">
+        <li className="menu__item " key="authorizedProfileActions">
           <div className="authorized-container">
             <DropdownItem icon={<div className="avatar--mini">
               <Avatar source={imgAvatarSrc} />
