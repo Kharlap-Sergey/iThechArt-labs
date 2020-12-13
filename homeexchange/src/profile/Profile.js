@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
-import { getProfileById } from "../shared/redux/profile/profileActionCreator";
+import { cleareProfileAction, getProfileById } from "../shared/redux/profile/profileActionCreator";
 import { connect } from "react-redux";
 import AdsPageList from "../shared/components/adsPageList/AdsPageList";
 import AccountIformation from "./components/AccountIformation";
 import "./profile.scss";
 import { loadChatId } from "../shared/redux/chat/chat";
+import { path } from "../shared/utils/path";
 
 class Profile extends PureComponent {
   constructor(props) {
@@ -20,6 +21,9 @@ class Profile extends PureComponent {
     console.log("fetch profile for ", this.state.userId);
     this.props.getProfileById(this.state.userId);
   }
+  componentWillUnmount() {
+    //this.props.cleareProfileAction()
+  }
 
   handleToChatClick(event) {
     console.log(this.state.userId, this.props.userId)
@@ -27,7 +31,7 @@ class Profile extends PureComponent {
   }
 
   editClickHandler(event) {
-    this.props.redirectToAction(`/edit/profile/${this.state.userId}`);
+    this.props.redirectToAction(path.profile.edit(this.state.userId));
   }
   render() {
     console.log(this.props);
@@ -62,5 +66,6 @@ const mapDispatchToProps = {
   redirectToAction,
   getProfileById,
   loadChatId,
+  cleareProfileAction,
 };
 export default connect(mapStateToPropos, mapDispatchToProps)(Profile);

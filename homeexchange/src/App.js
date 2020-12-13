@@ -26,7 +26,7 @@ function App() {
           <div className="main">
             <Switch>
               <RouteCatcher>
-                <Route exact path="/edit/profile/:id" component={EditProfile} />
+                <Route exact path={path.profile.edit()} component={EditProfile} />
                 <Route exact path={path.ad()} component={Ad} />
                 <Route exact path={path.chatList} component={ChatList} />
                 <Route exact path={path.chat+"/id:id"} component={Chat} />

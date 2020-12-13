@@ -1,7 +1,7 @@
 import { func } from "prop-types";
 import { requestWrapper } from "../../utils/requestWrapper";
 import { endLoadingAction, startLoadingAction } from "../remoteInteraciton/remoteInteractionActionCreator";
-import {PROFILE_GET_BY_ID, PROFILE_GET_ADS_FOR_PROFILE} from "./types";
+import {PROFILE_GET_BY_ID, PROFILE_GET_ADS_FOR_PROFILE, PROFILE_CLEAR} from "./types";
 
 export function getProfileById(userId){
   return async dispatch =>{
@@ -33,3 +33,8 @@ export function setAdsForProfile(ads){
   }
 }
 
+export function cleareProfileAction(){
+  return {
+    type: PROFILE_CLEAR,
+  }
+}

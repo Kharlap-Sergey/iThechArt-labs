@@ -6,6 +6,7 @@ import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator
 import PaintedLink from "../shared/components/paintedLink/PaintedLink";
 import Unauthorized from "./components/Unauthorized";
 import Authorized from "./components/Authorized";
+import { path } from "../shared/utils/path";
 
 class NavBar extends React.Component {
   getUserName() {
@@ -32,7 +33,7 @@ class NavBar extends React.Component {
         <nav className="menu">
           <ul className="menu__items">
             <li className="menu__item" key="Home">
-              <PaintedLink to="/" value="Home" />
+              <PaintedLink to={path.home} value="Home" />
             </li>
             <li className="menu__item menu__item--devider"></li>
             {this.getProfileContent()}
