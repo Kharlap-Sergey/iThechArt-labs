@@ -61,6 +61,7 @@ $radiant-color: #dcdcdc !default;
     right: 40px;
     font-size: 1rem;
     button {
+      cursor: pointer;
       color: $more-btn-color;
       background-color: #001730;
       border: 0;
