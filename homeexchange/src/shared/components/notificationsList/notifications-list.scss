@@ -1,0 +1,15 @@
+.notifications {
+  padding-left: 10px;
+  color: white;
+  &__list {
+    padding: 0 20px;
+    margin: 0;
+  }
+  &__item {
+    display: block;
+    border-radius: 80px;
+    size: 1.3rem;
+    word-wrap: break-word;
+    background-color: white;
+  }
+}

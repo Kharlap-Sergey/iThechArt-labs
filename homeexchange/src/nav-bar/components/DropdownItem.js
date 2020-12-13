@@ -28,13 +28,14 @@ class DropdownItem extends PureComponent {
         menu.classList.add("display-none");
     }
     render() {
+        console.log('this.props', this.props)
         return (
             
             <div onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut} className="dropdown-item">
                 <div className="deopdown-item__icon" onClick={this.handleNotificClick}>
                     {this.props.icon}
                 </div>
-                <div ref={this.dropdownMenuRef} className="display-none">
+                <div ref={this.dropdownMenuRef} className="display-none dropdown-item__menu">
                     {this.props.dropdownMenu}
                 </div>
             </div>

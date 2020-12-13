@@ -8,6 +8,7 @@ import {
 import { connect } from "react-redux";
 import { getNotificationsFetch } from "./../../redux/notifications/notifications";
 import Notification from './../notification/Notification';
+import "./notifications-list.scss";
 class NotificationsList extends PureComponent {
   constructor(props) {
     super(props);
@@ -36,15 +37,18 @@ class NotificationsList extends PureComponent {
   render() {
     console.log(this.props);
     const notifics = this.props.notifications;
+    console.log('notifics', notifics)
     return (
-      <div>
-        <ul>
+      <div className="notifications">
+        {notifics.length > 0 
+        ? (<ul className="notifications__list">
           {notifics.map((not) => (
-            <li key={not.id}>
-              <Notification notification={not}/>
+            <li className = "notifications__item" key={not.id}>
+                <Notification notification={not}/>
             </li>
           ))}
-        </ul>
+        </ul>)
+        :"Yuo don't have notifications"}
       </div>
     );
   }

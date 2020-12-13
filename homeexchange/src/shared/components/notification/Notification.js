@@ -5,6 +5,7 @@ import { redirectToAction } from "../../redux/redirect/redirectActionCreator";
 import { path } from "../../utils/path";
 import { } from "../../redux/notifications/notificationActions";
 import { deleteNotificationFetch } from "../../redux/notifications/notifications";
+import "./notification.scss"
 class Notification extends PureComponent {
   handleNotificationClick(event) {
     const notId = this.props.notification.id;
@@ -14,8 +15,8 @@ class Notification extends PureComponent {
     this.props.redirectToAction(path.chat + `/id${chatId}`);
   }
   render() {
-    return <div onClick={this.handleNotificationClick.bind(this)}
-    >{this.props.notification.id}</div>;
+    return <div className="notification" onClick={this.handleNotificationClick.bind(this)}
+    >You have a new response</div>;
   }
 }
 

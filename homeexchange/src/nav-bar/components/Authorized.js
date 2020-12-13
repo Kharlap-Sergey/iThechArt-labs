@@ -52,7 +52,7 @@ class Authorized extends PureComponent {
           <div className="authorized-container">
             <DropdownItem icon={(<div className="avatar--mini">
               <Avatar source={imgNotificationSrc} />
-            </div>)} dropdownMenu={<DropdownMenu>
+            </div>)} dropdownMenu={<DropdownMenu w="250px">
               <NotificationsList />
             </DropdownMenu>} />
           </div>
@@ -61,8 +61,8 @@ class Authorized extends PureComponent {
           <div className="authorized-container">
             <DropdownItem icon={<div className="avatar--mini">
               <Avatar source={imgAvatarSrc} />
-            </div>} dropdownMenu={<DropdownMenu>
-              {console.log("should draw")}
+            </div>} dropdownMenu={<DropdownMenu  w="150px">
+              {console.log("should draw") }
               <PaintedLink
                 to={"/profile/" + this.props.userId}
                 value="profile"

@@ -1,0 +1,11 @@
+.notification{
+    color: black;
+    margin-bottom: 10px;
+    padding: 2px 10px;
+    font-size: 1rem;
+    border-radius: inherit;
+    white-space: normal;
+    &:focus, &:hover{
+        background-color: lightblue;
+    }
+}
