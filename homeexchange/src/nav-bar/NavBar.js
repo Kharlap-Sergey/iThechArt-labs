@@ -20,7 +20,7 @@ class NavBar extends React.Component {
       console.log("user Id", userId);
       return (
         //todo define the account and author.. className
-        <Fragment className="account">
+        <Fragment>
           <Authorized userId={userId}></Authorized>
         </Fragment>
       );

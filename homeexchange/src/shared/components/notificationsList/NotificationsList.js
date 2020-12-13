@@ -12,12 +12,14 @@ import "./notifications-list.scss";
 class NotificationsList extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.deNotify = this.deNotify.bind(this)
   }
   hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl("https://localhost:44370/hub/notification",  {
+    .withUrl("https://localhost:44370/hub/notification", {
       accessTokenFactory: () => auth.getToken(),
     })
-    .build(); 
+    .build();
 
   componentDidMount() {
     this.props.getNotificationsFetch();
@@ -29,26 +31,35 @@ class NotificationsList extends PureComponent {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.notifications.length < this.props.notifications.length) {
+      console.log('notify')
+      this.props.notify?.call();
+    }
+  }
   componentWillUnmount() {
     //this.hubConnection.stop();
     this.props.clearNotificationsAction();
   }
 
+  deNotify(event){
+    this.props.deNotify?.call();
+  }
   render() {
     console.log(this.props);
     const notifics = this.props.notifications;
     console.log('notifics', notifics)
     return (
-      <div className="notifications">
-        {notifics.length > 0 
-        ? (<ul className="notifications__list">
-          {notifics.map((not) => (
-            <li className = "notifications__item" key={not.id}>
-                <Notification notification={not}/>
-            </li>
-          ))}
-        </ul>)
-        :"Yuo don't have notifications"}
+      <div className="notifications" onMouseOver={this.deNotify}>
+        {notifics.length > 0
+          ? (<ul className="notifications__list">
+            {notifics.map((not) => (
+              <li className="notifications__item" key={not.id}>
+                <Notification notification={not} />
+              </li>
+            ))}
+          </ul>)
+          : "Yuo don't have notifications"}
       </div>
     );
   }
