@@ -29,3 +29,10 @@
   align-items: flex-end;
   cursor: pointer;
 }
+
+.profile-actions {
+  &__item{
+    width: fit-content;
+    padding-bottom: 10px;
+  }
+}

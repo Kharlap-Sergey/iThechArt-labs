@@ -4,13 +4,14 @@ import {redirectToAction} from '../../redux/redirect/redirectActionCreator'
 import "./logout-btn.scss"
 import { auth } from './../../utils/auth';
 import { logoutAction } from './../../redux/account/accountActions';
+import { path } from '../../utils/path';
 class LogoutBtn extends PureComponent {
   logout() {
     console.log("log out event");
     console.log(this.props);
     this.props.logoutAction();
     auth.clearToken();
-    this.props.redirectToAction("/");
+    this.props.redirectToAction(path.home);
   }
   
   render() {
