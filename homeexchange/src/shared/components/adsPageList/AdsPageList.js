@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { clearAdsPageAction, getAds } from "./redux/adsPageListActionCreatior";
 import "./ads-page-list.scss"
 import Page from "./components/Page";
+import Loader from "../Loader/Loader";
 class AdsPageList extends PureComponent {
   constructor(props) {
     super(props);
@@ -48,11 +49,13 @@ class AdsPageList extends PureComponent {
     const userWasDefinedFlag = Boolean(this.props.userId)
     return (
       <div>
-        <Page ads={ads}
-          userWasDefinedFlag={userWasDefinedFlag}
-          prevBtn={this.props.hasPrevious && this.handlePrevious}
-          nextBtn={this.props.hasNext && this.handleNext}
-        />
+        {this.props.isLoading
+          ? <Loader />
+          : <Page ads={ads}
+            userWasDefinedFlag={userWasDefinedFlag}
+            prevBtn={this.props.hasPrevious && this.handlePrevious}
+            nextBtn={this.props.hasNext && this.handleNext}
+          />}
       </div>
     );
   }
