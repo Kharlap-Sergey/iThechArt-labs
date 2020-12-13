@@ -14,7 +14,7 @@
     border-radius: 12px;
     outline: 0;
     &:invalid {
-      color: white;
+      color: black;
       background-color: $input-invalid-bg-color !important;
     }
   }

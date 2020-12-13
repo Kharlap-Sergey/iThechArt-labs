@@ -23,7 +23,7 @@ const toastr = (
     timeOut={5000}
     newestOnTop={false}
     preventDuplicates
-    position="top-center"
+    position="top-left"
     getState={(state) => state.toastr} // This is the default
     transitionIn="fadeIn"
     transitionOut="fadeOut"

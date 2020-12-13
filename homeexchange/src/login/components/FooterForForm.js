@@ -6,7 +6,9 @@ class FooterForForm extends PureComponent {
     return (
       <div className="form__text">
         <p>or</p>
+        <div className="account-form-link">
         <PaintedLink to="/registration" value="registrate" />
+        </div>
       </div>
     );
   }

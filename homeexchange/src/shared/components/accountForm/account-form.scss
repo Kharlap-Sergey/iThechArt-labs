@@ -1,5 +1,11 @@
 @import "../../variables.scss";
 
+.account-form-link{
+  :hover{
+    color: black !important;
+  }
+}
+
 .form {
   display: flex;
   align-items: center;
@@ -8,7 +14,7 @@
     box-sizing: border-box;
     width: 320px;
     padding: 20px;
-    background-color: $background-color;
+    background-color:$account-form-bg-color;
     border-radius: 20px;
   }
   &__input {

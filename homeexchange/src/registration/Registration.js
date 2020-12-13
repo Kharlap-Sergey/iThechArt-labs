@@ -8,7 +8,7 @@ import { inputAttributes } from "../shared/utils/inputArguments";
 import { registrateUserPost } from "../shared/redux/account/account";
 class Registration extends React.PureComponent {
   inputsArguments = [
-    inputAttributes.firstname ,
+    inputAttributes.firstname,
     inputAttributes.lastname,
     inputAttributes.nickname,
     inputAttributes.email,
@@ -20,14 +20,16 @@ class Registration extends React.PureComponent {
   formText = (
     <div className="form__text">
       <p>alreade have an account?</p>
-      <PaintedLink to="/login" value="login" />
+      <div className="account-form-link">
+        <PaintedLink to="/login" value="login" />
+      </div>
     </div>
   );
 
   submeteHandler = (state) => {
     console.log("form was submeted");
     console.log("with arguments", state)
-    
+
     let user = {
       ...state,
     };
@@ -49,8 +51,8 @@ class Registration extends React.PureComponent {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  return { ...state.accountForm};
+  return { ...state.accountForm };
 };
 
-const mapDispatchToProps = { registrateUserPost};
+const mapDispatchToProps = { registrateUserPost };
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);
