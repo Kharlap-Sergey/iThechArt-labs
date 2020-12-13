@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import ShortAd from "../shortAd/ShortAd";
-import { getAds } from "./redux/adsPageListActionCreatior";
+import { clearAdsPageAction, getAds } from "./redux/adsPageListActionCreatior";
 import "./ads-page-list.scss"
+import Page from "./components/Page";
 class AdsPageList extends PureComponent {
   constructor(props) {
     super(props);
@@ -29,8 +29,10 @@ class AdsPageList extends PureComponent {
 
   }
   componentDidMount() {
-    console.log("did mount");
     this.loadPage();
+  }
+  componentWillUnmount() {
+    this.props.clearAdsPageAction();
   }
   componentDidUpdate(prevProps, prevState) {
     console.log("did update&&");
@@ -46,24 +48,11 @@ class AdsPageList extends PureComponent {
     const userWasDefinedFlag = Boolean(this.props.userId)
     return (
       <div>
-        {ads.map((ad) => {
-          return (
-            <div className="ads-list__element" key={ad.id}>
-              <ShortAd
-                key={ad.id}
-                adId ={ad.id}
-                title={ad.title}
-                typ={ad.type}
-                description={ad.description}
-                date={ad.dateOfPublication}
-                authorId={ad.authorId}
-                shouldAvatarDisplay={!userWasDefinedFlag}
-              />
-            </div>
-          );
-        })}
-        {this.props.hasPrevious && <button onClick={this.handlePrevious}>Prev</button>}
-        {this.props.hasNext && <button onClick={this.handleNext}>Next</button>}
+        <Page ads={ads}
+          userWasDefinedFlag={userWasDefinedFlag}
+          prevBtn={this.props.hasPrevious && this.handlePrevious}
+          nextBtn={this.props.hasNext && this.handleNext}
+        />
       </div>
     );
   }
@@ -71,9 +60,10 @@ class AdsPageList extends PureComponent {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  return { ...state.adsPageList};
+  return { ...state.adsPageList, isLoading: state.loader.pageList };
 };
 const mapDispatchToProps = {
   getAds,
+  clearAdsPageAction,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AdsPageList);

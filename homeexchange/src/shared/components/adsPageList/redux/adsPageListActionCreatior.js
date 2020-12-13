@@ -1,25 +1,44 @@
+import { enablePageListActin, disableAllAction } from "../../../redux/loader/loaderActionCreator";
+import { pathApi } from "../../../utils/path";
 import { requestWrapper } from "../../../utils/requestWrapper";
-import {GET_ADS} from "./types";
-export function getAds(page, userId){
-  return async dispatch =>{
-    const url = "https://localhost:44370/ad/getadspage/" + `${page}/${userId ?? ""}`;
-    console.log("try to recieve data form", url )
-    const response = await requestWrapper.get(url);
-    if (response.ok) {
-      //dispatch(isShouldBeUpdatedAction(true));
-      const data = await response.json();
-      console.log(data);
-      dispatch(setAds(data));
-    } else {
-      //todo logic
+import { CLEAR, GET_ADS } from "./types";
+import {toastr} from "react-redux-toastr";
+
+export function getAds(page, userId) {
+  return async dispatch => {
+    try {
+      
+      dispatch(enablePageListActin());
+      const url = pathApi.ad.loadPage(page, userId);
+
+      const response = await requestWrapper.get(url);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        dispatch(setAds(data));
+      } else {
+        
+      }
+    } catch(e) {
+      toastr.error("try again later", e.message)
+    } finally {
+      dispatch(disableAllAction());
     }
   }
 }
 
 
-export function setAds(ads){
+export function setAds(ads) {
   return {
     type: GET_ADS,
+    payload: ads
+  }
+}
+
+
+export function clearAdsPageAction(ads) {
+  return {
+    type: CLEAR,
     payload: ads
   }
 }

@@ -18,15 +18,6 @@ export class Home extends PureComponent {
     return (
       <div className="home">
         <AdsPageList></AdsPageList>
-        {/* <button
-          className="my-btn"
-          onClick={this.createAdClickHandler.bind(this)}
-        >
-          CreateAd
-        </button>
-        <button onClick={this.notificationsClickHandler.bind(this)}>
-          notifications
-        </button> */}
       </div>
     );
   }

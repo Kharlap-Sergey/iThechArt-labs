@@ -20,7 +20,7 @@ export const path = {
 export const pathApi = {
   notifications: {
     get: api + "/notification/getNotifications",
-    delete: (id) =>{
+    delete: (id) => {
       return api + `/notification/deleteNotificaton/${id}`;
     }
   },
@@ -34,7 +34,11 @@ export const pathApi = {
     loadChatList: api + "/chat/getChatList",
     loadChatId: api + "/chat/getPrivateRoomId",
     loadChatMessages: api + "/chat/getChatMessages"
-  }
+  },
+
+  ad: {
+    loadPage: (page, userId) => api + `/ad/getadspage/${page}/${userId ?? ""}`,
+  },
 }
 
 export const pathHub = {
