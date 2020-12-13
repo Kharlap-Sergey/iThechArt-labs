@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import AccountAvatar from "../shared/components/accountAvatar/AccountAvatar";
 import Loader from "../shared/components/Loader/Loader";
-import { getAd } from "../shared/redux/ad/adActionCreator";
+import { clearAdsAction, getAd } from "../shared/redux/ad/adActionCreator";
 import { formateDate, formateNumberToTypeOfAd } from "../shared/utils/formater";
 
 import "./ad.scss";
@@ -18,6 +18,9 @@ class Ad extends PureComponent {
   componentDidMount() {
     this.props.getAd(this.state.adId);
   }
+  componentWillUnmount() {
+    this.props.clearAdsAction();
+  }
 
   getAdContent = (ad) => (
     <div className="ad">
@@ -31,7 +34,7 @@ class Ad extends PureComponent {
         <div className="ad-main__type">{formateNumberToTypeOfAd(ad.type)}</div>
         <div className="ad-main__date">{formateDate(ad.dateOfPublication)}</div>
         <div className="ad-main__description">{ad.description}</div>
-        {this.props.userId ? <Authorized authorId={ad.authorId} adId={ad.id}/> : null}
+        {this.props.userId ? <Authorized authorId={ad.authorId} adId={ad.id} /> : null}
       </div>
     </div>
   );
@@ -52,5 +55,6 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = {
   getAd,
+  clearAdsAction,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Ad);
