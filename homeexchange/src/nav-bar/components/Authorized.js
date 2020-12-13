@@ -90,7 +90,7 @@ class Authorized extends PureComponent {
                   <PaintedLink to={path.chatList} value="my chats" />
                 </li>
               </ul>
-              
+
               <div className="logout-part-of-nav">
                 <LogoutBtn></LogoutBtn>
               </div>

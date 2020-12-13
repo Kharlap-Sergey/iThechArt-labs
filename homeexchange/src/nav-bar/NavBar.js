@@ -13,13 +13,11 @@ class NavBar extends React.Component {
     return undefined;
   }
 
-  accauntAction = () => {
+  getProfileContent = () => {
     let username = this.getUserName();
     if (username) {
       const userId = this.props.userId;
-      console.log("user Id", userId);
       return (
-        //todo define the account and author.. className
         <Fragment>
           <Authorized userId={userId}></Authorized>
         </Fragment>
@@ -37,7 +35,7 @@ class NavBar extends React.Component {
               <PaintedLink to="/" value="Home" />
             </li>
             <li className="menu__item menu__item--devider"></li>
-            {this.accauntAction()}
+            {this.getProfileContent()}
           </ul>
         </nav>
       </div>
