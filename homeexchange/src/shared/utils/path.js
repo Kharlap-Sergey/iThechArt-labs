@@ -1,11 +1,12 @@
 const api = "https://localhost:44370"
 export const path = {
   home: "/",
-
+  login: '/login',
+  registration: "/registration",
   /// ../chat/id:chatId
   chat: "/chat",
   chatList: "/chatlist",
-  ad: (id) => `/ad/id${id}`,
+  ad: (id) => `/ad/id${id ?? ":id"}`,
   adapi: {
     ad: api + "/ad",
     update: api + "/ad/update",

@@ -45,7 +45,7 @@ export function registrateUserPost(user) {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        dispatch(redirectToAction("/login"));
+        dispatch(redirectToAction(path.login));
       } else {
         console.log("some");
         const data = await response.json();

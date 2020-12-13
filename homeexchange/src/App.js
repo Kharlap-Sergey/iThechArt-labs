@@ -27,15 +27,15 @@ function App() {
             <Switch>
               <RouteCatcher>
                 <Route exact path="/edit/profile/:id" component={EditProfile} />
-                <Route exact path="/ad/id:id" component={Ad} />
+                <Route exact path={path.ad()} component={Ad} />
                 <Route exact path={path.chatList} component={ChatList} />
                 <Route exact path={path.chat+"/id:id"} component={Chat} />
                 <Route exact path="/ad/create" component={AdCreation} />
                 <Route exact path="/ad/edite/id:id" component={AdEditor} />
                 <Route exact path="/profile/:id" component={Profile} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/registration" component={Registration} />
-                <Route exact path="/" component={Home} />
+                <Route exact path={path.login} component={Login} />
+                <Route exact path={path.registration} component={Registration} />
+                <Route exact path={path.home} component={Home} />
               </RouteCatcher>
             </Switch>
           </div>

@@ -6,6 +6,7 @@ import AccountForm from "../shared/components/accountForm/AccoutForm";
 import { inputAttributes } from "../shared/utils/inputArguments";
 import { registrateUserPost } from "../shared/redux/account/account";
 import Loader from "../shared/components/Loader/Loader";
+import { path } from "../shared/utils/path";
 
 class Registration extends React.PureComponent {
   inputsArguments = [
@@ -22,7 +23,7 @@ class Registration extends React.PureComponent {
     <div className="form__text">
       <p>alreade have an account?</p>
       <div className="account-form-link">
-        <PaintedLink to="/login" value="login" />
+        <PaintedLink to={path.login} value="login" />
       </div>
     </div>
   );
