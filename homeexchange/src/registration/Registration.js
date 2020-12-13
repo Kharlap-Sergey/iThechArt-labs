@@ -1,11 +1,12 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import PaintedLink from "../shared/components/paintedLink/PaintedLink";
 import AccountForm from "../shared/components/accountForm/AccoutForm";
 import { inputAttributes } from "../shared/utils/inputArguments";
 import { registrateUserPost } from "../shared/redux/account/account";
+import Loader from "../shared/components/Loader/Loader";
+
 class Registration extends React.PureComponent {
   inputsArguments = [
     inputAttributes.firstname,
@@ -36,14 +37,19 @@ class Registration extends React.PureComponent {
     this.props.registrateUserPost(user);
   };
 
-  render() {
-    return (
-      <div>
-        <AccountForm
+  accountForm = (
+    <AccountForm
           onSubmit={this.submeteHandler}
           footer={this.formText}
           inputs={this.inputsArguments}
         />
+  )  
+  render() {
+    return (
+      <div>
+        {this.props.isLoading 
+          ? <Loader/>
+          : this.accountForm}
       </div>
     );
   }
@@ -51,7 +57,7 @@ class Registration extends React.PureComponent {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  return { ...state.accountForm };
+  return { ...state.accountForm, isLoading: state.loader.registration};
 };
 
 const mapDispatchToProps = { registrateUserPost };

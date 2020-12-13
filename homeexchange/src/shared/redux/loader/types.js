@@ -1,2 +1,3 @@
 export const DISABLE_ALL = "loader/disable/all";
-export const ENABLE_LOGIN = "loader/enable/Login";
+export const ENABLE_LOGIN = "loader/enable/login";
+export const ENABLE_REGISTRATION = "loader/enable/registration";

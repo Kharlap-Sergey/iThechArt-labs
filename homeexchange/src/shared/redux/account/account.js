@@ -4,7 +4,7 @@ import { requestWrapper } from './../../utils/requestWrapper';
 import { redirectToAction } from './../redirect/redirectActionCreator';
 import { toastr } from 'react-redux-toastr';
 import { loginUserAction } from './accountActions';
-import { disableAllAction, enableLoginAction} from "../loader/loaderActionCreator"
+import { disableAllAction, enableLoginAction, enableRegistrationActin } from "../loader/loaderActionCreator"
 
 export function loginUserPost(user) {
   return async (dispatch) => {
@@ -32,12 +32,13 @@ export function loginUserPost(user) {
       toastr.error("try again later", e.toString());
     }
     dispatch(disableAllAction())
-  }; 
+  };
 }
 
 export function registrateUserPost(user) {
   return async (dispatch) => {
     try {
+      dispatch(enableRegistrationActin())
       const url = pathApi.account.registrate;
       const response = await requestWrapper.post(url, user);
 
@@ -54,6 +55,8 @@ export function registrateUserPost(user) {
     } catch (e) {
       console.log(e);
       toastr.error("try again later", e.toString());
+    }finally {
+      dispatch(disableAllAction());
     }
   };
 }
