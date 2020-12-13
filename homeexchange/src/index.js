@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import ReduxToastr from "react-redux-toastr";
 
 import "./index.css";
+import './reset.scss';
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { rootReducer } from "./shared/redux/rootReducer";

@@ -1,7 +1,17 @@
 @import "../shared/variables.scss";
-.menu {
+.nav-bar {
   margin-bottom: 20px;
-  padding: 5px;
+  padding-top: 20px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu {
+
+  width: 600px;
+  border-radius: 80px;
+  padding: 5px 20px;
   background: $nav-bar-background-color;
   &__items {
     display: flex;

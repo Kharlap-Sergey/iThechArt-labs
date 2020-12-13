@@ -30,15 +30,17 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <nav className="menu">
-        <ul className="menu__items">
-          <li className="menu__item" key="Home">
-            <PaintedLink to="/" value="Home" />
-          </li>
-          <li className="menu__item menu__item--devider"></li>
-          {this.accauntAction()}
-        </ul>
-      </nav>
+      <div className="nav-bar">
+        <nav className="menu">
+          <ul className="menu__items">
+            <li className="menu__item" key="Home">
+              <PaintedLink to="/" value="Home" />
+            </li>
+            <li className="menu__item menu__item--devider"></li>
+            {this.accauntAction()}
+          </ul>
+        </nav>
+      </div>
     );
   }
 }

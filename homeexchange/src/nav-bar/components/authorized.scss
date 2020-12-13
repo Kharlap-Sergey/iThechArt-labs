@@ -1,6 +1,19 @@
 .authorized-container {
   position: relative;
 }
+.dropdown-item{
+
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+
+  position: relative;
+  background-color: inherit;
+  &:hover,&:focus{ 
+    background-color: inherit !important;
+  }
+  padding: 0 5px;
+}
 .logout-part-of-nav {
   width: 75%;
   font-size: 1rem;
