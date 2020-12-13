@@ -1,12 +1,12 @@
 import { requestWrapper } from './../../shared/utils/requestWrapper';
 import { redirectToAction } from './../../shared/redux/redirect/redirectActionCreator';
 import { toastr } from 'react-redux-toastr';
-import { path } from './../../shared/utils/path';
+import { path, pathApi } from './../../shared/utils/path';
 
 export function updateAd(ad) {
   return async (dispatch) => {
     try {
-      const url = path.ad.update;
+      const url = pathApi.ad.update;
       const response = await requestWrapper.post(url, ad);
       console.log(response);
       if (response.ok) {

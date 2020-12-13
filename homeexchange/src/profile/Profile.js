@@ -22,7 +22,7 @@ class Profile extends PureComponent {
     this.props.getProfileById(this.state.userId);
   }
   componentWillUnmount() {
-    //this.props.cleareProfileAction()
+    this.props.cleareProfileAction()
   }
 
   handleToChatClick(event) {

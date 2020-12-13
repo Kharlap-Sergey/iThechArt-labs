@@ -42,6 +42,7 @@ export const pathApi = {
 
   ad: {
     loadPage: (page, userId) => api + `/ad/getadspage/${page}/${userId ?? ""}`,
+    update: api + "/ad/update",
     get: (adId) => api+ `/Ad/get/${adId}`,
   },
 }

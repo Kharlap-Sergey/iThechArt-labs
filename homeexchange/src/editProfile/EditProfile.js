@@ -18,7 +18,7 @@ class EditProfile extends PureComponent {
   }
 
   inputsArguments = [
-    inputAttributes.firstname ,
+    inputAttributes.firstname,
     inputAttributes.lastname,
     inputAttributes.nickname,
     inputAttributes.email,
@@ -28,13 +28,13 @@ class EditProfile extends PureComponent {
   submeteHandler = (state) => {
     console.log("form was submeted");
     console.log("with arguments", state)
-    
+
     let user = {
       ...state,
     };
     this.props.updateUserPost(user);
   };
-  
+
   render() {
     console.log(this.props);
     return (
@@ -46,12 +46,13 @@ class EditProfile extends PureComponent {
             ) : null}
           </AccountIformation>
         </div> */}
-        <AccountForm
+
+        {this.props.profile.id && <AccountForm
           onSubmit={this.submeteHandler}
           inputs={this.inputsArguments}
           initialState={this.props.profile}
-        />
-        {this.state.userId}
+        />}
+
       </div>
     );
   }

@@ -1,13 +1,12 @@
-import { number } from "prop-types";
 import React, { PureComponent } from "react";
 import "./ad-form.scss";
 class AdForm extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = this.props.initialState ?? { type: 1 };
 
     this.submiteHandler = this.submiteHandler.bind(this);
     this.changeInputHandler = this.changeInputHandler.bind(this);
+    this.state = this.props.initial ?? { type: 1 };
   }
 
   submiteHandler(e) {
