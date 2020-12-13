@@ -46,7 +46,7 @@ const mapStateToProps = (state) => {
   console.log(state);
   return {
     ...state.accountForm,
-    ...state.remoteInteraction,
+    isLoading: state.loader.login,
   };
 };
 

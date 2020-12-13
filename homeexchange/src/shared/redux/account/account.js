@@ -1,22 +1,20 @@
-import { endLoadingAction, startLoadingAction } from '../remoteInteraciton/remoteInteractionActionCreator';
 import { path, pathApi } from './../../utils/path';
 import { auth } from './../../utils/auth';
 import { requestWrapper } from './../../utils/requestWrapper';
 import { redirectToAction } from './../redirect/redirectActionCreator';
 import { toastr } from 'react-redux-toastr';
 import { loginUserAction } from './accountActions';
+import { disableAllAction, enableLoginAction} from "../loader/loaderActionCreator"
 
 export function loginUserPost(user) {
   return async (dispatch) => {
-    dispatch(startLoadingAction())
+    dispatch(enableLoginAction())
     try {
       const url = pathApi.account.login;
-      console.log(url);
       const response = await requestWrapper.post(url, user);
-      console.log(response);
+
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         auth.setToken(data.jwt);
         dispatch(
           loginUserAction({
@@ -26,16 +24,14 @@ export function loginUserPost(user) {
         );
         dispatch(redirectToAction(path.home));
       } else {
-        console.log("some");
         const data = await response.json();
         toastr.error(data.errorText, "");
-        console.log(data.errorText)
       }
     } catch (e) {
       console.log(e);
       toastr.error("try again later", e.toString());
     }
-    dispatch(endLoadingAction())
+    dispatch(disableAllAction())
   }; 
 }
 

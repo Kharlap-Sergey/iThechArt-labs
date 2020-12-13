@@ -8,7 +8,7 @@ import { adsPageListReducer } from "../components/adsPageList/redux/adsPageListR
 import { accountReducer } from "./account/accountReducer";
 import { notificationsReducer } from "./notifications/notificationsReducer";
 import { chatReducer } from "./chat/chatReducer";
-
+import {loaderReducer} from "./loader/loaderReducer";
 export const rootReducer = combineReducers({
   user: accountReducer,
   notifications: notificationsReducer,
@@ -19,4 +19,5 @@ export const rootReducer = combineReducers({
   profile: profileReducer,
   adsPageList: adsPageListReducer,
   chat: chatReducer,
+  loader: loaderReducer
 });
