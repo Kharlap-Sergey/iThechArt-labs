@@ -53,8 +53,8 @@ class AdsPageList extends PureComponent {
           ? <Loader />
           : <Page ads={ads}
             userWasDefinedFlag={userWasDefinedFlag}
-            prevBtn={this.props.hasPrevious && this.handlePrevious}
-            nextBtn={this.props.hasNext && this.handleNext}
+            prevBtn={this.props.hasPrevious ? this.handlePrevious : null}
+            nextBtn={this.props.hasNext ? this.handleNext : null}
           />}
       </div>
     );

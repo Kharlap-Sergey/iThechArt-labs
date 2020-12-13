@@ -2,11 +2,12 @@ import React from 'react'
 import ShortAd from '../../shortAd/ShortAd';
 import "./page.scss";
 function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
+    function nothing(){}
     return (
         <>
             <div className="page">
                 <div className="page__prev" style={{visibility: prevBtn ? "visible " : "hidden"}}>
-                    <button className="page__btn" onClick={prevBtn ?? null}>{"<"}</button>
+                    <button className="page__btn" onClick={prevBtn ?? undefined}>{"<"}</button>
                 </div>
                 <div className="page__main">
                     {ads.map((ad) => {
@@ -27,7 +28,7 @@ function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
                     })}
                 </div>
                 <div className="page__next" style={{visibility: nextBtn ? "visible " : "hidden"}}>
-                    <button className="page__btn" onClick={nextBtn ?? null}>{">"}</button>
+                    <button className="page__btn" onClick={nextBtn ?? undefined}>{">"}</button>
                 </div>
             </div>
         </>
