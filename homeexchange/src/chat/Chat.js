@@ -17,6 +17,7 @@ class Chat extends PureComponent {
       chatId: +this.props.match.params.id,
     };
     this.handleSendClick = this.handleSendClick.bind(this);
+    this.chatRef = React.createRef();
   }
 
   hubConnection = new signalR.HubConnectionBuilder()
@@ -35,8 +36,14 @@ class Chat extends PureComponent {
     };
     console.log("message", message);
     this.hubConnection.invoke("Send", message);
+
   }
 
+  scrollDown(){
+    console.log('scroll')
+    var block = this.chatRef.current
+    block.scrollTop = block.scrollHeight;
+  }
   componentDidMount() {
     console.log('DIDMOUNT')
     this.props.clearChatAction();
@@ -49,8 +56,11 @@ class Chat extends PureComponent {
       console.log("message recieved", message);
       this.props.addChatMessagesAction([message]);
     });
+    this.scrollDown();
   }
-
+  componentDidUpdate(){
+    this.scrollDown();
+  }
   componentWillUnmount() {
     this.props.clearChatAction();
     //this.hubConnection.stop();
@@ -60,8 +70,9 @@ class Chat extends PureComponent {
     console.log("this.props", this.props);
     console.log("this.props", this.props.messages);
     return (
-      <div className="chat">
+      <div className="chat" ref={this.chatRef}>
         <MessageList
+          scrollDown={this.scrollDown.bind(this)}
           messages={this.props.messages}
           chatId={this.state.chatId}
           currentUserId={this.props.userId}
