@@ -29,6 +29,7 @@ class AccoutForm extends PureComponent {
   }
 
   render() {
+    console.log('this.props', this.props)
     return (
       <form action="" className="form" onSubmit={this.submiteHandler}>
         <div className="form__body">

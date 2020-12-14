@@ -4,6 +4,7 @@ import { getProfileById } from '../shared/redux/profile/profileActionCreator';
 import AccountForm from "../shared/components/accountForm/AccoutForm";
 import { inputAttributes } from '../shared/utils/inputArguments';
 import { updateUserPost } from './redux/updateUserActionCreator';
+import Loader from '../shared/components/Loader/Loader';
 
 class EditProfile extends PureComponent {
   constructor(props) {
@@ -47,11 +48,11 @@ class EditProfile extends PureComponent {
           </AccountIformation>
         </div> */}
 
-        {this.props.profile.id && <AccountForm
+        {this.props.profile.id ? <AccountForm
           onSubmit={this.submeteHandler}
           inputs={this.inputsArguments}
           initialState={this.props.profile}
-        />}
+        /> : <Loader/>}
 
       </div>
     );
