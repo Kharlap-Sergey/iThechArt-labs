@@ -3,13 +3,14 @@ import thunk from "redux-thunk";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import ReduxToastr from "react-redux-toastr";
-
 import "./index.css";
 import './reset.scss';
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { rootReducer } from "./shared/redux/rootReducer";
 import { applyMiddleware, compose, createStore } from "redux";
+//import { routerMiddleware } from 'react-router-redux'
+//const middleware = routerMiddleware(browserHistory)
 export const store = createStore(
   rootReducer,
   compose(
