@@ -19,9 +19,8 @@ import Chat from './chat/Chat';
 import ChatList from './chatList/ChatList';
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Router>
-        <div>
           <NavBar />
           <div className="main">
             <Switch>
@@ -38,7 +37,6 @@ function App() {
                 <Route exact path={path.home} component={Home} />
               </RouteCatcher>
             </Switch>
-          </div>
         </div>
       </Router>
     </div>

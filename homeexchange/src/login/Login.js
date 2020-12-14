@@ -6,7 +6,7 @@ import AccountForm from "../shared/components/accountForm/AccoutForm";
 import { inputAttributes } from "../shared/utils/inputArguments";
 import "./login.scss"
 import FooterForForm from "./components/FooterForForm";
-
+import logo from "../shared/imgs/account-form.svg"; 
 class Login extends PureComponent {
   state = {};
   inputsArguments = [
@@ -28,12 +28,13 @@ class Login extends PureComponent {
   footerForeForm = (<FooterForForm/>)
   content() {
     return (
-      <div className="loginFormContainer">
+      <div className="login-form-container">
         <AccountForm
           onSubmit={this.submeteHandler}
           footer={this.footerForeForm}
           inputs={this.inputsArguments}
         />
+        <img src={logo}/>
       </div>
     );
   }
