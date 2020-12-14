@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Message from "./Message";
+import AccountAvatar from "../../shared/components/accountAvatar/AccountAvatar";
 class MessageList extends PureComponent {
   constructor(props) {
     super(props);
@@ -11,16 +12,16 @@ class MessageList extends PureComponent {
     chatId: PropTypes.number.isRequired,
     currentUserid: PropTypes.number.isRequired,
   };
-  scrollDown(){
-    this.props.scrollDown();
-    var block = this.chatListRef.current
+  scrollDown() {
+    var block = this.chatListRef.current;
+    if (!block) return;
     block.scrollTop = block.scrollHeight;
   }
-  componentDidMount(){
-    this.scrollDown()
+  componentDidMount() {
+    this.scrollDown();
   }
-  componentDidUpdate(){
-    this.scrollDown()
+  componentDidUpdate() {
+    this.scrollDown();
   }
   render() {
     const messages = this.props.messages;
