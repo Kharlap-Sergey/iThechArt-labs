@@ -5,8 +5,6 @@ import Loader from "../shared/components/Loader/Loader";
 import AccountForm from "../shared/components/accountForm/AccoutForm";
 import { inputAttributes } from "../shared/utils/inputArguments";
 import "./login.scss"
-import FooterForForm from "./components/FooterForForm";
-import logo from "../shared/imgs/account-form.svg"; 
 class Login extends PureComponent {
   state = {};
   inputsArguments = [
@@ -36,7 +34,7 @@ class Login extends PureComponent {
     );
   }
   render() {
-    return !this.props.isLoading ? this.content() : <div><Loader /></div>;
+    return !this.props.isLoading ? this.content() : <div className="login-loader"><Loader /></div>;
   }
 }
 

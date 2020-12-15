@@ -1,13 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-
-import PaintedLink from "../shared/components/paintedLink/PaintedLink";
 import AccountForm from "../shared/components/accountForm/AccoutForm";
 import { inputAttributes } from "../shared/utils/inputArguments";
 import { registrateUserPost } from "../shared/redux/account/account";
 import Loader from "../shared/components/Loader/Loader";
-import { path } from "../shared/utils/path";
 
+import "./registration.scss";
 class Registration extends React.PureComponent {
   inputsArguments = [
     inputAttributes.firstname,
@@ -21,7 +19,7 @@ class Registration extends React.PureComponent {
 
   submeteHandler = (state) => {
     console.log("form was submeted");
-    console.log("with arguments", state)
+    console.log("with arguments", state);
 
     let user = {
       ...state,
@@ -30,17 +28,18 @@ class Registration extends React.PureComponent {
   };
 
   accountForm = (
-    <AccountForm
-          onSubmit={this.submeteHandler}
-          inputs={this.inputsArguments}
-        />
-  )  
+    <AccountForm onSubmit={this.submeteHandler} inputs={this.inputsArguments} />
+  );
   render() {
     return (
       <div>
-        {this.props.isLoading 
-          ? <Loader/>
-          : this.accountForm}
+        {this.props.isLoading ? (
+          <div className="registration-loader">
+            <Loader />
+          </div>
+        ) : (
+          this.accountForm
+        )}
       </div>
     );
   }
@@ -48,7 +47,7 @@ class Registration extends React.PureComponent {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  return { ...state.accountForm, isLoading: state.loader.registration};
+  return { ...state.accountForm, isLoading: state.loader.registration };
 };
 
 const mapDispatchToProps = { registrateUserPost };
