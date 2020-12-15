@@ -17,6 +17,7 @@ import AdEditor from "./adEditor/AdEditor";
 import { path } from './shared/utils/path';
 import Chat from './chat/Chat';
 import ChatList from './chatList/ChatList';
+import Sign from './sign/Sign';
 function App() {
   return (
     <div className="app">
@@ -32,8 +33,12 @@ function App() {
                 <Route exact path="/ad/create" component={AdCreation} />
                 <Route exact path="/ad/edite/id:id" component={AdEditor} />
                 <Route exact path="/profile/:id" component={Profile} />
-                <Route exact path={path.login} component={Login} />
-                <Route exact path={path.registration} component={Registration} />
+                <Route exact path={path.login}>
+                  <Sign type="login" />
+                </Route>
+                <Route exact path={path.registration}>
+                  <Sign type="signup" />
+                </Route>
                 <Route exact path={path.home} component={Home} />
               </RouteCatcher>
             </Switch>

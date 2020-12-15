@@ -25,16 +25,13 @@ class Login extends PureComponent {
 
     this.props.loginUserPost(account);
   };
-  footerForeForm = (<FooterForForm/>)
   content() {
     return (
       <div className="login-form-container">
         <AccountForm
           onSubmit={this.submeteHandler}
-          footer={this.footerForeForm}
           inputs={this.inputsArguments}
         />
-        <img src={logo}/>
       </div>
     );
   }

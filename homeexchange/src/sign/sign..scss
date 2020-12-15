@@ -1,0 +1,60 @@
+@import "../shared/variables.scss";
+
+.sign {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  &__content {
+    position: relative;
+    height: 650px;
+  }
+}
+
+.sign-content {
+  &__form {
+    width: 320px;
+    min-height: 0;
+    margin-right: 650px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: $sign-form-bg-color;
+    border-radius: 20px;
+    box-shadow: 4px 4px 70px 10px $sign-form-shadow-color;
+    transition: 1.5s;
+    // -webkit-transition: all 2.5s 2s ease-in-out;
+    // -moz-transition: all 2.5s 2s ease-in-out;
+    // -ms-transition: all 2.5s 2s ease-in-out;
+    // -o-transition: all 2.5s 2s ease-in-out;
+  }
+  .h650 {
+    min-height: 650px;
+  }
+  &__img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+  &__switcher {
+    padding: 20px;
+    padding-bottom: 0;
+  }
+}
+
+.sign-switcher {
+  font-size: 1rem;
+  &__btn {
+    margin-left: 10px;
+    padding: 2px 8px 5px;
+    color: white;
+    font-size: 1.4rem;
+    border: 0;
+    border-radius: 10px;
+    outline: none !important;
+
+    &--active {
+      background-color: #22b573;
+    }
+  }
+}

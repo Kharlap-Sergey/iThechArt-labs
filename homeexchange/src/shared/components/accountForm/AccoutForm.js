@@ -29,26 +29,32 @@ class AccoutForm extends PureComponent {
   }
 
   render() {
-    console.log('this.props', this.props)
+    console.log("this.props", this.props);
     return (
       <form action="" className="form" onSubmit={this.submiteHandler}>
         <div className="form__body">
           {this.props.header}
 
-          {this.props.inputs.map((input, index) => (
-            <div className="form__input" key={input.name}>
-              <InputBox
-                key={input.name}
-                placeholder={input.placeholder}
-                name={input.name}
-                val={this.state[input.name] ?? ""}
-                typ={input.type}
-                validationAttributes={input.validationAttributes}
-                //метод который будет вызываться при каждом изменнении input
-                onChange={this.changeInputHandler}
-              />
-            </div>
-          ))}
+          {this.props.inputs.map((input) => {
+            let formInput = (
+              <div className="form__input" key={input.name}>
+                <InputBox
+                  key={input.name}
+                  placeholder={input.placeholder}
+                  name={input.name}
+                  val={this.state[input.name] ?? ""}
+                  typ={input.type}
+                  validationAttributes={input.validationAttributes}
+                  //метод который будет вызываться при каждом изменнении input
+                  onChange={this.changeInputHandler}
+                />
+              </div>
+            );
+            setTimeout(() => {
+              
+            }, 500);
+            return formInput;
+          })}
 
           <SubmitButton></SubmitButton>
 

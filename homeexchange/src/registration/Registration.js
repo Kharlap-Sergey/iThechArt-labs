@@ -19,15 +19,6 @@ class Registration extends React.PureComponent {
     inputAttributes.getPasswordAttributesForRegistration(),
   ];
 
-  formText = (
-    <div className="form__text">
-      <p>alreade have an account?</p>
-      <div className="account-form-link">
-        <PaintedLink to={path.login} value="login" />
-      </div>
-    </div>
-  );
-
   submeteHandler = (state) => {
     console.log("form was submeted");
     console.log("with arguments", state)
@@ -41,7 +32,6 @@ class Registration extends React.PureComponent {
   accountForm = (
     <AccountForm
           onSubmit={this.submeteHandler}
-          footer={this.formText}
           inputs={this.inputsArguments}
         />
   )  
