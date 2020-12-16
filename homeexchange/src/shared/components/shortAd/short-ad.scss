@@ -5,10 +5,6 @@ $radiant-color: #dcdcdc !default;
   width: 450px;
   min-width: 450px;
   max-width: 450px;
-  min-height: 255px;
-  max-height: 270px;
-
-  padding: 5px;
   padding-top: 20px;
   padding-right: 40px;
   padding-left: 40px;
@@ -17,7 +13,7 @@ $radiant-color: #dcdcdc !default;
   //background-color: $short-ad-bg-color;
   background: linear-gradient(to right, $purple-blue-light, $green);
   border: 0;
-  border-radius: 20px;
+  border-radius: 10px;
   &__header {
     display: flex;
     justify-content: space-between;
@@ -28,7 +24,7 @@ $radiant-color: #dcdcdc !default;
     flex-direction: column;
     flex-grow: 1;
     padding-top: 20px;
-    padding-bottom: 40px;
+    padding-bottom: 10px;
     border-radius: 20px;
   }
   &__date {
