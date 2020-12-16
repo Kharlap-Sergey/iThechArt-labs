@@ -28,6 +28,7 @@
     -moz-transition: max-height 1s 0s;
     -ms-transition: max-height 1s 0s;
     -o-transition: max-height 1s 0s;
+    transition: max-height 1s 0s;
   }
 
   &__text {
@@ -41,4 +42,3 @@
     text-decoration: none;
   }
 }
-

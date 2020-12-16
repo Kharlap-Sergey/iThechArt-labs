@@ -7,43 +7,54 @@ import "./short-ad.scss";
 
 class ShortAd extends PureComponent {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.clickHandler = this.clickHandler.bind(this)
+    this.clickHandler = this.clickHandler.bind(this);
   }
   formatDate(dateString) {
-    const date = new Date(dateString)
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const date = new Date(dateString);
     const day = date.getDate();
     const year = date.getFullYear();
     const month = date.getMonth();
 
-    return `${month}/${day}/${year}`;
+    return `${monthNames[month]} ${day}`;
   }
 
   clickHandler(event) {
-    this.props.redirectToAction(`/ad/id${this.props.adId}`)
+    this.props.redirectToAction(`/ad/id${this.props.adId}`);
   }
 
   render() {
     console.log(this.props);
     return (
       <div className="short-ad">
-        {
-          this.props.shouldAvatarDisplay && (
-            <div className="short-ad__aside">
-              <div className="short-ad__account-avatar">
-                <AccountAvatar profileId={this.props.authorId}/>
-              </div>
-            </div>
-          )
-        }
+        <div className="short-ad__header">
+          <div className="short-ad__type">
+            {formateNumberToTypeOfAd(this.props.typ)}
+          </div>
+          <div className="short-ad__date">
+            {this.formatDate(this.props.date)}
+          </div>
+        </div>
         <div className="short-ad__main">
           <h2 className="short-ad__title">{this.props.title}</h2>
-          <div className="short-ad__date">{this.formatDate(this.props.date)}</div>
-          <div className="short-ad__type">{formateNumberToTypeOfAd(this.props.typ)}</div>
           <div className="short-ad__discription">{this.props.description}</div>
           <div className="short-ad__more">
-            <button onClick={this.clickHandler}>more</button>
+            <button className="short-ad__more-btn" onClick={this.clickHandler}>more</button>
           </div>
         </div>
       </div>
@@ -52,7 +63,7 @@ class ShortAd extends PureComponent {
 }
 
 const mapDispatchToProps = {
-  redirectToAction
-}
+  redirectToAction,
+};
 
 export default connect(null, mapDispatchToProps)(ShortAd);

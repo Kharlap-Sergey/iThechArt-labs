@@ -1,74 +1,86 @@
 @import "../../variables.scss";
 
-$separator-bg-color: #825b00 !default;
 $radiant-color: #dcdcdc !default;
 .short-ad {
-  display: flex;
   width: 450px;
+  min-width: 450px;
+  max-width: 450px;
+  min-height: 250px;
+  max-height: 250px;
+
   padding: 5px;
+  padding-top: 20px;
+  padding-right: 40px;
+  padding-left: 40px;
+  overflow: hidden;
   font-size: 1rem;
   //background-color: $short-ad-bg-color;
-  background-color: #022a53;
+  background: linear-gradient(to right, $purple-blue-light, $green);
   border: 0;
   border-radius: 20px;
-  &__aside {
-    width: fit-content;
-    padding: 10px;
-    padding-top: 10px;
-    //background-color: #1FC58E;
-    background-color:  #001730;
-    border-radius: inherit;
-  }
-  &__account-avatar{
-    margin: 0 auto;
-    width: 60px;
-    height: 60px;
+  &__header {
+    display: flex;
+    justify-content: space-between;
   }
   &__main {
-    border-radius: 20px;
-    padding: 20px;
-    background-color:  $short-ad-bg-color;
     position: relative;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    margin-left: 40px;
+    padding-top: 20px;
     padding-bottom: 40px;
+    border-radius: 20px;
   }
   &__date {
     margin-top: 0;
     padding-top: 0;
-    color: $radiant-color;
+    color: white;
   }
   &__type {
-    color: $radiant-color;
+    color: $dark-blue;
+    font-weight: 600;
   }
   &__title {
+    min-height: 80px;
     margin-bottom: 0;
     color: white;
-    border-bottom: 1px solid $separator-bg-color;
+    white-space: normal;
+    word-wrap: break-word;
   }
   &__discription {
     margin-top: 5px;
     color: black;
     font-size: 1.4rem;
-    border-top: 1px solid $separator-bg-color;
-    border-bottom: 1px solid $separator-bg-color;
   }
   &__more {
-    position: absolute;
-    bottom: 4px;
-    right: 40px;
+    display: flex;
+    justify-content: flex-end;
     font-size: 1rem;
-    button {
-      cursor: pointer;
-      color: $more-btn-color;
-      background-color: #001730;
-      border: 0;
+    &-btn {
+      box-sizing: border-box;
+      margin-top: 20px;
       padding: 2px 8px 6px 8px;
-      border-radius: 10px;
+      color: $more-btn-color;
+      font-weight: 600;
+      font-size: 18px;
+      text-align: center;
+      background-color: $dark-blue;
+      border: 0;
+      border-radius: 12px;
+      cursor: pointer;
+      -webkit-transition: all 0.5s 0s ease-in-out;
+      -moz-transition: all 0.5s 0s ease-in-out;
+      -ms-transition: all 0.5s 0s ease-in-out;
+      -o-transition: all 0.5s 0s ease-in-out;
+      transition: all 0.5s 0s ease-in-out;
+      &:active {
+        background-color: $dark-green;
+      }
       &:hover {
-        color: #05f4b7;
+        color: $dark-blue;
+        font-size: 2rem;
+        background-color: $green;
+        box-shadow: 0 0 200px 250px $green;
       }
     }
   }
