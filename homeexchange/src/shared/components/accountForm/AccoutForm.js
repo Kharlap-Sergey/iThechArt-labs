@@ -25,6 +25,7 @@ class AccoutForm extends PureComponent {
     setTimeout(() => this.props.onSubmit(this.state), 1000);
   }
 
+  
   getValidationMessage(element) {
     const validity = element.target.validity;
     if (element.target.validity.patternMismatch) {
@@ -64,6 +65,9 @@ class AccoutForm extends PureComponent {
   componentDidMount() {
     setTimeout(() => this.setState({ shouldShow: true }), 500);
   }
+
+  handleSubmitClick(e){
+  }
   render() {
     console.log("this.props", this.props);
     console.log("this.props", this.state);
@@ -95,7 +99,7 @@ class AccoutForm extends PureComponent {
             return formInput;
           })}
 
-          <SubmitButton></SubmitButton>
+          <SubmitButton onClick={this.handleSubmitClick}></SubmitButton>
 
           {this.props.footer}
         </div>

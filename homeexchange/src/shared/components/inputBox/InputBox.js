@@ -4,8 +4,8 @@ class InputBox extends React.PureComponent {
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
-    this.handleFocuse = this.handleFocuse.bind(this);
     this.show_hide_password = this.show_hide_password.bind(this);
+    this.handleFocuse = this.handleFocuse.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.state = { showValidation: true };
     this.refToInput = React.createRef();
@@ -32,9 +32,11 @@ class InputBox extends React.PureComponent {
   }
 
   handleFocuse(event) {
-    this.setState({ showValidation: false });
+    this.props.onChange(event);
+    //this.setState({ showValidation: false });
   }
   handleBlur(event) {
+    this.props.onChange(event);
     this.setState({ showValidation: true });
   }
   render() {

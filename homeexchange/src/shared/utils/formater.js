@@ -8,6 +8,6 @@ export function formateDate(dateString) {
   }
 
 export function formateNumberToTypeOfAd(t){
-    if(t == 1) return "tenancy"
+    if(t == 1) return "to lease"
     return "to rent"
 }

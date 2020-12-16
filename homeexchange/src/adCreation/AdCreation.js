@@ -10,6 +10,7 @@ class AdCreation extends PureComponent {
     console.log(state);
     this.props.createNewAd(state);
   }
+
   render() {
     return (
       <div className="ad-creation">
@@ -20,7 +21,7 @@ class AdCreation extends PureComponent {
             <AdForm onSubmit={this.submitHandler.bind(this)}></AdForm>
           )}
         </div>
-
+        
         <div className="ad-creation__img-bg-wrapper">
           <img
             className="ad-creation__img-bg"
