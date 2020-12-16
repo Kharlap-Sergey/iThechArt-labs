@@ -48,7 +48,7 @@ class AdsPageList extends PureComponent {
     const ads = this.props.ads;
     const userWasDefinedFlag = Boolean(this.props.userId)
     return (
-      <div>
+      <div className="ads-list">
         {this.props.isLoading
           ? <Loader />
           : <Page ads={ads}

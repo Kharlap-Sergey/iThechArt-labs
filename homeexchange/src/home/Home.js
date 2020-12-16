@@ -5,6 +5,8 @@ import { redirectToAction } from "./../shared/redux/redirect/redirectActionCreat
 
 import "./home.scss";
 
+import homeImg from "../shared/imgs/home.svg";
+
 export class Home extends PureComponent {
   createAdClickHandler(event) {
     event.preventDefault();
@@ -18,6 +20,7 @@ export class Home extends PureComponent {
     return (
       <div className="home">
         <AdsPageList></AdsPageList>
+        <img className="home__img" src={homeImg} />
       </div>
     );
   }
