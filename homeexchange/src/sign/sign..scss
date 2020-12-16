@@ -16,7 +16,8 @@
     width: 320px;
     margin-right: 650px;
     margin-bottom: 20px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
     background-color: $sign-form-bg-color;
     border-radius: 20px;
     box-shadow: 4px 4px 70px 10px $sign-form-shadow-color;
@@ -25,9 +26,6 @@
     // -moz-transition: all 2.5s 2s ease-in-out;
     // -ms-transition: all 2.5s 2s ease-in-out;
     // -o-transition: all 2.5s 2s ease-in-out;
-  }
-  .h650 {
-    min-height: 650px;
   }
   &__img {
     position: absolute;

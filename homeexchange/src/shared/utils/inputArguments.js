@@ -10,6 +10,7 @@ export const inputAttributes = {
       size: 16,
       pattern: "[0-9a-zA-Z]*",
       required: true,
+      "data-permitions": "a-Z and 0-9",
     },
   },
   firstname: {
@@ -19,10 +20,11 @@ export const inputAttributes = {
     type: "text",
     validationAttributes: {
       autoComplete: "off",
-      pattern: "[0-9a-zA-Z\-_]{1,20}",
+      pattern: "[0-9a-zA-Z-_]{1,20}",
       maxLength: "20",
       required: true,
-      title: "please use only numbers and English characters, also '-_'"
+      title: "please use only numbers and English characters, also '-_'",
+      "data-permitions": "a-Z 0-9 and - _ ",
     },
   },
   lastname: {
@@ -32,10 +34,11 @@ export const inputAttributes = {
     type: "text",
     validationAttributes: {
       autoComplete: "off",
-      pattern: "[0-9a-zA-Z\-_]{1,20}",
+      pattern: "[0-9a-zA-Z-_]{1,20}",
       maxLength: "20",
       required: true,
-      title: "please use only numbers and English characters, also '-_'"
+      title: "please use only numbers and English characters, also '-_'",
+      "data-permitions": "a-Z 0-9 and - _ ",
     },
   },
   nickname: {
@@ -45,10 +48,11 @@ export const inputAttributes = {
     type: "text",
     validationAttributes: {
       autoComplete: "off",
-      pattern: "[0-9a-zA-Z\-_]{1,20}",
+      pattern: "[0-9a-zA-Z-_]{1,20}",
       maxLength: "20",
       required: true,
-      title: "please use only numbers and English characters, also '-_@$%^#!'"
+      title: "please use only numbers and English characters, also '-_@$%^#!'",
+      "data-permitions": "a-Z 0-9 and - _ @ $ % ^ # !",
     },
   },
 
@@ -79,10 +83,11 @@ export const inputAttributes = {
     type: "text",
     validationAttributes: {
       autoComplete: "off",
-      pattern: "[0-9a-zA-Z\-_]{1,20}",
+      pattern: "[0-9a-zA-Z-_]{1,20}",
       maxLength: "20",
       required: true,
-      title: "please use only numbers and English characters, also '-_@$%^#!'"
+      title: "please use only numbers and English characters, also '-_@$%^#!'",
+      "data-permitions": "a-Z 0-9 and - _ @ $ % ^ # !",
     },
   },
   email: {
@@ -96,14 +101,14 @@ export const inputAttributes = {
     },
   },
 
-  getPasswordAttributesForLogin: function(){
-    console.log(this)
+  getPasswordAttributesForLogin: function () {
+    console.log(this);
     let pass = { ...this.password };
     pass.validationAttributes.autoComplete = "current-password";
     return pass;
   },
-  getPasswordAttributesForRegistration: function() {
-    console.log(this)
+  getPasswordAttributesForRegistration: function () {
+    console.log(this);
     let pass = { ...this.password };
     pass.validationAttributes.autoComplete = "new-password";
     return pass;
