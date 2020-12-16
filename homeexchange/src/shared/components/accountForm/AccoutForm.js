@@ -43,7 +43,7 @@ class AccoutForm extends PureComponent {
             let formInput = (
               <div
                 className={`form__input ${
-                  !this.state.shouldShow ? "max-h0 vis-hidden m0" : ""
+                  !this.state.shouldShow ? "m0" : "opas-1"
                 }`}
                 key={input.name}
               >

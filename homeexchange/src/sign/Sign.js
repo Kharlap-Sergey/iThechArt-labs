@@ -16,11 +16,6 @@ class Sign extends PureComponent {
   handleSwithcerClick = (event) => {
     const sign = this.signRef.current;
     console.log(sign.style);
-    // sign.classList.toggle("h650");
-    // setTimeout(() => {
-      
-    //   //sign.classList.remove("h650");
-    // }, 2500);
     this.setState({ type: [event.target.name] });
   };
   render() {

@@ -14,7 +14,6 @@
 .sign-content {
   &__form {
     width: 320px;
-    min-height: 250px;
     margin-right: 650px;
     margin-bottom: 20px;
     overflow: hidden;
@@ -37,6 +36,7 @@
     z-index: -1;
   }
   &__switcher {
+    margin-bottom: 20px;
     padding: 20px;
     padding-bottom: 0;
   }
