@@ -1,14 +1,26 @@
+@import "../shared/variables.scss";
+
 .ad-creation {
   position: relative;
   display: flex;
   justify-content: center;
   width: 100%;
-
   &__form {
     position: relative;
     left: -250px;
+    box-sizing: border-box;
     width: fit-content;
+    height: 540px;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: $ad-form-bg-color;
+    border-radius: 20px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 70px 10px $sign-form-shadow-color;
+    transition: 1.5s;
   }
+
   &__img-bg-wrapper {
     position: absolute;
     top: 0;

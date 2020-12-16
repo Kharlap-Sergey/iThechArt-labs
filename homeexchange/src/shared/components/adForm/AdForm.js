@@ -1,5 +1,7 @@
 import React, { PureComponent } from "react";
 import "./ad-form.scss";
+import SubmitButton from "./../accountForm/components/submitButton/SubmitButton";
+import InputBox from "./../inputBox/InputBox";
 class AdForm extends PureComponent {
   constructor(props) {
     super(props);
@@ -32,7 +34,7 @@ class AdForm extends PureComponent {
     console.log("render");
     console.log(this.props);
     return (
-      <form action="" className="adform" onSubmit={this.submiteHandler}>
+      <form action="" className="ad-form" onSubmit={this.submiteHandler}>
         <div className="ad-form__body">
           <div className="ad-form__title">
             <input
@@ -70,9 +72,7 @@ class AdForm extends PureComponent {
               onChange={this.changeInputHandler}
             ></textarea>
           </div>
-          <div className="ad-form__submit">
-            <button type="submit">submit</button>
-          </div>
+          <SubmitButton />
         </div>
       </form>
     );

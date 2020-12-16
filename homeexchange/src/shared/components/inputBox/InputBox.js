@@ -32,7 +32,7 @@ class InputBox extends React.PureComponent {
   }
 
   handleFocuse(event) {
-    //this.setState({ showValidation: false });
+    this.setState({ showValidation: false });
   }
   handleBlur(event) {
     this.setState({ showValidation: true });
