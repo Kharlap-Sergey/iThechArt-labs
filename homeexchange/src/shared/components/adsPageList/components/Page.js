@@ -6,7 +6,7 @@ function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
     return (
         <>
             <div className="page">
-                <div className="page__prev" style={{visibility: prevBtn ? "visible " : "hidden"}}>
+                <div className="page__switcher" style={{visibility: prevBtn ? "visible " : "hidden"}}>
                     <button className="page__btn" onClick={prevBtn ?? undefined}>{"<"}</button>
                 </div>
                 <div className="page__main">
@@ -27,7 +27,7 @@ function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
                         );
                     })}
                 </div>
-                <div className="page__next" style={{visibility: nextBtn ? "visible " : "hidden"}}>
+                <div className="page__switcher" style={{visibility: nextBtn ? "visible " : "hidden"}}>
                     <button className="page__btn" onClick={nextBtn ?? undefined}>{">"}</button>
                 </div>
             </div>

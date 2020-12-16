@@ -50,7 +50,7 @@ namespace HomeexchangeApi.Services
         }
         public AdsPage GetAdsPageShortDesc(int page, User author)
         {
-            int pageSize = 3;
+            int pageSize = 4;
             int descriptionLength = 20;
 
             var ads = adRepository
