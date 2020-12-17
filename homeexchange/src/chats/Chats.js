@@ -5,6 +5,7 @@ import Chat from './../chat/Chat';
 import { useDispatch } from "react-redux";
 import { redirectToAction } from './../shared/redux/redirect/redirectActionCreator';
 import { path } from './../shared/utils/path';
+import MessageBlock from './components/messageBlock/Chat';
 function Chats({ match }) {
   console.log(match);
   const [selectedChatId, setSelectedChatId] = useState(match?.params?.chatId);
@@ -20,7 +21,7 @@ function Chats({ match }) {
         <ChatsList selectedChatId ={selectedChatId} handleClick={selectChat}/>
       </div>
       <div className="chats__main">
-        {selectedChatId > 0 ? <Chat chatId ={selectedChatId}/> : null}
+        {selectedChatId > 0 ? <MessageBlock chatId ={selectedChatId}/> : null}
       </div>
     </div>
   );

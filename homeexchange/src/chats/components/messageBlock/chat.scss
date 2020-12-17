@@ -1,0 +1,63 @@
+@import "../../../shared/variables.scss";
+
+.chat {
+  width: 100%;
+  height: inherit;
+  padding: 20px;
+  font-size: 1rem;
+  ::-webkit-scrollbar {
+    /* chrome based */
+    width: 0px; /* ширина scrollbar'a */
+    background: transparent; /* опционально */
+  }
+  &__message-list {
+    height: 400px;
+    padding: 20px 10px;
+    overflow-y: scroll;
+    background-color: #676ffe;
+    border-radius: 10px;
+    box-shadow: inset 0 0 2px;
+  }
+
+  &__controls {
+    display: flex;
+    align-content: center;
+    margin-top: 10px;
+    padding: 0 10px;
+  }
+  &__input {
+    flex-grow: 1;
+    background: white;
+  }
+  &__send {
+    width: 40px;
+    height: 60px;
+  }
+}
+.message-list {
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+  }
+}
+
+.message {
+  width: fit-content;
+  max-width: 250px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  word-wrap: break-word;
+  background-color: $chat-message-bg-color;
+  border-radius: 10px;
+  &--right {
+    flex: 1 1;
+    order: 2;
+    border: 0;
+  }
+  &--left {
+    flex: 1 1;
+    order: -1;
+    border: 0;
+  }
+}
