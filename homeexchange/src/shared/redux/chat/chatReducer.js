@@ -21,7 +21,7 @@ export const chatReducer = (state = initialState, action) => {
       return { ...state, chats: { ...state.chats, ...chats } };
     case ADD_MESSAGES:
       console.log('action.payload', action.payload)
-      state.chats[action.payload.chatId] = action.payload;
+      state.chats[action.payload[0].chatId] = action.payload[0];
       return { ...state, messages: [...state.messages, ...action.payload] };
     case CLEAR:
       console.log("clear", initialState);

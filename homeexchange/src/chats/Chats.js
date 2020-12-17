@@ -5,7 +5,7 @@ import Chat from './../chat/Chat';
 import { useDispatch } from "react-redux";
 import { redirectToAction } from './../shared/redux/redirect/redirectActionCreator';
 import { path } from './../shared/utils/path';
-import MessageBlock from './components/messageBlock/Chat';
+import MessageBlock from './components/messageBlock/MessageBlock';
 function Chats({ match }) {
   console.log(match);
   const [selectedChatId, setSelectedChatId] = useState(match?.params?.chatId);
