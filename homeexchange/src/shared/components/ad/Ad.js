@@ -4,6 +4,7 @@ import { getAd, clearAdsAction } from "../../redux/ad/adActionCreator";
 import { formateDate, formateNumberToTypeOfAd } from "../../utils/formater";
 import "./ad.scss";
 import AccountAvatar from "./../accountAvatar/AccountAvatar";
+import Authorized from "./components/Authorized";
 class Ad extends PureComponent {
   constructor(props) {
     super(props);
@@ -35,16 +36,21 @@ class Ad extends PureComponent {
             </div>
           </div>
           <div className="ad__discription">{ad.description}</div>
-          <div className="ad__less">
-            <button
-              className="ad__less-btn"
-              onClick={(e) => {
-                this.handleLessClick();
-              }}
-            >
-              less
-            </button>
-          </div>
+          {this.props.userId && !ad.isResponded ? (
+            <Authorized authorId={ad.authorId} adId={ad.id} />
+          ) : null}
+          {this.handleLessClick ? (
+            <div className="ad__less">
+              <button
+                className="ad__less-btn"
+                onClick={(e) => {
+                  this.handleLessClick();
+                }}
+              >
+                less
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
     );
