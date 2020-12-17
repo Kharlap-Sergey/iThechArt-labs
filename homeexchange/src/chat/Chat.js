@@ -12,9 +12,8 @@ class Chat extends PureComponent {
   constructor(props) {
     super(props);
 
-    console.log(this.props.match.params.id);
     this.state = {
-      chatId: +this.props.match.params.id,
+      chatId: +this.props.chatId,
     };
     this.handleSendClick = this.handleSendClick.bind(this);
     this.chatRef = React.createRef();

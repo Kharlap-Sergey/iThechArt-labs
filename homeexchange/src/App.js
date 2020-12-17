@@ -18,6 +18,7 @@ import { path } from './shared/utils/path';
 import Chat from './chat/Chat';
 import ChatList from './chatList/ChatList';
 import Sign from './sign/Sign';
+import Chats from './chats/Chats';
 function App() {
   return (
     <div className="app">
@@ -28,7 +29,7 @@ function App() {
               <RouteCatcher>
                 <Route exact path={path.profile.edit()} component={EditProfile} />
                 <Route exact path={path.ad()} component={Ad} />
-                <Route exact path={path.chatList} component={ChatList} />
+                <Route exact path={path.chat()} component={Chats} />
                 <Route exact path={path.chat+"/id:id"} component={Chat} />
                 <Route exact path="/ad/create" component={AdCreation} />
                 <Route exact path="/ad/edite/id:id" component={AdEditor} />

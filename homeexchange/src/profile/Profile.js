@@ -1,19 +1,22 @@
 import React, { PureComponent } from "react";
 import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
-import { cleareProfileAction, getProfileById } from "../shared/redux/profile/profileActionCreator";
+import {
+  cleareProfileAction,
+  getProfileById,
+} from "../shared/redux/profile/profileActionCreator";
 import { connect } from "react-redux";
 import AdsPageList from "../shared/components/adsPageList/AdsPageList";
 import AccountIformation from "./components/AccountIformation";
 import "./profile.scss";
 import { loadChatId } from "../shared/redux/chat/chat";
 import { path } from "../shared/utils/path";
-import bgImg from '../shared/imgs/profile.svg'
+import bgImg from "../shared/imgs/profile.svg";
 class Profile extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = { userId: +this.props.match.params.id };
-    this.editClickHandler = this.handleEditClick.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
     this.handleToChatClick = this.handleToChatClick.bind(this);
   }
 
@@ -22,11 +25,11 @@ class Profile extends PureComponent {
     this.props.getProfileById(this.state.userId);
   }
   componentWillUnmount() {
-    this.props.cleareProfileAction()
+    this.props.cleareProfileAction();
   }
 
   handleToChatClick(event) {
-    console.log(this.state.userId, this.props.userId)
+    console.log(this.state.userId, this.props.userId);
     this.props.loadChatId(this.state.userId, this.props.userId);
   }
 
@@ -48,10 +51,14 @@ class Profile extends PureComponent {
               </button>
             ) : null}
           </AccountIformation>
-            {this.props.userId 
-            ? <button onClick={this.handleToChatClick} className="profile__chat-btn">ToChat</button>
-            : null}
-          
+          {this.props.userId ? (
+            <button
+              onClick={this.handleToChatClick}
+              className="profile__chat-btn"
+            >
+              to chat
+            </button>
+          ) : null}
         </div>
         <div className="profile__ads">
           <AdsPageList userId={this.state.userId}></AdsPageList>

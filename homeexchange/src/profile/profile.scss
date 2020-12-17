@@ -1,3 +1,5 @@
+@import "../shared/variables.scss";
+
 .profile {
   display: flex;
   flex-wrap: wrap;
@@ -15,12 +17,16 @@
   }
   &__inf {
     align-self: flex-start;
-    margin-right: 70px;
-    padding: 20px;
+    margin-right: 20px;
+    padding: 10px;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
     font-weight: 700;
     font-size: 1.5rem;
-    background-color: #001730;
-    border-radius: 20px;
+    background-color: $profile-inf-bg-color;
+    border-radius: 12px;
+    box-shadow: 4px 4px 70px 10px $profile-inf-shadow-color;
   }
   &__ads {
     min-width: 1050px;
@@ -31,16 +37,34 @@
     margin-left: 75%;
     padding: 2px 8px;
     color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
     background-color: black;
     border: 0;
     border-radius: 10px;
+    cursor: pointer;
+    transition: all 1s;
+    &:hover {
+      font-size: 150%;
+      background-color: transparent;
+    }
   }
   &__chat-btn {
     margin-top: 5px;
     padding: 1px 5px;
     color: white;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: 1.2rem;
     border: 1px solid #05f4b7;
     border-radius: inherit;
+    cursor: pointer;
+    transition: all 1s;
+    &:hover {
+      color: black;
+      font-size: 150%;
+      background-color: transparent;
+      border: 0;
+      box-shadow: 0 0 200px 250px #676ffe;
+    }
   }
 }

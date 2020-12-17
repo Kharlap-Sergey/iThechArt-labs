@@ -4,8 +4,8 @@ export const path = {
   login: '/login',
   registration: "/registration",
   /// ../chat/id:chatId
-  chat: "/chat",
-  chatList: "/chatlist",
+  chat: (cahtId) => `/chat/id${cahtId ?? ":chatId"}`, 
+  chatList: "/chats",
   ad: (id) => `/ad/id${id ?? ":id"}`,
   profile: {
     edit: (id) => `/profile/edit/id${id ?? ":id"}`,
