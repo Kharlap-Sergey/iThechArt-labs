@@ -1,6 +1,45 @@
+@import "../shared/variables.scss";
+
 .chats {
   display: flex;
   justify-content: center;
-	&__aside { }
-	&__main { }
+  height: 500px;
+  border-radius: 20px;
+  &__aside {
+    align-self: stretch;
+    width: 300px;
+    background-color: $chat-list-bg-color;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+  &__main {
+    width: 300px;
+  }
+}
+
+.chat-list {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  &__item {
+    width: 100%;
+    height: 75px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: $chat-list__item-bg-color;
+    border-radius: 10px;
+    &--selected {
+      background-color: $chat-list__item--selected-bg-color;
+    }
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+.short-chat {
+  &__title {
+  }
+  &__mesage {
+  }
 }

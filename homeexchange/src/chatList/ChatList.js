@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
 import { path } from "../shared/utils/path";
 import { loadChatList } from "./../shared/redux/chat/chat";
-import "./chat-list.scss";
+//import "./chat-list.scss";
 class ChatList extends PureComponent {
   componentDidMount() {
     this.props.loadChatList();

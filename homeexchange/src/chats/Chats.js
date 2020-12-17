@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import "./chat.scss";
 import ChatsList from "./components/ChatsList";
 import Chat from './../chat/Chat';
+import { useDispatch } from "react-redux";
+import { redirectToAction } from './../shared/redux/redirect/redirectActionCreator';
+import { path } from './../shared/utils/path';
 function Chats({ match }) {
   console.log(match);
   const [selectedChatId, setSelectedChatId] = useState(match?.params?.chatId);
+  const dispatch = useDispatch();
   const selectChat = (chatId) => {
+    dispatch(redirectToAction(path.chat(chatId)));
     setSelectedChatId(chatId);
   };
   return (
     <div className="chats">
       <div className="chats__aside">
-        <ChatsList />
+        <ChatsList selectedChatId ={selectedChatId} handleClick={selectChat}/>
       </div>
       <div className="chats__main">
         {selectedChatId > 0 ? <Chat chatId ={ selectedChatId}/> : null}
