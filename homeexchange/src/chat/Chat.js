@@ -76,9 +76,9 @@ class Chat extends PureComponent {
           chatId={this.state.chatId}
           currentUserId={this.props.userId}
         />
-        <form onSubmit={this.handleSendClick}>
-          <textarea name="message"></textarea>
-          <button>Send</button>
+        <form onSubmit={this.handleSendClick} className="chat__controls">
+          <textarea className="chat__input" name="message"></textarea>
+          <button className="chat__send">Send</button>
         </form>
       </div>
     );

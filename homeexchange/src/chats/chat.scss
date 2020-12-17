@@ -13,7 +13,10 @@
     border-bottom-left-radius: inherit;
   }
   &__main {
-    width: 300px;
+    width: 600px;
+    background-color: $chat-list-messages-bg-color;
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
   }
 }
 
