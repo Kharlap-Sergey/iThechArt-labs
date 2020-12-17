@@ -3,6 +3,12 @@
   flex-direction: row;
   justify-content: center;
   max-height: fit-content;
+  &--nothing {
+    color: #676ffe;
+    font-weight: bold;
+    font-size: 5rem;
+    text-align: center;
+  }
   &__ad-wrapper {
     display: flex;
     align-items: center;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ShortAd from "../../shortAd/ShortAd";
 import "./page.scss";
 import Ad from "../../ad/Ad";
+import { deleteAd } from "../../../redux/ad/adActionCreator";
 function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
   const [state, setState] = useState({ adId: null });
   const handleMoreClick = (adId) => {
@@ -11,6 +12,10 @@ function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
   const handleLessClick = () => {
     setState({ adId: null });
   };
+
+  if(ads?.length == 0){
+    return <div className="page page--nothing">nothing to show</div>
+  }
   return (
     <div className="page">
       <div
