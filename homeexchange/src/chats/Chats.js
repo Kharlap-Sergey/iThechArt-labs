@@ -11,7 +11,6 @@ function Chats({ match }) {
   const dispatch = useDispatch();
   const selectChat = (chatId) => {
     if(selectedChatId == chatId) return;
-    
     dispatch(redirectToAction(path.chat(chatId)));
     setSelectedChatId(chatId);
   };
@@ -21,7 +20,7 @@ function Chats({ match }) {
         <ChatsList selectedChatId ={selectedChatId} handleClick={selectChat}/>
       </div>
       <div className="chats__main">
-        {selectedChatId > 0 ? <Chat chatId ={ selectedChatId}/> : null}
+        {selectedChatId > 0 ? <Chat chatId ={selectedChatId}/> : null}
       </div>
     </div>
   );
