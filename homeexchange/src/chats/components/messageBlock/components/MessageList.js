@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Message from "./Message";
-import AccountAvatar from './../../../../shared/components/accountAvatar/AccountAvatar';
+import AccountAvatar from "../../../../shared/components/accountAvatar/AccountAvatar";
 class MessageList extends PureComponent {
   constructor(props) {
     super(props);
@@ -33,18 +33,25 @@ class MessageList extends PureComponent {
 
     console.log("message", messages);
     return (
-      <div className="chat__message-list" ref={this.chatListRef}>
+      <div className="message-box__message-list" ref={this.chatListRef}>
         <ul className="message-list">
-          {sortedMessages.map((message) => {
+          {sortedMessages.map((message, index) => {
             return message.chatId == this.props.chatId ? (
-              <li className={`message-list__item`} key={message.id}>
-                <div
-                  className={`${
-                    message.userId == this.props.currentUserId ? left : right
-                  }`}
-                ></div>
-                <Message content={message.content} />
-              </li>
+              <>
+                {message.userId != this.props.currentUserId &&
+                  sortedMessages?.[index - 1]?.userId != message.userId
+                  ? (<div className="avatar--mini">
+                    <AccountAvatar profileId={message.userId} />
+                  </div>)
+                  : null}
+                <li className={`message-list__item`} key={message.id}>
+                  <div
+                    className={`${message.userId == this.props.currentUserId ? left : right
+                      }`}
+                  ></div>
+                  <Message content={message.content} />
+                </li>
+              </>
             ) : null;
           })}
         </ul>

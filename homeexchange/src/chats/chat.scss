@@ -1,8 +1,10 @@
 @import "../shared/variables.scss";
 
 .chats {
+
   display: flex;
   justify-content: center;
+  align-self: center;
   height: 500px;
   border-radius: 20px;
   &__aside {

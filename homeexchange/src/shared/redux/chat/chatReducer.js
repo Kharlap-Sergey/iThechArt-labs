@@ -17,12 +17,21 @@ export const chatReducer = (state = initialState, action) => {
           message: chat.lastMessage,
         };
       });
-      console.log("chats", { ...state.chats, ...chats } );
+      console.log("chats", { ...state.chats, ...chats });
       return { ...state, chats: { ...state.chats, ...chats } };
     case ADD_MESSAGES:
       console.log('action.payload', action.payload)
-      state.chats[action.payload[0].chatId] = action.payload[0];
-      return { ...state, messages: [...state.messages, ...action.payload] };
+      console.log('state', state)
+      const chatts = {};
+      action.payload.forEach(e => {
+        console.log('e', state.chats[e.chatId]);
+        if (state.chats[e.chatId]) {
+          state.chats[e.chatId].message = e
+          chatts[e.chatId] = (state.chats[e.chatId])
+        }
+      })
+      console.log('state', state)
+      return { ...state, messages: [...state.messages, ...action.payload], chats: { ...state.chats, ...chatts } };
     case CLEAR:
       console.log("clear", initialState);
       return initialState;

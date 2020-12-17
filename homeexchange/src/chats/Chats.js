@@ -6,10 +6,12 @@ import { useDispatch } from "react-redux";
 import { redirectToAction } from './../shared/redux/redirect/redirectActionCreator';
 import { path } from './../shared/utils/path';
 import MessageBlock from './components/messageBlock/MessageBlock';
+import { loadChatList } from "../shared/redux/chat/chat";
 function Chats({ match }) {
   console.log(match);
   const [selectedChatId, setSelectedChatId] = useState(match?.params?.chatId);
   const dispatch = useDispatch();
+  dispatch(loadChatList());
   const selectChat = (chatId) => {
     if(selectedChatId == chatId) return;
     dispatch(redirectToAction(path.chat(chatId)));

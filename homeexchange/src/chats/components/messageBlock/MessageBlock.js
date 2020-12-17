@@ -30,6 +30,9 @@ class MessageBlock extends PureComponent {
     .build();
 
   handleSendClick(event) {
+    if(!event.target.message.value){
+      return;
+    }
     event.preventDefault();
     console.log("event", event.target.message);
     const message = {
@@ -38,6 +41,7 @@ class MessageBlock extends PureComponent {
     };
     console.log("message", message);
     this.hubConnection.invoke("Send", message);
+    event.target.message.value = "";
   }
 
   scrollDown() {
@@ -71,16 +75,16 @@ class MessageBlock extends PureComponent {
     console.log("this.props", this.props);
     console.log("this.props", this.props.messages);
     return (
-      <div className="chat" ref={this.chatRef}>
+      <div className="message-box" ref={this.chatRef}>
         <MessageList
           scrollDown={this.scrollDown.bind(this)}
           messages={this.props.messages}
           chatId={this.state.chatId}
           currentUserId={this.props.userId}
         />
-        <form onSubmit={this.handleSendClick} className="chat__controls">
-          <textarea className="chat__input" name="message"></textarea>
-          <button className="chat__send">Send</button>
+        <form onSubmit={this.handleSendClick} className="message-box__controls">
+          <textarea className="message-box__input" name="message"></textarea>
+          <button className="message-box__send">></button>
         </form>
       </div>
     );
