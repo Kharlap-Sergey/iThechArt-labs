@@ -13,7 +13,7 @@ class Profile extends PureComponent {
     super(props);
 
     this.state = { userId: +this.props.match.params.id };
-    this.editClickHandler = this.editClickHandler.bind(this);
+    this.editClickHandler = this.handleEditClick.bind(this);
     this.handleToChatClick = this.handleToChatClick.bind(this);
   }
 
@@ -30,7 +30,7 @@ class Profile extends PureComponent {
     this.props.loadChatId(this.state.userId, this.props.userId);
   }
 
-  editClickHandler(event) {
+  handleEditClick(event) {
     this.props.redirectToAction(path.profile.edit(this.state.userId));
   }
   render() {
@@ -42,7 +42,7 @@ class Profile extends PureComponent {
             {this.state.userId == this.props.userId ? (
               <button
                 className="profile__edit-btn"
-                onClick={this.editClickHandler}
+                onClick={this.handleEditClick}
               >
                 edit
               </button>
