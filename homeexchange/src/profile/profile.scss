@@ -3,6 +3,16 @@
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
+  &__img-bg {
+    position: relative;
+    left: -70%;
+    &-wrapper {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      z-index: -1;
+    }
+  }
   &__inf {
     align-self: flex-start;
     margin-right: 70px;

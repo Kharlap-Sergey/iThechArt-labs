@@ -7,7 +7,7 @@ import AccountIformation from "./components/AccountIformation";
 import "./profile.scss";
 import { loadChatId } from "../shared/redux/chat/chat";
 import { path } from "../shared/utils/path";
-
+import bgImg from '../shared/imgs/profile.svg'
 class Profile extends PureComponent {
   constructor(props) {
     super(props);
@@ -55,6 +55,14 @@ class Profile extends PureComponent {
         </div>
         <div className="profile__ads">
           <AdsPageList userId={this.state.userId}></AdsPageList>
+        </div>
+
+        <div className="profile__img-bg-wrapper">
+          <img
+            className="profile__img-bg"
+            src={bgImg}
+            alt="hee should be img"
+          />
         </div>
       </div>
     );

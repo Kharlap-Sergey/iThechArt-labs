@@ -1,10 +1,12 @@
 @import "../shared/variables.scss";
-.ad-editor{
+.ad-editor {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
 
   &__form {
+    position: relative;
+    left: -50%;
     height: fit-content;
     margin-bottom: 20px;
     overflow-x: hidden;
@@ -13,8 +15,6 @@
     border-radius: 20px;
     box-shadow: 4px 4px 70px 10px $sign-form-shadow-color;
     transition: 1.5s;
-    left: -50%;
-    position: relative;
   }
   &__img-bg-wrapper {
     position: absolute;
