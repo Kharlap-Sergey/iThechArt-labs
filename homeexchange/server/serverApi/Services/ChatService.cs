@@ -2,6 +2,7 @@
 using HomeexchangeApi.Domain.Entities;
 using HomeexchangeApi.Hubs;
 using HomeexchangeApi.Requests;
+using HomeexchangeApi.Responses;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -149,6 +150,16 @@ namespace HomeexchangeApi.Services
 
 
             return chatRepository.FindById(pw.ChatId) ;
+        }
+
+        public IEnumerable<ChatListItemResponse> GetChatResponsesList(int userId)
+        {
+            var chats = this.GetChatList(userId);
+            return chats.Select(chat => new ChatListItemResponse 
+                { 
+                    Chat = chat, 
+                    LastMessage = chatMessageRepository.Get(cm => cm.ChatId == chat.Id).FirstOrDefault()
+                });
         }
     }
 }

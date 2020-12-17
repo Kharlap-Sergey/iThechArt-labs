@@ -30,7 +30,7 @@ namespace HomeexchangeApi.Controllers
         public IActionResult GetChatList()
         {
             var userId = GetUserId();
-            var chatList = chatService.GetChatList(userId); 
+            var chatList = chatService.GetChatResponsesList(userId); 
             return Json(chatList);
         }
 

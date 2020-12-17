@@ -1,5 +1,6 @@
 ﻿using HomeexchangeApi.Domain.Entities;
 using HomeexchangeApi.Requests;
+using HomeexchangeApi.Responses;
 using System.Collections.Generic;
 
 namespace HomeexchangeApi.Services
@@ -7,6 +8,7 @@ namespace HomeexchangeApi.Services
     public interface IChatService
     {
         public IEnumerable<Chat> GetChatList(int userId);
+        public IEnumerable<ChatListItemResponse> GetChatResponsesList(int userId);
         public IEnumerable<int> GetChatMembersId(int chatId);
 
         public ChatMessage AddMessage(Message message, int comnitterId);
