@@ -5,7 +5,7 @@ import Loader from "../shared/components/Loader/Loader";
 import { clearAdsAction, getAd } from "../shared/redux/ad/adActionCreator";
 import { formateDate, formateNumberToTypeOfAd } from "../shared/utils/formater";
 
-import "./ad.scss";
+//import "./ad.scss";
 import Authorized from "./components/Authorized";
 
 class Ad extends PureComponent {

@@ -3,6 +3,13 @@
   flex-direction: row;
   justify-content: center;
   max-height: fit-content;
+  &__ad-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 940px;
+    height: 460px;
+  }
   &__btn {
     display: flex;
     align-items: center;

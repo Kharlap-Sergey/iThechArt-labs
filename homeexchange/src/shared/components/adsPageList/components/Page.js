@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import ShortAd from "../../shortAd/ShortAd";
 import "./page.scss";
+import Ad from "../../ad/Ad";
 function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
-  function nothing() {}
+  const [state, setState] = useState({ adId: null });
+  const handleMoreClick = (adId) => {
+    console.log("adId", adId);
+    setState({ adId: adId });
+  };
+  const handleLessClick = () => {
+    setState({ adId: null });
+  };
   return (
     <div className="page">
       <div
@@ -14,22 +22,29 @@ function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
         </button>
       </div>
       <div className="page__main">
-        {ads.map((ad) => {
-          return (
-            <div className="ads-list__element" key={ad.id}>
-              <ShortAd
-                key={ad.id}
-                adId={ad.id}
-                title={ad.title}
-                typ={ad.type}
-                description={ad.description}
-                date={ad.dateOfPublication}
-                authorId={ad.authorId}
-                shouldAvatarDisplay={!userWasDefinedFlag}
-              />
-            </div>
-          );
-        })}
+        {state.adId ? (
+          <div className="page__ad-wrapper">
+            <Ad adId={state.adId} handleLessClick={handleLessClick} />
+          </div>
+        ) : (
+          ads.map((ad) => {
+            return (
+              <div className="ads-list__element" key={ad.id}>
+                <ShortAd
+                  key={ad.id}
+                  adId={ad.id}
+                  title={ad.title}
+                  typ={ad.type}
+                  description={ad.description}
+                  date={ad.dateOfPublication}
+                  authorId={ad.authorId}
+                  shouldAvatarDisplay={!userWasDefinedFlag}
+                  handleMoreClick={handleMoreClick}
+                />
+              </div>
+            );
+          })
+        )}
       </div>
       <div
         className="page__switcher"

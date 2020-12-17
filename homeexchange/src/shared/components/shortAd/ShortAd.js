@@ -2,14 +2,11 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { redirectToAction } from "../../redux/redirect/redirectActionCreator";
 import { formateNumberToTypeOfAd } from "../../utils/formater";
-import AccountAvatar from "../accountAvatar/AccountAvatar";
 import "./short-ad.scss";
 
 class ShortAd extends PureComponent {
   constructor(props) {
     super(props);
-
-    this.clickHandler = this.clickHandler.bind(this);
   }
   formatDate(dateString) {
     const monthNames = [
@@ -34,8 +31,8 @@ class ShortAd extends PureComponent {
     return `${monthNames[month]} ${day}`;
   }
 
-  clickHandler(event) {
-    this.props.redirectToAction(`/ad/id${this.props.adId}`);
+  handleMoreClick(adId, event) {
+    this.props.handleMoreClick(adId, event);
   }
 
   render() {
@@ -54,7 +51,14 @@ class ShortAd extends PureComponent {
           <h2 className="short-ad__title">{this.props.title}</h2>
           <div className="short-ad__discription">{this.props.description}</div>
           <div className="short-ad__more">
-            <button className="short-ad__more-btn" onClick={this.clickHandler}>more</button>
+            <button
+              className="short-ad__more-btn"
+              onClick={(e) => {
+                this.handleMoreClick(this.props.adId, e);
+              }}
+            >
+              more
+            </button>
           </div>
         </div>
       </div>

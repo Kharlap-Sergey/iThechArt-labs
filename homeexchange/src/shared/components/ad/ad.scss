@@ -1,18 +1,13 @@
 @import "../../variables.scss";
-
-$radiant-color: #dcdcdc !default;
-.short-ad {
-  width: 450px;
+.ad {
+  width: fit-content;
   min-width: 450px;
-  max-width: 450px;
-  margin-right: 10px;
-  margin-left: 10px;
+  max-width: 98%;
   padding-top: 20px;
   padding-right: 40px;
   padding-left: 40px;
   overflow: hidden;
   font-size: 1rem;
-  //background-color: $short-ad-bg-color;
   background: linear-gradient(to right, $purple-blue-light, $green);
   border: 0;
   border-radius: 10px;
@@ -29,6 +24,15 @@ $radiant-color: #dcdcdc !default;
     padding-bottom: 10px;
     border-radius: 20px;
   }
+  &__main-info {
+    display: flex;
+    justify-content: space-between;
+    min-height: 65px;
+  }
+  &__author {
+    width: 60px;
+    height: 60px;
+  }
   &__date {
     margin-top: 0;
     padding-top: 0;
@@ -39,7 +43,6 @@ $radiant-color: #dcdcdc !default;
     font-weight: 600;
   }
   &__title {
-    min-height: 80px;
     margin-bottom: 0;
     color: white;
     white-space: normal;
@@ -49,18 +52,19 @@ $radiant-color: #dcdcdc !default;
     margin-top: 5px;
     color: black;
     font-size: 1.4rem;
+    white-space: normal;
+    word-wrap: break-word;
   }
-  &__more {
+  &__less {
     display: flex;
     justify-content: flex-end;
-    font-size: 1rem;
     &-btn {
       box-sizing: border-box;
       margin-top: 20px;
       padding: 2px 8px 6px 8px;
       color: $more-btn-color;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 2rem;
       text-align: center;
       background-color: $dark-blue;
       border: 0;
@@ -77,9 +81,9 @@ $radiant-color: #dcdcdc !default;
       }
       &:hover {
         color: $dark-blue;
-        font-size: 2rem;
+        font-size: 1.5rem;
         background-color: $green;
-        box-shadow: 0 0 200px 250px $green;
+        box-shadow: 0 0 500px 650px $green;
       }
     }
   }
