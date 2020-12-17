@@ -8,6 +8,7 @@ const initialState = {
 export const chatReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CHATS:
+      
       return { ...state, chats: [...action.payload] };
     case ADD_MESSAGES:
       return { ...state, messages: [...state.messages, ...action.payload] }

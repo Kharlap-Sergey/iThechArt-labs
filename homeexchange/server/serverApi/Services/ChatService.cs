@@ -158,7 +158,9 @@ namespace HomeexchangeApi.Services
             return chats.Select(chat => new ChatListItemResponse 
                 { 
                     Chat = chat, 
-                    LastMessage = chatMessageRepository.Get(cm => cm.ChatId == chat.Id).FirstOrDefault()
+                    LastMessage = chatMessageRepository.Get(cm => cm.ChatId == chat.Id)
+                    .OrderByDescending(cm=> cm.PublicationDate)
+                    .FirstOrDefault()
                 });
         }
     }
