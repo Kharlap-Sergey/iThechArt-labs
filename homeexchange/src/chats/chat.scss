@@ -1,10 +1,9 @@
 @import "../shared/variables.scss";
 
 .chats {
-
   display: flex;
-  justify-content: center;
   align-self: center;
+  justify-content: center;
   height: 500px;
   border-radius: 20px;
   &__aside {
@@ -15,10 +14,16 @@
     border-bottom-left-radius: inherit;
   }
   &__main {
+    position: relative;
     width: 600px;
     background-color: $chat-list-messages-bg-color;
     border-top-right-radius: inherit;
     border-bottom-right-radius: inherit;
+  }
+
+  &__bg-img-wrappper {
+    position: absolute;
+    z-index: 0;
   }
 }
 
