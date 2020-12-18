@@ -1,4 +1,5 @@
-﻿using HomeexchangeApi.Services;
+﻿using HomeexchangeApi.Requests;
+using HomeexchangeApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace HomeexchangeApi.Controllers
 {
+    [Route("[controller]/{action}")]
+
     public class RatingController : Controller
     {
         IRatingService ratingService;
@@ -21,15 +24,17 @@ namespace HomeexchangeApi.Controllers
         [HttpGet("{profileId}")]
         public IActionResult Get(int profileId)
         {
-            return View();
+            var res = ratingService.Get(profileId);
+            return Json(res);
         }
 
-        [HttpPost("{profileId}")]
+        [HttpPost]
         [Authorize]
-        public IActionResult Set([FormBody])
+        public IActionResult Set([FromBody] RatingRequest request)
         {
             int committerId = GetUserId();
-            return ratingService.Set(profileId, committerId);    
+            var res = ratingService.Set(request, committerId);
+            return Json(res);   
         }
 
         int GetUserId()

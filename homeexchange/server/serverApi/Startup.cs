@@ -34,15 +34,15 @@ namespace HomeexchangeApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddScoped<IGenericRepository<User>, IGenericRepository<User>>();
-            services.AddScoped<IGenericRepository<Ad>, IGenericRepository<Ad>>();
-            services.AddScoped<IGenericRepository<Notification>, IGenericRepository<Notification>>();
-            services.AddScoped<IGenericRepository<ResponseToAd>, IGenericRepository<ResponseToAd>>();
-            services.AddScoped<IGenericRepository<Chat>, IGenericRepository<Chat>>();
-            services.AddScoped<IGenericRepository<ChatMessage>, IGenericRepository<ChatMessage>>();
-            services.AddScoped<IGenericRepository<ChatMember>, IGenericRepository<ChatMember>>();
-            services.AddScoped<IGenericRepository<PrivateRoom>, IGenericRepository<PrivateRoom>>();
-            services.AddScoped<IGenericRepository<Rating>, IGenericRepository<Rating>>();
+            services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
+            services.AddScoped<IGenericRepository<Ad>, GenericRepository<Ad>>();
+            services.AddScoped<IGenericRepository<Notification>, GenericRepository<Notification>>();
+            services.AddScoped<IGenericRepository<ResponseToAd>, GenericRepository<ResponseToAd>>();
+            services.AddScoped<IGenericRepository<Chat>, GenericRepository<Chat>>();
+            services.AddScoped<IGenericRepository<ChatMessage>, GenericRepository<ChatMessage>>();
+            services.AddScoped<IGenericRepository<ChatMember>, GenericRepository<ChatMember>>();
+            services.AddScoped<IGenericRepository<PrivateRoom>, GenericRepository<PrivateRoom>>();
+            services.AddScoped<IGenericRepository<Rating>, GenericRepository<Rating>>();
 
 
             services.AddScoped<INotificationService, NotificationService>();

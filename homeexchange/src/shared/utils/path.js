@@ -22,6 +22,10 @@ export const path = {
 }
 
 export const pathApi = {
+  profileRating: {
+    get: (id) => api + `/rating/get/${id}`,
+    set: () => api+ "/rating/set"
+  },
   notifications: {
     get: api + "/notification/getNotifications",
     delete: (id) => {

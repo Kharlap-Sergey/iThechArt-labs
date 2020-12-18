@@ -12,6 +12,7 @@ import { loadChatId } from "../shared/redux/chat/chat";
 import { path } from "../shared/utils/path";
 import bgImg from "../shared/imgs/profile.svg";
 import StarRating from './../shared/components/starRating/StarRating';
+import RatingControl from "./components/RatingControl";
 class Profile extends PureComponent {
   constructor(props) {
     super(props);
@@ -43,7 +44,7 @@ class Profile extends PureComponent {
       <div className="profile">
         <div className="profile__inf">
           <AccountIformation {...this.props.profile}>
-            <StarRating currentRating={4} />
+            <RatingControl profileId = {this.state.userId}/>
             {this.state.userId == this.props.userId ? (
               <button
                 className="profile__edit-btn"

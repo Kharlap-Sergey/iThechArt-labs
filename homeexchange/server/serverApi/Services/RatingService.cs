@@ -1,5 +1,6 @@
 ﻿using HomeexchangeApi.Domain.Abstract;
 using HomeexchangeApi.Domain.Entities;
+using HomeexchangeApi.Requests;
 using HomeexchangeApi.Responses;
 using System;
 using System.Collections.Generic;
