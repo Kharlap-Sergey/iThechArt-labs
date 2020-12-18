@@ -5,18 +5,20 @@
   align-self: center;
   justify-content: center;
   height: 500px;
+  background-image: linear-gradient(to right, #90dab9, #9197fe);
   border-radius: 20px;
   &__aside {
     align-self: stretch;
     width: 300px;
-    background-color: $chat-list-bg-color;
+    //background-color: $chat-list-bg-color;
+
     border-top-left-radius: inherit;
     border-bottom-left-radius: inherit;
   }
   &__main {
     position: relative;
     width: 600px;
-    background-color: $chat-list-messages-bg-color;
+    //background-color: $chat-list-messages-bg-color;
     border-top-right-radius: inherit;
     border-bottom-right-radius: inherit;
   }
@@ -38,6 +40,8 @@
     padding: 10px;
     background-color: $chat-list__item-bg-color;
     border-radius: 10px;
+    box-shadow: 0 0 1px 1px $chat-list__item-bg-color;
+    cursor: pointer;
     &--selected {
       background-color: $chat-list__item--selected-bg-color;
     }
@@ -48,8 +52,14 @@
 }
 
 .short-chat {
+  display: flex;
+  flex-direction: column;
   &__title {
+    align-self: center;
+    color: white;
+    font-weight: 700;
   }
   &__mesage {
+    padding: 4px;
   }
 }

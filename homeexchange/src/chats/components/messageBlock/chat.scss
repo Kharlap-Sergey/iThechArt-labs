@@ -12,6 +12,14 @@
     width: 0px; /* ширина scrollbar'a */
     background: transparent; /* опционально */
   }
+  &__nothing {
+    position: absolute;
+    top: 40%;
+    left: 15%;
+    color: white;
+    font-weight: 700;
+    font-size: 3rem;
+  }
   &__message-list {
     height: 400px;
     padding: 20px 10px;

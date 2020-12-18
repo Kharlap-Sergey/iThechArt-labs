@@ -34,20 +34,24 @@ class MessageList extends PureComponent {
     console.log("message", messages);
     return (
       <div className="message-box__message-list" ref={this.chatListRef}>
+        {/* {sortedMessages.length < 1 ? (
+          <div className="message-box__nothing">type first message</div>
+        ) : null} */}
         <ul className="message-list">
           {sortedMessages.map((message, index) => {
             return message.chatId == this.props.chatId ? (
               <>
                 {message.userId != this.props.currentUserId &&
-                  sortedMessages?.[index - 1]?.userId != message.userId
-                  ? (<div className="avatar--mini">
+                sortedMessages?.[index - 1]?.userId != message.userId ? (
+                  <div className="avatar--mini">
                     <AccountAvatar profileId={message.userId} />
-                  </div>)
-                  : null}
+                  </div>
+                ) : null}
                 <li className={`message-list__item`} key={message.id}>
                   <div
-                    className={`${message.userId == this.props.currentUserId ? left : right
-                      }`}
+                    className={`${
+                      message.userId == this.props.currentUserId ? left : right
+                    }`}
                   ></div>
                   <Message content={message.content} />
                 </li>
