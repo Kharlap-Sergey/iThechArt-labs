@@ -1,0 +1,39 @@
+.star-rating {
+  display: flex;
+  &__item {
+    list-style: none;
+  }
+}
+
+.star {
+  &-item {
+    width: fit-content;
+    height: fit-content;
+    font-size: 2rem;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    outline: none;
+    cursor: pointer;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-text-fill-color: transparent;
+    &--half {
+      background: linear-gradient(to right, #22b573 50% 50%, gray 50%);
+    }
+    &--full {
+      background: linear-gradient(to right, #22b573, #22b573);
+    }
+    &--empty {
+      background: linear-gradient(to right, gray, gray);
+    }
+    &--hover {
+      background: linear-gradient(45deg, #676ffe, #676ffe);
+    }
+    &:hover {
+      font-size: 3rem;
+    }
+  }
+}

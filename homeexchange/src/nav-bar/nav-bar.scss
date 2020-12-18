@@ -1,18 +1,17 @@
 @import "../shared/variables.scss";
 .nav-bar {
+  display: flex;
+  justify-content: flex-end;
   margin-bottom: 20px;
   padding-top: 20px;
   padding-right: 10px;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .menu {
-
   width: 600px;
-  border-radius: 80px;
   padding: 5px 20px;
   background: $nav-bar-background-color;
+  border-radius: 80px;
   &__items {
     display: flex;
     align-items: center;

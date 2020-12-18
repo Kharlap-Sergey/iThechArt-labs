@@ -21,11 +21,11 @@
     background-color: $sign-form-bg-color;
     border-radius: 20px;
     box-shadow: 4px 4px 70px 10px $sign-form-shadow-color;
-    transition: 1.5s;
-    // -webkit-transition: all 2.5s 2s ease-in-out;
-    // -moz-transition: all 2.5s 2s ease-in-out;
-    // -ms-transition: all 2.5s 2s ease-in-out;
-    // -o-transition: all 2.5s 2s ease-in-out;
+    -webkit-transition: all 1.5s;
+    -moz-transition: all 1.5s;
+    -ms-transition: all 1.5s;
+    -o-transition: all 1.5s;
+    transition: all 1.5s;
   }
   &__img {
     position: absolute;

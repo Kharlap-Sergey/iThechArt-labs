@@ -1,13 +1,13 @@
 @import "../../variables.scss";
 
 .logout-btn {
-  padding: 4px 10px 5px 10px;
-  cursor: inherit;
   width: inherit;
-  border: 1px solid #05f4b7;
+  padding: 4px 10px 5px 10px;
   color: $logout-btn-color;
   background-color: inherit;
+  border: 1px solid #05f4b7;
   border-radius: 5px;
+  cursor: inherit;
   &:hover {
     color: #05f4b7;
   }

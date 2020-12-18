@@ -19,6 +19,7 @@ import Chat from './chat/Chat';
 import ChatList from './chatList/ChatList';
 import Sign from './sign/Sign';
 import Chats from './chats/Chats';
+import StarRating from './shared/components/starRating/StarRating';
 function App() {
   return (
     <div className="app">
@@ -27,6 +28,7 @@ function App() {
           <div className="main">
             <Switch>
               <RouteCatcher>
+                <Route exact path={"/test"} component={StarRating} />
                 <Route exact path={path.profile.edit()} component={EditProfile} />
                 <Route exact path={path.ad()} component={Ad} />
                 <Route exact path={path.chat()} component={Chats} />
