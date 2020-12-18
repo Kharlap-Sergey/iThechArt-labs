@@ -1,5 +1,6 @@
 .star-rating {
   display: flex;
+  align-items: center;
   &__item {
     list-style: none;
   }
@@ -21,16 +22,16 @@
     transition: all 0.5s;
     -webkit-text-fill-color: transparent;
     &--half {
-      background: linear-gradient(to right, #22b573 50% 50%, gray 50%);
+      background: linear-gradient(to right, gold 50% 50%, gray 50%);
     }
     &--full {
-      background: linear-gradient(to right, #22b573, #22b573);
+      background: linear-gradient(to right, gold, gold);
     }
     &--empty {
       background: linear-gradient(to right, gray, gray);
     }
     &--hover {
-      background: linear-gradient(45deg, #676ffe, #676ffe);
+      background: linear-gradient(45deg, blue, #1d2445);
     }
     &:hover {
       font-size: 3rem;
