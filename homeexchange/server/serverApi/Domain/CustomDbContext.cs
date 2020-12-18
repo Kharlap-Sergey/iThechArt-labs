@@ -32,6 +32,7 @@ namespace HomeexchangeApi.Domain
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
         public DbSet<ResponseToAd> ResponsesToAd { get; set; }
         public DbSet<Ad> Ads { get; set; }
         public DbSet<Notification> NotificationsAboutResponseToAd { get; set; }
