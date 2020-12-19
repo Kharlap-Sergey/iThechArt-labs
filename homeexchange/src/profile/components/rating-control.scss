@@ -1,0 +1,10 @@
+.rating-control{
+    align-items: center;
+    display: flex;
+    &__info{
+        margin-left: 5px;
+        align-self: flex-end;
+        font-size: 1rem;
+        padding-bottom: 3px;
+    }
+}

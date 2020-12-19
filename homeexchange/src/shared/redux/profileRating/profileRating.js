@@ -31,7 +31,7 @@ export function setProfileRating(rating){
             console.log('rating', rating)
             if(response.ok){
                 const data = await response.json();
-                //dispatch(updateProfileRatingAction(data));
+                dispatch(updateProfileRatingAction(data));
             }else{
                 toastr.error("", "");
             }

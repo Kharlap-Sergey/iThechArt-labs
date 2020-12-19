@@ -2,16 +2,7 @@ import React, { useState } from "react";
 import Star from "./components/Star";
 import "./star-reting.scss";
 
-const reducer = (accumulator, currentValue) => accumulator + currentValue.mark;
 const STARS_COUNT = 5;
-
-function calculateRating(rating){
-  console.log('rating', rating)
-  if(rating.length < 1) return 0;
-  const sum = rating.reduce(reducer, 0);
-  console.log('sum', sum)
-  return  sum / rating.length;
-}
 
 function StarRating({ currentRating, handleClick}) {
   const [onHoveredId, setHoveredId] = useState(0);
@@ -48,7 +39,7 @@ function StarRating({ currentRating, handleClick}) {
   };
   return (
     <div className="star-rating">
-      {getStars(STARS_COUNT, calculateRating(currentRating)).map((star, index) => (
+      {getStars(STARS_COUNT, currentRating).map((star, index) => (
         <li key={index} className="star-rating__item" onClick={(e) => {
           console.log('index', index);
           handleClick(index+1, e)}}>
