@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HomeexchangeApi.Domain.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -45,7 +46,10 @@ namespace HomeexchangeApi.Models
         public List<Notification> NotificationsAboutResponseToAd { get; set; } = 
             new List<Notification>();
 
-        //public Rating Rating { set; get; }
-      
+        [Required]
+        [JsonPropertyName("ProfileImgId")]
+        public int ProfileImgId { get; set; }
+        [NotMapped]
+        public Img ProfileImg { set; get; }
     }
 }

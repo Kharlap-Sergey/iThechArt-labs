@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using HomeexchangeApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,59 +15,36 @@ namespace HomeexchangeApi.Controllers
 
     public class ImgController : Controller
     {
-        readonly IWebHostEnvironment appEnvironment;
+        readonly IImgService imgService;
         public ImgController(
-            IWebHostEnvironment appEnvironment
+            IImgService imgService
             )
         {
-            this.appEnvironment = appEnvironment;
+            this.imgService = imgService;
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> AddFileAsync(IFormCollection uploadedFiles)
+        public IActionResult AddFileAsync(IFormCollection uploadedFiles)
         {
             IFormFile uploadedFile = uploadedFiles.Files.FirstOrDefault();
-            if (uploadedFile != null)
+            try
             {
-                // путь к папке Files
-                Directory.CreateDirectory(appEnvironment.WebRootPath + $"\\AccountFilse\\${ this.GetUserId()}");
-                string path = $"\\AccountFilse\\${this.GetUserId()}\\" + "profile.img";
-                string patht = appEnvironment.WebRootPath;
-                // сохраняем файл в папку Files в каталоге wwwroot
-                using (var fileStream = new FileStream(appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    await uploadedFile.CopyToAsync(fileStream);
-                }
-                //load to db
-                //FileModel file = new FileModel { Name = uploadedFile.FileName, Path = path };
-                //_context.Files.Add(file);
-                //_context.SaveChanges();
+                var file = imgService.Save(uploadedFile, GetUserId());
+                var res = file.Result.Name;
+                return Json(res);
             }
-            return Ok();
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         [HttpGet("userId")]
-        public async Task<IActionResult> Get(IFormCollection uploadedFiles)
+        public IActionResult Get(int userId)
         {
-            IFormFile uploadedFile = uploadedFiles.Files.FirstOrDefault();
-            if (uploadedFile != null)
-            {
-                // путь к папке Files
-                Directory.CreateDirectory(appEnvironment.WebRootPath + $"\\AccountFilse\\${ this.GetUserId()}");
-                string path = $"\\AccountFilse\\${this.GetUserId()}\\" + "profile.img";
-                string patht = appEnvironment.WebRootPath;
-                // сохраняем файл в папку Files в каталоге wwwroot
-                using (var fileStream = new FileStream(appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    await uploadedFile.CopyToAsync(fileStream);
-                }
-                //load to db
-                //FileModel file = new FileModel { Name = uploadedFile.FileName, Path = path };
-                //_context.Files.Add(file);
-                //_context.SaveChanges();
-            }
-            return Ok();
+            var file = imgService.GetPrfileImg(userId);
+            return Json(file);
         }
 
         int GetUserId()

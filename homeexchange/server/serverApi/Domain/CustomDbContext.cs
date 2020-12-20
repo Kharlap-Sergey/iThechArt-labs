@@ -36,7 +36,7 @@ namespace HomeexchangeApi.Domain
         public DbSet<ResponseToAd> ResponsesToAd { get; set; }
         public DbSet<Ad> Ads { get; set; }
         public DbSet<Notification> NotificationsAboutResponseToAd { get; set; }
-
+        public DbSet<Img> Imgs { set; get; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<ChatMember> ChatMembers { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }

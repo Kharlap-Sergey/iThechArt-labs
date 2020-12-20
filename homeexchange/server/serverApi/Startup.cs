@@ -43,6 +43,7 @@ namespace HomeexchangeApi
             services.AddScoped<IGenericRepository<ChatMember>, GenericRepository<ChatMember>>();
             services.AddScoped<IGenericRepository<PrivateRoom>, GenericRepository<PrivateRoom>>();
             services.AddScoped<IGenericRepository<Rating>, GenericRepository<Rating>>();
+            services.AddScoped<IGenericRepository<Img>, GenericRepository<Img>>();
 
 
             services.AddScoped<INotificationService, NotificationService>();
@@ -51,6 +52,7 @@ namespace HomeexchangeApi
             services.AddScoped<IAdService, AdService>();
             services.AddScoped<IAccounService, AccounService>();
             services.AddScoped<IRatingService, RatingService>();
+            services.AddScoped<IImgService, ImgService>();
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<CustomDbContext>(options =>
