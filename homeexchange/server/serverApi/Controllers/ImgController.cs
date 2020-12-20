@@ -43,8 +43,15 @@ namespace HomeexchangeApi.Controllers
         [HttpGet("userId")]
         public IActionResult Get(int userId)
         {
-            var file = imgService.GetPrfileImg(userId);
-            return Json(file);
+            try
+            {
+                var file = imgService.GetPrfileImg(userId);
+                return Json(file);
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
         }
 
         int GetUserId()

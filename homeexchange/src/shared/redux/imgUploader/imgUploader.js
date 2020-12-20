@@ -14,7 +14,27 @@ export function sendFile(file){
                 toastr.error("", "");
             }
         }catch(e){
+            toastr.error("some", "");
+        }finally{
 
+        }
+    }
+}
+
+export function loadFile(profileId){
+    return async dispatch => {
+        try{
+            const url = pathApi.img.get(profileId);
+            console.log('url', url);
+            const response = await requestWrapper.get(url);
+            if(response.ok){
+                const data = await response.json();
+                console.log('data', data)
+            }else{
+                toastr.error("", "");
+            }
+        }catch(e){
+            toastr.error("some", "");
         }finally{
 
         }

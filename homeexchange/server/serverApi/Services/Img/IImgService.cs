@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace HomeexchangeApi.Services
     public interface IImgService
     {
         public Task<IFormFile> Save(IFormFile formFIle, int commiterId);
-        public Task<IFormFile> GetPrfileImg(int targetUserId);
+        public FileStreamResult GetPrfileImg(int targetUserId);
     }
 }

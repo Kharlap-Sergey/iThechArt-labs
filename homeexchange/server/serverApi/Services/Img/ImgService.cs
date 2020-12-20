@@ -3,6 +3,7 @@ using HomeexchangeApi.Domain.Entities;
 using HomeexchangeApi.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,9 +27,25 @@ namespace HomeexchangeApi.Services
             this.imgRepository = imgRepository;
             this.userRepository = userRepository;
         }
-        public Task<IFormFile> GetPrfileImg(int targetUserId)
+        public FileStreamResult GetPrfileImg(int targetUserId)
         {
-            throw new NotImplementedException();
+            var user = userRepository.FindById(targetUserId);
+            int? imgId = user.ProfileImgId;
+            if(imgId == null)
+            {
+                throw new Exception("coldn't find the profile img");
+            }
+
+            var img = imgRepository.Get(i => i.Id == imgId).FirstOrDefault();
+            var path = img.Path;
+
+            using (var fileStream = new FileStream(appEnvironment.WebRootPath + path, FileMode.Open))
+            {
+                var res = new FileStreamResult(fileStream, "image/png");
+                return res;
+            }
+
+            throw new Exception();
         }
 
         public async Task<IFormFile> Save(IFormFile formFIle, int commiterId)
