@@ -45,10 +45,10 @@ namespace HomeexchangeApi.Services
                 }
 
                 var imgEnt = new Img { Title = "profile", Path = path };
-                //var user = userRepository.Get(u => u.Id == commiterId).FirstOrDefault();
+                var user = userRepository.Get(u => u.Id == commiterId).FirstOrDefault();
                 imgEnt = imgRepository.Create(imgEnt);
-                //user.ProfileImgId = imgEnt.Id;
-                //userRepository.Update(user);
+                user.ProfileImgId = imgEnt.Id;
+                userRepository.Update(user);
             }
 
             return formFIle;
