@@ -40,13 +40,13 @@ namespace HomeexchangeApi.Controllers
             }
         }
 
-        [HttpGet("userId")]
+        [HttpGet("{userId}")]
         public IActionResult Get(int userId)
         {
             try
             {
                 var file = imgService.GetPrfileImg(userId);
-                return Json(file);
+                return file;
             }
             catch(Exception e)
             {

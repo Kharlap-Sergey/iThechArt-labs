@@ -21,7 +21,7 @@ export function sendFile(file){
     }
 }
 
-export function loadFile(profileId){
+export function downloadFile(profileId){
     return async dispatch => {
         try{
             const url = pathApi.img.get(profileId);
