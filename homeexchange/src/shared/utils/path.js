@@ -22,6 +22,9 @@ export const path = {
 }
 
 export const pathApi = {
+  img:{
+    send: () => api + "/img/addFile",
+  },
   profileRating: {
     get: (id) => api + `/rating/get/${id}`,
     set: () => api+ "/rating/set"

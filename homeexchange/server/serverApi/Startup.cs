@@ -118,12 +118,11 @@ namespace HomeexchangeApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-            app.UseStaticFiles();
             //include CORS
             app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowCredentials()
                             .AllowAnyMethod()

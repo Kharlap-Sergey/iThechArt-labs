@@ -13,7 +13,7 @@ export const requestWrapper = {
     };
     return fetch(url, options);
   },
-  post: (url, dataJson) => {
+  post: (url, dataJson, contentType) => {
     console.log(dataJson);
     const options = {
       method: "POST",
@@ -36,4 +36,16 @@ export const requestWrapper = {
     };
     return fetch(url, options);
   },
+
+  postFiles: (url, data) => {
+    console.log(data);
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + requestWrapper.getToken(),
+      },
+      body: data,
+    };
+    return fetch(url, options);
+  }
 };
