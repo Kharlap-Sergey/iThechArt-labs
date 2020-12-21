@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {useDispatch} from "react-redux"
 import "./img-uploader.scss";
-import {sendFile} from '../../redux/imgUploader/imgUploader'
+import {downloadFile, sendFile} from '../../redux/imgUploader/imgUploader'
 function ImgUploader() {
     const [imgSrc, setImgSrc] = useState(null);
     const [imgFile, setImgFile] = useState(null);
@@ -39,12 +39,14 @@ function ImgUploader() {
             <div className="img-uploader__preview">
                 <img className="img-uploader__preimg" src={imgSrc ?? src} alt="img" />
             </div>
-            <form className="img-uploader__form"
+            {/* <form className="img-uploader__form"
                 onSubmit={handleSubmit}
                 encType="multipart/form-data" method="post">
                 <input className="img-uploader__input" type="file" name="file" onChange={handleSelection} title=" "/>
                 <input className="img-uploader__submit" type="submit" value="send" />
-            </form>
+                
+            </form> */}
+            <button onClick={(e)=>dispatch(downloadFile(1))} style={{color: "black"}}>LoadImg</button>
         </div>
     )
 }

@@ -10,6 +10,6 @@ namespace HomeexchangeApi.Services
     public interface IImgService
     {
         public Task<IFormFile> Save(IFormFile formFIle, int commiterId);
-        public FileStreamResult GetPrfileImg(int targetUserId);
+        public PhysicalFileResult GetPrfileImg(int targetUserId);
     }
 }

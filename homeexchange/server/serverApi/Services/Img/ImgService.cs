@@ -27,11 +27,11 @@ namespace HomeexchangeApi.Services
             this.imgRepository = imgRepository;
             this.userRepository = userRepository;
         }
-        public FileStreamResult GetPrfileImg(int targetUserId)
+        public PhysicalFileResult GetPrfileImg(int targetUserId)
         {
             var user = userRepository.FindById(targetUserId);
-            int? imgId = user.ProfileImgId;
-            if(imgId == null)
+            int imgId = user.ProfileImgId;
+            if(imgId <= 0)
             {
                 throw new Exception("coldn't find the profile img");
             }
@@ -41,7 +41,7 @@ namespace HomeexchangeApi.Services
 
             using (var fileStream = new FileStream(appEnvironment.WebRootPath + path, FileMode.Open))
             {
-                var res = new FileStreamResult(fileStream, "image/png");
+                var res = new PhysicalFileResult(appEnvironment.WebRootPath + path, "image/png");
                 return res;
             }
 

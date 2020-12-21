@@ -10,6 +10,7 @@ import { notificationsReducer } from "./notifications/notificationsReducer";
 import { chatReducer } from "./chat/chatReducer";
 import {loaderReducer} from "./loader/loaderReducer";
 import { profileRatingReducer } from "./profileRating/profileRatingReducer";
+import { profileImgReducer } from './imgUploader/profileImgReducer';
 export const rootReducer = combineReducers({
   user: accountReducer,
   notifications: notificationsReducer,
@@ -19,6 +20,7 @@ export const rootReducer = combineReducers({
   remoteInteraction: remoteInteractionReducer,
   profile: profileReducer,
   profileRating: profileRatingReducer, 
+  profileImg: profileImgReducer,
   adsPageList: adsPageListReducer,
   chat: chatReducer,
   loader: loaderReducer

@@ -46,6 +46,7 @@ namespace HomeexchangeApi.Controllers
             try
             {
                 var file = imgService.GetPrfileImg(userId);
+                //return Ok();
                 return file;
             }
             catch(Exception e)

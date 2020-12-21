@@ -47,5 +47,15 @@ export const requestWrapper = {
       body: data,
     };
     return fetch(url, options);
-  }
+  },
+
+  getFile: (url) => {
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + requestWrapper.getToken(),
+      },
+    };
+    return fetch(url, options);
+  },
 };
