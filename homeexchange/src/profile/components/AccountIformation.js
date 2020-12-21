@@ -7,7 +7,7 @@ class AccountIformation extends PureComponent {
     return (
       <div className="account-info">
         <div className="account-info__avatar">
-          <AccountAvatar />
+          <AccountAvatar profileId={ this.props.id}/>
         </div>
         <div className="account-info__information">
           <div className="account-info__nickname">{this.props.nickname}</div>

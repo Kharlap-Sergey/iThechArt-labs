@@ -15,7 +15,7 @@ class AccountAvatar extends PureComponent {
   render() {
     return (
       <div className="account-avatar" onClick={this.handleClick.bind(this)}>
-        <Avatar profileId={this.props.profileId} alternativeMessage="somthing" />
+        <Avatar profileId={this.props.profileId} alternativeMessage="accountAvatar" />
       </div>
     );
   }

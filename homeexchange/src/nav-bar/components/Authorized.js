@@ -69,7 +69,13 @@ class Authorized extends PureComponent {
             <DropdownItem
               icon={
                 <div className="avatar--mini">
-                  <Avatar source={this.state.imgNotificationSrc} />
+                  <div className="avatar">
+                    <img
+                      src={this.state.imgNotificationSrc}
+                      alt={"notif"}
+                      className="avatar__img"
+                    />
+                  </div>
                 </div>
               }
               dropdownMenu={
@@ -88,7 +94,7 @@ class Authorized extends PureComponent {
             <DropdownItem
               icon={
                 <div className="avatar--mini">
-                  <Avatar source={imgAvatarSrc} />
+                  <Avatar profileId={ this.props.userId} />
                 </div>
               }
               dropdownMenu={
