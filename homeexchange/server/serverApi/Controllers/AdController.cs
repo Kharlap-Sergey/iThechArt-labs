@@ -36,14 +36,14 @@ namespace HomeexchangeApi.Controllers
             return Json(ad);
         }
 
-        [HttpGet("{page=1}/{userId=-1}")]
-        public IActionResult GetAdsPage(int userId, int page)
+        [HttpGet("{type=0}/{page=1}/{userId=-1}")]
+        public IActionResult GetAdsPage(int userId, int page, int type)
         {
             User forUser = userId == -1
                    ? null
                    : userService.FindById(userId);
 
-            return Json(adService.GetAdsPageShortDesc(page, forUser));
+            return Json(adService.GetAdsPageShortDesc(page, forUser, type));
         }
 
         [HttpPost("{adId}")]
