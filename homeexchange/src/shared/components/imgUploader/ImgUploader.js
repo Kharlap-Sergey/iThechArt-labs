@@ -39,14 +39,12 @@ function ImgUploader() {
             <div className="img-uploader__preview">
                 <img className="img-uploader__preimg" src={imgSrc ?? src} alt="img" />
             </div>
-            {/* <form className="img-uploader__form"
+            <form className="img-uploader__form"
                 onSubmit={handleSubmit}
                 encType="multipart/form-data" method="post">
                 <input className="img-uploader__input" type="file" name="file" onChange={handleSelection} title=" "/>
                 <input className="img-uploader__submit" type="submit" value="send" />
-                
-            </form> */}
-            <button onClick={(e)=>dispatch(downloadFile(1))} style={{color: "black"}}>LoadImg</button>
+            </form>
         </div>
     )
 }

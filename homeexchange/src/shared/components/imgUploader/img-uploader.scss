@@ -1,14 +1,14 @@
 @import "../../shablons.scss";
 
 .img-uploader {
-  @include prity-bg;
-  overflow: hidden;
-  height: 300px;
-  width: 450px;
-  padding: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 450px;
+  height: 300px;
+  padding: 5px;
+  overflow: hidden;
+  @include prity-bg;
   &__form {
     display: flex;
     flex-direction: column;
@@ -17,12 +17,12 @@
     content: " ";
   }
   &__submit {
-    padding: 1px 10px 4px;
     box-sizing: border-box;
-    margin-top: 30px;
     width: fit-content;
-    font-size: 2rem;
+    margin-top: 30px;
+    padding: 1px 10px 4px;
     color: white;
+    font-size: 2rem;
     @include submit-btn;
   }
   &__preview {
@@ -31,8 +31,8 @@
   &__preimg {
     width: 230px;
     height: 230px;
-    border-radius: 50% !important;
-    background-repeat: no-repeat;
     object-fit: cover;
+    background-repeat: no-repeat;
+    border-radius: 50% !important;
   }
 }

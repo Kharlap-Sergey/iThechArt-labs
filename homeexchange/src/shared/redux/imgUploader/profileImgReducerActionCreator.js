@@ -2,10 +2,10 @@ import { CLEAR, SET} from "./types";
 
 export const clearProfileImgAction = () => ({type: CLEAR})
 
-export const setProfileImgAction = (file, profId) => ({
+export const setProfileImgAction = (file, profileId) => ({
     type: SET,
     payload: {
         file,
-        id: profId
+        profileId: profileId
     }
 })
