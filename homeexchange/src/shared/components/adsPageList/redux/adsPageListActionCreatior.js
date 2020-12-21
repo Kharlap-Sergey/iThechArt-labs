@@ -5,7 +5,6 @@ import { CLEAR, GET_ADS } from "./types";
 import {toastr} from "react-redux-toastr";
 
 export function getAds(page, userId, type) {
-  type = 0;
   return async dispatch => {
     try {
       dispatch(enablePageListActin());
