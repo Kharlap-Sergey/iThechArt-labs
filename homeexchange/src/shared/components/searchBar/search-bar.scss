@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata:700");
+
+.search-bar-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  height: 100px;
+  margin: auto;
+  .search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 4;
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    background: crimson;
+    border-radius: 50%;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
+    transition: all 1s;
+    // box-shadow: 0 0 25px 0 crimson;
+    &:hover {
+      cursor: pointer;
+    }
+    &::before {
+      position: absolute;
+      top: 22px;
+      right: 0;
+      bottom: 0;
+      left: 22px;
+      width: 12px;
+      height: 2px;
+      margin: auto;
+      background: white;
+      transform: rotate(45deg);
+      transition: all 0.5s;
+      content: "";
+    }
+    &::after {
+      position: absolute;
+      top: -5px;
+      right: 0;
+      bottom: 0;
+      left: -5px;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      border: 2px solid white;
+      border-radius: 50%;
+      transition: all 0.5s;
+      content: "";
+    }
+  }
+  input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    padding: 0 80px 0 20px;
+    color: white;
+    font-weight: bolder;
+    font-family: "Inconsolata", monospace;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 10px crimson;
+    // border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background: crimson;
+    border: 0;
+    border-radius: 30px;
+    outline: none;
+    box-shadow: 0 0 25px 0 crimson, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    // box-shadow: inset 0 0 25px 0 rgba(0, 0, 0, 0.5);
+    transition: all 1s;
+    &:hover {
+      cursor: pointer;
+    }
+    &:focus {
+      width: 300px;
+      cursor: text;
+      opacity: 1;
+    }
+    &:focus ~ .search {
+      right: -250px;
+      z-index: 6;
+      background: #151515;
+      &::before {
+        top: 0;
+        left: 0;
+        width: 25px;
+      }
+      &::after {
+        top: 0;
+        left: 0;
+        width: 25px;
+        height: 2px;
+        background: white;
+        border: 0;
+        border-radius: 0%;
+        transform: rotate(-45deg);
+      }
+    }
+    &::placeholder {
+      color: white;
+      font-weight: bolder;
+      opacity: 0.5;
+    }
+  }
+}

@@ -17,6 +17,7 @@ import Chat from './chat/Chat';
 import Sign from './sign/Sign';
 import Chats from './chats/Chats';
 import ImgUploader from "./shared/components/imgUploader/ImgUploader";
+import SearchBar from './shared/components/searchBar/SearchBar';
 function App() {
   return (
     <div className="app">
@@ -25,7 +26,7 @@ function App() {
           <div className="main">
             <Switch>
               <RouteCatcher>
-                <Route exact path={"/test"} component={ImgUploader} />
+                <Route exact path={"/test"} component={SearchBar} />
                 <Route exact path={path.profile.edit()} component={EditProfile} />
                 <Route exact path={path.ad()} component={Ad} />
                 <Route exact path={path.chat()} component={Chats} />
