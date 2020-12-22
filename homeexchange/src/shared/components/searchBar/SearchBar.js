@@ -10,7 +10,7 @@ function SearchBar({ onChange, val, onSearchClick, isOpen }) {
     >
       <input
         type="text"
-        placeholder="Search..."
+        placeholder="Search by location..."
         autoFocus={show || isOpen}
         value={val}
         onChange={(e) => onChange(e)}
