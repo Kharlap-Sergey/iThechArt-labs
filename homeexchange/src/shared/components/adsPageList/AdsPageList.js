@@ -57,6 +57,7 @@ class AdsPageList extends PureComponent {
   };
 
   handleFilterSwitch(e) {
+    e.preventDefault();
     console.log("e", e);
     const selectedId = +e.target.value;
 
