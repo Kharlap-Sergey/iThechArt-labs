@@ -1,10 +1,11 @@
-const api = "https://localhost:44370"
+const api = "https://localhost:44370";
 export const path = {
   home: "/",
-  login: '/login',
+  login: "/login",
+  sign: "/sign",
   registration: "/registration",
   /// ../chat/id:chatId
-  chat: (cahtId) => `/chat/id${cahtId ?? ":chatId"}`, 
+  chat: (cahtId) => `/chat/id${cahtId ?? ":chatId"}`,
   chatList: "/chats",
   ad: (id) => `/ad/id${id ?? ":id"}`,
   profile: {
@@ -13,33 +14,33 @@ export const path = {
   adapi: {
     ad: api + "/ad",
     update: api + "/ad/update",
-    create: ""
+    create: "",
   },
   accocunt: {
     account: api + "/account",
     login: api + "/account/login",
-  }
-}
+  },
+};
 
 export const pathApi = {
-  img:{
+  img: {
     send: () => api + "/img/addFile",
     get: (targetUserId) => api + `/img/get/${targetUserId}`,
   },
   profileRating: {
     get: (id) => api + `/rating/get/${id}`,
-    set: () => api+ "/rating/set"
+    set: () => api + "/rating/set",
   },
   notifications: {
     get: api + "/notification/getNotifications",
     delete: (id) => {
       return api + `/notification/deleteNotificaton/${id}`;
-    }
+    },
   },
 
   account: {
     registrate: api + "/account/registrate",
-    login: api + "/account/login"
+    login: api + "/account/login",
   },
 
   chat: {
@@ -51,10 +52,10 @@ export const pathApi = {
   ad: {
     loadPage: () => api + `/ad/getadspage`,
     update: api + "/ad/update",
-    get: (adId) => api+ `/Ad/get/${adId}`,
+    get: (adId) => api + `/Ad/get/${adId}`,
   },
-}
+};
 
 export const pathHub = {
   chat: api + "/hub/chat",
-}
+};

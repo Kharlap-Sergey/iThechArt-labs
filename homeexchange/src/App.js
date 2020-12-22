@@ -12,37 +12,40 @@ import RouteCatcher from "./shared/components/routeCatcher/RouteCatcher";
 import EditProfile from "./editProfile/EditProfile";
 import AdCreation from "./adCreation/AdCreation";
 import AdEditor from "./adEditor/AdEditor";
-import { path } from './shared/utils/path';
-import Chat from './chat/Chat';
-import Sign from './sign/Sign';
-import Chats from './chats/Chats';
+import { path } from "./shared/utils/path";
+import Chat from "./chat/Chat";
+import Sign from "./sign/Sign";
+import Chats from "./chats/Chats";
 import ImgUploader from "./shared/components/imgUploader/ImgUploader";
-import SearchBar from './shared/components/searchBar/SearchBar';
+import SearchBar from "./shared/components/searchBar/SearchBar";
 function App() {
   return (
     <div className="app">
       <Router>
-          <NavBar />
-          <div className="main">
-            <Switch>
-              <RouteCatcher>
-                <Route exact path={"/test"} component={SearchBar} />
-                <Route exact path={path.profile.edit()} component={EditProfile} />
-                <Route exact path={path.ad()} component={Ad} />
-                <Route exact path={path.chat()} component={Chats} />
-                <Route exact path={path.chat+"/id:id"} component={Chat} />
-                <Route exact path="/ad/create" component={AdCreation} />
-                <Route exact path="/ad/edite/id:id" component={AdEditor} />
-                <Route exact path="/profile/:id" component={Profile} />
-                <Route exact path={path.login}>
-                  <Sign type="login" />
-                </Route>
-                <Route exact path={path.registration}>
-                  <Sign type="signup" />
-                </Route>
-                <Route exact path={path.home} component={Home} />
-              </RouteCatcher>
-            </Switch>
+        <NavBar />
+        <div className="main">
+          <Switch>
+            <RouteCatcher>
+              <Route exact path={"/test"} component={SearchBar} />
+              <Route exact path={path.profile.edit()} component={EditProfile} />
+              <Route exact path={path.ad()} component={Ad} />
+              <Route exact path={path.chat()} component={Chats} />
+              <Route exact path={path.chat + "/id:id"} component={Chat} />
+              <Route exact path="/ad/create" component={AdCreation} />
+              <Route exact path="/ad/edite/id:id" component={AdEditor} />
+              <Route exact path="/profile/:id" component={Profile} />
+              <Route exact path={path.sign}>
+                <Sign type="login" />
+              </Route>
+              <Route exact path={path.login}>
+                <Sign type="login" />
+              </Route>
+              <Route exact path={path.registration}>
+                <Sign type="signup" />
+              </Route>
+              <Route exact path={path.home} component={Home} />
+            </RouteCatcher>
+          </Switch>
         </div>
       </Router>
     </div>
