@@ -1,5 +1,6 @@
 ﻿using HomeexchangeApi.Domain.Abstract;
 using HomeexchangeApi.Domain.Entities;
+using HomeexchangeApi.GlobalErrorHandling.Exceptions;
 using HomeexchangeApi.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,7 +34,7 @@ namespace HomeexchangeApi.Services
             int imgId = user.ProfileImgId;
             if(imgId <= 0)
             {
-                throw new Exception("coldn't find the profile img");
+                throw new ImgNotFoundException("coldn't find the profile img");
             }
 
             var img = imgRepository.Get(i => i.Id == imgId).FirstOrDefault();

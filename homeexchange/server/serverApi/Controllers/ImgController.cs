@@ -36,16 +36,9 @@ namespace HomeexchangeApi.Controllers
         [HttpGet("{userId}")]
         public IActionResult Get(int userId)
         {
-            try
-            {
-                var file = imgService.GetPrfileImg(userId);
-                //return Ok();
-                return file;
-            }
-            catch(Exception e)
-            {
-                return null;
-            }
+
+            var file = imgService.GetPrfileImg(userId);
+            return file;
         }
 
         int GetUserId()

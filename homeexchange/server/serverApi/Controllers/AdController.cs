@@ -66,7 +66,6 @@ namespace HomeexchangeApi.Controllers
         {
             var userId = GetCommitter();
             var committer = userService.FindById(userId);
-
             adService.Update(ad, committer.Id);
 
             return Ok();

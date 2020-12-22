@@ -69,6 +69,12 @@ namespace HomeexchangeApi.GlobalErrorHandling
                 message = e.Message;
                 statusCode = HttpStatusCode.Forbidden;
             }
+            else if (exception is ImgNotFoundException)
+            {
+                var e = exception as ImgNotFoundException;
+                message = e.Message;
+                statusCode = HttpStatusCode.NotFound;
+            }
 
             context.Response.StatusCode = (int)statusCode;
             return context.Response.WriteAsync(new ErrorDetails()
