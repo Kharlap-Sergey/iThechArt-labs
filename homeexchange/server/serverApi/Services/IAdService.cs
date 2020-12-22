@@ -5,11 +5,11 @@ namespace HomeexchangeApi.Services
 {
     public interface IAdService
     {
-        public Ad Create(Ad ad, User author);
+        public Ad Create(Ad ad, int committerId);
         public Ad FindById(int adId);
         public AdsPage GetAdsPageShortDesc(GetAdsPageRequest request);
-        public Ad Delete(int adId, User commiter);
-        public Ad Update(Ad ad, User commiter);
-        public Ad ReplyOnAd(Ad ad, User responder, string message = "");
+        public Ad Delete(int adId, int committerId);
+        public Ad Update(Ad ad, int committerId);
+        public Ad ReplyOnAd(Ad ad, int committerId, string message = "");
     }
 }

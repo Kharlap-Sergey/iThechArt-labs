@@ -50,7 +50,8 @@ namespace HomeexchangeApi.GlobalErrorHandling
                 var e = exception as InvalidCredentialExeption;
                 message = e.Message;
                 statusCode = HttpStatusCode.Unauthorized;
-            }else if(exception is DuplicateEmailException)
+            }
+            else if (exception is DuplicateEmailException)
             {
                 var e = exception as DuplicateEmailException;
                 message = "this email is already taken";
@@ -60,6 +61,12 @@ namespace HomeexchangeApi.GlobalErrorHandling
             {
                 var e = exception as DuplicateEmailException;
                 message = "this nickname is already taken";
+                statusCode = HttpStatusCode.Forbidden;
+            }
+            else if (exception is UnauthorizedAccessException)
+            {
+                var e = exception as UnauthorizedAccessException;
+                message = e.Message;
                 statusCode = HttpStatusCode.Forbidden;
             }
 

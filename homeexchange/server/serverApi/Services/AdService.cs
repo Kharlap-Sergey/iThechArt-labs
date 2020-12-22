@@ -28,21 +28,23 @@ namespace HomeexchangeApi.Services
             this.notificationService = notificationService;
         }
 
-        public Ad Create(Ad ad, User author)
+        public Ad Create(Ad ad, int committerId)
         {
-            ad.Author = author;
+            var user = userContext.FindById(committerId);
+
+            ad.AuthorId = committerId;
             ad.DateOfPublication = DateTime.Now;
 
             return adRepository.Create(ad);
         }
 
-        public Ad Delete(int adId, User commiter)
+        public Ad Delete(int adId, int committerId)
         {
             var ad = adRepository.FindById(adId);
 
-            if (ad.AuthorId != commiter.Id)
+            if (ad.AuthorId != committerId)
             {
-                throw new UnauthorizedAccessException("you do not have permition");
+                throw new PermissionException("to remove an ad");
             }
 
             return adRepository.Remove(ad);
@@ -105,9 +107,9 @@ namespace HomeexchangeApi.Services
             return result;
         }
 
-        public Ad Update(Ad ad, User commiter)
+        public Ad Update(Ad ad, int committerId)
         {
-            if (commiter.Id != ad.AuthorId)
+            if (committerId != ad.AuthorId)
             {
                 throw new UnauthorizedAccessException("access denied");
             }
@@ -115,15 +117,15 @@ namespace HomeexchangeApi.Services
             return adRepository.Update(ad);
         }
 
-        public Ad ReplyOnAd(Ad ad, User responder, string message = "")
+        public Ad ReplyOnAd(Ad ad, int committerId, string message = "")
         {
             if(ad.IsResponded)
             {
-                throw new AdAlreadyHasRepliedException($"the {ad.Id} alreade has been responded");
+                throw new AdAlreadyHasRepliedException($"the ad alreade has been responded");
             }
 
-            var chat = chatService.GetChatOrCreateForTowMembers(responder.Id, ad.AuthorId);
-            var chatMess = chatService.AddReply(chat.Id, responder.Id, $"{ad.Id}");
+            var chat = chatService.GetChatOrCreateForTowMembers(committerId, ad.AuthorId);
+            var chatMess = chatService.AddReply(chat.Id, committerId, $"{ad.Id}");
             var notification = new Notification
             {
                 TargetUserId = ad.AuthorId,
