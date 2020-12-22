@@ -54,7 +54,7 @@ class Profile extends PureComponent {
       <div className="profile">
         <div className="profile__inf">
           <AccountIformation {...this.props.profile}>
-            {this.props.userId==this.state.userId ? (
+            {this.props.userId == this.state.userId ? (
               <>
                 <div className="profile__open-btn-wrapper">
                   <button
@@ -66,7 +66,7 @@ class Profile extends PureComponent {
                 </div>
                 {this.state.isImgModalOpen ? (
                   <ImgModal onClose={this.handleCloseImgModalClick}>
-                    <ImgUploader />
+                    <ImgUploader profileId={this.props.userId} />
                   </ImgModal>
                 ) : null}
               </>

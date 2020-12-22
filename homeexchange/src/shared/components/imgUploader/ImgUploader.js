@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {useDispatch} from "react-redux"
 import "./img-uploader.scss";
 import {downloadFile, sendFile} from '../../redux/imgUploader/imgUploader'
-function ImgUploader() {
+function ImgUploader({profileId}) {
     const [imgSrc, setImgSrc] = useState(null);
     const [imgFile, setImgFile] = useState(null);
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ function ImgUploader() {
         let fd = new FormData();
         fd.append("imgData", imgFile);
         console.log('', [...fd]);
-        dispatch(sendFile(fd))
+        dispatch(sendFile(fd, profileId))
     }
 
     const handleSelection = (e) => {
