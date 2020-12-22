@@ -29,7 +29,7 @@ namespace HomeexchangeApi.Controllers
         [Authorize]
         public IActionResult GetChatList()
         {
-            var userId = GetUserId();
+            var userId = GetCommitterId();
             var chatList = chatService.GetChatResponsesList(userId); 
             return Json(chatList);
         }
@@ -50,7 +50,7 @@ namespace HomeexchangeApi.Controllers
             return Json(chatMessages);
         }
 
-        int GetUserId()
+        int GetCommitterId()
         {
             return int.Parse(User.Identity.Name);
         }

@@ -1,5 +1,6 @@
 ﻿using HomeexchangeApi.Domain.Abstract;
 using HomeexchangeApi.Domain.Entities;
+using HomeexchangeApi.Exceptions;
 using HomeexchangeApi.Hubs;
 using HomeexchangeApi.Requests;
 using HomeexchangeApi.Responses;
@@ -49,13 +50,6 @@ namespace HomeexchangeApi.Services
                 if (subscribers.ContainsKey(memberId))
                 {
                     recievers.Add(subscribers[memberId]);
-                    //var not = new Notification
-                    //{
-                    //    Type = Notification.NotificationType.NewMessage,
-                    //    TargetUserId = memberId,
-                    //    ChatId = mes.ChatId
-                    //};
-                    //notificationService.Create(not);
                 }
             }
 
@@ -123,9 +117,13 @@ namespace HomeexchangeApi.Services
             return members.Select(cm => cm.UserId);
         }
 
-        public IEnumerable<ChatMessage> GetChatMessages(int chatId)
+        public IEnumerable<ChatMessage> GetChatMessages(int chatId, int commiterId)
         {
-           // var result = chatMessageRepository.Get(chatMessage => chatMessage.ChatId == chatId);
+            var chatMem = chatMemberRepository.Get( cm => cm.ChatId == chatId && cm.UserId == commiterId).FirstOrDefault();
+            if(chatMem == null)
+            {
+                throw new PermissionException("couldn't load not yours messages");
+            }
             var result = chatMessageRepository.Get(m => m.ChatId == chatId);
             return result;
         }
