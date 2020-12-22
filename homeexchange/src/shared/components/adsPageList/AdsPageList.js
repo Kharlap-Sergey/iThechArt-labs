@@ -83,12 +83,20 @@ class AdsPageList extends PureComponent {
   }
   handleSearchClick(e) {
     console.log("e", e);
-    this.setState((state) => {
-      return { ...state, isOpen: !state.isOpen, searchVal: "" };
-    },
-    () => {
-      if(!this.state.isOpen) this.loadPage();
-    });
+    if (this.state.searchVal.length > 0) {
+      this.setState(
+        (state) => {
+          return { ...state, isOpen: !state.isOpen, searchVal: "" };
+        },
+        () => {
+          if (!this.state.isOpen) this.loadPage();
+        }
+      );
+    } else {
+      this.setState((state) => {
+        return { ...state, isOpen: !state.isOpen };
+      });
+    }
   }
   render() {
     console.log("render");
