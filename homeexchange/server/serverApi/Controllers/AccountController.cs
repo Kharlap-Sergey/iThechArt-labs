@@ -14,21 +14,19 @@ namespace HomeexchangeApi.Controllers
     {
         readonly IAccounService accounService;
         readonly IUserService userService;
-        readonly IExceptiionHandler exceptiionHandler;
         public AccountController(
              IUserService userService,
-             IAccounService accounService,
-             IExceptiionHandler exceptiionHandler
+             IAccounService accounService
             )
         {
             this.userService = userService;
             this.accounService = accounService;
-            this.exceptiionHandler = exceptiionHandler;
         }
 
         [HttpPost]
         public IActionResult Login([FromBody] Account account)
         {
+            throw new InvalidCredentialExeption("somefalksdfjashdf asdpfia;lkanb;");
             LoginResponse response;
             try
             {
@@ -37,7 +35,7 @@ namespace HomeexchangeApi.Controllers
             }
             catch (Exception e)
             {
-                return exceptiionHandler.GetResultForException(e);
+                return new BadRequestResult();
             }
         }
 

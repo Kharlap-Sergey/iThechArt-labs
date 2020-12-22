@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using HomeexchangeApi.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using HomeexchangeApi.GlobalErrorHandling;
 
 namespace HomeexchangeApi
 {
@@ -123,6 +124,7 @@ namespace HomeexchangeApi
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
+            app.ConfigureExceptionHandler();
             app.UseHttpsRedirection();
             app.UseRouting();
             //include CORS
