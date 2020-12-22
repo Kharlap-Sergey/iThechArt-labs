@@ -7,5 +7,8 @@ namespace HomeexchangeApi.Exceptions
 {
     public class AdAlreadyHasRepliedException : Exception
     {
+        public AdAlreadyHasRepliedException(string message)
+        : base(message)
+        { }
     }
 }

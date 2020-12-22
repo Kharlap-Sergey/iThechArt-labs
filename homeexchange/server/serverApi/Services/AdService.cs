@@ -42,7 +42,7 @@ namespace HomeexchangeApi.Services
 
             if (ad.AuthorId != commiter.Id)
             {
-                throw new Exception("you do not have permition");
+                throw new UnauthorizedAccessException("you do not have permition");
             }
 
             return adRepository.Remove(ad);
@@ -109,7 +109,7 @@ namespace HomeexchangeApi.Services
         {
             if (commiter.Id != ad.AuthorId)
             {
-                throw new Exception();
+                throw new UnauthorizedAccessException("access denied");
             }
 
             return adRepository.Update(ad);
@@ -119,7 +119,7 @@ namespace HomeexchangeApi.Services
         {
             if(ad.IsResponded)
             {
-                throw new AdAlreadyHasRepliedException();
+                throw new AdAlreadyHasRepliedException($"the {ad.Id} alreade has been responded");
             }
 
             var chat = chatService.GetChatOrCreateForTowMembers(responder.Id, ad.AuthorId);

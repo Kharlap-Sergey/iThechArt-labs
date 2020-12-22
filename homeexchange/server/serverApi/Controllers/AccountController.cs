@@ -12,14 +12,18 @@ namespace HomeexchangeApi.Controllers
     [Route("[controller]/{action}")]
     public sealed class AccountController : Controller
     {
-        IAccounService accounService;
-        IUserService userService;
+        readonly IAccounService accounService;
+        readonly IUserService userService;
+        readonly IExceptiionHandler exceptiionHandler;
         public AccountController(
              IUserService userService,
-             IAccounService accounService)
+             IAccounService accounService,
+             IExceptiionHandler exceptiionHandler
+            )
         {
             this.userService = userService;
             this.accounService = accounService;
+            this.exceptiionHandler = exceptiionHandler;
         }
 
         [HttpPost]
@@ -29,12 +33,12 @@ namespace HomeexchangeApi.Controllers
             try
             {
                 response = accounService.Login(account);
+                return Json(response);
             }
-            catch (InvalidCredentialExeption e)
+            catch (Exception e)
             {
-                return NotFound(new { errorText = e.Message });
+                return exceptiionHandler.GetResultForException(e);
             }
-            return Json(response);
         }
 
         [HttpPost]
