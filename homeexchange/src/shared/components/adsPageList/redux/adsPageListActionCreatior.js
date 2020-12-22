@@ -1,48 +1,47 @@
-import { enablePageListActin, disableAllAction } from "../../../redux/loader/loaderActionCreator";
+import {
+  enablePageListActin,
+  disableAllAction,
+} from "../../../redux/loader/loaderActionCreator";
 import { pathApi } from "../../../utils/path";
 import { requestWrapper } from "../../../utils/requestWrapper";
 import { CLEAR, GET_ADS } from "./types";
-import {toastr} from "react-redux-toastr";
+import { toastr } from "react-redux-toastr";
 
 export function getAds(page, type, searchString, authorId) {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       dispatch(enablePageListActin());
-      const url = pathApi.ad.loadPage(page);
+      const url = pathApi.ad.loadPage();
       const data = {
-        type,
+        filter: { type, authorId },
         searchString,
-        authorId
-      }
-      const response = await requestWrapper.post(url,data);
+        page,
+      };
+      const response = await requestWrapper.post(url, data);
       if (response.ok) {
         const data = await response.json();
         console.log(data);
         dispatch(setAds(data));
       } else {
-        
       }
-    } catch(e) {
-      toastr.error("try again later", e.message)
+    } catch (e) {
+      toastr.error("try again later", e.message);
     } finally {
       dispatch(disableAllAction());
     }
-  }
+  };
 }
-
 
 export function setAds(ads) {
   return {
     type: GET_ADS,
-    payload: ads
-  }
+    payload: ads,
+  };
 }
-
 
 export function clearAdsPageAction(ads) {
   return {
     type: CLEAR,
-    payload: ads
-  }
+    payload: ads,
+  };
 }
-

@@ -1,6 +1,7 @@
 ﻿using HomeexchangeApi.Domain.Abstract;
 using HomeexchangeApi.Exceptions;
 using HomeexchangeApi.Models;
+using HomeexchangeApi.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,8 +49,10 @@ namespace HomeexchangeApi.Services
         {
             return adRepository.FindById(adId);
         }
-        public AdsPage GetAdsPageShortDesc(int page, AdFilter adFilter)
+        public AdsPage GetAdsPageShortDesc(GetAdsPageRequest request)
         {
+            int page = request.Page;
+            AdFilter adFilter = request.Filter;
             int pageSize = 4;
             int descriptionLength = 20;
 

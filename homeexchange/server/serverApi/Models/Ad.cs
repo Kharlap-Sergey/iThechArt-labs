@@ -45,16 +45,10 @@ namespace HomeexchangeApi.Models
             if (adType == AdType.both) return true;
             return adType == Type;
         }
-        bool IsSearchStringMatch(string searchString)
-        {
-            return true;
-        }
         public bool IsMatch(AdFilter filter) {
             bool isAuthorMatch = IsAuthorMatch(filter.AuthorId);
             bool isTypeMatch = IsTypeMatch(filter.Type);
-            bool isSearchStringMatch = IsSearchStringMatch(filter.SearchString);
-
-            return isAuthorMatch && isTypeMatch && isSearchStringMatch;
+            return isAuthorMatch && isTypeMatch;
         }
     }
 }

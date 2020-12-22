@@ -13,8 +13,5 @@ namespace HomeexchangeApi.Models
 
         [JsonPropertyName("authorId")]
         public int? AuthorId { set; get; }
-
-        [JsonPropertyName("searchString")]
-        public string SearchString { set; get; }
     }
 }

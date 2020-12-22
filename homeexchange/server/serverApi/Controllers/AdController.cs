@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using HomeexchangeApi.Models;
 using HomeexchangeApi.Services;
+using HomeexchangeApi.Requests;
 
 namespace HomeexchangeApi.Controllers
 {
@@ -37,9 +38,9 @@ namespace HomeexchangeApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult GetAdsPage([FromQuery] int page,[FromBody] AdFilter filter)
+        public IActionResult GetAdsPage([FromBody] GetAdsPageRequest request)
         {
-            return Json(adService.GetAdsPageShortDesc(page, filter));
+            return Json(adService.GetAdsPageShortDesc(request));
         }
 
         [HttpPost("{adId}")]
