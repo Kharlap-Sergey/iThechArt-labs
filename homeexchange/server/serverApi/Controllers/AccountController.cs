@@ -26,41 +26,26 @@ namespace HomeexchangeApi.Controllers
         [HttpPost]
         public IActionResult Login([FromBody] Account account)
         {
-            throw new InvalidCredentialExeption("somefalksdfjashdf asdpfia;lkanb;");
             LoginResponse response;
-            try
-            {
-                response = accounService.Login(account);
-                return Json(response);
-            }
-            catch (Exception e)
-            {
-                return new BadRequestResult();
-            }
+            response = accounService.Login(account);
+            return Json(response);
         }
 
         [HttpPost]
         public IActionResult Registrate([FromBody] User user)
         {
-            try
-            {
-                user = accounService.Registrate(user);
-                var res = Json(user);
-                return res;
-            }
-            catch (Exception)
-            {
-                return new StatusCodeResult(400);
-            }
+            user = accounService.Registrate(user);
+            var res = Json(user);
+            return res;
         }
 
         [HttpPost]
         [Authorize]
         public IActionResult Update([FromBody] User user)
         {
-            var commiterId = int.Parse(User.Identity.Name);
+            var commiterId = GetCommitter();
             user = userService.Update(user, commiterId);
-            return Ok();
+            return Json(user);
         }
 
         [HttpGet("{userId}")]
@@ -68,6 +53,11 @@ namespace HomeexchangeApi.Controllers
         {
             var user = userService.GetProfile(userId);
             return Json(user);
+        }
+
+        int GetCommitter()
+        {
+            return int.Parse(User.Identity.Name);
         }
 
     }

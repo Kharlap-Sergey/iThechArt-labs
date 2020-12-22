@@ -19,16 +19,9 @@ namespace HomeexchangeApi.Domain.Concrete
 
         public TEntity Create(TEntity item)
         {
-            try
-            {
-                item = entities.Add(item).Entity;
-                dbContext.SaveChanges();
-                return item;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            item = entities.Add(item).Entity;
+            dbContext.SaveChanges();
+            return item;
         }
 
         public TEntity FindById(int id)

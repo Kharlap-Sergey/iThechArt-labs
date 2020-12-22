@@ -1,8 +1,10 @@
 ﻿using HomeexchangeApi.Domain.Abstract;
 using HomeexchangeApi.Exceptions;
+using HomeexchangeApi.GlobalErrorHandling.Exceptions;
 using HomeexchangeApi.Infrastructure;
 using HomeexchangeApi.Models;
 using HomeexchangeApi.Responses;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,9 @@ namespace HomeexchangeApi.Services
     public class AccounService : IAccounService
     {
         IGenericRepository<User> userRepository;
-        public AccounService(IGenericRepository<User> userRepository)
+        public AccounService(
+            IGenericRepository<User> userRepository
+            )
         {
             this.userRepository = userRepository;
         }
@@ -38,7 +42,21 @@ namespace HomeexchangeApi.Services
 
         public User Registrate(User user)
         {
-            return userRepository.Create(user);
+            try
+            {
+                return userRepository.Create(user);
+            }
+            catch (DbUpdateException e)
+            {
+                if (e.InnerException.Message.Contains("Email"))
+                {
+                    throw new DuplicateEmailException("try to registrate user");
+                }else if (e.InnerException.Message.Contains("Nickanme"))
+                {
+                    throw new DuplicateNicknameException("try to registrate user");
+                }
+                throw e;
+            }
         }
 
         private ClaimsIdentity GetIdentity(Account account)
@@ -47,13 +65,14 @@ namespace HomeexchangeApi.Services
             && u.Password == account.Password).FirstOrDefault();
             if (person == null)
             {
-                throw new InvalidCredentialExeption("Invalid username or password.");
+                throw new InvalidCredentialExeption("Invalid username or password");
             }
 
             var claims = new List<Claim>
                 {
                     new Claim(ClaimsIdentity.DefaultNameClaimType, person.Id.ToString()),
                 };
+
             ClaimsIdentity claimsIdentity =
             new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
                 ClaimsIdentity.DefaultRoleClaimType);

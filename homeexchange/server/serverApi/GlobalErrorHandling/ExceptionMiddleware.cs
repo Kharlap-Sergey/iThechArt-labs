@@ -1,4 +1,5 @@
 ﻿using HomeexchangeApi.Exceptions;
+using HomeexchangeApi.GlobalErrorHandling.Exceptions;
 using HomeexchangeApi.GlobalErrorHandling.Models;
 using HomeexchangeApi.Logger;
 using Microsoft.AspNetCore.Http;
@@ -40,16 +41,29 @@ namespace HomeexchangeApi.GlobalErrorHandling
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
-            int statusCode = (int)HttpStatusCode.InternalServerError;
+            var statusCode = HttpStatusCode.InternalServerError;
             string message = "Internal Server Error from the custom middleware.";
 
             //code logic here
             if (exception is InvalidCredentialExeption)
             {
-                var t = 1;
+                var e = exception as InvalidCredentialExeption;
+                message = e.Message;
+                statusCode = HttpStatusCode.Unauthorized;
+            }else if(exception is DuplicateEmailException)
+            {
+                var e = exception as DuplicateEmailException;
+                message = "this email is already taken";
+                statusCode = HttpStatusCode.Forbidden;
+            }
+            else if (exception is DuplicateNicknameException)
+            {
+                var e = exception as DuplicateEmailException;
+                message = "this nickname is already taken";
+                statusCode = HttpStatusCode.Forbidden;
             }
 
-            context.Response.StatusCode = statusCode;
+            context.Response.StatusCode = (int)statusCode;
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,

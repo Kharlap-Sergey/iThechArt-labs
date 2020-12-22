@@ -8,7 +8,7 @@ namespace HomeexchangeApi.Exceptions
     public sealed class PermissionException : Exception
     {
         public PermissionException(string message)
-       : base(message)
+       : base("don't have permission "+ message)
         { }
     }
 }

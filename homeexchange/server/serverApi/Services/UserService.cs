@@ -1,4 +1,5 @@
 ﻿using HomeexchangeApi.Domain.Abstract;
+using HomeexchangeApi.Exceptions;
 using HomeexchangeApi.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,9 @@ namespace HomeexchangeApi.Services
     public sealed class UserService : IUserService
     {
         IGenericRepository<User> userRepository;
-        public UserService(IGenericRepository<User> userRepository)
+        public UserService(
+            IGenericRepository<User> userRepository
+            )
         {
             this.userRepository = userRepository;
         }
@@ -18,7 +21,6 @@ namespace HomeexchangeApi.Services
         {
             return userRepository.Create(user);
         }
-
 
         public User FindById(int userId)
         {
@@ -36,7 +38,7 @@ namespace HomeexchangeApi.Services
         {
             if (commiterId != user.Id)
             {
-                throw new Exception();
+                throw new PermissionException("data can't be updated");
             }
 
             user.Password = userRepository.Get(u => u.Id == commiterId).FirstOrDefault().Password;
