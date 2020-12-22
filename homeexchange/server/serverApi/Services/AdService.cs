@@ -13,14 +13,17 @@ namespace HomeexchangeApi.Services
     {
         IGenericRepository<Ad> adRepository;
         INotificationService notificationService;
+        IGenericRepository<User> userContext;
         IChatService chatService;
         public AdService(
                 IGenericRepository<Ad> adContext,
+                IGenericRepository<User> userContext,
                 IChatService chatService,
                 INotificationService notificationService
                         )
         {
             adRepository = adContext;
+            this.userContext = userContext;
             this.chatService = chatService;
             this.notificationService = notificationService;
         }
@@ -49,15 +52,40 @@ namespace HomeexchangeApi.Services
         {
             return adRepository.FindById(adId);
         }
+
+        static bool IsKeyWordPresent(Ad ad, User Author, string keyWord)
+        {
+            return keyWord =="" || keyWord == Author.City.ToLower() || keyWord == Author.Country.ToLower();
+        }
+        static bool IsMatchToSearchString(Ad ad, User author, string searchString)
+        {
+            searchString = searchString.ToLower();
+            var keyWords = searchString.Split();
+            if (keyWords.Length == 0) return true;
+            bool res = false;
+
+            foreach(var keyWord in keyWords)
+            {
+                if (res) break;
+
+                res = IsKeyWordPresent(ad, author, keyWord);
+            }
+            return res;
+        }
         public AdsPage GetAdsPageShortDesc(GetAdsPageRequest request)
         {
             int page = request.Page;
             AdFilter adFilter = request.Filter;
+            string searchString = request.SearchString;
             int pageSize = 4;
             int descriptionLength = 20;
 
             var ads = adRepository
-                .Get(ad => !ad.IsResponded && ad.IsMatch(adFilter))
+                .Get(ad => !ad.IsResponded && ad.IsMatch(adFilter) 
+                                           && IsMatchToSearchString(
+                                                ad,
+                                                userContext.FindById(ad.AuthorId),
+                                                searchString))
                 .OrderByDescending(ad => ad.DateOfPublication).ToList();
 
             var adsBuf = ads.Skip((page - 1) * pageSize).Take(pageSize);
