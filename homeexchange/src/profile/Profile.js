@@ -11,15 +11,19 @@ import "./profile.scss";
 import { loadChatId } from "../shared/redux/chat/chat";
 import { path } from "../shared/utils/path";
 import bgImg from "../shared/imgs/profile.svg";
-import StarRating from './../shared/components/starRating/StarRating';
+import StarRating from "./../shared/components/starRating/StarRating";
 import RatingControl from "./components/RatingControl";
+import ImgModal from "./components/ImgModal";
+import ImgUploader from './../shared/components/imgUploader/ImgUploader';
 class Profile extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { userId: +this.props.match.params.id };
+    this.state = { userId: +this.props.match.params.id, isImgModalOpen: false };
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleToChatClick = this.handleToChatClick.bind(this);
+    this.handleOpenImgModalClick = this.handleOpenImgModalClick.bind(this);
+    this.handleCloseImgModalClick = this.handleCloseImgModalClick.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +34,12 @@ class Profile extends PureComponent {
     this.props.cleareProfileAction();
   }
 
+  handleOpenImgModalClick(e) {
+    this.setState({ isImgModalOpen: true });
+  }
+  handleCloseImgModalClick(e) {
+    this.setState({ isImgModalOpen: false });
+  }
   handleToChatClick(event) {
     console.log(this.state.userId, this.props.userId);
     this.props.loadChatId(this.state.userId, this.props.userId);
@@ -44,7 +54,17 @@ class Profile extends PureComponent {
       <div className="profile">
         <div className="profile__inf">
           <AccountIformation {...this.props.profile}>
-            <RatingControl profileId = {this.state.userId}/>
+            {this.props.userId ? (
+              <>
+                <button onClick={this.handleOpenImgModalClick}>open</button>
+                {this.state.isImgModalOpen ? (
+                  <ImgModal onClose={this.handleCloseImgModalClick}>
+                    <ImgUploader />
+                  </ImgModal>
+                ) : null}
+              </>
+            ) : null}
+            <RatingControl profileId={this.state.userId} />
             {this.state.userId == this.props.userId ? (
               <button
                 className="profile__edit-btn"

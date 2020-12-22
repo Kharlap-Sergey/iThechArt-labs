@@ -1,0 +1,44 @@
+.img-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  &__body {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 5px;
+  }
+  &__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  &__close-btn {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    background-color: crimson;
+    border: 0;
+    border-radius: 50% !important;
+    outline: none !important;
+    box-shadow: 0 0 25px 0 crimson, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+
+    div {
+      position: absolute;
+      top: -13px;
+      left: 8px;
+      color: white;
+      font-size: 4rem;
+      transform: rotate(45deg);
+    }
+  }
+}
