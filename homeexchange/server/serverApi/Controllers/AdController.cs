@@ -22,7 +22,7 @@ namespace HomeexchangeApi.Controllers
         [Authorize]
         public IActionResult Create([FromBody] Ad ad)
         {
-            var authorId = int.Parse(User.Identity.Name);
+            var authorId = GetCommitter();
             var author = userService.FindById(authorId);
 
             return Json(adService.Create(ad, author));
@@ -36,21 +36,17 @@ namespace HomeexchangeApi.Controllers
             return Json(ad);
         }
 
-        [HttpGet("{type=0}/{page=1}/{userId=-1}")]
-        public IActionResult GetAdsPage(int userId, int page, int type)
+        [HttpPost]
+        public IActionResult GetAdsPage([FromQuery] int page,[FromBody] AdFilter filter)
         {
-            User forUser = userId == -1
-                   ? null
-                   : userService.FindById(userId);
-
-            return Json(adService.GetAdsPageShortDesc(page, forUser, type));
+            return Json(adService.GetAdsPageShortDesc(page, filter));
         }
 
         [HttpPost("{adId}")]
         [Authorize]
         public IActionResult Reply(int adId)
         {
-            var userId = int.Parse(User.Identity.Name);
+            var userId = GetCommitter();
             var responder = userService.FindById(userId);
             var ad = adService.FindById(adId);
             return Json(adService.ReplyOnAd(ad, responder));
@@ -60,7 +56,7 @@ namespace HomeexchangeApi.Controllers
         [Authorize]
         public IActionResult Delete(int adId)
         {
-            var userId = int.Parse(User.Identity.Name);
+            var userId = GetCommitter();
             var committer = userService.FindById(userId);
             var ad = adService.Delete(adId, committer);
             return new OkResult();
@@ -69,12 +65,17 @@ namespace HomeexchangeApi.Controllers
         [Authorize]
         public IActionResult Update([FromBody] Ad ad)
         {
-            var userId = int.Parse(User.Identity.Name);
+            var userId = GetCommitter();
             var committer = userService.FindById(userId);
 
             adService.Update(ad, committer);
 
             return Ok();
+        }
+
+        int GetCommitter()
+        {
+            return int.Parse(User.Identity.Name);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace HomeexchangeApi.Hubs
             return Subscribers;
         }
 
-        public async Task Send(Message message)
+        public async Task Send(MessageRequest message)
         {
             var mes = chatService.AddMessage(message, GetCommitterId());
         }

@@ -11,7 +11,7 @@ namespace HomeexchangeApi.Services
         public IEnumerable<ChatListItemResponse> GetChatResponsesList(int userId);
         public IEnumerable<int> GetChatMembersId(int chatId);
 
-        public ChatMessage AddMessage(Message message, int comnitterId);
+        public ChatMessage AddMessage(MessageRequest message, int comnitterId);
         public ChatMessage AddReply(int chatId, int comnitterId, string message);
         public Chat CreateChat(string title);
 

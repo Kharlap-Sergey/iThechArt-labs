@@ -68,7 +68,7 @@ namespace HomeexchangeApi.Services
             SendMessageToChat(chatMessage);
             return chatMessage;
         } 
-        public ChatMessage AddMessage(Message message, int comnitterId)
+        public ChatMessage AddMessage(MessageRequest message, int comnitterId)
         {
             var chatMessage = new ChatMessage
             {

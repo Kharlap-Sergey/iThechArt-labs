@@ -10,7 +10,7 @@ function Filter({ type, onChange }) {
         id="filter-all"
         name="filter"
         value={0}
-        onClick={(e) => {onChange(e)}}
+        onChange={(e) => {onChange(e)}}
       />
       <label for="filter-rent">rent</label>
       <input
@@ -19,7 +19,7 @@ function Filter({ type, onChange }) {
         id="filter-rent"
         name="filter"
         value={1}
-        onClick={(e) => {onChange(e)}}
+        onChange={(e) => {onChange(e)}}
       />
       <label for="filter-rent">lease</label>
       <input
@@ -28,7 +28,7 @@ function Filter({ type, onChange }) {
         id="filter-lease"
         name="filter"
         value={2}
-        onClick={(e) => {onChange(e)}}
+        onChange={(e) => {onChange(e)}}
       />
     </div>
   );

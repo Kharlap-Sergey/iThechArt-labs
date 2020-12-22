@@ -49,7 +49,7 @@ export const pathApi = {
   },
 
   ad: {
-    loadPage: (page, userId, type) => api + `/ad/getadspage/${type}/${page}/${userId ?? ""}`,
+    loadPage: (page) => api + `/ad/getadspage?page=${page}`,
     update: api + "/ad/update",
     get: (adId) => api+ `/Ad/get/${adId}`,
   },

@@ -4,13 +4,17 @@ import { requestWrapper } from "../../../utils/requestWrapper";
 import { CLEAR, GET_ADS } from "./types";
 import {toastr} from "react-redux-toastr";
 
-export function getAds(page, userId, type) {
+export function getAds(page, type, searchString, authorId) {
   return async dispatch => {
     try {
       dispatch(enablePageListActin());
-      const url = pathApi.ad.loadPage(page, userId, type ?? 0);
-
-      const response = await requestWrapper.get(url);
+      const url = pathApi.ad.loadPage(page);
+      const data = {
+        type,
+        searchString,
+        authorId
+      }
+      const response = await requestWrapper.post(url,data);
       if (response.ok) {
         const data = await response.json();
         console.log(data);

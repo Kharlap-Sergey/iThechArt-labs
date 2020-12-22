@@ -15,6 +15,7 @@ export const requestWrapper = {
   },
   post: (url, dataJson, contentType) => {
     console.log(dataJson);
+    console.log("try to post to", url);
     const options = {
       method: "POST",
       headers: {

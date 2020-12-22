@@ -16,8 +16,9 @@ class AdsPageList extends PureComponent {
   loadPage() {
     this.props.getAds(
       this.state.currentPage,
-      this.props.userId,
-      this.state.type
+      this.state.type,
+      "",
+      this.props.userId
     );
   }
 

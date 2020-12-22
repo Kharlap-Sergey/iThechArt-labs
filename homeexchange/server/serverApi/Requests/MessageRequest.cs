@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HomeexchangeApi.Requests
 {
-    public sealed class Message
+    public sealed class MessageRequest
     {
         [JsonPropertyName("chatId")]
         public int ChatId { set; get; }

@@ -48,14 +48,13 @@ namespace HomeexchangeApi.Services
         {
             return adRepository.FindById(adId);
         }
-        public AdsPage GetAdsPageShortDesc(int page, User author, int type)
+        public AdsPage GetAdsPageShortDesc(int page, AdFilter adFilter)
         {
             int pageSize = 4;
             int descriptionLength = 20;
 
             var ads = adRepository
-                .Get(ad => !ad.IsResponded && (author == null || ad.AuthorId == author.Id) 
-                                           && (type == 0 || type == (int)ad.Type))
+                .Get(ad => !ad.IsResponded && ad.IsMatch(adFilter))
                 .OrderByDescending(ad => ad.DateOfPublication).ToList();
 
             var adsBuf = ads.Skip((page - 1) * pageSize).Take(pageSize);
