@@ -1,12 +1,10 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import AccountAvatar from "../shared/components/accountAvatar/AccountAvatar";
 import Loader from "../shared/components/Loader/Loader";
 import { clearAdsAction, getAd } from "../shared/redux/ad/adActionCreator";
 import { formateDate, formateNumberToTypeOfAd } from "../shared/utils/formater";
 
-//import "./ad.scss";
-import Authorized from "./components/Authorized";
+import "./ad.scss";
 
 class Ad extends PureComponent {
   constructor(props) {
@@ -23,18 +21,12 @@ class Ad extends PureComponent {
   }
 
   getAdContent = (ad) => (
-    <div className="ad">
-      <div className="ad__aside">
-        {this.props.userId != ad.authorId ? (
-          <AccountAvatar profileId={ad.authorId}></AccountAvatar>
-        ) : null}
-      </div>
-      <div className="ad__main ad-main">
-        <h2 className="ad-main__title">{ad.title}</h2>
-        <div className="ad-main__type">{formateNumberToTypeOfAd(ad.type)}</div>
-        <div className="ad-main__date">{formateDate(ad.dateOfPublication)}</div>
-        <div className="ad-main__description">{ad.description}</div>
-        {this.props.userId && !ad.isResponded ? <Authorized authorId={ad.authorId} adId={ad.id} /> : null}
+    <div className="ad-responded">
+      <div className="ad-responded__main ad-responded-main">
+        <h2 className="ad-responded-main__title">{ad.title}</h2>
+        <div className="ad-responded-main__type">{formateNumberToTypeOfAd(ad.type)}</div>
+        <div className="ad-responded-main__date">{formateDate(ad.dateOfPublication)}</div>
+        <div className="ad-responded-main__description">{ad.description}</div>
       </div>
     </div>
   );

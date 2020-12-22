@@ -12,7 +12,7 @@ class Notification extends PureComponent {
     const chatId = this.props.notification.chatId;
 
     this.props.deleteNotificationFetch(notId);
-    this.props.redirectToAction(path.chat + `/id${chatId}`);
+    this.props.redirectToAction(path.chat(chatId));
   }
   render() {
     return <div className="notification" onClick={this.handleNotificationClick.bind(this)}
