@@ -8,7 +8,7 @@ class Sign extends PureComponent {
     super(props);
 
     this.state = {
-      type: this.props.type,
+      type: "login",
     };
     this.signRef = React.createRef();
   }
