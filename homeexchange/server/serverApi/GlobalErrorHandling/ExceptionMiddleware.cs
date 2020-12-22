@@ -1,9 +1,11 @@
 ﻿using HomeexchangeApi.Exceptions;
 using HomeexchangeApi.GlobalErrorHandling.Models;
+using HomeexchangeApi.Logger;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Authentication;
@@ -14,11 +16,11 @@ namespace HomeexchangeApi.GlobalErrorHandling
     public sealed class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger _logger;
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+        private readonly ILoggerFactory loggerFactory;
+        public ExceptionMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
         {
-            _logger = logger;
             _next = next;
+            this.loggerFactory = loggerFactory;
         }
         public async Task InvokeAsync(HttpContext httpContext)
         {
@@ -28,7 +30,9 @@ namespace HomeexchangeApi.GlobalErrorHandling
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong: {ex}");
+                loggerFactory.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logger.txt"));
+                var logger = loggerFactory.CreateLogger("FileLogger");
+                logger.LogInformation("Processing request {0}", ex);
                 var t = ex.GetType();
                 await HandleExceptionAsync(httpContext, ex);
             }
