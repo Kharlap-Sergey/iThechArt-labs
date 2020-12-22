@@ -85,6 +85,9 @@ class AdsPageList extends PureComponent {
     console.log("e", e);
     this.setState((state) => {
       return { ...state, isOpen: !state.isOpen, searchVal: "" };
+    },
+    () => {
+      if(!this.state.isOpen) this.loadPage();
     });
   }
   render() {
