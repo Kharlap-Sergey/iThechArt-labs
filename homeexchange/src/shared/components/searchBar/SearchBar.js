@@ -1,10 +1,21 @@
 import React from "react";
 import "./search-bar.scss";
-function SearchBar() {
+function SearchBar({ onChange, val, onSearchClick, isOpen }) {
+  const show = val?.length > 0;
   return (
-    <div className="search-bar-container">
-      <input type="text" placeholder="Search..." />
-      <div className="search"></div>
+    <div
+      className={`search-bar-container${
+        show || isOpen ? " search-bar-container--show" : ""
+      }`}
+    >
+      <input
+        type="text"
+        placeholder="Search..."
+        autoFocus={show || isOpen}
+        value={val}
+        onChange={(e) => onChange(e)}
+      />
+      <div className="search" onClick={onSearchClick}></div>
     </div>
   );
 }

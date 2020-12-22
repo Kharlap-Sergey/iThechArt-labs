@@ -5,36 +5,16 @@ import "./ads-page-list.scss";
 import Page from "./components/Page";
 import Loader from "../Loader/Loader";
 import Filter from "./components/Filter";
+import SearchBar from './../searchBar/SearchBar';
 class AdsPageList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.initialState = { currentPage: 1, type: 0, searchVal:""};
+    this.initialState = { currentPage: 1, type: 0, searchVal:"", isOpen: false};
     this.state = this.initialState;
+    this.handleSearchChange = this.handleSearchChange.bind(this)
+    this.handleSearchClick = this.handleSearchClick.bind(this)
   }
-
-  loadPage() {
-    this.props.getAds(
-      this.state.currentPage,
-      this.state.type,
-      this.state.searchVal,
-      this.props.userId
-    );
-  }
-
-  handleNext = (event) => {
-    event.preventDefault();
-    this.setState((state) => {
-      return { ...state, currentPage: state.currentPage + 1 };
-    });
-    console.log(this.state);
-  };
-  handlePrevious = (event) => {
-    event.preventDefault();
-    this.setState((state) => {
-      return { ...state, currentPage: state.currentPage - 1 };
-    });
-  };
   componentDidMount() {
     this.loadPage();
   }
@@ -49,6 +29,28 @@ class AdsPageList extends PureComponent {
     }
   }
 
+  loadPage() {
+    this.props.getAds(
+      this.state.currentPage,
+      this.state.type,
+      this.state.searchVal,
+      this.props.userId
+    );
+  }
+  handleNext = (event) => {
+    event.preventDefault();
+    this.setState((state) => {
+      return { ...state, currentPage: state.currentPage + 1 };
+    });
+    console.log(this.state);
+  };
+  handlePrevious = (event) => {
+    event.preventDefault();
+    this.setState((state) => {
+      return { ...state, currentPage: state.currentPage - 1 };
+    });
+  };
+  
   handleFilterSwitch(e) {
     console.log("e", e);
     const selectedId = +e.target.value;
@@ -73,6 +75,14 @@ class AdsPageList extends PureComponent {
       }
     );
   }
+  handleSearchClick(e) {
+    console.log("e", e);
+    this.setState(
+      (state) => {
+        return { ...state, isOpen: !state.isOpen, searchVal: ""};
+      }
+    );
+  }
   render() {
     console.log("render");
     console.log(this.props);
@@ -90,9 +100,11 @@ class AdsPageList extends PureComponent {
                 onChange={(e) => {
                   this.handleFilterSwitch(e);
                 }}
-                inputVale={this.state.searchVal}
-                onSearchChange={(e)=>{this.handleSearchChange(e)}}
               />
+              <div className="ads-list__search">
+              <SearchBar onChange={this.handleSearchChange} val={this.state.searchVal}
+              onSearchClick={this.handleSearchClick} isOpen={this.state.isOpen}/>
+              </div>
             </div>
             <Page
               ads={ads}
