@@ -24,9 +24,7 @@ namespace HomeexchangeApi.Controllers
         public IActionResult Create([FromBody] Ad ad)
         {
             var authorId = GetCommitter();
-            var author = userService.FindById(authorId);
-
-            return Json(adService.Create(ad, author));
+            return Json(adService.Create(ad, authorId));
         }
 
 
@@ -50,7 +48,7 @@ namespace HomeexchangeApi.Controllers
             var userId = GetCommitter();
             var responder = userService.FindById(userId);
             var ad = adService.FindById(adId);
-            return Json(adService.ReplyOnAd(ad, responder));
+            return Json(adService.ReplyOnAd(ad, responder.Id));
         }
 
         [HttpDelete("{adId}")]
@@ -59,7 +57,7 @@ namespace HomeexchangeApi.Controllers
         {
             var userId = GetCommitter();
             var committer = userService.FindById(userId);
-            var ad = adService.Delete(adId, committer);
+            var ad = adService.Delete(adId, committer.Id);
             return new OkResult();
         }
 
@@ -69,7 +67,7 @@ namespace HomeexchangeApi.Controllers
             var userId = GetCommitter();
             var committer = userService.FindById(userId);
 
-            adService.Update(ad, committer);
+            adService.Update(ad, committer.Id);
 
             return Ok();
         }

@@ -28,16 +28,9 @@ namespace HomeexchangeApi.Controllers
         public IActionResult AddFileAsync(IFormCollection uploadedFiles)
         {
             IFormFile uploadedFile = uploadedFiles.Files.FirstOrDefault();
-            try
-            {
-                var file = imgService.Save(uploadedFile, GetUserId());
-                var res = file.Result.Name;
-                return Json(res);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            var file = imgService.Save(uploadedFile, GetUserId());
+            var res = file.Result.Name;
+            return Json(res);
         }
 
         [HttpGet("{userId}")]

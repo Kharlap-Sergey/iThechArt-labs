@@ -46,7 +46,7 @@ namespace HomeexchangeApi.Controllers
         [Authorize]
         public IActionResult GetChatMessages(int chatId)
         {
-            var chatMessages = chatService.GetChatMessages(chatId);
+            var chatMessages = chatService.GetChatMessages(chatId, GetCommitterId());
             return Json(chatMessages);
         }
 
