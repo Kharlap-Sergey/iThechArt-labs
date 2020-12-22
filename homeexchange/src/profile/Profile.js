@@ -14,7 +14,7 @@ import bgImg from "../shared/imgs/profile.svg";
 import StarRating from "./../shared/components/starRating/StarRating";
 import RatingControl from "./components/RatingControl";
 import ImgModal from "./components/ImgModal";
-import ImgUploader from './../shared/components/imgUploader/ImgUploader';
+import ImgUploader from "./../shared/components/imgUploader/ImgUploader";
 class Profile extends PureComponent {
   constructor(props) {
     super(props);
@@ -54,9 +54,16 @@ class Profile extends PureComponent {
       <div className="profile">
         <div className="profile__inf">
           <AccountIformation {...this.props.profile}>
-            {this.props.userId ? (
+            {this.props.userId==this.state.userId ? (
               <>
-                <button onClick={this.handleOpenImgModalClick}>open</button>
+                <div className="profile__open-btn-wrapper">
+                  <button
+                    className="profile__open-btn"
+                    onClick={this.handleOpenImgModalClick}
+                  >
+                    <div className="">+</div>
+                  </button>
+                </div>
                 {this.state.isImgModalOpen ? (
                   <ImgModal onClose={this.handleCloseImgModalClick}>
                     <ImgUploader />
