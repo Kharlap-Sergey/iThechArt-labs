@@ -9,7 +9,7 @@ class AdsPageList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.initialState = { currentPage: 1, type: 0 };
+    this.initialState = { currentPage: 1, type: 0, searchVal:""};
     this.state = this.initialState;
   }
 
@@ -17,7 +17,7 @@ class AdsPageList extends PureComponent {
     this.props.getAds(
       this.state.currentPage,
       this.state.type,
-      "",
+      this.state.searchVal,
       this.props.userId
     );
   }
@@ -55,14 +55,24 @@ class AdsPageList extends PureComponent {
 
     this.setState(
       (state) => {
-        return { ...this.initialState, type: selectedId };
+        return { ...state, type: selectedId, currentPage: 1 };
       },
       () => {
         this.loadPage();
       }
     );
   }
-
+  handleSearchChange(e) {
+    console.log("e", e);
+    this.setState(
+      (state) => {
+        return { ...state, searchVal: e.target.value, currentPage: 1 };
+      },
+      () => {
+        this.loadPage();
+      }
+    );
+  }
   render() {
     console.log("render");
     console.log(this.props);
@@ -80,6 +90,8 @@ class AdsPageList extends PureComponent {
                 onChange={(e) => {
                   this.handleFilterSwitch(e);
                 }}
+                inputVale={this.state.searchVal}
+                onSearchChange={(e)=>{this.handleSearchChange(e)}}
               />
             </div>
             <Page

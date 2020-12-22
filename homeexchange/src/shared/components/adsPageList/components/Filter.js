@@ -1,6 +1,6 @@
 import React from "react";
 
-function Filter({ type, onChange }) {
+function Filter({ type, onChange, onSearchChange, inputVale }) {
   return (
     <div>
       <label htmlFor="filter-all">all</label>
@@ -29,6 +29,12 @@ function Filter({ type, onChange }) {
         name="filter"
         value={1}
         onChange={(e) => {onChange(e)}}
+      />
+       <input
+        type="text"
+        value={inputVale}
+        autoFocus={true}
+        onChange={(e) => {onSearchChange(e)}}
       />
     </div>
   );
