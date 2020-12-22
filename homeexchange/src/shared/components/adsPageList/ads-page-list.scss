@@ -6,6 +6,12 @@
   }
   &__search {
     position: relative;
-    top: -40px;
+    top: -10px;
+    width: 350px;
+    margin-left: 40px;
+  }
+  &__options-row {
+    display: flex;
+    justify-content: center;
   }
 }

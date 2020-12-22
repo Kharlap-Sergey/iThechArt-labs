@@ -5,15 +5,20 @@ import "./ads-page-list.scss";
 import Page from "./components/Page";
 import Loader from "../Loader/Loader";
 import Filter from "./components/Filter";
-import SearchBar from './../searchBar/SearchBar';
+import SearchBar from "./../searchBar/SearchBar";
 class AdsPageList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.initialState = { currentPage: 1, type: 0, searchVal:"", isOpen: false};
+    this.initialState = {
+      currentPage: 1,
+      type: 0,
+      searchVal: "",
+      isOpen: false,
+    };
     this.state = this.initialState;
-    this.handleSearchChange = this.handleSearchChange.bind(this)
-    this.handleSearchClick = this.handleSearchClick.bind(this)
+    this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleSearchClick = this.handleSearchClick.bind(this);
   }
   componentDidMount() {
     this.loadPage();
@@ -50,7 +55,7 @@ class AdsPageList extends PureComponent {
       return { ...state, currentPage: state.currentPage - 1 };
     });
   };
-  
+
   handleFilterSwitch(e) {
     console.log("e", e);
     const selectedId = +e.target.value;
@@ -77,11 +82,9 @@ class AdsPageList extends PureComponent {
   }
   handleSearchClick(e) {
     console.log("e", e);
-    this.setState(
-      (state) => {
-        return { ...state, isOpen: !state.isOpen, searchVal: ""};
-      }
-    );
+    this.setState((state) => {
+      return { ...state, isOpen: !state.isOpen, searchVal: "" };
+    });
   }
   render() {
     console.log("render");
@@ -94,16 +97,22 @@ class AdsPageList extends PureComponent {
           <Loader />
         ) : (
           <>
-            <div>
-              <Filter
-                type={this.state.type}
-                onChange={(e) => {
-                  this.handleFilterSwitch(e);
-                }}
-              />
+            <div className="ads-list__options-row">
               <div className="ads-list__search">
-              <SearchBar onChange={this.handleSearchChange} val={this.state.searchVal}
-              onSearchClick={this.handleSearchClick} isOpen={this.state.isOpen}/>
+                <SearchBar
+                  onChange={this.handleSearchChange}
+                  val={this.state.searchVal}
+                  onSearchClick={this.handleSearchClick}
+                  isOpen={this.state.isOpen}
+                />
+              </div>
+              <div className="ads-list__filter">
+                <Filter
+                  type={this.state.type}
+                  onChange={(e) => {
+                    this.handleFilterSwitch(e);
+                  }}
+                />
               </div>
             </div>
             <Page
