@@ -13,12 +13,12 @@
     margin-right: 20px;
   }
   &__main {
-    @include prity-bg;
     width: 700px;
     height: 500px;
     padding: 5px;
     color: white;
     border-radius: 5px;
+    @include prity-bg;
   }
 }
 
