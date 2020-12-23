@@ -30,10 +30,10 @@ class MessageBlock extends PureComponent {
     .build();
 
   handleSendClick(event) {
-    if (!event.target.message.value) {
+    event.preventDefault();
+    if (event.target.message.value?.length <= 0) {
       return;
     }
-    event.preventDefault();
     const message = {
       chatId: this.state.chatId,
       content: event.target.message.value,
@@ -71,7 +71,7 @@ class MessageBlock extends PureComponent {
           currentUserId={this.props.userId}
         />
         <form onSubmit={this.handleSendClick} className="message-box__controls">
-          <textarea className="message-box__input" name="message"></textarea>
+          <textarea className="message-box__input" name="message" ></textarea>
           <button className="message-box__send">{">"}</button>
         </form>
       </div>

@@ -10,7 +10,6 @@ class MessageList extends PureComponent {
   static propTypes = {
     messages: PropTypes.array.isRequired,
     chatId: PropTypes.number.isRequired,
-    currentUserid: PropTypes.number.isRequired,
   };
   scrollDown() {
     var block = this.chatListRef.current;
