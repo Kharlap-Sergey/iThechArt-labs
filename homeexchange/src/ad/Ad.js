@@ -24,8 +24,12 @@ class Ad extends PureComponent {
     <div className="ad-responded">
       <div className="ad-responded__main ad-responded-main">
         <h2 className="ad-responded-main__title">{ad.title}</h2>
-        <div className="ad-responded-main__type">{formateNumberToTypeOfAd(ad.type)}</div>
-        <div className="ad-responded-main__date">{formateDate(ad.dateOfPublication)}</div>
+        <div className="ad-responded-main__type">
+          {formateNumberToTypeOfAd(ad.type)}
+        </div>
+        <div className="ad-responded-main__date">
+          {formateDate(ad.dateOfPublication)}
+        </div>
         <div className="ad-responded-main__description">{ad.description}</div>
       </div>
     </div>

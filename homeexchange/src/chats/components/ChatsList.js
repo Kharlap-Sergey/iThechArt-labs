@@ -19,16 +19,23 @@ function ChatsList({ selectedChatId, handleClick }) {
     for (let elm in obj) {
       res.push(obj[elm]);
     }
-    console.log('res', res)
-    return res.sort((b, a) => new Date(a.message?.publicationDate) - new Date(b.message?.publicationDate));
+    return res.sort(
+      (b, a) =>
+        new Date(a.message?.publicationDate) -
+        new Date(b.message?.publicationDate)
+    );
   };
   return (
     <ul className="chat-list">
       {ownmap(chats).map((chat) => (
-        <li key={chat.id}
-          onClick={(e) => { handleClick(chat.id, e) }}
-          className={`chat-list__item ${selectedChatId == chat.id ? "chat-list__item--selected" : ""
-            }`}
+        <li
+          key={chat.id}
+          onClick={(e) => {
+            handleClick(chat.id, e);
+          }}
+          className={`chat-list__item ${
+            selectedChatId == chat.id ? "chat-list__item--selected" : ""
+          }`}
         >
           <ShortChat chat={chat} />
         </li>
@@ -37,4 +44,4 @@ function ChatsList({ selectedChatId, handleClick }) {
   );
 }
 
-export default ChatsList
+export default ChatsList;

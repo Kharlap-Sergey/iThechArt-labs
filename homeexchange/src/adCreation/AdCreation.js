@@ -20,7 +20,7 @@ class AdCreation extends PureComponent {
             <AdForm onSubmit={this.submitHandler.bind(this)}></AdForm>
           )}
         </div>
-        
+
         <div className="ad-creation__img-bg-wrapper">
           <img
             className="ad-creation__img-bg"

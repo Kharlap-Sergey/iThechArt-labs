@@ -1,15 +1,15 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { getAd } from './../shared/redux/ad/adActionCreator';
-import AdForm from './../shared/components/adForm/AdForm';
-import { updateAd } from './redux/update';
-import bgImg from "../shared/imgs/repairing.svg"
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { getAd } from "./../shared/redux/ad/adActionCreator";
+import AdForm from "./../shared/components/adForm/AdForm";
+import { updateAd } from "./redux/update";
+import bgImg from "../shared/imgs/repairing.svg";
 import "./ad-editor.scss";
 class AdEditor extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { adId: this.props.match.params.id }
+    this.state = { adId: this.props.match.params.id };
   }
   submitHandler(state) {
     this.props.updateAd(state);
@@ -19,11 +19,16 @@ class AdEditor extends PureComponent {
   }
 
   render() {
-    console.log('render')
+    console.log("render");
     return (
       <div className="ad-editor">
         <div className="ad-editor__form">
-          {this.props.ad.id && <AdForm onSubmit={this.submitHandler.bind(this)} initial={this.props.ad}></AdForm>}
+          {this.props.ad.id && (
+            <AdForm
+              onSubmit={this.submitHandler.bind(this)}
+              initial={this.props.ad}
+            ></AdForm>
+          )}
         </div>
         <div className="ad-editor__img-bg-wrapper">
           <img
@@ -38,12 +43,12 @@ class AdEditor extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  ad: state.ads.ad
-})
+  ad: state.ads.ad,
+});
 
 const mapDispatchToProps = {
   getAd,
-  updateAd
-}
+  updateAd,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdEditor)
+export default connect(mapStateToProps, mapDispatchToProps)(AdEditor);
