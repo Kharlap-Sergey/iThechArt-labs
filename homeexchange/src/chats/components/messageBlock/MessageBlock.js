@@ -34,31 +34,24 @@ class MessageBlock extends PureComponent {
       return;
     }
     event.preventDefault();
-    console.log("event", event.target.message);
     const message = {
       chatId: this.state.chatId,
       content: event.target.message.value,
     };
-    console.log("message", message);
     this.hubConnection.invoke("Send", message);
     event.target.message.value = "";
   }
 
   scrollDown() {
-    console.log("scroll");
     var block = this.chatRef.current;
     block.scrollTop = block.scrollHeight;
   }
   componentDidMount() {
-    console.log("DIDMOUNT");
     this.props.clearChatAction();
     this.props.loadChatMessages(this.state.chatId);
     this.hubConnection.start().catch((err) => {
-      console.log(err);
     });
-    console.log("this.hubConnection", this.hubConnection);
     this.hubConnection.on("Recieve", (message) => {
-      console.log("message recieved", message);
       this.props.addChatMessagesAction([message]);
     });
     this.scrollDown();
@@ -68,12 +61,8 @@ class MessageBlock extends PureComponent {
   }
   componentWillUnmount() {
     this.props.clearChatAction();
-    //this.hubConnection.stop();
-    //this.props.clearNotificationsAction();
   }
   render() {
-    console.log("this.props", this.props);
-    console.log("this.props", this.props.messages);
     return (
       <div className="message-box" ref={this.chatRef}>
         <MessageList

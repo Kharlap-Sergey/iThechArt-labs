@@ -1,7 +1,7 @@
-import { redirectToAction } from './../../shared/redux/redirect/redirectActionCreator';
-import { toastr } from 'react-redux-toastr';
-import { requestWrapper } from './../../shared/utils/requestWrapper';
-import { auth } from './../../shared/utils/auth';
+import { redirectToAction } from "./../../shared/redux/redirect/redirectActionCreator";
+import { toastr } from "react-redux-toastr";
+import { requestWrapper } from "./../../shared/utils/requestWrapper";
+import { auth } from "./../../shared/utils/auth";
 
 export function updateUserPost(user) {
   return async (dispatch) => {

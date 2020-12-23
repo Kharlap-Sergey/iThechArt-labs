@@ -31,7 +31,6 @@ class MessageList extends PureComponent {
       (a, b) => new Date(a.publicationDate) - new Date(b.publicationDate)
     );
 
-    console.log("message", messages);
     return (
       <div className="message-box__message-list" ref={this.chatListRef}>
         {/* {sortedMessages.length < 1 ? (
