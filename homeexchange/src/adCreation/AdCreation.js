@@ -13,11 +13,13 @@ class AdCreation extends PureComponent {
   render() {
     return (
       <div className="ad-creation">
-        <div className="ad-creation__form">
+        <div className="ad-creation__body">
           {this.props.isLoading ? (
             <Loader />
           ) : (
-            <AdForm onSubmit={this.submitHandler.bind(this)}></AdForm>
+            <div className="ad-creation__form">
+              <AdForm onSubmit={this.submitHandler.bind(this)}></AdForm>
+            </div>
           )}
         </div>
 

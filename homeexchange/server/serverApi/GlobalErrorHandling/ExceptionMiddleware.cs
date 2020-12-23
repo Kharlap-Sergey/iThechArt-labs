@@ -42,7 +42,7 @@ namespace HomeexchangeApi.GlobalErrorHandling
         {
             context.Response.ContentType = "application/json";
             var statusCode = HttpStatusCode.InternalServerError;
-            string message = "Internal Server Error from the custom middleware.";
+            string message = "Somthing was incorrect";
 
             //code logic here
             if (exception is InvalidCredentialExeption)
