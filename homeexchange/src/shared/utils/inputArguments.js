@@ -117,13 +117,11 @@ export const inputAttributes = {
   },
 
   getPasswordAttributesForLogin: function () {
-    console.log(this);
     let pass = { ...this.password };
     pass.validationAttributes.autoComplete = "current-password";
     return pass;
   },
   getPasswordAttributesForRegistration: function () {
-    console.log(this);
     let pass = { ...this.password };
     pass.validationAttributes.autoComplete = "new-password";
     return pass;
