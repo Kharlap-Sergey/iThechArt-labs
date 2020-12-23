@@ -8,19 +8,16 @@ function StarRating({ currentRating, handleClick }) {
   const [onHoveredId, setHoveredId] = useState(0);
 
   const hover = (id, e) => {
-    console.log("hover");
     if (e.type == "mouseover") {
       setHoveredId(id);
     }
     if (e.type == "mouseout") {
       setHoveredId(0);
     }
-    console.log("onHoveredId", onHoveredId);
   };
 
   const getStars = (count, currentRating) => {
     const res = [];
-    console.log("currentRating", currentRating);
     for (let i = 0; i < count; i++) {
       const tp =
         currentRating <= 0 ? "empty" : currentRating >= 1 ? "full" : "half";
@@ -44,7 +41,6 @@ function StarRating({ currentRating, handleClick }) {
           key={index}
           className="star-rating__item"
           onClick={(e) => {
-            console.log("index", index);
             handleClick(index + 1, e);
           }}
         >

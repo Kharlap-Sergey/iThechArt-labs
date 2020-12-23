@@ -2,6 +2,7 @@ import { toastr } from "react-redux-toastr";
 import { pathApi } from "../../utils/path";
 import { requestWrapper } from "../../utils/requestWrapper";
 import { setProfileImgAction } from "./profileImgReducerActionCreator";
+import { toastrNotifier } from './../tostrNotifier';
 
 export function sendFile(file, authorId) {
   return async (dispatch) => {
@@ -35,7 +36,6 @@ export function downloadFile(profileId) {
 
         reader.readAsDataURL(data);
       } else {
-        toastrNotifier.alertBadResponse(response);
       }
     } catch (e) {
       toastrNotifier.tryAgainLater();
