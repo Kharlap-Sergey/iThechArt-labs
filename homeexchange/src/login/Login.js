@@ -22,12 +22,9 @@ class Login extends PureComponent {
   };
   content = (
     <div className="login-form-container">
-      <AccountForm
-        onSubmit={this.handleSubmit}
-        inputs={this.inputsArguments}
-      />
+      <AccountForm onSubmit={this.handleSubmit} inputs={this.inputsArguments} />
     </div>
-  )
+  );
 
   render() {
     return !this.props.isLoading ? (

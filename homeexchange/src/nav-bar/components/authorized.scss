@@ -2,12 +2,12 @@
   position: relative;
 }
 .dropdown-item {
+  position: relative;
   display: flex;
   align-items: flex-end;
-  cursor: pointer;
   padding: 0 5px;
-  position: relative;
   background-color: inherit;
+  cursor: pointer;
   &__menu {
     width: inherit;
   }
@@ -25,9 +25,8 @@
   height: 30px;
 }
 
-
 .profile-actions {
-  &__item{
+  &__item {
     width: fit-content;
     padding-bottom: 10px;
   }
