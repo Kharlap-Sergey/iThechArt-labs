@@ -10,6 +10,7 @@ export const path = {
   ad: (id) => `/ad/id${id ?? ":id"}`,
   profile: {
     edit: (id) => `/profile/edit/id${id ?? ":id"}`,
+    to: (id) => `/profile/id${id ?? ":id"}`,
   },
   adapi: {
     ad: api + "/ad",
@@ -53,7 +54,7 @@ export const pathApi = {
   ad: {
     create: api + "/ad/create",
     loadPage: () => api + `/ad/getadspage`,
-    update: (adId) => api + `/ad/update/${adId}`,
+    update: () => api + `/ad/update`,
     get: (adId) => api + `/ad/get/${adId}`,
     delete: (adId) => api + `/ad/delete/${adId}`,
     replyOnAd: (adId) => api + `/ad/reply/${adId}`,

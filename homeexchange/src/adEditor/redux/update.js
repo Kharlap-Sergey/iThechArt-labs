@@ -7,10 +7,11 @@ import { toastrNotifier } from "./../../shared/redux/tostrNotifier";
 export function updateAd(ad) {
   return async (dispatch) => {
     try {
-      const url = pathApi.ad.update;
+      const url = pathApi.ad.update();
+      
       const response = await requestWrapper.post(url, ad);
       if (response.ok) {
-        dispatch(redirectToAction(path.home()));
+        dispatch(redirectToAction(path.profile));
       } else {
         toastrNotifier.alertBadResponse(response);
       }

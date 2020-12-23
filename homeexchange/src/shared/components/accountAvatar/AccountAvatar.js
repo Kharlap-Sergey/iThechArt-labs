@@ -4,12 +4,13 @@ import "./account-avatar.scss";
 import { connect } from "react-redux";
 import { redirectToAction } from "./../../redux/redirect/redirectActionCreator";
 import { downloadFile } from "../../redux/imgUploader/imgUploader";
+import { path } from './../../utils/path';
 
 class AccountAvatar extends PureComponent {
   handleClick(event) {
     event.preventDefault();
     this.props.profileId &&
-      this.props.redirectToAction(`/profile/${this.props.profileId}`);
+      this.props.redirectToAction(path.profile.to(this.props.profileId));
   }
   render() {
     return (

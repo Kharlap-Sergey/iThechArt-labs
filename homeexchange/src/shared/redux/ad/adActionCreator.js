@@ -60,17 +60,6 @@ export function deleteAd(adId) {
     }
   };
 }
-export function updateAd(adId) {
-  return async (dispatch) => {
-    const url = pathApi.ad.update(adId);
-    const response = await requestWrapper.delete(url);
-    if (response.ok) {
-      dispatch(redirectToAction(path.home));
-    } else {
-      toastrNotifier.alertBadResponse(response);
-    }
-  };
-}
 export function replyOnAd(adId) {
   return async (dispatch) => {
     const url = pathApi.ad.replyOnAd(adId);

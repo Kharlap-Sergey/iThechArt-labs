@@ -93,7 +93,7 @@ class Authorized extends PureComponent {
                   <ul className="profile-actions">
                     <li className="profile-actions__item">
                       <PaintedLink
-                        to={"/profile/" + this.props.userId}
+                        to={path.profile.to(this.props.userId)}
                         value="profile"
                       />
                     </li>
