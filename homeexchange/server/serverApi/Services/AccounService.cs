@@ -65,7 +65,7 @@ namespace HomeexchangeApi.Services
             && u.Password == account.Password).FirstOrDefault();
             if (person == null)
             {
-                throw new InvalidCredentialExeption("Invalid username or password");
+                throw new InvalidCredentialExeption("The user name or password is not correct");
             }
 
             var claims = new List<Claim>

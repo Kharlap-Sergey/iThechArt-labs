@@ -5,6 +5,7 @@ import { redirectToAction } from './../redirect/redirectActionCreator';
 import { toastr } from 'react-redux-toastr';
 import { loginUserAction } from './accountActions';
 import { disableAllAction, enableLoginAction, enableRegistrationActin } from "../loader/loaderActionCreator"
+import { toastrNotifier } from '../tostrNotifier';
 
 export function loginUserPost(user) {
   return async (dispatch) => {
@@ -24,8 +25,7 @@ export function loginUserPost(user) {
         );
         dispatch(redirectToAction(path.home));
       } else {
-        const data = await response.json();
-        toastr.error(data.errorText, "");
+        toastrNotifier.alertBadResponse(response);
       }
     } catch (e) {
       console.log(e);

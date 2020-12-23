@@ -1,7 +1,7 @@
 const api = "https://localhost:44370";
 export const path = {
   home: "/",
-  login: "/login",
+  login: "/sign",
   sign: "/sign",
   registration: "/registration",
   /// ../chat/id:chatId
