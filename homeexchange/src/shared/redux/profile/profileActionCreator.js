@@ -10,10 +10,11 @@ import {
   PROFILE_CLEAR,
 } from "./types";
 import { toastrNotifier } from "./../tostrNotifier";
+import { disableAllAction, enableRegistrationActin } from "../loader/loaderActionCreator";
 
 export function getProfileById(userId) {
   return async (dispatch) => {
-    dispatch(startLoadingAction());
+    dispatch(enableRegistrationActin());
     const url = pathApi.account.get(userId);
     const response = await requestWrapper.get(url);
     if (response.ok) {
@@ -22,7 +23,7 @@ export function getProfileById(userId) {
     } else {
       toastrNotifier.alertBadResponse(response);
     }
-    dispatch(endLoadingAction());
+    dispatch(disableAllAction());
   };
 }
 

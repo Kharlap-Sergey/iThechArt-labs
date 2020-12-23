@@ -36,13 +36,15 @@ class EditProfile extends PureComponent {
   render() {
     return (
       <div className="edit-profile">
-        <div className="edit-profile__form">
-          {this.props.profile.id ? (
-            <AccountForm
-              onSubmit={this.submeteHandler}
-              inputs={this.inputsArguments}
-              initialState={this.props.profile}
-            />
+        <div className="edit-profile__body">
+          {!this.props.isLoading ? (
+            <div className="edit-profile__form">
+              <AccountForm
+                onSubmit={this.submeteHandler}
+                inputs={this.inputsArguments}
+                initialState={this.props.profile}
+              />
+            </div>
           ) : (
             <Loader />
           )}
@@ -61,7 +63,11 @@ class EditProfile extends PureComponent {
 }
 
 const mapStateToPropos = (state) => {
-  return { profile: state.profile, ...state.user };
+  return {
+    profile: state.profile,
+    ...state.user,
+    isLoading: state.loader.registration,
+  };
 };
 const mapDispatchToProps = {
   getProfileById,
