@@ -9,18 +9,16 @@ class Sign extends PureComponent {
     this.state = {
       type: "login",
     };
-    this.signRef = React.createRef();
   }
 
   handleSwithcerClick = (event) => {
-    const sign = this.signRef.current;
     this.setState({ type: [event.target.name] });
   };
   render() {
     return (
       <div className="sign">
         <div className="sign__content sign-content">
-          <div className="sign-content__form" ref={this.signRef}>
+          <div className="sign-content__form">
             <div className="sign-content__switcher sign-switcher">
               <button
                 className={`sign-switcher__btn ${

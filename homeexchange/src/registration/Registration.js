@@ -19,7 +19,6 @@ class Registration extends React.PureComponent {
   ];
 
   submeteHandler = (state) => {
-
     let user = {
       ...state,
     };
