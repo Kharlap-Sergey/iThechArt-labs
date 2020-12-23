@@ -5,7 +5,7 @@ import {
 import { pathApi } from "../../../utils/path";
 import { requestWrapper } from "../../../utils/requestWrapper";
 import { CLEAR, GET_ADS } from "./types";
-import { toastr } from "react-redux-toastr";
+import { toastrNotifier } from './../../../redux/tostrNotifier';
 
 export function getAds(page, type, searchString, authorId) {
   return async (dispatch) => {
@@ -20,12 +20,12 @@ export function getAds(page, type, searchString, authorId) {
       const response = await requestWrapper.post(url, data);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         dispatch(setAds(data));
       } else {
+        toastrNotifier.alertBadResponse(response);
       }
     } catch (e) {
-      toastr.error("try again later", e.message);
+      toastrNotifier.tryAgainLater()
     } finally {
       dispatch(disableAllAction());
     }

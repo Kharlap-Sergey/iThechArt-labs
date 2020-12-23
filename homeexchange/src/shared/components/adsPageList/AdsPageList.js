@@ -27,9 +27,7 @@ class AdsPageList extends PureComponent {
     this.props.clearAdsPageAction();
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log("did update&&");
     if (prevState.currentPage !== this.state.currentPage) {
-      console.log("should be updated");
       this.loadPage();
     }
   }
@@ -58,7 +56,6 @@ class AdsPageList extends PureComponent {
 
   handleFilterSwitch(e) {
     e.preventDefault();
-    console.log("e", e);
     const selectedId = +e.target.value;
 
     this.setState(
@@ -71,7 +68,6 @@ class AdsPageList extends PureComponent {
     );
   }
   handleSearchChange(e) {
-    console.log("e", e);
     this.setState(
       (state) => {
         return { ...state, searchVal: e.target.value, currentPage: 1 };
@@ -82,7 +78,6 @@ class AdsPageList extends PureComponent {
     );
   }
   handleSearchClick(e) {
-    console.log("e", e);
     if (this.state.searchVal.length > 0) {
       this.setState(
         (state) => {
@@ -99,8 +94,6 @@ class AdsPageList extends PureComponent {
     }
   }
   render() {
-    console.log("render");
-    console.log(this.props);
     const ads = this.props.ads;
     const userWasDefinedFlag = Boolean(this.props.userId);
     return (
@@ -140,10 +133,10 @@ class AdsPageList extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return { ...state.adsPageList, isLoading: state.loader.pageList };
-};
+const mapStateToProps = (state) => ({
+  ...state.adsPageList,
+  isLoading: state.loader.pageList,
+});
 const mapDispatchToProps = {
   getAds,
   clearAdsPageAction,
