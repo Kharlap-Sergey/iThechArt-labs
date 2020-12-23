@@ -43,7 +43,7 @@ export const inputAttributes = {
   },
 
   language: {
-    placeholder: "languages1",
+    placeholder: "languages",
     name: "language",
     type: "text",
     validationAttributes: {

@@ -10,5 +10,8 @@ export const toastrNotifier = {
     }catch{
       toastr.error("something went wrong", "please try again later");
     }
+  },
+  tryAgainLater: ()=>{
+    toastr.error("something went wrong", "please try again later");
   }
 }
