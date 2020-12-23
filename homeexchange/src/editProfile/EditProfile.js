@@ -34,7 +34,6 @@ class EditProfile extends PureComponent {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="edit-profile">
         <div className="edit-profile__form">

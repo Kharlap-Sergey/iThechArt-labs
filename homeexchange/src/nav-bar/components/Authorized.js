@@ -89,7 +89,6 @@ class Authorized extends PureComponent {
               }
               dropdownMenu={
                 <DropdownMenu w="150px">
-                  {console.log("should draw")}
                   <ul className="profile-actions">
                     <li className="profile-actions__item">
                       <PaintedLink

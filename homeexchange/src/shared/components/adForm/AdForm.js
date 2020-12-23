@@ -15,17 +15,13 @@ class AdForm extends PureComponent {
 
   submiteHandler(e) {
     e.preventDefault();
-    console.log("submit handler was occured", e);
-    console.log("props", this.props);
-    console.log("the form state is ", this.state);
+
     this.props.onSubmit(this.state);
   }
 
   changeInputHandler(e) {
     e.preventDefault();
-    console.log("changes in input was occured", e);
-    console.log("props", this.props);
-    console.log("the form state was ", this.state);
+
     if (e.target.name == "type") {
       this.setState({ [e.target.name]: Number(e.target.value) });
     } else this.setState({ [e.target.name]: e.target.value });
@@ -74,8 +70,6 @@ class AdForm extends PureComponent {
   }
 
   render() {
-    console.log("render");
-    console.log(this.props);
     return (
       <form action="" className="ad-form" onSubmit={this.submiteHandler}>
         <div className="ad-form__body">

@@ -11,7 +11,6 @@ import "./profile.scss";
 import { loadChatId } from "../shared/redux/chat/chat";
 import { path } from "../shared/utils/path";
 import bgImg from "../shared/imgs/profile.svg";
-import StarRating from "./../shared/components/starRating/StarRating";
 import RatingControl from "./components/RatingControl";
 import ImgModal from "./components/ImgModal";
 import ImgUploader from "./../shared/components/imgUploader/ImgUploader";
@@ -40,7 +39,6 @@ class Profile extends PureComponent {
     this.setState({ isImgModalOpen: false });
   }
   handleToChatClick(event) {
-    console.log(this.state.userId, this.props.userId);
     this.props.loadChatId(this.state.userId, this.props.userId);
   }
 
@@ -48,7 +46,6 @@ class Profile extends PureComponent {
     this.props.redirectToAction(path.profile.edit(this.state.userId));
   }
   render() {
-    console.log(this.props);
     return (
       <div className="profile">
         <div className="profile__inf">
