@@ -14,8 +14,6 @@ export const requestWrapper = {
     return fetch(url, options);
   },
   post: (url, dataJson, contentType) => {
-    console.log(dataJson);
-    console.log("try to post to", url);
     const options = {
       method: "POST",
       headers: {
@@ -39,7 +37,6 @@ export const requestWrapper = {
   },
 
   postFiles: (url, data) => {
-    console.log(data);
     const options = {
       method: "POST",
       headers: {
