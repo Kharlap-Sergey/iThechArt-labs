@@ -12,13 +12,10 @@ class AdEditor extends PureComponent {
     this.state = { adId: this.props.match.params.id }
   }
   submitHandler(state) {
-    console.log("state", state)
     this.props.updateAd(state);
-    console.log(state);
   }
   componentDidMount() {
     this.props.getAd(this.state.adId);
-    console.log(this.state);
   }
 
   render() {

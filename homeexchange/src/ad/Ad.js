@@ -32,9 +32,7 @@ class Ad extends PureComponent {
   );
 
   render() {
-    console.log("render");
     const ad = this.props.ad;
-    console.log(ad);
     return ad.title ? this.getAdContent(ad) : <Loader />;
   }
 }

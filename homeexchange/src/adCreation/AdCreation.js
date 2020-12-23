@@ -7,7 +7,6 @@ import bgImg from "../shared/imgs/ad-creat.svg";
 import "./ad-creation.scss";
 class AdCreation extends PureComponent {
   submitHandler(state) {
-    console.log(state);
     this.props.createNewAd(state);
   }
 

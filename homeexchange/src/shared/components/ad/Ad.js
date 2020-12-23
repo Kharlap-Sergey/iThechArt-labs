@@ -21,7 +21,6 @@ class Ad extends PureComponent {
   }
   render() {
     const ad = this.props.ad;
-    console.log("this.props", ad);
     return (
       <div className="ad">
         <div className="ad__header">

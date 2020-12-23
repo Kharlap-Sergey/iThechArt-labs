@@ -1,23 +1,21 @@
 import { requestWrapper } from './../../shared/utils/requestWrapper';
 import { redirectToAction } from './../../shared/redux/redirect/redirectActionCreator';
-import { toastr } from 'react-redux-toastr';
-import { path, pathApi } from './../../shared/utils/path';
+import { pathApi } from '../../shared/utils/path';
+import { path } from './../../shared/utils/path';
+import { toastrNotifier } from './../../shared/redux/tostrNotifier';
 
 export function updateAd(ad) {
   return async (dispatch) => {
     try {
       const url = pathApi.ad.update;
       const response = await requestWrapper.post(url, ad);
-      console.log(response);
       if (response.ok) {
-        dispatch(redirectToAction("/"));
+        dispatch(redirectToAction(path.home()));
       } else {
-        console.log("some");
-        toastr.error("some eroor", response.status);
+        toastrNotifier.alertBadResponse(response)
       }
     } catch (e) {
-      console.log(e);
-      toastr.error("try again later", e.toString());
+      toastrNotifier.tryAgainLater();
     }
   };
 }
