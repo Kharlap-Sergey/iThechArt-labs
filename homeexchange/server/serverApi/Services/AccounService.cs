@@ -51,7 +51,7 @@ namespace HomeexchangeApi.Services
                 if (e.InnerException.Message.Contains("Email"))
                 {
                     throw new DuplicateEmailException("try to registrate user");
-                }else if (e.InnerException.Message.Contains("Nickanme"))
+                }else if (e.InnerException.Message.Contains("Nickname"))
                 {
                     throw new DuplicateNicknameException("try to registrate user");
                 }
