@@ -12,7 +12,6 @@ import EditProfile from "./editProfile/EditProfile";
 import AdCreation from "./adCreation/AdCreation";
 import AdEditor from "./adEditor/AdEditor";
 import { path } from "./shared/utils/path";
-import Chat from "./chat/Chat";
 import Sign from "./sign/Sign";
 import Chats from "./chats/Chats";
 import SearchBar from "./shared/components/searchBar/SearchBar";
@@ -35,7 +34,7 @@ function App() {
               </Route>
               <Route exact path={path.chat()}>
                 <PrivateRoute authed={auth}>
-                  <Chat />
+                  <Chats />
                 </PrivateRoute>
               </Route>
               <Route exact path="/ad/create">
