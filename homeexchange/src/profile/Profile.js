@@ -18,7 +18,7 @@ class Profile extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { userId: +this.props.match.params.id, isImgModalOpen: false };
+    this.state = { isImgModalOpen: false };
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleToChatClick = this.handleToChatClick.bind(this);
     this.handleOpenImgModalClick = this.handleOpenImgModalClick.bind(this);
@@ -26,7 +26,12 @@ class Profile extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.getProfileById(this.state.userId);
+    this.props.getProfileById(+this.props.match.params.id);
+  }
+  componentDidUpdate(prev) {
+    if (prev.match.params.id != this.props.match.params.id) {
+      this.props.getProfileById(+this.props.match.params.id);
+    }
   }
   componentWillUnmount() {
     this.props.cleareProfileAction();
@@ -39,18 +44,18 @@ class Profile extends PureComponent {
     this.setState({ isImgModalOpen: false });
   }
   handleToChatClick(event) {
-    this.props.loadChatId(this.state.userId, this.props.userId);
+    this.props.loadChatId(+this.props.match.params.id, this.props.userId);
   }
 
   handleEditClick(event) {
-    this.props.redirectToAction(path.profile.edit(this.state.userId));
+    this.props.redirectToAction(path.profile.edit(+this.props.match.params.id));
   }
   render() {
     return (
       <div className="profile">
         <div className="profile__inf">
           <AccountIformation {...this.props.profile}>
-            {this.props.userId == this.state.userId ? (
+            {this.props.userId == +this.props.match.params.id ? (
               <>
                 <div className="profile__open-btn-wrapper">
                   <button
@@ -67,8 +72,8 @@ class Profile extends PureComponent {
                 ) : null}
               </>
             ) : null}
-            <RatingControl profileId={this.state.userId} />
-            {this.state.userId == this.props.userId ? (
+            <RatingControl profileId={+this.props.match.params.id} />
+            {+this.props.match.params.id == this.props.userId ? (
               <button
                 className="profile__edit-btn"
                 onClick={this.handleEditClick}
@@ -87,7 +92,7 @@ class Profile extends PureComponent {
           ) : null}
         </div>
         <div className="profile__ads">
-          <AdsPageList userId={this.state.userId}></AdsPageList>
+          <AdsPageList userId={+this.props.match.params.id}></AdsPageList>
         </div>
 
         <div className="profile__img-bg-wrapper">
