@@ -5,7 +5,6 @@ import Ad from "../../ad/Ad";
 function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
   const [state, setState] = useState({ adId: null });
   const handleMoreClick = (adId) => {
-    console.log("adId", adId);
     setState({ adId: adId });
   };
   const handleLessClick = () => {
