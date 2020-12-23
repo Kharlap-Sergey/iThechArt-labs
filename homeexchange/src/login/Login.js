@@ -38,7 +38,6 @@ class Login extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     ...state.accountForm,
     isLoading: state.loader.login,
