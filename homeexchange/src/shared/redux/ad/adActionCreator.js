@@ -1,119 +1,85 @@
 import { requestWrapper } from "../../utils/requestWrapper";
-import { AD_CLEAR, AD_GET, AD_GETALL} from "./types";
-import {startLoadingAction, endLoadingAction} from "../remoteInteraciton/remoteInteractionActionCreator"
-import { redirectToAction } from './../redirect/redirectActionCreator';
-import { auth } from './../../utils/auth';
+import { AD_CLEAR, AD_GET, AD_GETALL } from "./types";
+import {
+  startLoadingAction,
+  endLoadingAction,
+} from "../remoteInteraciton/remoteInteractionActionCreator";
+import { redirectToAction } from "./../redirect/redirectActionCreator";
 import { pathApi, path } from "../../utils/path";
-import { toastr } from 'react-redux-toastr';
-import { enableAdFromtActin, disableAllAction } from "../loader/loaderActionCreator";
+import {
+  enableAdFromtActin,
+  disableAllAction,
+} from "../loader/loaderActionCreator";
+import { toastrNotifier } from "./../tostrNotifier";
 
-export function getAllAds() {
-  return async (dispatch) => {
-    dispatch(startLoadingAction());
-    const url = "https://localhost:44370/Ad/getall";
-    const response = await requestWrapper.get(url);
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(setAllAdsAction({ ads: [...data] }));
-    } else {
-      //todo logic
-    }
-    dispatch(endLoadingAction());
-  };
-}
 export function createNewAd(ad) {
   return async (dispatch) => {
-    try{
-    dispatch(enableAdFromtActin())
-    const url = "https://localhost:44370/Ad/Create";
-    const token = auth.getToken();
-    const response = await requestWrapper.post(url, ad, token);
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(redirectToAction(path.home));
-    } else {
-      const data = await response.json();
-      toastr.error(data);
-      //todo logic
-    }
-    }catch (e){
-      toastr.error("try again later", e.message);
-    }finally{
-      dispatch(disableAllAction())
+    try {
+      dispatch(enableAdFromtActin());
+      const url = pathApi.ad.create;
+      const response = await requestWrapper.post(url, ad);
+      if (response.ok) {
+        dispatch(redirectToAction(path.profile));
+      } else {
+        toastrNotifier.alertBadResponse(response);
+      }
+    } catch (e) {
+      toastrNotifier.tryAgainLater();
+    } finally {
+      dispatch(disableAllAction());
     }
   };
 }
-export function getAd(adId){
+export function getAd(adId) {
   return async (dispatch) => {
-   try{
-    const url = pathApi.ad.get(adId);
-    const token = auth.getToken();
-    const response = await requestWrapper.get(url, token);
-    if (response.ok) {
-      const data = await response.json();
-      console.log("ad -", data);
-      dispatch(setAdAction({ ad: data }));
-    } else {
-      const data = await response.json();
-      toastr.error(data);
-      //todo logic
+    try {
+      const url = pathApi.ad.get(adId);
+      const response = await requestWrapper.get(url);
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(setAdAction({ ad: data }));
+      } else {
+        const data = await response.json();
+        toastrNotifier.alertBadResponse(response);
+        dispatch(redirectToAction(path.Profile));
+      }
+    } catch (e) {
+      toastrNotifier.tryAgainLater();
     }
-   }
-   catch(e){
-     toastr.error("try again later", e.message);
-   }
   };
 }
 
 export function deleteAd(adId) {
   return async (dispatch) => {
-    const url = "https://localhost:44370/Ad/delete/" + adId;
-    const token = auth.getToken();
-    const response = await requestWrapper.delete(url, token);
+    const url = pathApi.ad.delete(adId);
+    const response = await requestWrapper.delete(url);
     if (response.ok) {
-      dispatch(redirectToAction('/'));
+      dispatch(redirectToAction(path.home));
     } else {
-      //todo logic
+      toastrNotifier.alertBadResponse(response);
     }
   };
 }
 export function updateAd(adId) {
   return async (dispatch) => {
-    const url = "https://localhost:44370/Ad/update/";
-    const token = auth.getToken();
-    const response = await requestWrapper.delete(url, token);
+    const url = pathApi.ad.update(adId);
+    const response = await requestWrapper.delete(url);
     if (response.ok) {
-      dispatch(redirectToAction('/'));
+      dispatch(redirectToAction(path.home));
     } else {
-      //todo logic
+      toastrNotifier.alertBadResponse(response);
     }
   };
 }
-export function replyOnAd(adId){
+export function replyOnAd(adId) {
   return async (dispatch) => {
-    const url = "https://localhost:44370/Ad/reply/" + adId;
-    const token = auth.getToken();
-    console.log(url);
+    const url = pathApi.ad.replyOnAd(adId);
     const response = await requestWrapper.post(url, {});
     if (response.ok) {
-      //dispatch(isShouldBeUpdatedAction(true));
+      dispatch(redirectToAction(path.home));
     } else {
-      //todo logic
+      toastrNotifier.alertBadResponse(response);
     }
-  };
-}
-export function getAdsForUserByUserId(userId){
-  return async (dispatch) => {
-    dispatch(startLoadingAction());
-    const url = "https://localhost:44370/Ad/get/" + userId;
-    const token = auth.getToken();
-    const response = await requestWrapper.post(url, {}, token);
-    if (response.ok) {
-      //dispatch(isShouldBeUpdatedAction(true));
-    } else {
-      //todo logic
-    }
-    dispatch(endLoadingAction());
   };
 }
 export function setAllAdsAction(ads) {
@@ -130,6 +96,6 @@ export function clearAdsAction() {
 export function setAdAction(ad) {
   return {
     type: AD_GET,
-    payload: ad
+    payload: ad,
   };
 }

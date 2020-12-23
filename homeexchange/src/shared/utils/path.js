@@ -50,9 +50,12 @@ export const pathApi = {
   },
 
   ad: {
+    create: api + "/ad/create",
     loadPage: () => api + `/ad/getadspage`,
-    update: api + "/ad/update",
-    get: (adId) => api + `/Ad/get/${adId}`,
+    update: (adId) => api + `/ad/update/${adId}`,
+    get: (adId) => api + `/ad/get/${adId}`,
+    delete: (adId) => api + `/ad/delete/${adId}`,
+    replyOnAd: (adId) => api + `/ad/reply/${adId}`,
   },
 };
 
