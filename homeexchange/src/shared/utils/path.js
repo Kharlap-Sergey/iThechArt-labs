@@ -39,7 +39,7 @@ export const pathApi = {
     },
   },
   account: {
-    update: api + "account/update",
+    update: api + "/account/update",
     registrate: api + "/account/registrate",
     login: api + "/account/login",
     get: (id) => api + `/account/get/${id}`,
