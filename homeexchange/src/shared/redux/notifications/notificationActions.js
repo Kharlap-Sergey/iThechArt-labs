@@ -5,10 +5,10 @@ export const addNotificationsAction = (notifications) => ({
   payload: notifications,
 });
 
-export const deleteNotificationByIdAction = (notificationId) =>({
+export const deleteNotificationByIdAction = (notificationId) => ({
   type: DELETE_BY_ID,
-  payload: notificationId
-})
+  payload: notificationId,
+});
 export const clearNotificationsAction = () => ({
   type: NOTIFICATION_CLEAR,
 });

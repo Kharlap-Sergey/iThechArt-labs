@@ -7,7 +7,7 @@ export const profileImgReducer = (state = initialState, action) => {
     case SET:
       const id = action.payload.profileId;
       const file = action.payload.file;
-      const img = { [id]:file };
+      const img = { [id]: file };
       return { ...state, ...img };
     case CLEAR:
       return initialState;
