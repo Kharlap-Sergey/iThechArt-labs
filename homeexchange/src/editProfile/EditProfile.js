@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux';
-import { getProfileById } from '../shared/redux/profile/profileActionCreator';
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { getProfileById } from "../shared/redux/profile/profileActionCreator";
 import AccountForm from "../shared/components/accountForm/AccoutForm";
-import { inputAttributes } from '../shared/utils/inputArguments';
-import { updateUserPost } from './redux/updateUserActionCreator';
-import Loader from '../shared/components/Loader/Loader';
-import bgImg from "../shared/imgs/repairing.svg"
+import { inputAttributes } from "../shared/utils/inputArguments";
+import { updateUserPost } from "./redux/updateUserActionCreator";
+import Loader from "../shared/components/Loader/Loader";
+import bgImg from "../shared/imgs/repairing.svg";
 import "./edit-profile.scss";
 class EditProfile extends PureComponent {
   constructor(props) {
@@ -15,7 +15,6 @@ class EditProfile extends PureComponent {
   }
 
   componentDidMount() {
-    console.log("fetch profile for ", this.state.userId);
     this.props.getProfileById(this.state.userId);
   }
 
@@ -28,9 +27,6 @@ class EditProfile extends PureComponent {
     inputAttributes.city,
   ];
   submeteHandler = (state) => {
-    console.log("form was submeted");
-    console.log("with arguments", state)
-
     let user = {
       ...state,
     };
@@ -41,20 +37,16 @@ class EditProfile extends PureComponent {
     console.log(this.props);
     return (
       <div className="edit-profile">
-        {/* <div className="profile__inf">
-          <AccountIformation {...this.props.profile}>
-            {this.state.userId == this.props.userId ? (
-              <button className="profile__edit-btn">edit</button>
-            ) : null}
-          </AccountIformation>
-        </div> */}
-
         <div className="edit-profile__form">
-          {this.props.profile.id ? <AccountForm
-            onSubmit={this.submeteHandler}
-            inputs={this.inputsArguments}
-            initialState={this.props.profile}
-          /> : <Loader />}
+          {this.props.profile.id ? (
+            <AccountForm
+              onSubmit={this.submeteHandler}
+              inputs={this.inputsArguments}
+              initialState={this.props.profile}
+            />
+          ) : (
+            <Loader />
+          )}
         </div>
 
         <div className="edit-profile__img-bg-wrapper">
@@ -74,6 +66,6 @@ const mapStateToPropos = (state) => {
 };
 const mapDispatchToProps = {
   getProfileById,
-  updateUserPost
+  updateUserPost,
 };
 export default connect(mapStateToPropos, mapDispatchToProps)(EditProfile);

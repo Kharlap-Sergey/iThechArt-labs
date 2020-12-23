@@ -4,7 +4,7 @@ export const path = {
   login: "/sign",
   sign: "/sign",
   registration: "/registration",
-  /// ../chat/id:chatId
+  
   chat: (cahtId) => `/chat/id${cahtId ?? ":chatId"}`,
   chatList: "/chats",
   ad: (id) => `/ad/id${id ?? ":id"}`,
@@ -37,8 +37,8 @@ export const pathApi = {
       return api + `/notification/deleteNotificaton/${id}`;
     },
   },
-
   account: {
+    update: api + "account/update",
     registrate: api + "/account/registrate",
     login: api + "/account/login",
   },

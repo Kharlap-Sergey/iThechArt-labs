@@ -1,12 +1,14 @@
 @import "../shared/variables.scss";
 .edit-profile {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
 
   &__form {
-    height: fit-content;
+    position: relative;
+    left: -50%;
     width: 320px;
+    height: fit-content;
     margin-bottom: 20px;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -14,8 +16,6 @@
     border-radius: 20px;
     box-shadow: 4px 4px 70px 10px $sign-form-shadow-color;
     transition: 1.5s;
-    left: -50%;
-    position: relative;
   }
   &__img-bg-wrapper {
     position: absolute;

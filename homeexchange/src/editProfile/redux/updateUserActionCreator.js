@@ -1,24 +1,20 @@
 import { redirectToAction } from "./../../shared/redux/redirect/redirectActionCreator";
-import { toastr } from "react-redux-toastr";
 import { requestWrapper } from "./../../shared/utils/requestWrapper";
-import { auth } from "./../../shared/utils/auth";
+import { path, pathApi } from './../../shared/utils/path';
+import { toastrNotifier } from './../../shared/redux/tostrNotifier';
 
 export function updateUserPost(user) {
   return async (dispatch) => {
     try {
-      const url = "https://localhost:44370/Account/update";
-      const token = auth.getToken();
+      const url = pathApi.account.update();
       const response = await requestWrapper.post(url, user, token);
-      console.log(response);
       if (response.ok) {
-        dispatch(redirectToAction("/"));
+        dispatch(redirectToAction(path.profile));
       } else {
-        console.log("some");
-        toastr.error("some eroor");
+        toastrNotifier.alertBadResponse(response);
       }
     } catch (e) {
-      console.log(e);
-      toastr.error("try again later", e.toString());
+      toastrNotifier.tryAgainLater();
     }
   };
 }
