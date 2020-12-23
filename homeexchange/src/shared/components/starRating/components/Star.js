@@ -3,7 +3,7 @@ import React from "react";
 function Star({ modificator, hover, id, hovered }) {
   return (
     <div
-      class={`star-item star-item--${modificator} star-item--${hovered}`}
+      className={`star-item star-item--${modificator} star-item--${hovered}`}
       onMouseOver={(e) => {
         hover(id, e);
       }}

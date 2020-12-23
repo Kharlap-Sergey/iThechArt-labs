@@ -19,7 +19,6 @@ class AdEditor extends PureComponent {
   }
 
   render() {
-    console.log("render");
     return (
       <div className="ad-editor">
         <div className="ad-editor__form">
