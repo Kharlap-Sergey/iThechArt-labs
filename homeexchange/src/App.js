@@ -28,24 +28,16 @@ function App() {
             <RouteCatcher>
               <Route exact path={"/test"} component={SearchBar} />
               <Route exact path={path.profile.edit()}>
-                <PrivateRoute authed={auth}>
-                  <EditProfile />
-                </PrivateRoute>
+                <PrivateRoute authed={auth} component={EditProfile} />
               </Route>
               <Route exact path={path.chat()}>
-                <PrivateRoute authed={auth}>
-                  <Chats />
-                </PrivateRoute>
+                <PrivateRoute authed={auth} component={Chats} />
               </Route>
               <Route exact path="/ad/create">
-                <PrivateRoute authed={auth}>
-                  <AdCreation />
-                </PrivateRoute>
+                <PrivateRoute authed={auth} component={AdCreation} />
               </Route>
               <Route exact path="/ad/edite/id:id">
-                <PrivateRoute authed={auth}>
-                  <AdEditor />
-                </PrivateRoute>
+                <PrivateRoute authed={auth} component={AdEditor} />
               </Route>
               <Route exact path={path.ad()} component={Ad} />
               <Route exact path="/profile/:id" component={Profile} />

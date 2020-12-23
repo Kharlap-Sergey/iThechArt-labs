@@ -33,6 +33,10 @@ namespace HomeexchangeApi.Models
         [JsonProperty("password", NullValueHandling = NullValueHandling.Ignore)]
         public string Password { get; set; }
 
+        [Required]
+        [JsonPropertyName("language")]
+        public string Languages { get; set; }
+
         public string Country { get; set; }
 
         public string City { get; set; }

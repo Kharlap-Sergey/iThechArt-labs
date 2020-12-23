@@ -41,6 +41,21 @@ export const inputAttributes = {
       "data-permitions": "a-Z 0-9 and - _ ",
     },
   },
+
+  language: {
+    placeholder: "languages1",
+    name: "language",
+    type: "text",
+    validationAttributes: {
+      autoComplete: "off",
+      pattern: "[0-9a-zA-Z ]+",
+      maxLength: "20",
+      required: true,
+      title: "please use only numbers and English characters, also '-_'",
+      "data-permitions": "a-Z 0-9 and - _ ",
+    },
+  },
+
   nickname: {
     placeholder: "nickname",
     name: "nickname",

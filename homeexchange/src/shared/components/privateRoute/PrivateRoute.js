@@ -1,7 +1,7 @@
 import { path } from "./../../utils/path";
-import { Redirect } from "react-router-dom";
-function PrivateRoute({ children, authed }) {
-  return authed == true ? children : <Redirect to={path.sign} />;
+import { Redirect, withRouter } from "react-router-dom";
+function PrivateRoute({ component: Component, authed, ...rest }) {
+  return authed == true ? <Component {...rest}/> : <Redirect to={path.sign} />;
 }
 
-export default PrivateRoute;
+export default withRouter(PrivateRoute);

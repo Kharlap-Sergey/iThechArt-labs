@@ -14,6 +14,7 @@ class Registration extends React.PureComponent {
     inputAttributes.email,
     inputAttributes.country,
     inputAttributes.city,
+    inputAttributes.language,
     inputAttributes.getPasswordAttributesForRegistration(),
   ];
 
