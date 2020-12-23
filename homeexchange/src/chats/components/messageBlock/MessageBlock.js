@@ -30,7 +30,7 @@ class MessageBlock extends PureComponent {
     .build();
 
   handleSendClick(event) {
-    if(!event.target.message.value){
+    if (!event.target.message.value) {
       return;
     }
     event.preventDefault();
@@ -49,8 +49,7 @@ class MessageBlock extends PureComponent {
   componentDidMount() {
     this.props.clearChatAction();
     this.props.loadChatMessages(this.state.chatId);
-    this.hubConnection.start().catch((err) => {
-    });
+    this.hubConnection.start().catch((err) => {});
     this.hubConnection.on("Recieve", (message) => {
       this.props.addChatMessagesAction([message]);
     });
@@ -73,7 +72,7 @@ class MessageBlock extends PureComponent {
         />
         <form onSubmit={this.handleSendClick} className="message-box__controls">
           <textarea className="message-box__input" name="message"></textarea>
-          <button className="message-box__send">></button>
+          <button className="message-box__send">{">"}</button>
         </form>
       </div>
     );
