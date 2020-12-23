@@ -14,6 +14,5 @@
 
   <ItemGroup>
     <Folder Include="GlobalErrorHandling\Extensions\" />
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 </Project>
