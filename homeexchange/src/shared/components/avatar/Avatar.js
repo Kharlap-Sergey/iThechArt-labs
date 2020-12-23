@@ -8,7 +8,7 @@ function Avatar({ profileId, alternativeMessage }) {
   const dispatch = useDispatch();
   const imgs = useSelector((state) => state.profileImg);
   useEffect(() => {
-    if (profileId && imgs[profileId]) {
+    if (profileId && !imgs[profileId]) {
       dispatch(downloadFile(profileId));
     }
   }, [profileId]);
