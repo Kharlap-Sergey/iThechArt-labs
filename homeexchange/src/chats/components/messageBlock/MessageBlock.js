@@ -80,7 +80,6 @@ class MessageBlock extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  console.log("state", state);
   return {
     ...state.chat,
     ...state.user,

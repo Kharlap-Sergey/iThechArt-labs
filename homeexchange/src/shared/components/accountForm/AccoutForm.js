@@ -44,7 +44,6 @@ class AccoutForm extends PureComponent {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
     if (!e.target.validity.valid) {
-      console.log(e.target.validity, e.target.pattern);
       this.setState({
         validationTitle: {
           [e.target.name]: this.getValidationMessage(e),
