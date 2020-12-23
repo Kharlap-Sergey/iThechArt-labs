@@ -5,14 +5,14 @@
 }
 
 @mixin transition-all-15 {
-    -webkit-transition: all 1.5s;
-    -moz-transition: all 1.5s;
-    -ms-transition: all 1.5s;
-    -o-transition: all 1.5s;
-    transition: all 1.5s;
+  -webkit-transition: all 1.5s;
+  -moz-transition: all 1.5s;
+  -ms-transition: all 1.5s;
+  -o-transition: all 1.5s;
+  transition: all 1.5s;
 }
 
-@mixin submit-btn {    
+@mixin submit-btn {
   background-color: #1d2445;
   border: 0;
   border-radius: 12px;
@@ -23,7 +23,7 @@
   -o-transition: all 0.5s 0s ease-in-out;
   transition: all 0.5s 0s ease-in-out;
   &:active {
-    background-color: #1d2445
+    background-color: #1d2445;
   }
   &:hover {
     color: #22b573;

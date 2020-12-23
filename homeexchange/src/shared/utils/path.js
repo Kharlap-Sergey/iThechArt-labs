@@ -4,7 +4,7 @@ export const path = {
   login: "/sign",
   sign: "/sign",
   registration: "/registration",
-  
+
   chat: (cahtId) => `/chat/id${cahtId ?? ":chatId"}`,
   chatList: "/chats",
   ad: (id) => `/ad/id${id ?? ":id"}`,

@@ -19,9 +19,9 @@ export function formateDate(dateString) {
   const month = date.getMonth();
 
   return `${monthNames[month]} ${day}`;
-  }
+}
 
-export function formateNumberToTypeOfAd(t){
-    if(t == 1) return "to lease"
-    return "to rent"
+export function formateNumberToTypeOfAd(t) {
+  if (t == 1) return "to lease";
+  return "to rent";
 }

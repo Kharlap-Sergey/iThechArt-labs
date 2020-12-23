@@ -1,5 +1,5 @@
-import React from 'react';
-import "./submit-button.scss"
+import React from "react";
+import "./submit-button.scss";
 
 class SubmitButton extends React.PureComponent {
   render() {

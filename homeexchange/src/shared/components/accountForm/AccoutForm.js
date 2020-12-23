@@ -4,7 +4,6 @@ import SubmitButton from "./components/submitButton/SubmitButton";
 import "./account-form.scss";
 class AccoutForm extends PureComponent {
   constructor(props) {
-    console.log('define component')
     super(props);
     this.state = {
       ...this.props.initialState,
@@ -24,18 +23,18 @@ class AccoutForm extends PureComponent {
 
   getValidationMessage(element) {
     const validity = element.target.validity;
-    if (element.target.validity.patternMismatch) {
+    if (validity.patternMismatch) {
       return "please use only: " + element.target.dataset.permitions;
     }
-    if (element.target.validity.valueMissing) {
+    if (validity.valueMissing) {
       return "please fill out this field";
     }
-    if (element.target.validity.tooShort) {
+    if (validity.tooShort) {
       return `this field require ${element.target.getAttribute(
         "minlength"
       )} characters or more`;
     }
-    if (element.target.validity.typeMismatch) {
+    if (validity.typeMismatch) {
       return `his field require data to be ${element.target.getAttribute(
         "type"
       )}`;
