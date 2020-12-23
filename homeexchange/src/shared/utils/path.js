@@ -58,4 +58,5 @@ export const pathApi = {
 
 export const pathHub = {
   chat: api + "/hub/chat",
+  notification: api + "hub/notification",
 };

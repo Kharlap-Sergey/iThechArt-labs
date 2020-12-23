@@ -1,19 +1,17 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import {redirectToAction} from '../../redux/redirect/redirectActionCreator'
-import "./logout-btn.scss"
-import { auth } from './../../utils/auth';
-import { logoutAction } from './../../redux/account/accountActions';
-import { path } from '../../utils/path';
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { redirectToAction } from "../../redux/redirect/redirectActionCreator";
+import "./logout-btn.scss";
+import { auth } from "./../../utils/auth";
+import { logoutAction } from "./../../redux/account/accountActions";
+import { path } from "../../utils/path";
 class LogoutBtn extends PureComponent {
   logout() {
-    console.log("log out event");
-    console.log(this.props);
     this.props.logoutAction();
     auth.clearToken();
     this.props.redirectToAction(path.home);
   }
-  
+
   render() {
     return (
       <button className="logout-btn" onClick={this.logout.bind(this)}>
@@ -22,8 +20,7 @@ class LogoutBtn extends PureComponent {
     );
   }
 }
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {
   logoutAction,

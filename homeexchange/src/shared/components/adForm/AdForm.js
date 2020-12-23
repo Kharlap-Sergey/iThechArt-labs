@@ -7,7 +7,7 @@ class AdForm extends PureComponent {
 
     this.submiteHandler = this.submiteHandler.bind(this);
     this.changeInputHandler = this.changeInputHandler.bind(this);
-    const temp = this.props.initial ?? { type: 1 }
+    const temp = this.props.initial ?? { type: 1 };
     this.state = { validationTitle: {}, ...temp };
     this.handleFocuse = this.handleFocuse.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
@@ -27,17 +27,15 @@ class AdForm extends PureComponent {
     console.log("props", this.props);
     console.log("the form state was ", this.state);
     if (e.target.name == "type") {
-      console.log(Number(e.target.value));
       this.setState({ [e.target.name]: Number(e.target.value) });
     } else this.setState({ [e.target.name]: e.target.value });
 
     if (!e.target.validity.valid) {
-
       this.setState({
         validationTitle: {
           [e.target.name]: this.getValidationMessage(e.target),
         },
-      })
+      });
     } else if (this.state.validationTitle[e.target.name]) {
       this.setState({
         validationTitle: {
@@ -56,16 +54,19 @@ class AdForm extends PureComponent {
       return "please fill out this field";
     }
     if (validity.tooShort) {
-      return `this field require ${element.target.getAttribute("minlength")} characters or more`;
+      return `this field require ${element.target.getAttribute(
+        "minlength"
+      )} characters or more`;
     }
     if (validity.typeMismatch) {
-      return `his field require data to be ${element.target.getAttribute("type")}`;
+      return `his field require data to be ${element.target.getAttribute(
+        "type"
+      )}`;
     }
   }
 
   handleFocuse(event) {
     this.changeInputHandler(event);
-    //this.setState({ showValidation: false });
   }
   handleBlur(event) {
     this.changeInputHandler(event);

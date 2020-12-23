@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import "./dropdown-menu.scss"
+import React, { PureComponent } from "react";
+import "./dropdown-menu.scss";
 class DropdownMenu extends PureComponent {
   render() {
     return (

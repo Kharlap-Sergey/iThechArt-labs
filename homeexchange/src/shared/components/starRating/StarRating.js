@@ -4,7 +4,7 @@ import "./star-reting.scss";
 
 const STARS_COUNT = 5;
 
-function StarRating({ currentRating, handleClick}) {
+function StarRating({ currentRating, handleClick }) {
   const [onHoveredId, setHoveredId] = useState(0);
 
   const hover = (id, e) => {
@@ -15,12 +15,12 @@ function StarRating({ currentRating, handleClick}) {
     if (e.type == "mouseout") {
       setHoveredId(0);
     }
-    console.log('onHoveredId', onHoveredId)
+    console.log("onHoveredId", onHoveredId);
   };
 
   const getStars = (count, currentRating) => {
     const res = [];
-    console.log('currentRating', currentRating)
+    console.log("currentRating", currentRating);
     for (let i = 0; i < count; i++) {
       const tp =
         currentRating <= 0 ? "empty" : currentRating >= 1 ? "full" : "half";
@@ -40,9 +40,14 @@ function StarRating({ currentRating, handleClick}) {
   return (
     <div className="star-rating">
       {getStars(STARS_COUNT, currentRating).map((star, index) => (
-        <li key={index} className="star-rating__item" onClick={(e) => {
-          console.log('index', index);
-          handleClick(index+1, e)}}>
+        <li
+          key={index}
+          className="star-rating__item"
+          onClick={(e) => {
+            console.log("index", index);
+            handleClick(index + 1, e);
+          }}
+        >
           {star}
         </li>
       ))}

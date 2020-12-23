@@ -1,6 +1,5 @@
 @import "../../variables.scss";
 .dropdown-menu1 {
-
   position: absolute;
   left: 0;
   z-index: 100;
@@ -12,8 +11,8 @@
   background-color: $doropdowb-menu-bg-color;
   background-clip: padding-box;
   border: 1px solid $doropdowb-menu-bg-color;
-  border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 .dropdown-menu1-sw {
   right: 0;

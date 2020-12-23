@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { deleteAd, replyOnAd } from "../../../redux/ad/adActionCreator";
-import { redirectToAction } from './../../../redux/redirect/redirectActionCreator';
+import { redirectToAction } from "./../../../redux/redirect/redirectActionCreator";
 class Authorized extends PureComponent {
   removeClickHandler(event) {
     this.props.deleteAd(this.props.adId);

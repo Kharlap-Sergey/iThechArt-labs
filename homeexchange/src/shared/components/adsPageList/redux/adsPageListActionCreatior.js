@@ -5,7 +5,7 @@ import {
 import { pathApi } from "../../../utils/path";
 import { requestWrapper } from "../../../utils/requestWrapper";
 import { CLEAR, GET_ADS } from "./types";
-import { toastrNotifier } from './../../../redux/tostrNotifier';
+import { toastrNotifier } from "./../../../redux/tostrNotifier";
 
 export function getAds(page, type, searchString, authorId) {
   return async (dispatch) => {
@@ -25,7 +25,7 @@ export function getAds(page, type, searchString, authorId) {
         toastrNotifier.alertBadResponse(response);
       }
     } catch (e) {
-      toastrNotifier.tryAgainLater()
+      toastrNotifier.tryAgainLater();
     } finally {
       dispatch(disableAllAction());
     }

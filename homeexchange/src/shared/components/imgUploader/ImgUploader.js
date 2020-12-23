@@ -8,14 +8,9 @@ function ImgUploader({ profileId }) {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const file = e.target.file;
-    console.log("file", file);
-    console.log(file.files);
-    console.log("imgSrc", imgSrc);
     let fd = new FormData();
     fd.append("imgData", imgFile);
-    console.log("", [...fd]);
     dispatch(sendFile(fd, profileId));
   };
 
@@ -24,12 +19,10 @@ function ImgUploader({ profileId }) {
     var reader = new FileReader();
 
     reader.onload = function (event) {
-      console.log("event.target", event.target);
       setImgSrc(event.target.result);
-      //setImgFile(event.target.result);
     };
-    if(fileinput.files.length <= 0){
-        return;
+    if (fileinput.files.length <= 0) {
+      return;
     }
     reader.readAsDataURL(fileinput.files[0]);
     setImgFile(fileinput.files[0]);

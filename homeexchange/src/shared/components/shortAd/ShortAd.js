@@ -36,7 +36,6 @@ class ShortAd extends PureComponent {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="short-ad">
         <div className="short-ad__header">

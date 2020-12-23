@@ -13,7 +13,6 @@ class InputBox extends React.PureComponent {
 
   show_hide_password(event) {
     event.preventDefault();
-    console.log(event);
     var input = this.refToInput.current;
     if (input.getAttribute("type") === "password") {
       event.target.classList.add("view");
@@ -26,22 +25,17 @@ class InputBox extends React.PureComponent {
   }
 
   onChange(event) {
-    console.log(event);
-    console.log("event.target", event.target.validity);
     this.props.onChange(event);
   }
 
   handleFocuse(event) {
     this.props.onChange(event);
-    //this.setState({ showValidation: false });
   }
   handleBlur(event) {
     this.props.onChange(event);
     this.setState({ showValidation: true });
   }
   render() {
-    console.log("render");
-    console.log(this.props);
     return (
       <div className="input-box">
         <div className="input-box__validation">
