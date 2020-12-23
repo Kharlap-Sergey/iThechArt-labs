@@ -7,7 +7,7 @@ export function updateUserPost(user) {
   return async (dispatch) => {
     try {
       const url = pathApi.account.update();
-      const response = await requestWrapper.post(url, user, token);
+      const response = await requestWrapper.post(url, user);
       if (response.ok) {
         dispatch(redirectToAction(path.profile));
       } else {

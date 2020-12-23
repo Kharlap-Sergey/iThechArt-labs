@@ -19,8 +19,6 @@ class Registration extends React.PureComponent {
   ];
 
   submeteHandler = (state) => {
-    console.log("form was submeted");
-    console.log("with arguments", state);
 
     let user = {
       ...state,

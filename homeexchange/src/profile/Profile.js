@@ -27,7 +27,6 @@ class Profile extends PureComponent {
   }
 
   componentDidMount() {
-    console.log("fetch profile for ", this.state.userId);
     this.props.getProfileById(this.state.userId);
   }
   componentWillUnmount() {
