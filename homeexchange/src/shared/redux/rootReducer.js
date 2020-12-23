@@ -8,9 +8,9 @@ import { adsPageListReducer } from "../components/adsPageList/redux/adsPageListR
 import { accountReducer } from "./account/accountReducer";
 import { notificationsReducer } from "./notifications/notificationsReducer";
 import { chatReducer } from "./chat/chatReducer";
-import {loaderReducer} from "./loader/loaderReducer";
+import { loaderReducer } from "./loader/loaderReducer";
 import { profileRatingReducer } from "./profileRating/profileRatingReducer";
-import { profileImgReducer } from './imgUploader/profileImgReducer';
+import { profileImgReducer } from "./imgUploader/profileImgReducer";
 export const rootReducer = combineReducers({
   user: accountReducer,
   notifications: notificationsReducer,
@@ -19,9 +19,9 @@ export const rootReducer = combineReducers({
   redirect: redirectReducer,
   remoteInteraction: remoteInteractionReducer,
   profile: profileReducer,
-  profileRating: profileRatingReducer, 
+  profileRating: profileRatingReducer,
   profileImg: profileImgReducer,
   adsPageList: adsPageListReducer,
   chat: chatReducer,
-  loader: loaderReducer
+  loader: loaderReducer,
 });

@@ -1,6 +1,10 @@
-import { REMOTE_CLEAR, REMOTE_IS_LOADING, REMOTE_IS_SHOUL_BE_UPDATED } from "./types";
+import {
+  REMOTE_CLEAR,
+  REMOTE_IS_LOADING,
+  REMOTE_IS_SHOUL_BE_UPDATED,
+} from "./types";
 
-const initialState = {isShouldBeUpdate: false, isLoading: false, };
+const initialState = { isShouldBeUpdate: false, isLoading: false };
 
 export const remoteInteractionReducer = (state = initialState, action) => {
   switch (action.type) {

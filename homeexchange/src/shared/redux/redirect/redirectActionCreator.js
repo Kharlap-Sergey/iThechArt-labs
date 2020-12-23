@@ -1,15 +1,14 @@
-import { REDIRECT_CLEAR, REDIRECT_TO } from "./types"
+import { REDIRECT_CLEAR, REDIRECT_TO } from "./types";
 
-export const redirectToAction = (path)=>
-{
+export const redirectToAction = (path) => {
   return {
     type: REDIRECT_TO,
-    payload: {path: path}
-  }
-}
+    payload: { path: path },
+  };
+};
 
-export const redirectClear = () =>{
+export const redirectClear = () => {
   return {
-    type: REDIRECT_CLEAR
-  }
-}
+    type: REDIRECT_CLEAR,
+  };
+};

@@ -25,7 +25,6 @@ class NotificationsList extends PureComponent {
   componentDidMount() {
     this.props.getNotificationsFetch();
     this.hubConnection.start().catch((err) => {
-      console.log(err);
     });
     this.hubConnection.on("Notify", (notification) => {
       this.props.addNotificationsAction([notification]);
@@ -45,9 +44,7 @@ class NotificationsList extends PureComponent {
     this.props.deNotify?.call();
   }
   render() {
-    console.log(this.props);
     const notifics = this.props.notifications;
-    console.log("notifics", notifics);
     return (
       <div className="notifications" onMouseOver={this.deNotify}>
         {notifics.length > 0 ? (

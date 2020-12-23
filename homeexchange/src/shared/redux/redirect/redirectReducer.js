@@ -1,11 +1,11 @@
 import { REDIRECT_TO, REDIRECT_CLEAR } from "./types";
 
-const initialState = {path: ""};
+const initialState = { path: "" };
 
 export const redirectReducer = (state = initialState, action) => {
   switch (action.type) {
     case REDIRECT_TO:
-      return {...state, ...action.payload};
+      return { ...state, ...action.payload };
     case REDIRECT_CLEAR:
       return initialState;
     default:
