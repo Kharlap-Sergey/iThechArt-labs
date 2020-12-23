@@ -5,6 +5,7 @@ import AdForm from "./../shared/components/adForm/AdForm";
 import { updateAd } from "./redux/update";
 import bgImg from "../shared/imgs/repairing.svg";
 import "./ad-editor.scss";
+import Loader from "../shared/components/Loader/Loader";
 class AdEditor extends PureComponent {
   constructor(props) {
     super(props);
@@ -21,12 +22,18 @@ class AdEditor extends PureComponent {
   render() {
     return (
       <div className="ad-editor">
-        <div className="ad-editor__form">
-          {this.props.ad.id && (
-            <AdForm
-              onSubmit={this.submitHandler.bind(this)}
-              initial={this.props.ad}
-            ></AdForm>
+        <div className="ad-editor__body">
+          {this.props.isLoading ? (
+            <Loader />
+          ) : (
+            <div className="ad-editor__form">
+              {this.props.ad.id && (
+                <AdForm
+                  onSubmit={this.submitHandler.bind(this)}
+                  initial={this.props.ad}
+                ></AdForm>
+              )}
+            </div>
           )}
         </div>
         <div className="ad-editor__img-bg-wrapper">
@@ -43,6 +50,7 @@ class AdEditor extends PureComponent {
 
 const mapStateToProps = (state) => ({
   ad: state.ads.ad,
+  isLoading: state.loader.adForm,
 });
 
 const mapDispatchToProps = {

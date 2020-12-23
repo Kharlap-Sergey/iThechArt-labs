@@ -31,7 +31,9 @@ export function createNewAd(ad) {
   };
 }
 export function getAd(adId) {
+
   return async (dispatch) => {
+      dispatch(enableAdFromtActin());
     try {
       const url = pathApi.ad.get(adId);
       const response = await requestWrapper.get(url);
@@ -45,6 +47,8 @@ export function getAd(adId) {
       }
     } catch (e) {
       toastrNotifier.tryAgainLater();
+    }finally{
+      dispatch(disableAllAction());
     }
   };
 }

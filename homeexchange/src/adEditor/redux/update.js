@@ -3,9 +3,12 @@ import { redirectToAction } from "./../../shared/redux/redirect/redirectActionCr
 import { pathApi } from "../../shared/utils/path";
 import { path } from "./../../shared/utils/path";
 import { toastrNotifier } from "./../../shared/redux/tostrNotifier";
+import { enableAdFromtActin } from "../../shared/redux/loader/loaderActionCreator";
+import { disableAllAction } from './../../shared/redux/loader/loaderActionCreator';
 
 export function updateAd(ad) {
   return async (dispatch) => {
+    dispatch(enableAdFromtActin());
     try {
       const url = pathApi.ad.update();
       
@@ -17,6 +20,8 @@ export function updateAd(ad) {
       }
     } catch (e) {
       toastrNotifier.tryAgainLater();
+    }finally{
+      dispatch(disableAllAction());
     }
   };
 }

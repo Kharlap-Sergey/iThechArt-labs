@@ -3,14 +3,16 @@
   position: relative;
   display: flex;
   align-items: center;
-
-  &__form {
+  &__body {
     position: relative;
     left: -50%;
+    min-width: 400px;
     height: fit-content;
     margin-bottom: 20px;
     overflow-x: hidden;
     overflow-y: hidden;
+  }
+  &__form {
     background-color: $sign-form-bg-color;
     border-radius: 20px;
     box-shadow: 4px 4px 70px 10px $sign-form-shadow-color;
