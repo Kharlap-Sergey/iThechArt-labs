@@ -6,7 +6,6 @@ import "./sign..scss";
 class Sign extends PureComponent {
   constructor(props) {
     super(props);
-
     this.state = {
       type: "login",
     };
@@ -15,7 +14,6 @@ class Sign extends PureComponent {
 
   handleSwithcerClick = (event) => {
     const sign = this.signRef.current;
-    console.log(sign.style);
     this.setState({ type: [event.target.name] });
   };
   render() {

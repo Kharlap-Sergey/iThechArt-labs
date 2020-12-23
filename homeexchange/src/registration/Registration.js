@@ -46,10 +46,10 @@ class Registration extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return { ...state.accountForm, isLoading: state.loader.registration };
-};
+const mapStateToProps = (state) => ({
+  ...state.accountForm,
+  isLoading: state.loader.registration,
+});
 
 const mapDispatchToProps = { registrateUserPost };
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);

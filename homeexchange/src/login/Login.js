@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Loader from "../shared/components/Loader/Loader";
 import AccountForm from "../shared/components/accountForm/AccoutForm";
 import { inputAttributes } from "../shared/utils/inputArguments";
-import "./login.scss"
+import "./login.scss";
 class Login extends PureComponent {
   state = {};
   inputsArguments = [
@@ -12,10 +12,7 @@ class Login extends PureComponent {
     inputAttributes.getPasswordAttributesForLogin(),
   ];
 
-  submeteHandler = (state) => {
-    console.log("form was submeted");
-    console.log("with arguments", state)
-    
+  handleSubmit = (state) => {
     let account = {
       login: state.email,
       password: state.password,
@@ -23,18 +20,23 @@ class Login extends PureComponent {
 
     this.props.loginUserPost(account);
   };
-  content() {
-    return (
-      <div className="login-form-container">
-        <AccountForm
-          onSubmit={this.submeteHandler}
-          inputs={this.inputsArguments}
-        />
+  content = (
+    <div className="login-form-container">
+      <AccountForm
+        onSubmit={this.handleSubmit}
+        inputs={this.inputsArguments}
+      />
+    </div>
+  )
+
+  render() {
+    return !this.props.isLoading ? (
+      this.content
+    ) : (
+      <div className="login-loader">
+        <Loader />
       </div>
     );
-  }
-  render() {
-    return !this.props.isLoading ? this.content() : <div className="login-loader"><Loader /></div>;
   }
 }
 
