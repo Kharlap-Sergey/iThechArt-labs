@@ -19,6 +19,7 @@ class AdsPageList extends PureComponent {
     this.state = this.initialState;
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
+    this.searchHandler = null;
   }
   componentDidMount() {
     this.loadPage();
@@ -27,7 +28,10 @@ class AdsPageList extends PureComponent {
     this.props.clearAdsPageAction();
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.currentPage !== this.state.currentPage || prevProps.userId != this.props.userId) {
+    if (
+      prevState.currentPage !== this.state.currentPage ||
+      prevProps.userId != this.props.userId
+    ) {
       this.loadPage();
     }
   }
@@ -73,7 +77,10 @@ class AdsPageList extends PureComponent {
         return { ...state, searchVal: e.target.value, currentPage: 1 };
       },
       () => {
-        this.loadPage();
+        clearTimeout(this.searchHandler);
+        this.searchHandler = setTimeout(() => {
+          this.loadPage();
+        }, 1000);
       }
     );
   }
