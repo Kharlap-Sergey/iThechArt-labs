@@ -2,6 +2,7 @@
 using HomeexchangeApi.Domain.Entities;
 using HomeexchangeApi.Exceptions;
 using HomeexchangeApi.Hubs;
+using HomeexchangeApi.Models;
 using HomeexchangeApi.Requests;
 using HomeexchangeApi.Responses;
 using Microsoft.AspNetCore.SignalR;
@@ -13,17 +14,19 @@ namespace HomeexchangeApi.Services
 {
     public sealed class ChatService : IChatService
     {
-        IGenericRepository<Chat> chatRepository;
-        IGenericRepository<ChatMember> chatMemberRepository;
-        IGenericRepository<ChatMessage> chatMessageRepository;
-        IGenericRepository<PrivateRoom> privateRoomRepository;
-        IHubContext<ChatHub> chatHubContext;
+        readonly IGenericRepository<Chat> chatRepository;
+        readonly IGenericRepository<ChatMember> chatMemberRepository;
+        readonly IGenericRepository<ChatMessage> chatMessageRepository;
+        readonly IGenericRepository<PrivateRoom> privateRoomRepository;
+        readonly IHubContext<ChatHub> chatHubContext;
+        readonly IUserService userService;
 
         public ChatService(
             IGenericRepository<Chat> chatRepository,
             IGenericRepository<ChatMember> chatMemberRepository,
             IGenericRepository<ChatMessage> chatMessageRepository,
             IGenericRepository<PrivateRoom> privateRoomRepository,
+            IUserService userService,
             IHubContext<ChatHub> chatHubContext
             )
         {
@@ -32,6 +35,7 @@ namespace HomeexchangeApi.Services
             this.chatMessageRepository = chatMessageRepository;
             this.privateRoomRepository = privateRoomRepository;
             this.chatHubContext = chatHubContext;
+            this.userService = userService;
         }
 
         public void AddMemberToChat(int chatId, int memberId)
@@ -61,7 +65,7 @@ namespace HomeexchangeApi.Services
             var chatMessage = chatMessageRepository.Create(message);
             SendMessageToChat(chatMessage);
             return chatMessage;
-        } 
+        }
         public ChatMessage AddMessage(MessageRequest message, int comnitterId)
         {
             var chatMessage = new ChatMessage
@@ -108,7 +112,7 @@ namespace HomeexchangeApi.Services
         public IEnumerable<Chat> GetChatList(int userId)
         {
             var chatIds = chatMemberRepository.Get(cm => cm.UserId == userId).Select(cm => cm.ChatId);
-            return chatRepository.Get().Where(chat =>  chatIds.Contains(chat.Id));
+            return chatRepository.Get().Where(chat => chatIds.Contains(chat.Id));
         }
 
         public IEnumerable<int> GetChatMembersId(int chatId)
@@ -119,8 +123,8 @@ namespace HomeexchangeApi.Services
 
         public IEnumerable<ChatMessage> GetChatMessages(int chatId, int commiterId)
         {
-            var chatMem = chatMemberRepository.Get( cm => cm.ChatId == chatId && cm.UserId == commiterId).FirstOrDefault();
-            if(chatMem == null)
+            var chatMem = chatMemberRepository.Get(cm => cm.ChatId == chatId && cm.UserId == commiterId).FirstOrDefault();
+            if (chatMem == null)
             {
                 throw new PermissionException("couldn't load not yours messages");
             }
@@ -130,36 +134,38 @@ namespace HomeexchangeApi.Services
 
         public Chat GetChatOrCreateForTowMembers(int member1, int member2)
         {
-           if(member1 > member2)
+            if (member1 > member2)
             {
                 var temp = member1;
                 member1 = member2;
                 member2 = temp;
             }
             var pw = privateRoomRepository.Get(pw => pw.Member1Id == member1 && pw.Member2Id == member2).FirstOrDefault();
-            if(pw == null)
+            if (pw == null)
             {
-                var chat = CreateChat($"{member1}/{member2}");
+                var chat = 
+                    CreateChat($"{userService.FindById(member1).Nickname}" +
+                    $"/{userService.FindById(member2).Nickname}");
 
                 pw = CreatePrivateRoom(chat.Id, member1, member2);
                 AddMemberToChat(chat.Id, member1);
-                if(member1 != member2) AddMemberToChat(chat.Id, member2);
+                if (member1 != member2) AddMemberToChat(chat.Id, member2);
             }
 
 
-            return chatRepository.FindById(pw.ChatId) ;
+            return chatRepository.FindById(pw.ChatId);
         }
 
         public IEnumerable<ChatListItemResponse> GetChatResponsesList(int userId)
         {
             var chats = this.GetChatList(userId);
-            return chats.Select(chat => new ChatListItemResponse 
-                { 
-                    Chat = chat, 
-                    LastMessage = chatMessageRepository.Get(cm => cm.ChatId == chat.Id)
-                    .OrderByDescending(cm=> cm.PublicationDate)
+            return chats.Select(chat => new ChatListItemResponse
+            {
+                Chat = chat,
+                LastMessage = chatMessageRepository.Get(cm => cm.ChatId == chat.Id)
+                    .OrderByDescending(cm => cm.PublicationDate)
                     .FirstOrDefault()
-                });
+            });
         }
     }
 }
