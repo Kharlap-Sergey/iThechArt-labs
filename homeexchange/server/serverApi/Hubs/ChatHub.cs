@@ -47,7 +47,13 @@ namespace HomeexchangeApi.Hubs
             //NotificationService.Subscribers[userId] = connectionId;
             await base.OnConnectedAsync();
         }
-
+        public override async Task OnDisconnectedAsync(Exception e)
+        {
+            int userId = int.Parse(Context.User.Identity.Name);
+            
+            if(Subscribers.ContainsKey(userId)) Subscribers.Remove(userId);
+            await base.OnDisconnectedAsync(e);
+        }
         int GetCommitterId()
         {
             return int.Parse(Context.User.Identity.Name);
