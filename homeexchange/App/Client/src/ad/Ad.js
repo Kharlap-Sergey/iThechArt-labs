@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Loader from "shared/components/Loader/Loader";
 import { clearAdsAction, getAd } from "shared/redux/ad/adActionCreator";
@@ -20,8 +20,9 @@ class Ad extends PureComponent {
       type: PropTypes.number.isRequired,
       description: PropTypes.string.isRequired,
       dateOfPublication: PropTypes.any.isRequired,
-    })
-  }
+    }),
+    match: PropTypes.object.isRequired,
+  };
 
   componentDidMount() {
     this.props.getAd(this.state.adId);

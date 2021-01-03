@@ -1,9 +1,4 @@
 import { requestWrapper } from "../../utils/requestWrapper";
-import { AD_CLEAR, AD_GET, AD_GETALL } from "./types";
-import {
-  startLoadingAction,
-  endLoadingAction,
-} from "../remoteInteraciton/remoteInteractionActionCreator";
 import { redirectToAction } from "./../redirect/redirectActionCreator";
 import { pathApi, path } from "../../utils/path";
 import {
@@ -30,8 +25,8 @@ export function createNewAd(ad) {
     }
   };
 }
-export function getAd(adId) {
 
+export function getAd(adId) {
   return async (dispatch) => {
       dispatch(enableAdFromtActin());
     try {
@@ -64,6 +59,7 @@ export function deleteAd(adId) {
     }
   };
 }
+
 export function replyOnAd(adId) {
   return async (dispatch) => {
     const url = pathApi.ad.replyOnAd(adId);
@@ -73,22 +69,5 @@ export function replyOnAd(adId) {
     } else {
       toastrNotifier.alertBadResponse(response);
     }
-  };
-}
-export function setAllAdsAction(ads) {
-  return {
-    type: AD_GETALL,
-    payload: ads,
-  };
-}
-export function clearAdsAction() {
-  return {
-    type: AD_CLEAR,
-  };
-}
-export function setAdAction(ad) {
-  return {
-    type: AD_GET,
-    payload: ad,
   };
 }
