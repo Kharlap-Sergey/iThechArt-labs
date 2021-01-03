@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import Login from "../login/Login";
 import Registration from "../registration/Registration";
 import logo from "../shared/imgs/account-form.svg";
-import "./sign..scss";
+import "./sign.scss";
 class Sign extends PureComponent {
   constructor(props) {
     super(props);
