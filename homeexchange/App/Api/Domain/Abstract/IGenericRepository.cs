@@ -11,6 +11,7 @@ namespace HomeexchangeApi.Domain.Abstract
         TEntity FindById(int id);
         IEnumerable<TEntity> Get();
         IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
+        IQueryable<TEntity> GetQuerable();
         TEntity Remove(TEntity item);
         TEntity Update(TEntity item);
     }

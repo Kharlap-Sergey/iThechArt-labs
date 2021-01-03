@@ -39,6 +39,11 @@ namespace HomeexchangeApi.Domain.Concrete
             return entities.AsNoTracking().ToList().Where(predicate);
         }
 
+        public IQueryable<TEntity> GetQuerable(Func<TEntity, bool> predicate)
+        {
+            return entities.AsNoTracking().ToList().Where(predicate);
+        }
+
         public TEntity Remove(TEntity item)
         {
             dbContext.Entry(item).State = EntityState.Deleted;
