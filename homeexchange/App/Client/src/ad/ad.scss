@@ -1,5 +1,5 @@
-@import "../shared/variables.scss";
-@import "../shared/mixins.scss";
+@import "shared/variables.scss";
+@import "shared/mixins.scss";
 
 .ad-responded {
   display: flex;
@@ -47,24 +47,5 @@
     margin: 10px;
     padding: 2px;
     word-wrap: break-word;
-  }
-  &__auth {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 0 20px;
-    background-color: #001730;
-    border-radius: inherit;
-  }
-
-  &__btn {
-    margin: 10px;
-    padding: 3px 10px;
-    background-color: inherit;
-    border: 1px solid $ad-main-btn-border-color;
-    cursor: pointer;
-    &:hover,
-    &:focus {
-      color: $ad-neon;
-    }
   }
 }

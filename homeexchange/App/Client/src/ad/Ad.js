@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import Loader from "../shared/components/Loader/Loader";
-import { clearAdsAction, getAd } from "../shared/redux/ad/adActionCreator";
-import { formateDate, formateNumberToTypeOfAd } from "../shared/utils/formater";
-
+import Loader from "shared/components/Loader/Loader";
+import { clearAdsAction, getAd } from "shared/redux/ad/adActionCreator";
+import { formateDate, formateNumberToTypeOfAd } from "shared/utils/formater";
 import "./ad.scss";
+import { selectAd } from "shared/redux/ad/selectors";
 
 class Ad extends PureComponent {
   constructor(props) {
@@ -13,9 +14,19 @@ class Ad extends PureComponent {
     this.state = { adId: this.props.match.params.id };
   }
 
+  static propTypes = {
+    ad: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      type: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+      dateOfPublication: PropTypes.any.isRequired,
+    })
+  }
+
   componentDidMount() {
     this.props.getAd(this.state.adId);
   }
+
   componentWillUnmount() {
     this.props.clearAdsAction();
   }
@@ -43,10 +54,10 @@ class Ad extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    ...state.user,
-    ad: state.ads.ad,
+    ad: selectAd(state),
   };
 };
+
 const mapDispatchToProps = {
   getAd,
   clearAdsAction,
