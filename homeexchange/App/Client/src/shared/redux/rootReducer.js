@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { reducer as toastrReducer } from "react-redux-toastr";
-import { adReducer } from "./ad/adReducer";
+import { adReducer } from "./ad/reducer";
 import { redirectReducer } from "./redirect/redirectReducer";
 import { remoteInteractionReducer } from "./remoteInteraciton/remoteInteractionReducer";
 import { profileReducer } from "./profile/profileReducer";

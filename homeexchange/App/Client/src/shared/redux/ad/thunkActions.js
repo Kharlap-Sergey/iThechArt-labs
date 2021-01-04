@@ -6,6 +6,7 @@ import {
   disableAllAction,
 } from "../loader/loaderActionCreator";
 import { toastrNotifier } from "./../tostrNotifier";
+import { setAdAction } from './actions';
 
 export function createNewAd(ad) {
   return async (dispatch) => {
@@ -34,11 +35,31 @@ export function getAd(adId) {
       const response = await requestWrapper.get(url);
       if (response.ok) {
         const data = await response.json();
-        dispatch(setAdAction({ ad: data }));
+        dispatch(setAdAction(data));
       } else {
         const data = await response.json();
         toastrNotifier.alertBadResponse(response);
         dispatch(redirectToAction(path.Profile));
+      }
+    } catch (e) {
+      toastrNotifier.tryAgainLater();
+    }finally{
+      dispatch(disableAllAction());
+    }
+  };
+}
+
+export function updateAd(ad) {
+  return async (dispatch) => {
+    dispatch(enableAdFromtActin());
+    try {
+      const url = pathApi.ad.update();
+      
+      const response = await requestWrapper.post(url, ad);
+      if (response.ok) {
+        dispatch(redirectToAction(path.profile));
+      } else {
+        toastrNotifier.alertBadResponse(response);
       }
     } catch (e) {
       toastrNotifier.tryAgainLater();

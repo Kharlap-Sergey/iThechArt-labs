@@ -1,4 +1,4 @@
-import { SET_ADS } from './constants';
+import { SET_ADS, CLEAR, SET_AD } from './constants';
 
 export function setAdsAction(ads) {
   return {
@@ -9,13 +9,13 @@ export function setAdsAction(ads) {
 
 export function clearAdsAction() {
   return {
-    type: AD_CLEAR,
+    type: CLEAR,
   };
 }
 
 export function setAdAction(ad) {
   return {
-    type: AD_GET,
+    type: SET_AD,
     payload: ad,
   };
 }

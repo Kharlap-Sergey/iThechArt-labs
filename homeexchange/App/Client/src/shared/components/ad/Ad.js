@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { getAd, clearAdsAction } from "../../redux/ad/adActionCreator";
+import { clearAdsAction } from "shared/redux/ad/actions";
 import { formateDate, formateNumberToTypeOfAd } from "../../utils/formater";
 import "./ad.scss";
 import AccountAvatar from "./../accountAvatar/AccountAvatar";
 import Authorized from "./components/Authorized";
+import { getAd } from "shared/redux/ad/thunkActions";
 class Ad extends PureComponent {
   constructor(props) {
     super(props);

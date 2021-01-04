@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { getAd } from "./../shared/redux/ad/adActionCreator";
 import AdForm from "./../shared/components/adForm/AdForm";
-import { updateAd } from "./redux/update";
 import bgImg from "../shared/imgs/repairing.svg";
 import "./ad-editor.scss";
 import Loader from "../shared/components/Loader/Loader";
+import { getAd, updateAd } from "shared/redux/ad/thunkActions";
+
 class AdEditor extends PureComponent {
   constructor(props) {
     super(props);

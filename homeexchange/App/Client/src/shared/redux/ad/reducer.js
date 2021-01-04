@@ -1,5 +1,6 @@
-const initialState = { ads: [], ad: {} };
 import { SET_AD, SET_ADS, CLEAR } from './constants';
+
+const initialState = { ads: [], ad: {} };
 
 export const adReducer = (state = initialState, action) => {
   switch (action.type) {

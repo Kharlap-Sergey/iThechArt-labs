@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { deleteAd, replyOnAd } from "../../../redux/ad/adActionCreator";
+import { deleteAd, replyOnAd } from "shared/redux/ad/thunkActions";
 import { redirectToAction } from "./../../../redux/redirect/redirectActionCreator";
 class Authorized extends PureComponent {
   removeClickHandler(event) {
