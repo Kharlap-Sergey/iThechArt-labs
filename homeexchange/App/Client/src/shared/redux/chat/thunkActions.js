@@ -22,7 +22,7 @@ export function loadChatList() {
   };
 }
 
-export function loadChatId(member1, member2) {
+export function loadPrivateRoomId(member1, member2) {
   return async (dispatch) => {
     try {
       const url = pathApi.chat.loadChatId;

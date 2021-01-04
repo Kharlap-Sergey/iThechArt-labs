@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Message from "../message/Message";
-import AccountAvatar from "../../../shared/components/accountAvatar/AccountAvatar";
+import AccountAvatar from "shared/components/accountAvatar/AccountAvatar";
 import "./message-list.scss";
 
 class MessageList extends PureComponent {
@@ -11,7 +11,6 @@ class MessageList extends PureComponent {
   }
   static propTypes = {
     messages: PropTypes.array.isRequired,
-    chatId: PropTypes.number.isRequired,
   };
   scrollDown() {
     var block = this.chatListRef.current;
@@ -36,7 +35,7 @@ class MessageList extends PureComponent {
       <div className="message-box__message-list" ref={this.chatListRef}>
         <ul className="message-list">
           {sortedMessages.map((message, index) => {
-            return message.chatId == this.props.chatId ? (
+            return (
               <React.Fragment key={message.id}>
                 {message.userId != this.props.currentUserId &&
                 sortedMessages?.[index - 1]?.userId != message.userId ? (
@@ -53,7 +52,7 @@ class MessageList extends PureComponent {
                   <Message content={message.content} />
                 </li>
               </React.Fragment>
-            ) : null;
+            );
           })}
         </ul>
       </div>

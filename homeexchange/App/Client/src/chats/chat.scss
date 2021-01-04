@@ -10,15 +10,12 @@
   &__aside {
     align-self: stretch;
     width: 300px;
-    //background-color: $chat-list-bg-color;
-
     border-top-left-radius: inherit;
     border-bottom-left-radius: inherit;
   }
   &__main {
     position: relative;
     width: 600px;
-    //background-color: $chat-list-messages-bg-color;
     border-top-right-radius: inherit;
     border-bottom-right-radius: inherit;
   }

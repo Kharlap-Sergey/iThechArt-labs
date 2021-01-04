@@ -10,7 +10,7 @@ function Chats({ match }) {
   const [selectedChatId, setSelectedChatId] = useState(+match?.params?.chatId);
   const dispatch = useDispatch();
   const selectChat = (chatId) => {
-    if (selectedChatId == chatId) return;
+    if (selectedChatId === chatId) return;
     dispatch(redirectToAction(path.chat(chatId)));
     setSelectedChatId(chatId);
   };
