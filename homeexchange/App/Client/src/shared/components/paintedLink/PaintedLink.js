@@ -1,18 +1,19 @@
 import React from "react";
+import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
 import "./painted-link.scss";
-class PaintedLink extends React.PureComponent {
-  render() {
-    return (
-      <Link
-        to={this.props.to}
-        className="painted-link"
-        data-item-content={this.props.value}
-      >
-        {this.props.value}
-      </Link>
-    );
-  }
+
+function PaintedLink({ to, value }) {
+  return (
+    <Link to={to} className="painted-link" data-item-content={value}>
+      {value}
+    </Link>
+  );
+}
+
+PaintedLink.propTypes = {
+  to: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 }
 
 export default PaintedLink;
