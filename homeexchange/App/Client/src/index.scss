@@ -29,3 +29,32 @@ body {
 #root {
   height: 100%;
 }
+
+.display-none {
+  display: none;
+}
+
+.max-h0 {
+  max-height: 0 !important;
+}
+
+.vis-hidden {
+  visibility: hidden;
+}
+
+.pos-abs {
+  position: absolute;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.alogn-center {
+  align-content: center;
+}
+
+.opas-1 {
+  opacity: 1 !important;
+}
