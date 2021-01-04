@@ -9,7 +9,6 @@ import { getAd, updateAd } from "shared/redux/ad/thunkActions";
 class AdEditor extends PureComponent {
   constructor(props) {
     super(props);
-
     this.state = { adId: this.props.match.params.id };
   }
   submitHandler(state) {

@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import AdForm from "shared/components/adForm/AdForm";
 import Loader from "shared/components/Loader/Loader";
@@ -10,6 +11,10 @@ import "./ad-creation.scss";
 class AdCreation extends PureComponent {
   submitHandler(state) {
     this.props.createNewAd(state);
+  }
+  static propTypes = {
+    isLoading: PropTypes.bool,
+    createNewAd: PropTypes.func,
   }
 
   render() {
