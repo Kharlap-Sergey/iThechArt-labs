@@ -7,7 +7,7 @@ import Home from "home/Home";
 import Profile from "profile/Profile";
 import Ad from "ad/Ad";
 import EditProfile from "editProfile/EditProfile";
-import AdCreation from "adCreation/AdCreation";
+import AdCreator from "adCreator/AdCreator";
 import AdEditor from "adEditor/AdEditor";
 import Sign from "sign/Sign";
 import Chats from "chats/Chats";
@@ -34,7 +34,7 @@ function App() {
                 <PrivateRoute authed={auth} component={Chats} />
               </Route>
               <Route exact path={path.ad.create()}>
-                <PrivateRoute authed={auth} component={AdCreation} />
+                <PrivateRoute authed={auth} component={AdCreator} />
               </Route>
               <Route exact path={path.ad.edit()}>
                 <PrivateRoute authed={auth} component={AdEditor} />

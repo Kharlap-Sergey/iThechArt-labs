@@ -6,9 +6,9 @@ import Loader from "shared/components/Loader/Loader";
 import bgImg from "shared/imgs/ad-creat.svg";
 import { createNewAd } from "shared/redux/ad/thunkActions";
 import { selectAdFormLoaderStatus } from "shared/redux/loader/selectors";
-import "./ad-creation.scss";
+import "./ad-creator.scss";
 
-class AdCreation extends PureComponent {
+class AdCreator extends PureComponent {
   submitHandler(state) {
     this.props.createNewAd(state);
   }
@@ -19,20 +19,20 @@ class AdCreation extends PureComponent {
 
   render() {
     return (
-      <div className="ad-creation">
-        <div className="ad-creation__body">
+      <div className="ad-creator">
+        <div className="ad-creator__body">
           {this.props.isLoading ? (
             <Loader />
           ) : (
-            <div className="ad-creation__form">
+            <div className="ad-creator__form">
               <AdForm onSubmit={this.submitHandler.bind(this)} />
             </div>
           )}
         </div>
 
-        <div className="ad-creation__img-bg-wrapper">
+        <div className="ad-creator__img-bg-wrapper">
           <img
-            className="ad-creation__img-bg"
+            className="ad-creator__img-bg"
             src={bgImg}
             alt="hee should be img"
           />
@@ -50,4 +50,4 @@ const mapDispatchToProps = {
   createNewAd,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdCreation);
+export default connect(mapStateToProps, mapDispatchToProps)(AdCreator);
