@@ -1,34 +1,17 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { redirectToAction } from "../../redux/redirect/redirectActionCreator";
-import { formatNumberToTypeOfAd } from "shared/utils/formater";
+import PropTypes from 'prop-types'
+import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { formatNumberToTypeOfAd, formatDate } from "shared/utils/formater";
 import "./short-ad.scss";
 
 class ShortAd extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-  formatDate(dateString) {
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const year = date.getFullYear();
-    const month = date.getMonth();
-
-    return `${monthNames[month]} ${day}`;
+  static propTypes = {
+    typ: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    adId: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
   }
 
   handleMoreClick(adId, event) {
@@ -43,7 +26,7 @@ class ShortAd extends PureComponent {
             {formatNumberToTypeOfAd(this.props.typ)}
           </div>
           <div className="short-ad__date">
-            {this.formatDate(this.props.date)}
+            {formatDate(this.props.date)}
           </div>
         </div>
         <div className="short-ad__main">
