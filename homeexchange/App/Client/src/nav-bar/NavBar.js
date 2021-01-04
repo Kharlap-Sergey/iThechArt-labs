@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import "./nav-bar.scss";
 import { logoutAction } from "../shared/redux/account/accountActions";
@@ -7,24 +7,28 @@ import PaintedLink from "../shared/components/paintedLink/PaintedLink";
 import Unauthorized from "./components/Unauthorized";
 import Authorized from "./components/Authorized";
 import { path } from "../shared/utils/path";
+import { selectUser } from "shared/redux/account/selectors";
+import PropTypes from 'prop-types';
 
-class NavBar extends React.Component {
+class NavBar extends PureComponent {
+  static propTypes = {
+    user: PropTypes.shape({
+      email: PropTypes.string,
+      userId: PropTypes.number,
+    }),
+  }
+
   getUserName() {
-    if (this.props && this.props.email) return this.props.email;
-    return undefined;
+    return this.props.user?.email;
   }
 
   getProfileContent = () => {
     let username = this.getUserName();
     if (username) {
-      const userId = this.props.userId;
-      return (
-        <Fragment>
-          <Authorized userId={userId}></Authorized>
-        </Fragment>
-      );
+      const userId = this.props.user.userId;
+      return <Authorized userId={userId} />;
     }
-    return <Unauthorized></Unauthorized>;
+    return <Unauthorized />;
   };
 
   render() {
@@ -44,9 +48,9 @@ class NavBar extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return state.user;
-};
+const mapStateToProps = (state) => ({
+  user: selectUser(state),
+});
 
 const mapDispatchToProps = {
   logoutAction,

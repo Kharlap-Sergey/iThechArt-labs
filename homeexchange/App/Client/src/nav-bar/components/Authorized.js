@@ -1,11 +1,11 @@
 import React, { Fragment, PureComponent } from "react";
-import Avatar from "../../shared/components/avatar/Avatar";
-import DropdownMenu from "../../shared/components/dropdownMenu/DropdownMenu";
-import LogoutBtn from "../../shared/components/logoutBtn/LogoutBtn";
-import PaintedLink from "../../shared/components/paintedLink/PaintedLink";
+import Avatar from "shared/components/avatar/Avatar";
+import DropdownMenu from "shared/components/dropdownMenu/DropdownMenu";
+import LogoutBtn from "shared/components/logoutBtn/LogoutBtn";
+import PaintedLink from "shared/components/paintedLink/PaintedLink";
 import "./authorized.scss";
-import NotificationsList from "./../../shared/components/notificationsList/NotificationsList";
-import { path } from "../../shared/utils/path";
+import NotificationsList from "shared/components/notificationsList/NotificationsList";
+import { path } from "shared/utils/path";
 import DropdownItem from "./DropdownItem";
 
 class Authorized extends PureComponent {
@@ -49,7 +49,7 @@ class Authorized extends PureComponent {
   }
 
   componentDidMount() {
-    this.notificationsList = <NotificationsList></NotificationsList>;
+    this.notificationsList = <NotificationsList/>;
   }
   render() {
     return (
@@ -105,7 +105,7 @@ class Authorized extends PureComponent {
                   </ul>
 
                   <div className="logout-part-of-nav">
-                    <LogoutBtn></LogoutBtn>
+                    <LogoutBtn/>
                   </div>
                 </DropdownMenu>
               }
