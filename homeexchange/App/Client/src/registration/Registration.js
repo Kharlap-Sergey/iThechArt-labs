@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import AccountForm from "../shared/components/accountForm/AccoutForm";
-import { inputAttributes } from "../shared/utils/inputArguments";
-import { registrateUserPost } from "../shared/redux/account/account";
-import Loader from "../shared/components/Loader/Loader";
-
+import AccountForm from "shared/components/accountForm/AccoutForm";
+import { inputAttributes } from "shared/utils/inputArguments";
+import { registrateUserPost } from "shared/redux/account/account";
+import Loader from "shared/components/Loader/Loader";
 import "./registration.scss";
+import { selectRegistrationLoaderStatus } from "shared/redux/loader/selectors";
+
 class Registration extends React.PureComponent {
   inputsArguments = [
     inputAttributes.firstname,
@@ -44,8 +45,7 @@ class Registration extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  ...state.accountForm,
-  isLoading: state.loader.registration,
+  isLoading: selectRegistrationLoaderStatus(state),
 });
 
 const mapDispatchToProps = { registrateUserPost };

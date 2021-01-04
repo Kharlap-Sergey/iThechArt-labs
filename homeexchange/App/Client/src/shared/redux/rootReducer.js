@@ -12,16 +12,16 @@ import { loaderReducer } from "./loader/loaderReducer";
 import { profileRatingReducer } from "./profileRating/profileRatingReducer";
 import { profileImgReducer } from "./imgUploader/profileImgReducer";
 export const rootReducer = combineReducers({
-  user: accountReducer,
-  notifications: notificationsReducer,
+  adsPageList: adsPageListReducer,
   ads: adReducer,
-  toastr: toastrReducer,
-  redirect: redirectReducer,
-  remoteInteraction: remoteInteractionReducer,
+  chat: chatReducer,
+  loader: loaderReducer,
+  notifications: notificationsReducer,
   profile: profileReducer,
   profileRating: profileRatingReducer,
   profileImg: profileImgReducer,
-  adsPageList: adsPageListReducer,
-  chat: chatReducer,
-  loader: loaderReducer,
+  redirect: redirectReducer,
+  remoteInteraction: remoteInteractionReducer,
+  toastr: toastrReducer,
+  user: accountReducer,
 });
