@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { clearAdsAction } from "shared/redux/ad/actions";
-import { formateDate, formateNumberToTypeOfAd } from "../../utils/formater";
+import { formatDate, formatNumberToTypeOfAd } from "../../utils/formater";
 import "./ad.scss";
 import AccountAvatar from "./../accountAvatar/AccountAvatar";
 import Authorized from "./components/Authorized";
@@ -25,8 +25,8 @@ class Ad extends PureComponent {
     return (
       <div className="ad">
         <div className="ad__header">
-          <div className="ad__type">{formateNumberToTypeOfAd(ad.type)}</div>
-          <div className="ad__date">{formateDate(ad.dateOfPublication)}</div>
+          <div className="ad__type">{formatNumberToTypeOfAd(ad.type)}</div>
+          <div className="ad__date">{formatDate(ad.dateOfPublication)}</div>
         </div>
         <div className="ad__main">
           <div className="ad__main-info">

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { redirectToAction } from "../../redux/redirect/redirectActionCreator";
-import { formateNumberToTypeOfAd } from "../../utils/formater";
+import { formatNumberToTypeOfAd } from "../../utils/formater";
 import "./short-ad.scss";
 
 class ShortAd extends PureComponent {
@@ -40,7 +40,7 @@ class ShortAd extends PureComponent {
       <div className="short-ad">
         <div className="short-ad__header">
           <div className="short-ad__type">
-            {formateNumberToTypeOfAd(this.props.typ)}
+            {formatNumberToTypeOfAd(this.props.typ)}
           </div>
           <div className="short-ad__date">
             {this.formatDate(this.props.date)}

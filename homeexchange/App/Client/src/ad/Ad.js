@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Loader from "shared/components/Loader/Loader";
 import { getAd } from "shared/redux/ad/thunkActions";
-import { formateDate, formateNumberToTypeOfAd } from "shared/utils/formater";
+import { formatDate, formatNumberToTypeOfAd } from "shared/utils/formater";
 import "./ad.scss";
 import { selectAd } from "shared/redux/ad/selectors";
 import { clearAdsAction } from "shared/redux/ad/actions";
@@ -38,10 +38,10 @@ class Ad extends PureComponent {
       <div className="ad-responded__main ad-responded-main">
         <h2 className="ad-responded-main__title">{ad.title}</h2>
         <div className="ad-responded-main__type">
-          {formateNumberToTypeOfAd(ad.type)}
+          {formatNumberToTypeOfAd(ad.type)}
         </div>
         <div className="ad-responded-main__date">
-          {formateDate(ad.dateOfPublication)}
+          {formatDate(ad.dateOfPublication)}
         </div>
         <div className="ad-responded-main__description">{ad.description}</div>
       </div>

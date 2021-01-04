@@ -1,4 +1,4 @@
-export function formateDate(dateString) {
+export function formatDate(dateString) {
   const monthNames = [
     "January",
     "February",
@@ -21,7 +21,7 @@ export function formateDate(dateString) {
   return `${monthNames[month]} ${day}`;
 }
 
-export function formateNumberToTypeOfAd(t) {
+export function formatNumberToTypeOfAd(t) {
   if (t == 1) return "to lease";
   return "to rent";
 }

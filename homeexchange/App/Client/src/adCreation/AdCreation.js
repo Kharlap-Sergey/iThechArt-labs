@@ -1,10 +1,12 @@
 import React, { PureComponent } from "react";
-import AdForm from "../shared/components/adForm/AdForm";
 import { connect } from "react-redux";
-import Loader from "../shared/components/Loader/Loader";
-import bgImg from "../shared/imgs/ad-creat.svg";
-import "./ad-creation.scss";
+import AdForm from "shared/components/adForm/AdForm";
+import Loader from "shared/components/Loader/Loader";
+import bgImg from "shared/imgs/ad-creat.svg";
 import { createNewAd } from "shared/redux/ad/thunkActions";
+import { selectAdFormLoaderStatus } from "shared/redux/loader/selectors";
+import "./ad-creation.scss";
+
 class AdCreation extends PureComponent {
   submitHandler(state) {
     this.props.createNewAd(state);
@@ -18,7 +20,7 @@ class AdCreation extends PureComponent {
             <Loader />
           ) : (
             <div className="ad-creation__form">
-              <AdForm onSubmit={this.submitHandler.bind(this)}></AdForm>
+              <AdForm onSubmit={this.submitHandler.bind(this)} />
             </div>
           )}
         </div>
@@ -36,7 +38,7 @@ class AdCreation extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  isLoading: state.loader.adForm,
+  isLoading: selectAdFormLoaderStatus(state),
 });
 
 const mapDispatchToProps = {
