@@ -4,7 +4,7 @@ import "./submit-button.scss";
 class SubmitButton extends React.PureComponent {
   render() {
     return (
-      <button type="submit" className="submit" onClick={this.props.onClick3}>
+      <button type="submit" className="submit">
         submit
       </button>
     );

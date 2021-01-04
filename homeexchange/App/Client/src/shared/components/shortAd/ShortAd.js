@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { redirectToAction } from "../../redux/redirect/redirectActionCreator";
-import { formatNumberToTypeOfAd } from "../../utils/formater";
+import { formatNumberToTypeOfAd } from "shared/utils/formater";
 import "./short-ad.scss";
 
 class ShortAd extends PureComponent {

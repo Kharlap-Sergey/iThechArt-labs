@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types'
 import Star from "./components/Star";
 import "./star-reting.scss";
 
@@ -8,10 +9,10 @@ function StarRating({ currentRating, handleClick }) {
   const [onHoveredId, setHoveredId] = useState(0);
 
   const hover = (id, e) => {
-    if (e.type == "mouseover") {
+    if (e.type === "mouseover") {
       setHoveredId(id);
     }
-    if (e.type == "mouseout") {
+    if (e.type === "mouseout") {
       setHoveredId(0);
     }
   };
@@ -51,4 +52,8 @@ function StarRating({ currentRating, handleClick }) {
   );
 }
 
+StarRating.propTypes = {
+  currentRating: PropTypes.number,
+  handleClick: PropTypes.func,
+}
 export default StarRating;

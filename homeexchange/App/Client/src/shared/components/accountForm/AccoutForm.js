@@ -26,7 +26,7 @@ class AccoutForm extends PureComponent {
   componentDidMount() {
     setTimeout(() => this.setState({ shouldShow: true }), 500);
   }
-  
+
   submiteHandler(e) {
     this.setState({ shouldShow: false });
     e.preventDefault();
@@ -50,10 +50,6 @@ class AccoutForm extends PureComponent {
         },
       });
     }
-  }
-
-  handleSubmitClick(e) {
-    e.preventDefault();
   }
   render() {
     return (
@@ -84,7 +80,7 @@ class AccoutForm extends PureComponent {
             return formInput;
           })}
 
-          <SubmitButton onClick={this.handleSubmitClick} />
+          <SubmitButton/>
 
           {this.props.footer}
         </div>
