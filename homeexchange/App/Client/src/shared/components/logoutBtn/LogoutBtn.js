@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { redirectToAction } from "../../redux/redirect/redirectActionCreator";
+import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { auth } from "shared/utils/auth";
+import { logoutAction } from "shared/redux/account/accountActions";
+import { path } from "shared/utils/path";
 import "./logout-btn.scss";
-import { auth } from "./../../utils/auth";
-import { logoutAction } from "./../../redux/account/accountActions";
-import { path } from "../../utils/path";
+
 class LogoutBtn extends PureComponent {
   logout() {
     this.props.logoutAction();
