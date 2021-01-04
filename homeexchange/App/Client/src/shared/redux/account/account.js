@@ -56,3 +56,21 @@ export function registrateUserPost(user) {
     }
   };
 }
+
+export function updateUserPost(user) {
+  return async (dispatch) => {
+    try {
+      dispatch(enableRegistrationActin());
+      const url = pathApi.account.update;
+      const response = await requestWrapper.post(url, user);
+      if (response.ok) {
+        dispatch(redirectToAction(path.profile.to(user.id)));
+      } else {
+        toastrNotifier.alertBadResponse(response);
+      }
+    } catch (e) {
+      toastrNotifier.tryAgainLater();
+      dispatch(disableAllAction());
+    }
+  };
+}

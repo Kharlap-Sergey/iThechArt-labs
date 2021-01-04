@@ -1,21 +1,25 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { getProfileById } from "../shared/redux/profile/profileActionCreator";
-import AccountForm from "../shared/components/accountForm/AccoutForm";
-import { inputAttributes } from "../shared/utils/inputArguments";
-import { updateUserPost } from "./redux/updateUserActionCreator";
-import Loader from "../shared/components/Loader/Loader";
-import bgImg from "../shared/imgs/repairing.svg";
+import { getProfileById } from "shared/redux/profile/profileActionCreator";
+import AccountForm from "shared/components/accountForm/AccoutForm";
+import { inputAttributes } from "shared/utils/inputArguments";
+import Loader from "shared/components/Loader/Loader";
+import bgImg from "shared/imgs/repairing.svg";
+import { updateUserPost } from 'shared/redux/account/account';
+import { selectProfile } from 'shared/redux/profile/selectors';
+import { selectUser } from 'shared/redux/account/selectors';
+import { selectRegistrationLoaderStatus } from "shared/redux/loader/selectors";
+import PropTypes from 'prop-types'
 import "./edit-profile.scss";
+
 class EditProfile extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = { userId: this.props.match.params.id };
-  }
-
   componentDidMount() {
-    this.props.getProfileById(this.state.userId);
+    this.props.getProfileById(this.props.match.params.id);
+  }
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    profile: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired,
   }
 
   inputsArguments = [
@@ -64,9 +68,9 @@ class EditProfile extends PureComponent {
 
 const mapStateToPropos = (state) => {
   return {
-    profile: state.profile,
-    ...state.user,
-    isLoading: state.loader.registration,
+    profile: selectProfile(state),
+    user: selectUser(state),
+    isLoading: selectRegistrationLoaderStatus(state),
   };
 };
 const mapDispatchToProps = {
