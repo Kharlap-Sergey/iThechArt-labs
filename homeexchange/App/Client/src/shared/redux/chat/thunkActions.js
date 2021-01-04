@@ -1,8 +1,8 @@
 import { pathApi } from "../../utils/path";
-import { requestWrapper } from "./../../utils/requestWrapper";
-import { redirectToAction } from "./../redirect/redirectActionCreator";
-import { path } from "./../../utils/path";
-import { addChatListAction, addChatMessagesAction } from "./chatActionCreator";
+import { requestWrapper } from "../../utils/requestWrapper";
+import { redirectToAction } from "../redirect/redirectActionCreator";
+import { path } from "../../utils/path";
+import { addChatListAction, addChatMessagesAction } from "./actions";
 import { toastrNotifier } from "../tostrNotifier";
 
 export function loadChatList() {

@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import AdsPageList from "../shared/components/adsPageList/AdsPageList";
 import AccountIformation from "./components/AccountIformation";
 import "./profile.scss";
-import { loadChatId } from "../shared/redux/chat/chat";
+import { loadChatId } from "../shared/redux/chat/thunkActions";
 import { path } from "../shared/utils/path";
 import bgImg from "../shared/imgs/profile.svg";
 import RatingControl from "./components/RatingControl";

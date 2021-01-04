@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from 'prop-types';
-import { loadChatList } from "shared/redux/chat/chat";
-import { clearChatAction } from "shared/redux/chat/chatActionCreator";
+import { loadChatList } from "shared/redux/chat/thunkActions";
+import { clearChatAction } from "shared/redux/chat/actions";
 import { selectChatsList } from 'shared/redux/chat/selectors';
 import ShortChat from "../shortChat/ShortChat";
 import "./chat-list.scss";

@@ -1,4 +1,4 @@
-import { ADD_MESSAGES, CLEAR, ADD_CHATS } from "./types";
+import { ADD_MESSAGES, CLEAR, ADD_CHATS } from "./constants";
 
 const initialState = {
   chats: {},

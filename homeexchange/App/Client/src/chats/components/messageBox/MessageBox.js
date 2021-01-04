@@ -5,8 +5,8 @@ import MessageList from "../messageList/MessageList";
 import {
   clearChatAction,
   addChatMessagesAction,
-} from "../../../shared/redux/chat/chatActionCreator";
-import { loadChatMessages } from "../../../shared/redux/chat/chat";
+} from "../../../shared/redux/chat/actions";
+import { loadChatMessages } from "../../../shared/redux/chat/thunkActions";
 import { pathHub } from "../../../shared/utils/path";
 import { auth } from "../../../shared/utils/auth";
 import "./message-box.scss";
