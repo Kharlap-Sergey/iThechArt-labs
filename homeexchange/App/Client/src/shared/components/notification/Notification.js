@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { redirectToAction } from "../../redux/redirect/redirectActionCreator";
-import { path } from "../../utils/path";
-import {} from "../../redux/notifications/notificationActions";
-import { deleteNotificationFetch } from "../../redux/notifications/notifications";
+import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { path } from "shared/utils/path";
+import { deleteNotificationFetch } from "shared/redux/notifications/notifications";
 import "./notification.scss";
+
 class Notification extends PureComponent {
-  handleNotificationClick(event) {
+  handleNotificationClick() {
     const notId = this.props.notification.id;
     const chatId = this.props.notification.chatId;
 

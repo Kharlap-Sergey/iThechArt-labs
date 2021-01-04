@@ -41,7 +41,7 @@ class NotificationsList extends PureComponent {
     this.props.clearNotificationsAction();
   }
 
-  deNotify(event) {
+  deNotify() {
     this.props.deNotify?.call();
   }
   render() {
