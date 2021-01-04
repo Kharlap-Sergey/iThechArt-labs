@@ -2,10 +2,12 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { clearAdsAction } from "shared/redux/ad/actions";
 import { formatDate, formatNumberToTypeOfAd } from "../../utils/formater";
-import "./ad.scss";
-import AccountAvatar from "./../accountAvatar/AccountAvatar";
+import AccountAvatar from "shared/components/accountAvatar/AccountAvatar";
 import Authorized from "./components/Authorized";
 import { getAd } from "shared/redux/ad/thunkActions";
+import { selectAd } from "shared/redux/ad/selectors";
+import "./ad.scss";
+
 class Ad extends PureComponent {
   constructor(props) {
     super(props);
@@ -57,12 +59,10 @@ class Ad extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ...state.user,
-    ad: state.ads.ad,
-  };
-};
+const mapStateToProps = (state) => ({
+  ad: selectAd(state),
+})
+
 const mapDispatchToProps = {
   getAd,
   clearAdsAction,
