@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Fragment, PureComponent } from "react";
 import Avatar from "shared/components/avatar/Avatar";
 import DropdownMenu from "shared/components/dropdownMenu/DropdownMenu";
@@ -27,7 +28,9 @@ class Authorized extends PureComponent {
     this.deNotify = this.deNotify.bind(this);
     this.notificationListRef = React.createRef();
   }
-
+  static propTypes = {
+    userId: PropTypes.number.isRequired,
+  }
   notify() {
     this.setState({ imgNotificationSrc: this.activeNotif });
   }
@@ -48,12 +51,9 @@ class Authorized extends PureComponent {
     this.setState({ showActionMenu: false });
   }
 
-  componentDidMount() {
-    this.notificationsList = <NotificationsList/>;
-  }
   render() {
     return (
-      <Fragment>
+      <Fragment key="authorized-items">
         <li className="menu__item " key="authorizedProfileNotig">
           <div className="authorized-container">
             <DropdownItem

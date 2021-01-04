@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import "./dropdown-item.scss";
 
 class DropdownItem extends PureComponent {
   constructor(props) {
@@ -32,7 +33,7 @@ class DropdownItem extends PureComponent {
         onMouseOut={this.handleMouseOut}
         className="dropdown-item"
       >
-        <div className="deopdown-item__icon" onClick={this.handleNotificClick}>
+        <div className="dropdown-item__icon">
           {this.props.icon}
         </div>
         <div

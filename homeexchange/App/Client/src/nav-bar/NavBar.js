@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "./nav-bar.scss";
 import { logoutAction } from "shared/redux/account/accountActions";
@@ -16,7 +16,7 @@ class NavBar extends PureComponent {
       email: PropTypes.string,
       userId: PropTypes.number,
     }),
-  }
+  };
 
   getUserName() {
     return this.props.user?.email;
@@ -28,7 +28,11 @@ class NavBar extends PureComponent {
       const userId = this.props.user.userId;
       return <Authorized userId={userId} />;
     }
-    return <Unauthorized />;
+    return (
+      <li className="menu__item menu__item--unauthorized" key="unauthorized">
+        <Unauthorized/>
+      </li>
+    );
   };
 
   render() {

@@ -1,0 +1,15 @@
+.dropdown-item {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 5px;
+  background-color: inherit;
+  cursor: pointer;
+  &__menu {
+    width: inherit;
+  }
+  &:hover,
+  &:focus {
+    background-color: inherit !important;
+  }
+}
