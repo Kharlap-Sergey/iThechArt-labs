@@ -1,12 +1,16 @@
 import React, { PureComponent } from "react";
-import Avatar from "../avatar/Avatar";
-import "./account-avatar.scss";
+import PropTypes from 'prop-types'
 import { connect } from "react-redux";
-import { redirectToAction } from "./../../redux/redirect/redirectActionCreator";
-import { downloadFile } from "../../redux/imgUploader/imgUploader";
-import { path } from './../../utils/path';
+import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { downloadFile } from "shared/redux/imgUploader/imgUploader";
+import { path } from 'shared/utils/path';
+import Avatar from 'shared/components/avatar/Avatar';
+import "./account-avatar.scss";
 
 class AccountAvatar extends PureComponent {
+  static propTypes = {
+    profileId: PropTypes.number.isRequired,
+  }
   handleClick(event) {
     event.preventDefault();
     this.props.profileId &&
@@ -24,13 +28,10 @@ class AccountAvatar extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
-  imgs: state.profileImg,
-});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {
   redirectToAction,
-  downloadFile,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountAvatar);

@@ -1,7 +1,10 @@
 import React, { PureComponent } from "react";
-import InputBox from "../inputBox/InputBox";
-import SubmitButton from "./components/submitButton/SubmitButton";
+import PropTypes from "prop-types";
+import InputBox from "shared/components/inputBox/InputBox";
+import SubmitButton from "shared/components/submitButton/SubmitButton";
+import { getValidationMessage } from "shared/utils/inputValidator";
 import "./account-form.scss";
+
 class AccoutForm extends PureComponent {
   constructor(props) {
     super(props);
@@ -14,6 +17,16 @@ class AccoutForm extends PureComponent {
     this.changeInputHandler = this.changeInputHandler.bind(this);
   }
 
+  static propTypes = {
+    header: PropTypes.object,
+    footer: PropTypes.object,
+    inputs: PropTypes.arrayOf(PropTypes.object),
+  };
+
+  componentDidMount() {
+    setTimeout(() => this.setState({ shouldShow: true }), 500);
+  }
+  
   submiteHandler(e) {
     this.setState({ shouldShow: false });
     e.preventDefault();
@@ -21,32 +34,13 @@ class AccoutForm extends PureComponent {
     setTimeout(() => this.props.onSubmit(this.state), 1000);
   }
 
-  getValidationMessage(element) {
-    const validity = element.target.validity;
-    if (validity.patternMismatch) {
-      return "please use only: " + element.target.dataset.permitions;
-    }
-    if (validity.valueMissing) {
-      return "please fill out this field";
-    }
-    if (validity.tooShort) {
-      return `this field require ${element.target.getAttribute(
-        "minlength"
-      )} characters or more`;
-    }
-    if (validity.typeMismatch) {
-      return `his field require data to be ${element.target.getAttribute(
-        "type"
-      )}`;
-    }
-  }
   changeInputHandler(e) {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
     if (!e.target.validity.valid) {
       this.setState({
         validationTitle: {
-          [e.target.name]: this.getValidationMessage(e),
+          [e.target.name]: getValidationMessage(e),
         },
       });
     } else if (this.state.validationTitle[e.target.name]) {
@@ -56,9 +50,6 @@ class AccoutForm extends PureComponent {
         },
       });
     }
-  }
-  componentDidMount() {
-    setTimeout(() => this.setState({ shouldShow: true }), 500);
   }
 
   handleSubmitClick(e) {
@@ -93,7 +84,7 @@ class AccoutForm extends PureComponent {
             return formInput;
           })}
 
-          <SubmitButton onClick={this.handleSubmitClick}></SubmitButton>
+          <SubmitButton onClick={this.handleSubmitClick} />
 
           {this.props.footer}
         </div>

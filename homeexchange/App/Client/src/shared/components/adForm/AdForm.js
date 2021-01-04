@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import "./ad-form.scss";
-import SubmitButton from "./../accountForm/components/submitButton/SubmitButton";
+import SubmitButton from "../submitButton/SubmitButton";
 class AdForm extends PureComponent {
   constructor(props) {
     super(props);
