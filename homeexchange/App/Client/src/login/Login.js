@@ -1,12 +1,18 @@
 import React, { PureComponent } from "react";
-import { loginUserPost } from "../shared/redux/account/account";
 import { connect } from "react-redux";
-import Loader from "../shared/components/Loader/Loader";
-import AccountForm from "../shared/components/accountForm/AccoutForm";
-import { inputAttributes } from "../shared/utils/inputArguments";
+import PropTypes from 'prop-types';
+import { loginUserPost } from "shared/redux/account/account";
+import Loader from "shared/components/Loader/Loader";
+import AccountForm from "shared/components/accountForm/AccoutForm";
+import { inputAttributes } from "shared/utils/inputArguments";
+import { selectLoginLoaderStatus } from "shared/redux/loader/selectors";
 import "./login.scss";
+
 class Login extends PureComponent {
-  state = {};
+  static propType = {
+    isLoading: PropTypes.bool.isRequired,
+  }
+
   inputsArguments = [
     inputAttributes.email,
     inputAttributes.getPasswordAttributesForLogin(),
@@ -37,12 +43,9 @@ class Login extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ...state.accountForm,
-    isLoading: state.loader.login,
-  };
-};
+const mapStateToProps = (state) => ({
+  isLoading: selectLoginLoaderStatus(state),
+});
 
 const mapDispatchToProps = { loginUserPost };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
