@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./chat.scss";
-import ChatsList from "./components/ChatsList";
+import ChatsList from "./components/chatList/ChatsList";
 import { useDispatch } from "react-redux";
 import { redirectToAction } from "./../shared/redux/redirect/redirectActionCreator";
 import { path } from "./../shared/utils/path";
-import MessageBlock from "./components/messageBlock/MessageBlock";
+import MessageBox from "./components/messageBox/MessageBox";
 import bgImg from "../shared/imgs/chat.svg";
 function Chats({ match }) {
   const [selectedChatId, setSelectedChatId] = useState(match?.params?.chatId);
@@ -23,7 +23,7 @@ function Chats({ match }) {
         <div className="chats__bg-img-wrappper">
           <img src={bgImg} alt="" className="chats__bg-img" />
         </div>
-        {selectedChatId > 0 ? <MessageBlock chatId={selectedChatId} /> : null}
+        {selectedChatId > 0 ? <MessageBox chatId={selectedChatId} /> : null}
       </div>
     </div>
   );

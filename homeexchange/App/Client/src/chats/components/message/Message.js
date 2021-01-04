@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { path } from "./../../../../shared/utils/path";
+import { path } from "../../../shared/utils/path";
+import "./message.scss";
 
 class Message extends PureComponent {
   static propTypes = {
@@ -21,7 +22,7 @@ class Message extends PureComponent {
   }
   render() {
     return (
-      <div className="message">{this.renderMessage(this.props.content)}</div>
+      <div className="chat-message">{this.renderMessage(this.props.content)}</div>
     );
   }
 }

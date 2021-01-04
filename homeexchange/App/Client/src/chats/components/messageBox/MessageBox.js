@@ -1,17 +1,17 @@
 import React, { PureComponent } from "react";
 import * as signalR from "@microsoft/signalr";
 import { connect } from "react-redux";
-import MessageList from "./components/MessageList";
+import MessageList from "../messageList/MessageList";
 import {
   clearChatAction,
   addChatMessagesAction,
-} from "./../../../shared/redux/chat/chatActionCreator";
-import { loadChatMessages } from "./../../../shared/redux/chat/chat";
-import { pathHub } from "./../../../shared/utils/path";
-import { auth } from "./../../../shared/utils/auth";
-import "./chat.scss";
+} from "../../../shared/redux/chat/chatActionCreator";
+import { loadChatMessages } from "../../../shared/redux/chat/chat";
+import { pathHub } from "../../../shared/utils/path";
+import { auth } from "../../../shared/utils/auth";
+import "./message-box.scss";
 
-class MessageBlock extends PureComponent {
+class MessageBox extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -91,4 +91,4 @@ const mapDispatchToProps = {
   addChatMessagesAction,
   clearChatAction,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(MessageBlock);
+export default connect(mapStateToProps, mapDispatchToProps)(MessageBox);

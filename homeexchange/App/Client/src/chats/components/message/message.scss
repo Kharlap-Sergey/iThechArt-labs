@@ -1,0 +1,21 @@
+@import "shared/variables.scss";
+
+.chat-message {
+  width: fit-content;
+  max-width: 250px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  word-wrap: break-word;
+  background-color: $chat-message-bg-color;
+  border-radius: 10px;
+  &--right {
+    flex: 1 1;
+    order: 2;
+    border: 0;
+  }
+  &--left {
+    flex: 1 1;
+    order: -1;
+    border: 0;
+  }
+}

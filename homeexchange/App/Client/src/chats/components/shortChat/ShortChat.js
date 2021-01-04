@@ -1,4 +1,6 @@
 import React from "react";
+import "./short-chat.scss";
+
 function ShortChat({ chat }) {
   return (
     <div className="short-chat">

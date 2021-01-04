@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { loadChatList } from "./../../shared/redux/chat/chat";
-import ShortChat from "./ShortChat";
-import { clearChatAction } from "./../../shared/redux/chat/chatActionCreator";
+import { loadChatList } from "../../../shared/redux/chat/chat";
+import ShortChat from "./../shortChat/ShortChat";
+import { clearChatAction } from "../../../shared/redux/chat/chatActionCreator";
 import React, { useEffect } from "react";
+import "./chat-list.scss";
 
 function ChatsList({ selectedChatId, handleClick }) {
   const dispatch = useDispatch();

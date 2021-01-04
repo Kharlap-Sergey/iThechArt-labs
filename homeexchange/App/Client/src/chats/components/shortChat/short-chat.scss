@@ -1,0 +1,12 @@
+.short-chat {
+  display: flex;
+  flex-direction: column;
+  &__title {
+    align-self: center;
+    color: white;
+    font-weight: 700;
+  }
+  &__mesage {
+    padding: 4px;
+  }
+}

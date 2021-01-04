@@ -1,7 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Message from "./Message";
-import AccountAvatar from "../../../../shared/components/accountAvatar/AccountAvatar";
+import Message from "../message/Message";
+import AccountAvatar from "../../../shared/components/accountAvatar/AccountAvatar";
+import "./message-list.scss";
+
 class MessageList extends PureComponent {
   constructor(props) {
     super(props);
@@ -24,17 +26,14 @@ class MessageList extends PureComponent {
   }
   render() {
     const messages = this.props.messages;
-    const left = "message--left";
-    const right = "message--right";
+    const left = "chat-message--left";
+    const right = "chat-message--right";
     const sortedMessages = messages.sort(
       (a, b) => new Date(a.publicationDate) - new Date(b.publicationDate)
     );
 
     return (
       <div className="message-box__message-list" ref={this.chatListRef}>
-        {/* {sortedMessages.length < 1 ? (
-          <div className="message-box__nothing">type first message</div>
-        ) : null} */}
         <ul className="message-list">
           {sortedMessages.map((message, index) => {
             return message.chatId == this.props.chatId ? (
