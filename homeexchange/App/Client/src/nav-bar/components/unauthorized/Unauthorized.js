@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
-import PaintedLink from "../../shared/components/paintedLink/PaintedLink";
-import { path } from "../../shared/utils/path";
+import PaintedLink from "../../../shared/components/paintedLink/PaintedLink";
+import { path } from "../../../shared/utils/path";
 
 class Unauthorized extends PureComponent {
   render() {

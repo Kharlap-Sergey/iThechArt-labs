@@ -1,14 +1,14 @@
 import React, { PureComponent } from "react";
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import "./nav-bar.scss";
-import { logoutAction } from "../shared/redux/account/accountActions";
-import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
-import PaintedLink from "../shared/components/paintedLink/PaintedLink";
-import Unauthorized from "./components/Unauthorized";
-import Authorized from "./components/Authorized";
-import { path } from "../shared/utils/path";
+import { logoutAction } from "shared/redux/account/accountActions";
+import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import PaintedLink from "shared/components/paintedLink/PaintedLink";
+import Unauthorized from "./components/unauthorized/Unauthorized";
+import Authorized from "./components/authorized/Authorized";
+import { path } from "shared/utils/path";
 import { selectUser } from "shared/redux/account/selectors";
-import PropTypes from 'prop-types';
 
 class NavBar extends PureComponent {
   static propTypes = {

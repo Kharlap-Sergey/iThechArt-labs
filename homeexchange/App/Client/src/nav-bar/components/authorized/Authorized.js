@@ -6,7 +6,7 @@ import PaintedLink from "shared/components/paintedLink/PaintedLink";
 import "./authorized.scss";
 import NotificationsList from "shared/components/notificationsList/NotificationsList";
 import { path } from "shared/utils/path";
-import DropdownItem from "./DropdownItem";
+import DropdownItem from "../dropdownItem/DropdownItem";
 
 class Authorized extends PureComponent {
   constructor(props) {
