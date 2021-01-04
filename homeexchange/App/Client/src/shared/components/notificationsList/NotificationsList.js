@@ -1,15 +1,16 @@
 import React, { PureComponent } from "react";
-import { auth } from "./../../utils/auth";
 import * as signalR from "@microsoft/signalr";
 import {
   addNotificationsAction,
   clearNotificationsAction,
-} from "./../../redux/notifications/notificationActions";
+} from "shared/redux/notifications/notificationActions";
+import { auth } from "shared/utils/auth";
 import { connect } from "react-redux";
-import { getNotificationsFetch } from "./../../redux/notifications/notifications";
-import Notification from "./../notification/Notification";
+import { getNotificationsFetch } from "shared/redux/notifications/notifications";
+import Notification from "shared/components/notification/Notification";
+import { pathHub } from 'shared/utils/path';
 import "./notifications-list.scss";
-import { pathHub } from './../../utils/path';
+
 class NotificationsList extends PureComponent {
   constructor(props) {
     super(props);
