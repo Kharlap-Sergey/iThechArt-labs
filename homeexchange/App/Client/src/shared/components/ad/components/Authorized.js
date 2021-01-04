@@ -1,31 +1,49 @@
 import React, { PureComponent } from "react";
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { deleteAd, replyOnAd } from "shared/redux/ad/thunkActions";
-import { redirectToAction } from "./../../../redux/redirect/redirectActionCreator";
+import { path } from "shared/utils/path";
+import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { selectUser } from 'shared/redux/account/selectors';
+
 class Authorized extends PureComponent {
-  removeClickHandler(event) {
+  constructor(props) {
+    super(props)
+  
+    this.removeClickHandler = this.removeClickHandler.bind(this);
+    this.editClickHandler = this.editClickHandler.bind(this);
+    this.replyClickHandler = this.replyClickHandler.bind(this);
+  }
+  
+  static propTypes = {
+    adId: PropTypes.number.isRequired,
+    user: PropTypes.object.isRequired,
+    authorId: PropTypes.number.isRequired,
+  }
+  
+  removeClickHandler() {
     this.props.deleteAd(this.props.adId);
   }
-  editClickHandler(event) {
-    this.props.redirectToAction(`/ad/edite/id${this.props.adId}`);
+  editClickHandler() {
+    this.props.redirectToAction(path.ad.edit(this.props.adId));
   }
-  replyClickHandler(event) {
+  replyClickHandler() {
     this.props.replyOnAd(this.props.adId);
   }
   render() {
     return (
       <div className="ad__action">
-        {this.props.userId === this.props.authorId ? (
+        {this.props.user.userId === this.props.authorId ? (
           <>
             <button
               className="ad__action-btn"
-              onClick={this.editClickHandler.bind(this)}
+              onClick={this.editClickHandler}
             >
               edit
             </button>
             <button
               className="ad__action-btn"
-              onClick={this.removeClickHandler.bind(this)}
+              onClick={this.removeClickHandler}
             >
               remove
             </button>
@@ -33,7 +51,7 @@ class Authorized extends PureComponent {
         ) : (
           <button
             className="ad__action-btn"
-            onClick={this.replyClickHandler.bind(this)}
+            onClick={this.replyClickHandler}
           >
             reply
           </button>
@@ -43,7 +61,7 @@ class Authorized extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({ ...state.user });
+const mapStateToProps = (state) => ({ user: selectUser(state) });
 
 const mapDispatchToProps = {
   deleteAd,

@@ -97,7 +97,7 @@ class Authorized extends PureComponent {
                       />
                     </li>
                     <li className="profile-actions__item">
-                      <PaintedLink to={"/ad/create"} value="create ad" />
+                      <PaintedLink to={path.ad.create()} value="create ad" />
                     </li>
                     <li className="profile-actions__item">
                       <PaintedLink to={path.chat("0")} value="my chats" />

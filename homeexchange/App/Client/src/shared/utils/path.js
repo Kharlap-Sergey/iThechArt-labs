@@ -7,7 +7,7 @@ export const path = {
   ad: {
     to: (id) => `/ad/id${id ?? ":id"}`,
     edit: (id) => `/ad/edite/${id ?? ":id"}`,
-    create: () => "ad/create",
+    create: () => "/ad/create",
   },
   profile: {
     edit: (id) => `/profile/edit/id${id ?? ":id"}`,
