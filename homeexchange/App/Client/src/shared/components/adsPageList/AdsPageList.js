@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { clearAdsPageAction, getAds } from "./redux/adsPageListActionCreatior";
 import "./ads-page-list.scss";
 import Page from "./components/Page";
-import Loader from "../Loader/Loader";
+import Loader from "shared/components/Loader/Loader";
 import Filter from "./components/Filter";
-import SearchBar from "./../searchBar/SearchBar";
+import SearchBar from "shared/components/searchBar/SearchBar";
+
 class AdsPageList extends PureComponent {
   constructor(props) {
     super(props);

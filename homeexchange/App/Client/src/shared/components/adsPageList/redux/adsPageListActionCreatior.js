@@ -1,11 +1,11 @@
 import {
   enablePageListActin,
   disableAllAction,
-} from "../../../redux/loader/loaderActionCreator";
-import { pathApi } from "../../../utils/path";
-import { requestWrapper } from "../../../utils/requestWrapper";
+} from "shared/redux/loader/loaderActionCreator";
+import { pathApi } from "shared/utils/path";
+import { requestWrapper } from "shared/utils/requestWrapper";
 import { CLEAR, GET_ADS } from "./types";
-import { toastrNotifier } from "./../../../redux/tostrNotifier";
+import { toastrNotifier } from "shared/redux/tostrNotifier";
 
 export function getAds(page, type, searchString, authorId) {
   return async (dispatch) => {

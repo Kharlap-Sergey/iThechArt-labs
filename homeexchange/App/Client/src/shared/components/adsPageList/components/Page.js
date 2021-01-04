@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ShortAd from "../../shortAd/ShortAd";
+import ShortAd from "shared/components/shortAd/ShortAd";
 import "./page.scss";
-import Ad from "../../ad/Ad";
+import Ad from "shared/components/ad/Ad";
 function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
   const [state, setState] = useState({ adId: null });
   const handleMoreClick = (adId) => {
