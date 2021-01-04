@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./chat.scss";
-import ChatsList from "./components/chatList/ChatsList";
+import ChatsList from "./components/chatsList/ChatsList";
 import { useDispatch } from "react-redux";
 import { redirectToAction } from "./../shared/redux/redirect/redirectActionCreator";
 import { path } from "./../shared/utils/path";
 import MessageBox from "./components/messageBox/MessageBox";
 import bgImg from "../shared/imgs/chat.svg";
 function Chats({ match }) {
-  const [selectedChatId, setSelectedChatId] = useState(match?.params?.chatId);
+  const [selectedChatId, setSelectedChatId] = useState(+match?.params?.chatId);
   const dispatch = useDispatch();
   const selectChat = (chatId) => {
     if (selectedChatId == chatId) return;

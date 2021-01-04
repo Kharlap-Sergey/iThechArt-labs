@@ -1,13 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
-import { loadChatList } from "../../../shared/redux/chat/chat";
-import ShortChat from "./../shortChat/ShortChat";
-import { clearChatAction } from "../../../shared/redux/chat/chatActionCreator";
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import PropTypes from 'prop-types';
+import { loadChatList } from "shared/redux/chat/chat";
+import { clearChatAction } from "shared/redux/chat/chatActionCreator";
+import { selectChatsList } from 'shared/redux/chat/selectors';
+import ShortChat from "../shortChat/ShortChat";
 import "./chat-list.scss";
 
 function ChatsList({ selectedChatId, handleClick }) {
+
   const dispatch = useDispatch();
-  const chats = useSelector((state) => state.chat.chats);
+
+  const chats = useSelector((state) => selectChatsList(state));
+
   useEffect(() => {
     dispatch(loadChatList());
     return () => {
@@ -26,6 +31,7 @@ function ChatsList({ selectedChatId, handleClick }) {
         new Date(b.message?.publicationDate)
     );
   };
+
   return (
     <ul className="chat-list">
       {ownmap(chats).map((chat) => (
@@ -35,7 +41,7 @@ function ChatsList({ selectedChatId, handleClick }) {
             handleClick(chat.id, e);
           }}
           className={`chat-list__item ${
-            selectedChatId == chat.id ? "chat-list__item--selected" : ""
+            selectedChatId === chat.id ? "chat-list__item--selected" : ""
           }`}
         >
           <ShortChat chat={chat} />
@@ -45,4 +51,7 @@ function ChatsList({ selectedChatId, handleClick }) {
   );
 }
 
+ChatsList.propTypes = {
+  selectedChatId: PropTypes.number,
+}
 export default ChatsList;
