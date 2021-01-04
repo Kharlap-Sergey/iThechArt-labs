@@ -10,9 +10,9 @@ import { selectProfile } from 'shared/redux/profile/selectors';
 import { selectUser } from 'shared/redux/account/selectors';
 import { selectRegistrationLoaderStatus } from "shared/redux/loader/selectors";
 import PropTypes from 'prop-types'
-import "./edit-profile.scss";
+import "./profile-editor.scss";
 
-class EditProfile extends PureComponent {
+class ProfileEditor extends PureComponent {
   componentDidMount() {
     this.props.getProfileById(this.props.match.params.id);
   }
@@ -39,10 +39,10 @@ class EditProfile extends PureComponent {
 
   render() {
     return (
-      <div className="edit-profile">
-        <div className="edit-profile__body">
+      <div className="profile-editor">
+        <div className="profile-editor__body">
           {!this.props.isLoading ? (
-            <div className="edit-profile__form">
+            <div className="profile-editor__form">
               <AccountForm
                 onSubmit={this.submeteHandler}
                 inputs={this.inputsArguments}
@@ -54,9 +54,9 @@ class EditProfile extends PureComponent {
           )}
         </div>
 
-        <div className="edit-profile__img-bg-wrapper">
+        <div className="profile-editor__img-bg-wrapper">
           <img
-            className="edit-profile__img-bg"
+            className="profile-editor__img-bg"
             src={bgImg}
             alt="hee should be img"
           />
@@ -77,4 +77,4 @@ const mapDispatchToProps = {
   getProfileById,
   updateUserPost,
 };
-export default connect(mapStateToPropos, mapDispatchToProps)(EditProfile);
+export default connect(mapStateToPropos, mapDispatchToProps)(ProfileEditor);

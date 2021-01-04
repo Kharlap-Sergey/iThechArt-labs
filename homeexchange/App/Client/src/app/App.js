@@ -6,7 +6,7 @@ import NavBar from "nav-bar/NavBar";
 import Home from "home/Home";
 import Profile from "profile/Profile";
 import Ad from "ad/Ad";
-import EditProfile from "editProfile/EditProfile";
+import ProfileEditor from "profileEditor/EditProfile";
 import AdCreator from "adCreator/AdCreator";
 import AdEditor from "adEditor/AdEditor";
 import Sign from "sign/Sign";
@@ -28,7 +28,7 @@ function App() {
           <Switch>
             <RouteCatcher>
               <Route exact path={path.profile.edit()}>
-                <PrivateRoute authed={auth} component={EditProfile} />
+                <PrivateRoute authed={auth} component={ProfileEditor} />
               </Route>
               <Route exact path={path.chat()}>
                 <PrivateRoute authed={auth} component={Chats} />
