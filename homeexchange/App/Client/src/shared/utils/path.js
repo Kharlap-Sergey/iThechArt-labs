@@ -1,25 +1,17 @@
 const api = "https://localhost:44370";
 export const path = {
   home: "/",
-  login: "/sign",
   sign: "/sign",
-  registration: "/registration",
 
   chat: (cahtId) => `/chat/id${cahtId ?? ":chatId"}`,
-  chatList: "/chats",
-  ad: (id) => `/ad/id${id ?? ":id"}`,
+  ad: {
+    to: (id) => `/ad/id${id ?? ":id"}`,
+    edit: (id) => `/ad/edite/${id ?? ":id"}`,
+    create: () => "ad/create",
+  },
   profile: {
     edit: (id) => `/profile/edit/id${id ?? ":id"}`,
     to: (id) => `/profile/id${id ?? ":id"}`,
-  },
-  adapi: {
-    ad: api + "/ad",
-    update: api + "/ad/update",
-    create: "",
-  },
-  accocunt: {
-    account: api + "/account",
-    login: api + "/account/login",
   },
 };
 
@@ -34,9 +26,7 @@ export const pathApi = {
   },
   notifications: {
     get: api + "/notification/getNotifications",
-    delete: (id) => {
-      return api + `/notification/deleteNotificaton/${id}`;
-    },
+    delete: (id) => api + `/notification/deleteNotificaton/${id}`,
   },
   account: {
     update: api + "/account/update",

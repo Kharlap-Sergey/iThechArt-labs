@@ -13,7 +13,6 @@ import Sign from "sign/Sign";
 import Chats from "chats/Chats";
 import { path } from "shared/utils/path";
 import RouteCatcher from "shared/components/routeCatcher/RouteCatcher";
-import SearchBar from "shared/components/searchBar/SearchBar";
 import PrivateRoute from "shared/components/privateRoute/PrivateRoute";
 import { selectUser } from "shared/redux/account/selectors";
 import "./app.scss";
@@ -34,13 +33,13 @@ function App() {
               <Route exact path={path.chat()}>
                 <PrivateRoute authed={auth} component={Chats} />
               </Route>
-              <Route exact path="/ad/create">
+              <Route exact path={path.ad.create()}>
                 <PrivateRoute authed={auth} component={AdCreation} />
               </Route>
-              <Route exact path="/ad/edite/id:id">
+              <Route exact path={path.ad.edit()}>
                 <PrivateRoute authed={auth} component={AdEditor} />
               </Route>
-              <Route exact path={path.ad()} component={Ad} />
+              <Route exact path={path.ad.to()} component={Ad} />
               <Route exact path={path.profile.to()} component={Profile} />
               <Route exact path={path.sign} component={Sign} />
               <Route exact path={path.home} component={Home} />

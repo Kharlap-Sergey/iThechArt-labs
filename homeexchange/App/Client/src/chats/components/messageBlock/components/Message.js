@@ -15,7 +15,7 @@ class Message extends PureComponent {
     return (
       <>
         {content.slice(0, res.index)}
-        <Link to={path.ad(res[1])}>{res[0]}</Link>
+        <Link to={path.ad.to(res[1])}>{res[0]}</Link>
       </>
     );
   }
