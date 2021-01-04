@@ -6,13 +6,11 @@ import { getAd } from "shared/redux/ad/thunkActions";
 import { formateDate, formateNumberToTypeOfAd } from "shared/utils/formater";
 import "./ad.scss";
 import { selectAd } from "shared/redux/ad/selectors";
-import { clearAdsAction } from 'shared/redux/ad/actions';
+import { clearAdsAction } from "shared/redux/ad/actions";
 
 class Ad extends PureComponent {
   constructor(props) {
     super(props);
-
-    this.state = { adId: this.props.match.params.id };
   }
 
   static propTypes = {
@@ -23,10 +21,12 @@ class Ad extends PureComponent {
       dateOfPublication: PropTypes.any.isRequired,
     }),
     match: PropTypes.object.isRequired,
+    getAd: PropTypes.func.isRequired,
+    clearAdsAction: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    this.props.getAd(this.state.adId);
+    this.props.getAd(this.props.match.params.id);
   }
 
   componentWillUnmount() {
@@ -54,14 +54,11 @@ class Ad extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ad: selectAd(state),
-  };
-};
+const mapStateToProps = (state) => ({ ad: selectAd(state) });
 
 const mapDispatchToProps = {
   getAd,
   clearAdsAction,
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Ad);
