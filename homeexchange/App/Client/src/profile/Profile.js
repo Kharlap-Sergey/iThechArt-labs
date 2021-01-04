@@ -6,14 +6,17 @@ import {
 } from "../shared/redux/profile/profileActionCreator";
 import { connect } from "react-redux";
 import AdsPageList from "../shared/components/adsPageList/AdsPageList";
-import AccountIformation from "./components/AccountIformation";
+import AccountIformation from "./components/accountInformation/AccountIformation";
+import { loadPrivateRoomId } from "shared/redux/chat/thunkActions";
+import { path } from "shared/utils/path";
+import bgImg from "shared/imgs/profile.svg";
+import RatingControl from "./components/ratingControl/RatingControl";
+import ImgUploader from "shared/components/imgUploader/ImgUploader";
+import { selectProfile } from "shared/redux/profile/selectors";
+import { selectUser } from 'shared/redux/account/selectors';
+import Modal from "shared/components/modal/Modal";
 import "./profile.scss";
-import { loadPrivateRoomId } from "../shared/redux/chat/thunkActions";
-import { path } from "../shared/utils/path";
-import bgImg from "../shared/imgs/profile.svg";
-import RatingControl from "./components/RatingControl";
-import ImgModal from "./components/ImgModal";
-import ImgUploader from "./../shared/components/imgUploader/ImgUploader";
+
 class Profile extends PureComponent {
   constructor(props) {
     super(props);
@@ -29,7 +32,7 @@ class Profile extends PureComponent {
     this.props.getProfileById(+this.props.match.params.id);
   }
   componentDidUpdate(prev) {
-    if (prev.match.params.id != this.props.match.params.id) {
+    if (prev.match.params.id !== this.props.match.params.id) {
       this.props.getProfileById(+this.props.match.params.id);
     }
   }
@@ -43,11 +46,11 @@ class Profile extends PureComponent {
   handleCloseImgModalClick(e) {
     this.setState({ isImgModalOpen: false });
   }
-  handleToChatClick(event) {
+  handleToChatClick() {
     this.props.loadChatId(+this.props.match.params.id, this.props.userId);
   }
 
-  handleEditClick(event) {
+  handleEditClick() {
     this.props.redirectToAction(path.profile.edit(+this.props.match.params.id));
   }
   render() {
@@ -55,7 +58,7 @@ class Profile extends PureComponent {
       <div className="profile">
         <div className="profile__inf">
           <AccountIformation {...this.props.profile}>
-            {this.props.userId == +this.props.match.params.id ? (
+            {this.props.user.userId === +this.props.match.params.id ? (
               <>
                 <div className="profile__open-btn-wrapper">
                   <button
@@ -66,14 +69,14 @@ class Profile extends PureComponent {
                   </button>
                 </div>
                 {this.state.isImgModalOpen ? (
-                  <ImgModal onClose={this.handleCloseImgModalClick}>
+                  <Modal onClose={this.handleCloseImgModalClick}>
                     <ImgUploader profileId={this.props.userId} />
-                  </ImgModal>
+                  </Modal>
                 ) : null}
               </>
             ) : null}
             <RatingControl profileId={+this.props.match.params.id} />
-            {+this.props.match.params.id == this.props.userId ? (
+            {+this.props.match.params.id === this.props.user.userId ? (
               <button
                 className="profile__edit-btn"
                 onClick={this.handleEditClick}
@@ -82,7 +85,7 @@ class Profile extends PureComponent {
               </button>
             ) : null}
           </AccountIformation>
-          {this.props.userId ? (
+          {this.props.user.userId ? (
             <button
               onClick={this.handleToChatClick}
               className="profile__chat-btn"
@@ -107,9 +110,10 @@ class Profile extends PureComponent {
   }
 }
 
-const mapStateToPropos = (state) => {
-  return { profile: state.profile, ...state.user };
-};
+const mapStateToPropos = (state) => ({
+  profile: selectProfile(state),
+  user: selectUser(state),
+});
 const mapDispatchToProps = {
   redirectToAction,
   getProfileById,

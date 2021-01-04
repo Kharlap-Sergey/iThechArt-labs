@@ -1,11 +1,13 @@
+import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import StarRating from "../../shared/components/starRating/StarRating";
+import StarRating from "shared/components/starRating/StarRating";
 import {
   loadProfileRating,
   setProfileRating,
-} from "../../shared/redux/profileRating/profileRating";
-import { clearProfileRatingAction } from "../../shared/redux/profileRating/profileRatingActionCreator";
+} from "shared/redux/profileRating/profileRating";
+import { clearProfileRatingAction } from "shared/redux/profileRating/profileRatingActionCreator";
+import { selectProfileRating } from "shared/redux/profileRating/selectors";
 import "./rating-control.scss";
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue.mark;
@@ -24,8 +26,9 @@ function RatingControl({ profileId }) {
       dispatch(clearProfileRatingAction());
     };
   }, []);
-  const ratings = useSelector((state) => state.profileRating);
-  const handleClick = (mark, e) => {
+
+  const ratings = useSelector((state) => selectProfileRating(state));
+  const handleClick = (mark) => {
     dispatch(setProfileRating({ targetId: profileId, mark: mark }));
   };
   return (
@@ -39,4 +42,7 @@ function RatingControl({ profileId }) {
   );
 }
 
+RatingControl.propTypes = {
+  profileId: PropTypes.number.isRequired,
+};
 export default RatingControl;

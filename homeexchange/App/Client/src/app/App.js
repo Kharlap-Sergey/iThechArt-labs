@@ -6,7 +6,7 @@ import NavBar from "nav-bar/NavBar";
 import Home from "home/Home";
 import Profile from "profile/Profile";
 import Ad from "ad/Ad";
-import ProfileEditor from "profileEditor/EditProfile";
+import ProfileEditor from "profileEditor/profileEditor";
 import AdCreator from "adCreator/AdCreator";
 import AdEditor from "adEditor/AdEditor";
 import Sign from "sign/Sign";

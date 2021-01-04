@@ -1,13 +1,13 @@
 import React from "react";
-import "./img-modal.scss";
-function ImgModal(props) {
+import "./modal.scss";
+function Modal(props) {
   const { onClose } = props;
   return (
-    <div className="img-modal">
-      <div className="img-modal__body">
-        <div className="img-modal__close">
+    <div className="modal">
+      <div className="modal__body">
+        <div className="modal__close">
           <button
-            className="img-modal__close-btn"
+            className="modal__close-btn"
             onClick={(e) => {
               onClose(e);
             }}
@@ -21,4 +21,4 @@ function ImgModal(props) {
   );
 }
 
-export default ImgModal;
+export default Modal;
