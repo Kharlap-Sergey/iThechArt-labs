@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import "./img-uploader.scss";
-import { downloadFile, sendFile } from "../../redux/imgUploader/imgUploader";
+import { sendFile } from "shared/redux/imgUploader/imgUploader";
+
 function ImgUploader({ profileId }) {
   const [imgSrc, setImgSrc] = useState(null);
   const [imgFile, setImgFile] = useState(null);
