@@ -1,7 +1,9 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { redirectClear } from "../../redux/redirect/redirectActionCreator";
+import { selectRedirectPath } from "shared/redux/redirect/selectors";
+import { redirectClear } from "shared/redux/redirect/redirectActionCreator";
+
 class RouteCatcher extends PureComponent {
   render() {
     if (this.props.path) {
@@ -11,11 +13,7 @@ class RouteCatcher extends PureComponent {
     return this.props.children;
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    ...state.redirect,
-  };
-};
+const mapStateToProps = (state) => ({path: selectRedirectPath(state)})
 
 const mapDispatchToProps = { redirectClear };
 export default connect(mapStateToProps, mapDispatchToProps)(RouteCatcher);

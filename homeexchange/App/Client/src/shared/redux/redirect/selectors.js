@@ -1,0 +1,1 @@
+export const selectRedirectPath = (state) => state.redirect.path
