@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types'
-import Star from "./components/Star";
+import Star from "./Star";
 import "./star-reting.scss";
 
 const STARS_COUNT = 5;

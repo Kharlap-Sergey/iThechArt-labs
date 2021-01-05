@@ -67,8 +67,8 @@
         background-color: $input-invalid-bg-color !important;
       }
       &::-webkit-scrollbar {
-        width: 0px; /* ширина scrollbar'a */
-        background: transparent; /* опционально */
+        width: 0px;
+        background: transparent;
       }
     }
   }

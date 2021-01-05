@@ -12,7 +12,6 @@ $radiant-color: #dcdcdc !default;
   padding-left: 40px;
   overflow: hidden;
   font-size: 1rem;
-  //background-color: $short-ad-bg-color;
   background: linear-gradient(to right, $purple-blue-light, $green);
   border: 0;
   border-radius: 10px;
@@ -67,10 +66,6 @@ $radiant-color: #dcdcdc !default;
       border-radius: 12px;
       outline: none !important;
       cursor: pointer;
-      -webkit-transition: all 0.5s 0s ease-in-out;
-      -moz-transition: all 0.5s 0s ease-in-out;
-      -ms-transition: all 0.5s 0s ease-in-out;
-      -o-transition: all 0.5s 0s ease-in-out;
       transition: all 0.5s 0s ease-in-out;
       &:active {
         background-color: $dark-green;

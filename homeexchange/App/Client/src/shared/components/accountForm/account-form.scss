@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@import "shared/variables.scss";
 
 .account-form-link {
   :hover {
@@ -23,10 +23,6 @@
     width: 100%;
     margin-top: 20px;
     opacity: 0;
-    -webkit-transition: all 1s 0s;
-    -moz-transition: all 1s 0s;
-    -ms-transition: all 1s 0s;
-    -o-transition: all 1s 0s;
     transition: all 1s 0s;
   }
 

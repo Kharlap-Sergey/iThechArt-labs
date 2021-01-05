@@ -8,9 +8,8 @@
   padding: 20px;
   font-size: 1rem;
   ::-webkit-scrollbar {
-    /* chrome based */
-    width: 0px; /* ширина scrollbar'a */
-    background: transparent; /* опционально */
+    width: 0px;
+    background: transparent;
   }
   &__nothing {
     position: absolute;

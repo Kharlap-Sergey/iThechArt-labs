@@ -11,14 +11,9 @@
     width: fit-content;
     height: fit-content;
     font-size: 2rem;
-    -webkit-background-clip: text !important;
     background-clip: text !important;
     outline: none;
     cursor: pointer;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -ms-transition: all 0.5s;
-    -o-transition: all 0.5s;
     transition: all 0.5s;
     -webkit-text-fill-color: transparent;
     &--half {

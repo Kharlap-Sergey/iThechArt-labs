@@ -103,7 +103,7 @@ class Profile extends PureComponent {
           <div className="profile__inf" />
         )}
         <div className="profile__ads">
-          <AdsPageList userId={+this.props.match.params.id}></AdsPageList>
+          <AdsPageList userId={+this.props.match.params.id}/>
         </div>
 
         <div className="profile__img-bg-wrapper">
