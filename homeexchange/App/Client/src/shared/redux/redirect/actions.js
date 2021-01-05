@@ -1,4 +1,4 @@
-import { REDIRECT_CLEAR, REDIRECT_TO } from "./types";
+import { REDIRECT_CLEAR, REDIRECT_TO } from "./constants";
 
 export const redirectToAction = (path) => {
   return {

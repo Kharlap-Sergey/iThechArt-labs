@@ -1,4 +1,4 @@
-import { REDIRECT_TO, REDIRECT_CLEAR } from "./types";
+import { REDIRECT_TO, REDIRECT_CLEAR } from "./constants";
 
 const initialState = { path: "" };
 

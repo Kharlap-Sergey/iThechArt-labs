@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { redirectToAction } from "shared/redux/redirect/actions";
 import { path } from "shared/utils/path";
 import { deleteNotificationFetch } from "shared/redux/notifications/thunkActions";
 import "./notification.scss";

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./chat.scss";
 import ChatsList from "./components/chatsList/ChatsList";
 import { useDispatch } from "react-redux";
-import { redirectToAction } from "./../shared/redux/redirect/redirectActionCreator";
+import { redirectToAction } from "../shared/redux/redirect/actions";
 import { path } from "./../shared/utils/path";
 import MessageBox from "./components/messageBox/MessageBox";
 import bgImg from "../shared/imgs/chat.svg";

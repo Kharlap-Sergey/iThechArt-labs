@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { redirectToAction } from "shared/redux/redirect/actions";
 import { getProfileById } from "shared/redux/profile/thunkActions";
 import { cleareProfileAction } from "shared/redux/profile/actions";
 import { connect } from "react-redux";

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "./nav-bar.scss";
 import { logoutAction } from "shared/redux/account/actions";
-import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { redirectToAction } from "shared/redux/redirect/actions";
 import PaintedLink from "shared/components/paintedLink/PaintedLink";
 import Unauthorized from "./components/unauthorized/Unauthorized";
 import Authorized from "./components/authorized/Authorized";

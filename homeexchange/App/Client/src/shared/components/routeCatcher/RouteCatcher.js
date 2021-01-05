@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { selectRedirectPath } from "shared/redux/redirect/selectors";
-import { redirectClear } from "shared/redux/redirect/redirectActionCreator";
+import { redirectClear } from "shared/redux/redirect/actions";
 
 class RouteCatcher extends PureComponent {
   render() {

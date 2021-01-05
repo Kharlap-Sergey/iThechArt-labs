@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import AdsPageList from "shared/components/adsPageList/AdsPageList";
-import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { redirectToAction } from "shared/redux/redirect/actions";
 
 import homeImg from "shared/imgs/home.svg";
 import "./home.scss";

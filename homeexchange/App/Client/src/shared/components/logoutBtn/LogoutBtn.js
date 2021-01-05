@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { redirectToAction } from "shared/redux/redirect/actions";
 import { auth } from "shared/utils/auth";
 import { logoutAction } from "shared/redux/account/actions";
 import { path } from "shared/utils/path";

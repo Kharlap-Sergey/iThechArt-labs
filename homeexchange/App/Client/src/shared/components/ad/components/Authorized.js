@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { deleteAd, replyOnAd } from "shared/redux/ad/thunkActions";
 import { path } from "shared/utils/path";
-import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { redirectToAction } from "shared/redux/redirect/actions";
 import { selectUser } from 'shared/redux/account/selectors';
 
 class Authorized extends PureComponent {

@@ -1,5 +1,5 @@
 import { requestWrapper } from "shared/utils/requestWrapper";
-import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { redirectToAction } from "shared/redux/redirect/actions";
 import { pathApi, path } from "shared/utils/path";
 import {
   enableAdFromtActin,

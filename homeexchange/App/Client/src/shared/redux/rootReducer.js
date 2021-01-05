@@ -1,8 +1,7 @@
 import { combineReducers } from "redux";
 import { reducer as toastrReducer } from "react-redux-toastr";
 import { adReducer } from "./ad/reducer";
-import { redirectReducer } from "./redirect/redirectReducer";
-import { remoteInteractionReducer } from "./remoteInteraciton/remoteInteractionReducer";
+import { redirectReducer } from "./redirect/reducer";
 import { profileReducer } from "./profile/reducer";
 import { adsPageListReducer } from "../components/adsPageList/redux/adsPageListReducer";
 import { accountReducer } from "./account/reducer";
@@ -21,7 +20,6 @@ export const rootReducer = combineReducers({
   profileRating: profileRatingReducer,
   profileImg: profileImgReducer,
   redirect: redirectReducer,
-  remoteInteraction: remoteInteractionReducer,
   toastr: toastrReducer,
   user: accountReducer,
 });
