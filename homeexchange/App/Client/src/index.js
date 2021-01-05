@@ -1,4 +1,4 @@
-//import "normalize.css";
+import "normalize.css";
 import React from "react";
 import thunk from "redux-thunk";
 import ReactDOM from "react-dom";
