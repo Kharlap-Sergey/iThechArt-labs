@@ -3,10 +3,10 @@ import * as signalR from "@microsoft/signalr";
 import {
   addNotificationsAction,
   clearNotificationsAction,
-} from "shared/redux/notifications/notificationActions";
+} from "shared/redux/notifications/actions";
 import { auth } from "shared/utils/auth";
 import { connect } from "react-redux";
-import { getNotificationsFetch } from "shared/redux/notifications/notifications";
+import { getNotificationsFetch } from "shared/redux/notifications/thunkActions";
 import Notification from "shared/components/notification/Notification";
 import { pathHub } from 'shared/utils/path';
 import "./notifications-list.scss";

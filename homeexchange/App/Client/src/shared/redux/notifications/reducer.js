@@ -1,4 +1,4 @@
-import { NOTIFICATION_CLEAR, NOTIFICATION_ADD, DELETE_BY_ID } from "./types";
+import { NOTIFICATION_CLEAR, NOTIFICATION_ADD, DELETE_BY_ID } from "./constants";
 
 const initialState = [];
 

@@ -1,7 +1,7 @@
 import { pathApi } from "../../utils/path";
-import { requestWrapper } from "./../../utils/requestWrapper";
-import { addNotificationsAction, deleteNotificationByIdAction } from "./notificationActions";
-import { toastrNotifier } from './../tostrNotifier';
+import { requestWrapper } from "../../utils/requestWrapper";
+import { addNotificationsAction, deleteNotificationByIdAction } from "./actions";
+import { toastrNotifier } from '../tostrNotifier';
 
 export function getNotificationsFetch() {
   return async (dispatch) => {
