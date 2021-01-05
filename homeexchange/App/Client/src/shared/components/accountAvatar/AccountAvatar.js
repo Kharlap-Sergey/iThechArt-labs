@@ -8,7 +8,7 @@ import "./account-avatar.scss";
 
 class AccountAvatar extends PureComponent {
   static propTypes = {
-    profileId: PropTypes.number.isRequired,
+    profileId: PropTypes.number,
   }
   handleClick(event) {
     event.preventDefault();
