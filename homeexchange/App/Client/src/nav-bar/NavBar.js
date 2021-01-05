@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "./nav-bar.scss";
-import { logoutAction } from "shared/redux/account/accountActions";
+import { logoutAction } from "shared/redux/account/actions";
 import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
 import PaintedLink from "shared/components/paintedLink/PaintedLink";
 import Unauthorized from "./components/unauthorized/Unauthorized";

@@ -1,4 +1,4 @@
-import { CLEAR, SET } from "./types";
+import { CLEAR, SET } from "./constants";
 
 export const clearProfileImgAction = () => ({ type: CLEAR });
 

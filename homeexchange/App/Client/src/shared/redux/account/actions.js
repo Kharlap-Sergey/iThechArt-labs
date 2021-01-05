@@ -1,4 +1,4 @@
-import { LOGIN_ERROR, LOGIN_USER, LOGOUT } from "./types";
+import { LOGIN_ERROR, LOGIN_USER, LOGOUT } from "./constants";
 export const loginUserAction = (user) => {
   return {
     type: LOGIN_USER,

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import AccountForm from "shared/components/accountForm/AccoutForm";
 import { inputAttributes } from "shared/utils/inputArguments";
-import { registrateUserPost } from "shared/redux/account/account";
+import { registrateUserPost } from "shared/redux/account/thunkActions";
 import Loader from "shared/components/Loader/Loader";
 import "./registration.scss";
 import { selectRegistrationLoaderStatus } from "shared/redux/loader/selectors";

@@ -1,11 +1,11 @@
-import { requestWrapper } from "../../utils/requestWrapper";
-import { redirectToAction } from "./../redirect/redirectActionCreator";
-import { pathApi, path } from "../../utils/path";
+import { requestWrapper } from "shared/utils/requestWrapper";
+import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { pathApi, path } from "shared/utils/path";
 import {
   enableAdFromtActin,
   disableAllAction,
 } from "../loader/loaderActionCreator";
-import { toastrNotifier } from "./../tostrNotifier";
+import { toastrNotifier } from "shared/redux/tostrNotifier";
 import { setAdAction } from './actions';
 
 export function createNewAd(ad) {

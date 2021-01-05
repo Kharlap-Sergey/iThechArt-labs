@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { loginUserPost } from "shared/redux/account/account";
+import { loginUserPost } from "shared/redux/account/thunkActions";
 import Loader from "shared/components/Loader/Loader";
 import AccountForm from "shared/components/accountForm/AccoutForm";
 import { inputAttributes } from "shared/utils/inputArguments";

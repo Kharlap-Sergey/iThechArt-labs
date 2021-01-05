@@ -1,9 +1,9 @@
-import { pathApi } from "../../utils/path";
-import { requestWrapper } from "../../utils/requestWrapper";
-import { redirectToAction } from "../redirect/redirectActionCreator";
-import { path } from "../../utils/path";
+import { pathApi } from "shared/utils/path";
+import { requestWrapper } from "shared/utils/requestWrapper";
+import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { path } from "shared/utils/path";
 import { addChatListAction, addChatMessagesAction } from "./actions";
-import { toastrNotifier } from "../tostrNotifier";
+import { toastrNotifier } from "shared/redux/tostrNotifier";
 
 export function loadChatList() {
   return async (dispatch) => {

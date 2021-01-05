@@ -5,7 +5,7 @@ import AccountForm from "shared/components/accountForm/AccoutForm";
 import { inputAttributes } from "shared/utils/inputArguments";
 import Loader from "shared/components/Loader/Loader";
 import bgImg from "shared/imgs/repairing.svg";
-import { updateUserPost } from 'shared/redux/account/account';
+import { updateUserPost } from 'shared/redux/account/thunkActions';
 import { selectProfile } from 'shared/redux/profile/selectors';
 import { selectUser } from 'shared/redux/account/selectors';
 import { selectRegistrationLoaderStatus } from "shared/redux/loader/selectors";

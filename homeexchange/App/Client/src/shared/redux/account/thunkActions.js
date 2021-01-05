@@ -1,14 +1,14 @@
-import { path, pathApi } from "./../../utils/path";
-import { auth } from "./../../utils/auth";
-import { requestWrapper } from "./../../utils/requestWrapper";
-import { redirectToAction } from "./../redirect/redirectActionCreator";
-import { loginUserAction } from "./accountActions";
+import { path, pathApi } from "../../utils/path";
+import { auth } from "shared/utils/auth";
+import { requestWrapper } from "shared/utils/requestWrapper";
+import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { loginUserAction } from "./actions";
 import {
   disableAllAction,
   enableLoginAction,
   enableRegistrationActin,
-} from "../loader/loaderActionCreator";
-import { toastrNotifier } from "../tostrNotifier";
+} from "shared/redux/loader/loaderActionCreator";
+import { toastrNotifier } from "shared/redux/tostrNotifier";
 
 export function loginUserPost(user) {
   return async (dispatch) => {

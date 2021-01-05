@@ -1,8 +1,7 @@
-import { toastr } from "react-redux-toastr";
-import { pathApi } from "../../utils/path";
-import { requestWrapper } from "../../utils/requestWrapper";
-import { setProfileImgAction } from "./profileImgReducerActionCreator";
-import { toastrNotifier } from './../tostrNotifier';
+import { pathApi } from "shared/utils/path";
+import { requestWrapper } from "shared/utils/requestWrapper";
+import { toastrNotifier } from 'shared/redux/tostrNotifier';
+import { setProfileImgAction } from "./actions";
 
 export function sendFile(file, authorId) {
   return async (dispatch) => {
