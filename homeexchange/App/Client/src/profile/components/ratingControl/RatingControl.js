@@ -5,8 +5,8 @@ import StarRating from "shared/components/starRating/StarRating";
 import {
   loadProfileRating,
   setProfileRating,
-} from "shared/redux/profileRating/profileRating";
-import { clearProfileRatingAction } from "shared/redux/profileRating/profileRatingActionCreator";
+} from "shared/redux/profileRating/thunkActions";
+import { clearProfileRatingAction } from "shared/redux/profileRating/actions";
 import { selectProfileRating } from "shared/redux/profileRating/selectors";
 import "./rating-control.scss";
 

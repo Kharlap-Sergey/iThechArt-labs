@@ -1,11 +1,10 @@
-import { toastr } from "react-redux-toastr";
-import { pathApi } from "../../utils/path";
-import { requestWrapper } from "../../utils/requestWrapper";
+import { pathApi } from "shared/utils/path";
+import { requestWrapper } from "shared/utils/requestWrapper";
+import { toastrNotifier } from "shared/redux/tostrNotifier";
 import {
   setProfileRatingAction,
   updateProfileRatingAction,
-} from "./profileRatingActionCreator";
-import { toastrNotifier } from "./../tostrNotifier";
+} from "./actions";
 
 export function loadProfileRating(profileId) {
   return async (dispatch) => {

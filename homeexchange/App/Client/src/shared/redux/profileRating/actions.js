@@ -1,4 +1,4 @@
-import { CLEAR, SET, UPDATE } from "./types";
+import { CLEAR, SET, UPDATE } from "./constants";
 
 export const clearProfileRatingAction = () => ({ type: CLEAR });
 
