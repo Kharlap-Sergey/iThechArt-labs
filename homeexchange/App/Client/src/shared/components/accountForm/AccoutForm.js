@@ -51,36 +51,36 @@ class AccoutForm extends PureComponent {
       });
     }
   }
+
   render() {
+    const inputsList = this.props.inputs.map((input, index) => {
+      let formInput = (
+        <div
+          className={`form__input ${!this.state.shouldShow ? "m0" : "opas-1"}`}
+          key={input.name}
+        >
+          <InputBox
+            key={input.name}
+            placeholder={input.placeholder}
+            name={input.name}
+            val={this.state[input.name] ?? ""}
+            validationTitle={this.state.validationTitle[input.name]}
+            typ={input.type}
+            validationAttributes={input.validationAttributes}
+            onChange={this.changeInputHandler}
+          />
+        </div>
+      );
+      return formInput;
+    });
     return (
       <form action="" className="form" onSubmit={this.submiteHandler}>
         <div className="form__body">
           {this.props.header}
+            
+          {inputsList}
 
-          {this.props.inputs.map((input, index) => {
-            let formInput = (
-              <div
-                className={`form__input ${
-                  !this.state.shouldShow ? "m0" : "opas-1"
-                }`}
-                key={input.name}
-              >
-                <InputBox
-                  key={input.name}
-                  placeholder={input.placeholder}
-                  name={input.name}
-                  val={this.state[input.name] ?? ""}
-                  validationTitle={this.state.validationTitle[input.name]}
-                  typ={input.type}
-                  validationAttributes={input.validationAttributes}
-                  onChange={this.changeInputHandler}
-                />
-              </div>
-            );
-            return formInput;
-          })}
-
-          <SubmitButton/>
+          <SubmitButton />
 
           {this.props.footer}
         </div>

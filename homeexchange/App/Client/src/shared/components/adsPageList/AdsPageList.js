@@ -7,7 +7,7 @@ import Page from "./Page";
 import Loader from "shared/components/Loader/Loader";
 import Filter from "./Filter";
 import SearchBar from "shared/components/searchBar/SearchBar";
-import { selectAds } from "shared/redux/ad/selectors";
+import { selectAdsPage } from "shared/redux/ad/selectors";
 import { selectAdLoaderStatus } from "shared/redux/loader/selectors";
 
 class AdsPageList extends PureComponent {
@@ -105,7 +105,7 @@ class AdsPageList extends PureComponent {
     }
   }
   render() {
-    const ads = this.props.ads;
+    const {ads, hasNext, hasPrevious} = this.props.adsPage;
     const userWasDefinedFlag = Boolean(this.props.userId);
     return (
       <div className="ads-list">
@@ -134,8 +134,8 @@ class AdsPageList extends PureComponent {
             <Page
               ads={ads}
               userWasDefinedFlag={userWasDefinedFlag}
-              prevBtn={this.props.hasPrevious ? this.handlePrevious : null}
-              nextBtn={this.props.hasNext ? this.handleNext : null}
+              prevBtn={hasPrevious ? this.handlePrevious : null}
+              nextBtn={hasNext ? this.handleNext : null}
             />
           </>
         )}
@@ -145,7 +145,7 @@ class AdsPageList extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  ads: selectAds(state),
+  adsPage: selectAdsPage(state),
   isLoading: selectAdLoaderStatus(state),
 });
 const mapDispatchToProps = {

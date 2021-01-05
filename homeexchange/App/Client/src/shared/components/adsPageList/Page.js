@@ -14,6 +14,24 @@ function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
   if (ads?.length === 0) {
     return <div className="page page--nothing">nothing to show</div>;
   }
+
+  const adsList = ads.map((ad) => {
+    return (
+      <div className="ads-list__element" key={ad.id}>
+        <ShortAd
+          key={ad.id}
+          adId={ad.id}
+          title={ad.title}
+          typ={ad.type}
+          description={ad.description}
+          date={ad.dateOfPublication}
+          authorId={ad.authorId}
+          shouldAvatarDisplay={!userWasDefinedFlag}
+          handleMoreClick={handleMoreClick}
+        />
+      </div>
+    );
+  })
   return (
     <div className="page">
       <div
@@ -30,23 +48,7 @@ function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
             <Ad adId={state.adId} handleLessClick={handleLessClick} />
           </div>
         ) : (
-          ads.map((ad) => {
-            return (
-              <div className="ads-list__element" key={ad.id}>
-                <ShortAd
-                  key={ad.id}
-                  adId={ad.id}
-                  title={ad.title}
-                  typ={ad.type}
-                  description={ad.description}
-                  date={ad.dateOfPublication}
-                  authorId={ad.authorId}
-                  shouldAvatarDisplay={!userWasDefinedFlag}
-                  handleMoreClick={handleMoreClick}
-                />
-              </div>
-            );
-          })
+          adsList
         )}
       </div>
       <div

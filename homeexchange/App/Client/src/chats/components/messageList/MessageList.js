@@ -31,30 +31,29 @@ class MessageList extends PureComponent {
       (a, b) => new Date(a.publicationDate) - new Date(b.publicationDate)
     );
 
+    const srotedMessagesList = sortedMessages.map((message, index) => {
+      return (
+        <React.Fragment key={message.id}>
+          {message.userId !== this.props.currentUserId &&
+          sortedMessages?.[index - 1]?.userId !== message.userId ? (
+            <div className="avatar--mini">
+              <AccountAvatar profileId={message.userId} />
+            </div>
+          ) : null}
+          <li className={`message-list__item`} key={message.id}>
+            <div
+              className={`${
+                message.userId === this.props.currentUserId ? left : right
+              }`}
+            ></div>
+            <Message content={message.content} />
+          </li>
+        </React.Fragment>
+      );
+    });
     return (
       <div className="message-box__message-list" ref={this.chatListRef}>
-        <ul className="message-list">
-          {sortedMessages.map((message, index) => {
-            return (
-              <React.Fragment key={message.id}>
-                {message.userId !== this.props.currentUserId &&
-                sortedMessages?.[index - 1]?.userId !== message.userId ? (
-                  <div className="avatar--mini">
-                    <AccountAvatar profileId={message.userId} />
-                  </div>
-                ) : null}
-                <li className={`message-list__item`} key={message.id}>
-                  <div
-                    className={`${
-                      message.userId === this.props.currentUserId ? left : right
-                    }`}
-                  ></div>
-                  <Message content={message.content} />
-                </li>
-              </React.Fragment>
-            );
-          })}
-        </ul>
+        <ul className="message-list">{srotedMessagesList}</ul>
       </div>
     );
   }
