@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { clearAdsAction } from "shared/redux/ad/actions";
 import { formatDate, formatNumberToTypeOfAd } from "../../utils/formater";
 import AccountAvatar from "shared/components/accountAvatar/AccountAvatar";
-import Authorized from "./components/Authorized";
+import Authorized from "./Authorized";
 import { getAd } from "shared/redux/ad/thunkActions";
 import { selectAd } from "shared/redux/ad/selectors";
 import "./ad.scss";
