@@ -1,11 +1,9 @@
 import React, { PureComponent } from "react";
-import { redirectToAction } from "../shared/redux/redirect/redirectActionCreator";
-import {
-  cleareProfileAction,
-  getProfileById,
-} from "../shared/redux/profile/profileActionCreator";
+import { redirectToAction } from "shared/redux/redirect/redirectActionCreator";
+import { getProfileById } from "shared/redux/profile/thunkActions";
+import { cleareProfileAction } from "shared/redux/profile/actions";
 import { connect } from "react-redux";
-import AdsPageList from "../shared/components/adsPageList/AdsPageList";
+import AdsPageList from "shared/components/adsPageList/AdsPageList";
 import AccountIformation from "./components/accountInformation/AccountIformation";
 import { loadPrivateRoomId } from "shared/redux/chat/thunkActions";
 import { path } from "shared/utils/path";
@@ -13,7 +11,7 @@ import bgImg from "shared/imgs/profile.svg";
 import RatingControl from "./components/ratingControl/RatingControl";
 import ImgUploader from "shared/components/imgUploader/ImgUploader";
 import { selectProfile } from "shared/redux/profile/selectors";
-import { selectUser } from 'shared/redux/account/selectors';
+import { selectUser } from "shared/redux/account/selectors";
 import Modal from "shared/components/modal/Modal";
 import "./profile.scss";
 

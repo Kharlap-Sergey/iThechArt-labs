@@ -2,7 +2,7 @@ import {
   PROFILE_CLEAR,
   PROFILE_GET_ADS_FOR_PROFILE,
   PROFILE_GET_BY_ID,
-} from "./types";
+} from "./constants";
 
 const initialState = { ads: [] };
 

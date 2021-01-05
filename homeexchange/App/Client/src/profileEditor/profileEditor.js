@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { getProfileById } from "shared/redux/profile/profileActionCreator";
+import { getProfileById } from "shared/redux/profile/thunkActions";
 import AccountForm from "shared/components/accountForm/AccoutForm";
 import { inputAttributes } from "shared/utils/inputArguments";
 import Loader from "shared/components/Loader/Loader";
