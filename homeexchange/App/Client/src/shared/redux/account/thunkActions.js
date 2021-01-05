@@ -7,7 +7,7 @@ import {
   disableAllAction,
   enableLoginAction,
   enableRegistrationActin,
-} from "shared/redux/loader/loaderActionCreator";
+} from "shared/redux/loader/actions";
 import { toastrNotifier } from "shared/redux/tostrNotifier";
 
 export function loginUserPost(user) {

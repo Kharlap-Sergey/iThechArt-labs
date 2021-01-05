@@ -8,7 +8,7 @@ import { adsPageListReducer } from "../components/adsPageList/redux/adsPageListR
 import { accountReducer } from "./account/reducer";
 import { notificationsReducer } from "./notifications/notificationsReducer";
 import { chatReducer } from "./chat/reducer";
-import { loaderReducer } from "./loader/loaderReducer";
+import { loaderReducer } from "./loader/reducer";
 import { profileRatingReducer } from "./profileRating/profileRatingReducer";
 import { profileImgReducer } from "./imgUploader/reducer";
 export const rootReducer = combineReducers({

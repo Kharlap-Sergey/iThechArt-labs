@@ -1,4 +1,4 @@
-import { DISABLE_ALL, ENABLE_ADFORM, ENABLE_LOGIN, ENABLE_PAGE_LIST, ENABLE_REGISTRATION } from "./types";
+import { DISABLE_ALL, ENABLE_ADFORM, ENABLE_LOGIN, ENABLE_PAGE_LIST, ENABLE_REGISTRATION } from "./constants";
 
 export const disableAllAction = () => ({
   type: DISABLE_ALL,

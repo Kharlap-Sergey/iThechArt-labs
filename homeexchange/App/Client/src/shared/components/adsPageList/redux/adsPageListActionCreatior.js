@@ -1,7 +1,7 @@
 import {
   enablePageListActin,
   disableAllAction,
-} from "shared/redux/loader/loaderActionCreator";
+} from "shared/redux/loader/actions";
 import { pathApi } from "shared/utils/path";
 import { requestWrapper } from "shared/utils/requestWrapper";
 import { CLEAR, GET_ADS } from "./types";

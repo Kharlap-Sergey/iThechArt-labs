@@ -4,7 +4,7 @@ import {
   ENABLE_LOGIN,
   ENABLE_PAGE_LIST,
   ENABLE_REGISTRATION,
-} from "./types";
+} from "./constants";
 
 const initialState = {
   login: false,

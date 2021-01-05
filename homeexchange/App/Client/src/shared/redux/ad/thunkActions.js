@@ -4,7 +4,7 @@ import { pathApi, path } from "shared/utils/path";
 import {
   enableAdFromtActin,
   disableAllAction,
-} from "../loader/loaderActionCreator";
+} from "../loader/actions";
 import { toastrNotifier } from "shared/redux/tostrNotifier";
 import { setAdAction } from './actions';
 

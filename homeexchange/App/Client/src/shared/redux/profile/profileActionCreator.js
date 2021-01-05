@@ -10,7 +10,7 @@ import {
   PROFILE_CLEAR,
 } from "./types";
 import { toastrNotifier } from "./../tostrNotifier";
-import { disableAllAction, enableRegistrationActin } from "../loader/loaderActionCreator";
+import { disableAllAction, enableRegistrationActin } from "../loader/actions";
 
 export function getProfileById(userId) {
   return async (dispatch) => {
