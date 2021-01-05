@@ -9,9 +9,6 @@ import { selectAd } from "shared/redux/ad/selectors";
 import { clearAdsAction } from "shared/redux/ad/actions";
 
 class Ad extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
 
   static propTypes = {
     ad: PropTypes.shape({

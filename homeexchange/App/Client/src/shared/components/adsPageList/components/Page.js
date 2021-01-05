@@ -11,7 +11,7 @@ function Page({ ads, userWasDefinedFlag, nextBtn, prevBtn }) {
     setState({ adId: null });
   };
 
-  if (ads?.length == 0) {
+  if (ads?.length === 0) {
     return <div className="page page--nothing">nothing to show</div>;
   }
   return (

@@ -28,7 +28,7 @@ class Sign extends PureComponent {
             <div className="sign-content__switcher sign-switcher">
               <button
                 className={`sign-switcher__btn ${
-                  this.state.type == "login" ? "sign-switcher__btn--active" : ""
+                  this.state.type === "login" ? "sign-switcher__btn--active" : ""
                 }`}
                 name="login"
                 onClick={this.handleSwithcerClick}
@@ -37,7 +37,7 @@ class Sign extends PureComponent {
               </button>
               <button
                 className={`sign-switcher__btn ${
-                  this.state.type == "signup"
+                  this.state.type === "signup"
                     ? "sign-switcher__btn--active"
                     : ""
                 }`}
@@ -47,9 +47,9 @@ class Sign extends PureComponent {
                 sign up
               </button>
             </div>
-            {this.state.type == "login" ? <Login /> : <Registration />}
+            {this.state.type === "login" ? <Login /> : <Registration />}
           </div>
-          <img className="sign-content__img" src={logo} />
+          <img className="sign-content__img" src={logo} alt="img"/>
         </div>
       </div>
     );

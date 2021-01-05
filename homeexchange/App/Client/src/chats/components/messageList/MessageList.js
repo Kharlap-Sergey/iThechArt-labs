@@ -37,8 +37,8 @@ class MessageList extends PureComponent {
           {sortedMessages.map((message, index) => {
             return (
               <React.Fragment key={message.id}>
-                {message.userId != this.props.currentUserId &&
-                sortedMessages?.[index - 1]?.userId != message.userId ? (
+                {message.userId !== this.props.currentUserId &&
+                sortedMessages?.[index - 1]?.userId !== message.userId ? (
                   <div className="avatar--mini">
                     <AccountAvatar profileId={message.userId} />
                   </div>
@@ -46,7 +46,7 @@ class MessageList extends PureComponent {
                 <li className={`message-list__item`} key={message.id}>
                   <div
                     className={`${
-                      message.userId == this.props.currentUserId ? left : right
+                      message.userId === this.props.currentUserId ? left : right
                     }`}
                   ></div>
                   <Message content={message.content} />

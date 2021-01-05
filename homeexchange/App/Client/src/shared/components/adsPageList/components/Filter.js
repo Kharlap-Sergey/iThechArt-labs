@@ -8,7 +8,7 @@ function Filter({ type, onChange }) {
         <li className="filter__option filter-option" key={id}>
           <button
             className={`filter-option__btn${
-              type == id ? " filter-option__btn--selected" : ""
+              type === id ? " filter-option__btn--selected" : ""
             }`}
             onClick={(e) => {
               onChange(e);

@@ -11,8 +11,8 @@ export const profileRatingReducer = (state = initialState, action) => {
       let isPresent = false;
       for (let i = 0; i < votes.length; i++) {
         if (
-          votes[i].targetId == action.payload.targetId &&
-          votes[i].committerId == action.payload.committerId
+          votes[i].targetId === action.payload.targetId &&
+          votes[i].committerId === action.payload.committerId
         ) {
           votes[i] = action.payload;
           isPresent = true;

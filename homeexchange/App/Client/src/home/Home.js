@@ -11,7 +11,7 @@ export class Home extends PureComponent {
     return (
       <div className="home">
         <AdsPageList/>
-        <img className="home__img" src={homeImg} />
+        <img className="home__img" src={homeImg} alt={"img"}/>
       </div>
     );
   }

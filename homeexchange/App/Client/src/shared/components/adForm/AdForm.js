@@ -22,7 +22,7 @@ class AdForm extends PureComponent {
   changeInputHandler(e) {
     e.preventDefault();
 
-    if (e.target.name == "type") {
+    if (e.target.name === "type") {
       this.setState({ [e.target.name]: Number(e.target.value) });
     } else this.setState({ [e.target.name]: e.target.value });
 

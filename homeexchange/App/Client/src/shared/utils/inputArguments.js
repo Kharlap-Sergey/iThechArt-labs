@@ -91,20 +91,6 @@ export const inputAttributes = {
       required: true,
     },
   },
-  nickname: {
-    placeholder: "nickname",
-    name: "nickname",
-
-    type: "text",
-    validationAttributes: {
-      autoComplete: "off",
-      pattern: "[0-9a-zA-Z-_]{1,20}",
-      maxLength: "20",
-      required: true,
-      title: "please use only numbers and English characters, also '-_@$%^#!'",
-      "data-permitions": "a-Z 0-9 and - _ @ $ % ^ # !",
-    },
-  },
   email: {
     placeholder: "e-mail",
     name: "email",

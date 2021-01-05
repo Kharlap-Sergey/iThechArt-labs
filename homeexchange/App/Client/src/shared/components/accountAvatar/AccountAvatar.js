@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import { redirectToAction } from "shared/redux/redirect/actions";
-import { downloadFile } from "shared/redux/imgUploader/thunkActions";
 import { path } from 'shared/utils/path';
 import Avatar from 'shared/components/avatar/Avatar';
 import "./account-avatar.scss";

@@ -9,10 +9,6 @@ import { selectAd } from "shared/redux/ad/selectors";
 import "./ad.scss";
 
 class Ad extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.getAd(this.props.adId);
   }

@@ -10,7 +10,6 @@ function ImgUploader({ profileId }) {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    const file = e.target.file;
     let fd = new FormData();
     fd.append("imgData", imgFile);
     dispatch(sendFile(fd, profileId));

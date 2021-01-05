@@ -1,4 +1,4 @@
-import { CLEAR, SET, UPDATE } from "./constants";
+import { CLEAR, SET} from "./constants";
 
 const initialState = {};
 

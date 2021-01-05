@@ -31,7 +31,7 @@ class AdsPageList extends PureComponent {
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.currentPage !== this.state.currentPage ||
-      prevProps.userId != this.props.userId
+      prevProps.userId !== this.props.userId
     ) {
       this.loadPage();
     }

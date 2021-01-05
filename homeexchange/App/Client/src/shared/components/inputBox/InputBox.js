@@ -60,7 +60,7 @@ class InputBox extends React.PureComponent {
             href="#"
             className="password-control"
             onClick={this.show_hide_password}
-          ></a>
+          />
         )}
       </div>
     );
