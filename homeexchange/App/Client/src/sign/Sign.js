@@ -1,18 +1,24 @@
 import React, { PureComponent } from "react";
-import Login from "../login/Login";
-import Registration from "../registration/Registration";
-import logo from "../shared/imgs/account-form.svg";
+import { connect } from "react-redux";
+import Login from "login/Login";
+import Registration from "registration/Registration";
+import logo from "shared/imgs/account-form.svg";
 import "./sign.scss";
+import { redirectToAction } from "shared/redux/redirect/actions";
+import { path } from "shared/utils/path";
+
 class Sign extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      type: "login",
+      type: this.props.match?.params?.type ?? "login",
     };
   }
 
   handleSwithcerClick = (event) => {
-    this.setState({ type: [event.target.name] });
+    const redirectPath = path.sign[event.target.name];
+    debugger;
+    this.props.redirectToAction(redirectPath);
   };
   render() {
     return (
@@ -35,7 +41,7 @@ class Sign extends PureComponent {
                     ? "sign-switcher__btn--active"
                     : ""
                 }`}
-                name="signup"
+                name="registration"
                 onClick={this.handleSwithcerClick}
               >
                 sign up
@@ -50,4 +56,4 @@ class Sign extends PureComponent {
   }
 }
 
-export default Sign;
+export default connect(null, { redirectToAction })(Sign);

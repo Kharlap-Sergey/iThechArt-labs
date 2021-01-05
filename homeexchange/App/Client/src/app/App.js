@@ -41,7 +41,7 @@ function App() {
               </Route>
               <Route exact path={path.ad.to()} component={Ad} />
               <Route exact path={path.profile.to()} component={Profile} />
-              <Route exact path={path.sign} component={Sign} />
+              <Route exact path={path.sign.to} component={Sign} />
               <Route exact path={path.home} component={Home} />
             </RouteCatcher>
           </Switch>

@@ -45,7 +45,7 @@ export function registrateUserPost(user) {
       const response = await requestWrapper.post(url, user);
 
       if (response.ok) {
-        dispatch(redirectToAction(path.login));
+        dispatch(redirectToAction(path.sign.login));
       } else {
         toastrNotifier.alertBadResponse(response);
       }

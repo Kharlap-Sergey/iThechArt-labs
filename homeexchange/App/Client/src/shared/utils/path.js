@@ -1,8 +1,11 @@
 const api = "https://localhost:44370";
 export const path = {
   home: "/",
-  sign: "/sign",
-
+  sign: {
+    to: "/sign/:type",
+    login: "/sign/login",
+    registration: "/sign/registration",
+  },
   chat: (cahtId) => `/chat/id${cahtId ?? ":chatId"}`,
   ad: {
     to: (id) => `/ad/id${id ?? ":id"}`,
