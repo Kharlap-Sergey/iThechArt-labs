@@ -17,7 +17,6 @@ class Sign extends PureComponent {
 
   handleSwithcerClick = (event) => {
     const redirectPath = path.sign[event.target.name];
-    debugger;
     this.props.redirectToAction(redirectPath);
   };
   render() {
@@ -28,7 +27,9 @@ class Sign extends PureComponent {
             <div className="sign-content__switcher sign-switcher">
               <button
                 className={`sign-switcher__btn ${
-                  this.state.type === "login" ? "sign-switcher__btn--active" : ""
+                  this.state.type === "login"
+                    ? "sign-switcher__btn--active"
+                    : ""
                 }`}
                 name="login"
                 onClick={this.handleSwithcerClick}
@@ -49,7 +50,7 @@ class Sign extends PureComponent {
             </div>
             {this.state.type === "login" ? <Login /> : <Registration />}
           </div>
-          <img className="sign-content__img" src={logo} alt="img"/>
+          <img className="sign-content__img" src={logo} alt="img" />
         </div>
       </div>
     );
