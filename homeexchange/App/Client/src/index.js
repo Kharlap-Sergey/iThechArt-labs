@@ -18,6 +18,7 @@ export const store = createStore(
 
 const toastr = (
   <ReduxToastr
+    className="toastr"
     timeOut={5000}
     newestOnTop={false}
     preventDuplicates

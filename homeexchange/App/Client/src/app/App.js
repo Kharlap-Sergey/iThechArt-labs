@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 import NavBar from "nav-bar/NavBar";
@@ -16,9 +16,17 @@ import RouteCatcher from "shared/components/routeCatcher/RouteCatcher";
 import PrivateRoute from "shared/components/privateRoute/PrivateRoute";
 import { selectUser } from "shared/redux/account/selectors";
 import "./app.scss";
+import { reenter } from "shared/redux/account/thunkActions";
 
 function App() {
   const user = useSelector((state) => selectUser(state));
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(reenter());
+    return () => {
+    }
+  }, []);
+
   const auth = !!user.userId;
   return (
     <div className="app">

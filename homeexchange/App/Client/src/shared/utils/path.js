@@ -35,6 +35,7 @@ export const pathApi = {
     update: api + "/account/update",
     registrate: api + "/account/registrate",
     login: api + "/account/login",
+    reenter: api + "/account/get",
     get: (id) => api + `/account/get/${id}`,
   },
 

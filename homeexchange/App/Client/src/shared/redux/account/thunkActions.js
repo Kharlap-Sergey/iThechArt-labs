@@ -74,3 +74,27 @@ export function updateUserPost(user) {
     }
   };
 }
+
+export function reenter() {
+  return async (dispatch) => {
+    dispatch(enableLoginAction());
+    try {
+      const url = pathApi.account.reenter;
+      const response = await requestWrapper.get(url);
+      if (response.ok) {
+        const data = await response.json();
+        auth.setToken(data.jwt);
+        dispatch(
+          loginUserAction({
+            email: data.user.email,
+            userId: data.user.id,
+          })
+        );
+      }
+    } catch (e) {
+      toastrNotifier.tryAgainLater();
+    } finally {
+      dispatch(disableAllAction());
+    }
+  };
+}
