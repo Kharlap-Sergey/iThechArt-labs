@@ -11,5 +11,6 @@ namespace HomeexchangeApi.Services
     {
         public User Registrate(User user);
         public LoginResponse Login(Account account);
+        public LoginResponse Reenter(int userId);
     }
 }

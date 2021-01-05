@@ -40,6 +40,17 @@ namespace HomeexchangeApi.Services
             return response;
         }
 
+        public LoginResponse Reenter(int userId)
+        {
+            var user = userRepository.FindById(userId);
+            var account = new Account { 
+                Login = user.Email
+                ,Password = user.Password 
+            };
+
+            return Login(account);
+        }
+
         public User Registrate(User user)
         {
             try

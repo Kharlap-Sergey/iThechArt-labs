@@ -55,6 +55,14 @@ namespace HomeexchangeApi.Controllers
             return Json(user);
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult Get()
+        {
+            var userId = GetCommitter();
+            return Json(accounService.Reenter(userId));
+        }
+
         int GetCommitter()
         {
             return int.Parse(User.Identity.Name);
