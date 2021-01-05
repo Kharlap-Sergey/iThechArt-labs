@@ -1,9 +1,38 @@
-import { pathApi } from "shared/utils/path";
+import * as signalR from "@microsoft/signalr";
 import { requestWrapper } from "shared/utils/requestWrapper";
 import { redirectToAction } from "shared/redux/redirect/actions";
-import { path } from "shared/utils/path";
+import { path, pathHub, pathApi } from "shared/utils/path";
 import { addChatListAction, addChatMessagesAction } from "./actions";
 import { toastrNotifier } from "shared/redux/tostrNotifier";
+import { auth } from "shared/utils/auth";
+
+const chatHub = new signalR.HubConnectionBuilder()
+  .withUrl(pathHub.chat, {
+    transport: signalR.HttpTransportType.WebSockets,
+    accessTokenFactory: () => auth.getToken(),
+  })
+  .build();
+
+export const connectToChat = () => {
+  return async (dispatch) => {
+    await chatHub.start().catch((err) => {});
+    if (!chatHub.methods.recieve)
+      await chatHub.on("Recieve", function ReciveMessage(message) {
+        dispatch(addChatMessagesAction([message]));
+      });
+  };
+};
+export const disconnectFromChat = () => {
+  return async (dispatch) => {
+    await chatHub.stop();
+  };
+};
+export const sendMessageToChat = (message) => {
+  return async () => {
+    debugger;
+    await chatHub.invoke("Send", message);
+  };
+};
 
 export function loadChatList() {
   return async (dispatch) => {

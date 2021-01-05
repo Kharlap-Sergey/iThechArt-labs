@@ -42,9 +42,6 @@ namespace HomeexchangeApi.Hubs
             int userId = int.Parse(Context.User.Identity.Name);
             string connectionId = this.Context.ConnectionId;
             Subscribers[userId] = connectionId;
-
-
-            //NotificationService.Subscribers[userId] = connectionId;
             await base.OnConnectedAsync();
         }
         public override async Task OnDisconnectedAsync(Exception e)

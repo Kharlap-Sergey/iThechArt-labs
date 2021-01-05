@@ -1,16 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { redirectToAction } from "shared/redux/redirect/actions";
-import { auth } from "shared/utils/auth";
-import { logoutAction } from "shared/redux/account/actions";
-import { path } from "shared/utils/path";
+import { applyLogoutSettings } from "shared/redux/account/thunkActions";
 import "./logout-btn.scss";
 
 class LogoutBtn extends PureComponent {
   logout() {
-    this.props.logoutAction();
-    auth.clearToken();
-    this.props.redirectToAction(path.home);
+    this.props.applyLogoutSettings();
   }
 
   render() {
@@ -24,7 +19,6 @@ class LogoutBtn extends PureComponent {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {
-  logoutAction,
-  redirectToAction,
+  applyLogoutSettings
 };
 export default connect(mapStateToProps, mapDispatchToProps)(LogoutBtn);

@@ -7,9 +7,7 @@ import {
   clearChatAction,
   addChatMessagesAction,
 } from "shared/redux/chat/actions";
-import { loadChatMessages } from "shared/redux/chat/thunkActions";
-import { pathHub } from "shared/utils/path";
-import { auth } from "shared/utils/auth";
+import { loadChatMessages, sendMessageToChat } from "shared/redux/chat/thunkActions";
 import "./message-box.scss";
 import { selectUser } from "shared/redux/account/selectors";
 import { selectMessages } from "shared/redux/chat/selectors";
@@ -27,12 +25,6 @@ class MessageBox extends PureComponent {
     messages: PropTypes.any.isRequired,
     chatId: PropTypes.number.isRequired,
   };
-  hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl(pathHub.chat, {
-      transport: signalR.HttpTransportType.WebSockets,
-      accessTokenFactory: () => auth.getToken(),
-    })
-    .build();
 
   handleSendClick(event) {
     event.preventDefault();
@@ -43,7 +35,7 @@ class MessageBox extends PureComponent {
       chatId: this.props.chatId,
       content: event.target.message.value,
     };
-    this.hubConnection.invoke("Send", message);
+    this.props.sendMessageToChat(message);
     event.target.message.value = "";
   }
 
@@ -54,10 +46,6 @@ class MessageBox extends PureComponent {
   componentDidMount() {
     this.props.clearChatAction();
     this.props.loadChatMessages(this.props.chatId);
-    this.hubConnection.start().catch((err) => {});
-    this.hubConnection.on("Recieve", (message) => {
-      this.props.addChatMessagesAction([message]);
-    });
     this.scrollDown();
   }
   componentDidUpdate() {
@@ -92,5 +80,6 @@ const mapDispatchToProps = {
   loadChatMessages,
   addChatMessagesAction,
   clearChatAction,
+  sendMessageToChat,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MessageBox);
