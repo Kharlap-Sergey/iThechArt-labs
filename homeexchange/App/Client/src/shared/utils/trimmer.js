@@ -1,2 +1,5 @@
 export const trimText = (text, length, endChar) =>
-  text.length > length ? text.slice(0, length) + endChar : text;
+  {
+    if(!text) return "";
+    return text.length > length ? text.slice(0, length) + endChar : text;
+  }

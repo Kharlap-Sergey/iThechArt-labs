@@ -4,7 +4,7 @@ import AccountAvatar from "shared/components/accountAvatar/AccountAvatar";
 import "./account-information.scss";
 
 function AccountIformation({
-  id: accountId,
+  id,
   nickname,
   email,
   country,
@@ -14,7 +14,7 @@ function AccountIformation({
   return (
     <div className="account-info">
       <div className="account-info__avatar">
-        <AccountAvatar profileId={accountId} />
+        <AccountAvatar profileId={id} />
       </div>
       <div className="account-info__information">
         <div className="account-info__nickname">{nickname}</div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types'
 import { useDispatch } from "react-redux";
 import { sendFile } from "shared/redux/imgUploader/thunkActions";
 import "./img-uploader.scss";
@@ -54,6 +55,10 @@ function ImgUploader({ profileId }) {
       </form>
     </div>
   );
+}
+
+ImgUploader.propTypes = {
+  profileId: PropTypes.number.isRequired,
 }
 
 export default ImgUploader;

@@ -45,53 +45,63 @@ class Profile extends PureComponent {
     this.setState({ isImgModalOpen: false });
   }
   handleToChatClick() {
-    this.props.loadChatId(+this.props.match.params.id, this.props.userId);
+    this.props.loadChatId(+this.props.match.params.id, this.props.user.userId);
   }
 
   handleEditClick() {
     this.props.redirectToAction(path.profile.edit(+this.props.match.params.id));
   }
+
+  getProfileInformation() {
+    return (
+      <div className="profile__inf">
+        <AccountIformation {...this.props.profile}>
+          {this.props.user.userId === +this.props.match.params.id ? (
+            <>
+              <div className="profile__open-btn-wrapper">
+                <button
+                  className="profile__open-btn"
+                  onClick={this.handleOpenImgModalClick}
+                >
+                  <div className="">+</div>
+                </button>
+              </div>
+              {this.state.isImgModalOpen ? (
+                <Modal onClose={this.handleCloseImgModalClick}>
+                  <ImgUploader profileId={this.props.user.userId} />
+                </Modal>
+              ) : null}
+            </>
+          ) : null}
+          <RatingControl profileId={+this.props.match.params.id} />
+          {+this.props.match.params.id === this.props.user.userId ? (
+            <button
+              className="profile__edit-btn"
+              onClick={this.handleEditClick}
+            >
+              edit
+            </button>
+          ) : null}
+        </AccountIformation>
+        {this.props.user.userId ? (
+          <button
+            onClick={this.handleToChatClick}
+            className="profile__chat-btn"
+          >
+            to chat
+          </button>
+        ) : null}
+      </div>
+    );
+  }
   render() {
     return (
       <div className="profile">
-        <div className="profile__inf">
-          <AccountIformation {...this.props.profile}>
-            {this.props.user.userId === +this.props.match.params.id ? (
-              <>
-                <div className="profile__open-btn-wrapper">
-                  <button
-                    className="profile__open-btn"
-                    onClick={this.handleOpenImgModalClick}
-                  >
-                    <div className="">+</div>
-                  </button>
-                </div>
-                {this.state.isImgModalOpen ? (
-                  <Modal onClose={this.handleCloseImgModalClick}>
-                    <ImgUploader profileId={this.props.userId} />
-                  </Modal>
-                ) : null}
-              </>
-            ) : null}
-            <RatingControl profileId={+this.props.match.params.id} />
-            {+this.props.match.params.id === this.props.user.userId ? (
-              <button
-                className="profile__edit-btn"
-                onClick={this.handleEditClick}
-              >
-                edit
-              </button>
-            ) : null}
-          </AccountIformation>
-          {this.props.user.userId ? (
-            <button
-              onClick={this.handleToChatClick}
-              className="profile__chat-btn"
-            >
-              to chat
-            </button>
-          ) : null}
-        </div>
+        {this.props.profile.id ? (
+          this.getProfileInformation()
+        ) : (
+          <div className="profile__inf" />
+        )}
         <div className="profile__ads">
           <AdsPageList userId={+this.props.match.params.id}></AdsPageList>
         </div>

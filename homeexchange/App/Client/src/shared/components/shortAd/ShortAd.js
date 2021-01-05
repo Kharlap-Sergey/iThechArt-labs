@@ -7,7 +7,7 @@ import "./short-ad.scss";
 
 class ShortAd extends PureComponent {
   static propTypes = {
-    typ: PropTypes.string.isRequired,
+    typ: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     adId: PropTypes.number.isRequired,
