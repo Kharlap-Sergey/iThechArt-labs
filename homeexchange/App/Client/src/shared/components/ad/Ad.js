@@ -13,7 +13,7 @@ class Ad extends PureComponent {
     this.props.getAd(this.props.adId);
   }
   componentWillUnmount() {
-    this.props.clearAdsAction();
+    //this.props.clearAdsAction();
   }
   handleLessClick(adId, event) {
     this.props.handleLessClick(adId, event);

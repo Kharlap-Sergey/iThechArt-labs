@@ -38,7 +38,7 @@ class Sign extends PureComponent {
               </button>
               <button
                 className={`sign-switcher__btn ${
-                  this.state.type === "signup"
+                  this.state.type === "registration"
                     ? "sign-switcher__btn--active"
                     : ""
                 }`}
