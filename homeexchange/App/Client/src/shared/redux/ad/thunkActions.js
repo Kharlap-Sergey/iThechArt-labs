@@ -4,9 +4,10 @@ import { pathApi, path } from "shared/utils/path";
 import {
   enableAdFromtActin,
   disableAllAction,
-} from "../loader/actions";
+  enableAdLoader,
+} from "shared/redux/loader/actions";
 import { toastrNotifier } from "shared/redux/tostrNotifier";
-import { setAdAction } from './actions';
+import { setAdAction, setAdsAction } from './actions';
 
 export function createNewAd(ad) {
   return async (dispatch) => {
@@ -89,6 +90,31 @@ export function replyOnAd(adId) {
       dispatch(redirectToAction(path.home));
     } else {
       toastrNotifier.alertBadResponse(response);
+    }
+  };
+}
+
+export function getAds(page, type, searchString, authorId) {
+  return async (dispatch) => {
+    try {
+      dispatch(enableAdLoader());
+      const url = pathApi.ad.loadPage();
+      const data = {
+        filter: { type, authorId },
+        searchString,
+        page,
+      };
+      const response = await requestWrapper.post(url, data);
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(setAdsAction(data));
+      } else {
+        toastrNotifier.alertBadResponse(response);
+      }
+    } catch (e) {
+      toastrNotifier.tryAgainLater();
+    } finally {
+      dispatch(disableAllAction());
     }
   };
 }

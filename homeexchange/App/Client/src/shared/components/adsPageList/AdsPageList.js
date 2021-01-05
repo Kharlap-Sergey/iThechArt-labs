@@ -1,11 +1,14 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { clearAdsPageAction, getAds } from "./redux/adsPageListActionCreatior";
+import { clearAdsAction} from "shared/redux/ad/actions";
+import { getAds } from 'shared/redux/ad/thunkActions'
 import "./ads-page-list.scss";
-import Page from "./components/Page";
+import Page from "./Page";
 import Loader from "shared/components/Loader/Loader";
-import Filter from "./components/Filter";
+import Filter from "./Filter";
 import SearchBar from "shared/components/searchBar/SearchBar";
+import { selectAds } from "shared/redux/ad/selectors";
+import { selectAdLoaderStatus } from "shared/redux/loader/selectors";
 
 class AdsPageList extends PureComponent {
   constructor(props) {
@@ -26,7 +29,7 @@ class AdsPageList extends PureComponent {
     this.loadPage();
   }
   componentWillUnmount() {
-    this.props.clearAdsPageAction();
+    this.props.clearAdsAction();
   }
   componentDidUpdate(prevProps, prevState) {
     if (
@@ -142,11 +145,11 @@ class AdsPageList extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  ...state.adsPageList,
-  isLoading: state.loader.pageList,
+  ads: selectAds(state),
+  isLoading: selectAdLoaderStatus(state),
 });
 const mapDispatchToProps = {
   getAds,
-  clearAdsPageAction,
+  clearAdsAction,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AdsPageList);
