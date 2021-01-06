@@ -53,7 +53,6 @@ class AdsPageList extends PureComponent {
     this.setState((state) => {
       return { ...state, currentPage: state.currentPage + 1 };
     });
-    console.log(this.state);
   };
   handlePrevious = (event) => {
     event.preventDefault();

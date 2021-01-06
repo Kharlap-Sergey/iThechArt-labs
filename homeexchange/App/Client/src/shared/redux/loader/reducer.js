@@ -1,3 +1,4 @@
+import produce from "immer";
 import {
   DISABLE_ALL,
   ENABLE_ADFORM,
@@ -14,18 +15,26 @@ const initialState = {
 };
 
 export const loaderReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ENABLE_LOGIN:
-      return { ...state, login: true };
-    case ENABLE_REGISTRATION:
-      return { ...state, registration: true };
-    case ENABLE_AD:
-      return { ...state, ad: true };
-    case ENABLE_ADFORM:
-      return { ...state, adForm: true };
-    case DISABLE_ALL:
-      return initialState;
-    default:
-      return state;
-  }
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case ENABLE_LOGIN:
+        draft.login = true;
+        break;
+      case ENABLE_REGISTRATION:
+        draft.registration = true;
+        break;
+      case ENABLE_AD:
+        draft.ad = true;
+        break;
+      case ENABLE_ADFORM:
+        draft.adForm = true;
+        break;
+      case DISABLE_ALL:
+        draft.login = initialState.login;
+        draft.ad = initialState.ad;
+        draft.adForm = initialState.adForm;
+        draft.registration = initialState.registration    
+        break;
+    }
+  });
 };

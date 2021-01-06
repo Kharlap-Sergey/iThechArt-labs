@@ -1,16 +1,17 @@
-import {LOGIN_ERROR, LOGIN_USER, LOGOUT} from "./constants";
+import { LOGIN_ERROR, LOGIN_USER, LOGOUT } from "./constants";
+import produce from "immer";
 
-const initialState = {};
+const initialState = {date: {}};
 
 export const accountReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case LOGIN_USER:
-      return {...state, ...action.payload};
-    case LOGIN_ERROR:
-      return {...state, ...action.payload};
-    case LOGOUT:
-      return {}
-    default:
-      return state;
-  }
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case LOGIN_USER:
+        draft.date = action.payload;
+        break;
+      case LOGOUT:
+        draft.date = initialState.date;
+        break;
+    }
+  });
 };

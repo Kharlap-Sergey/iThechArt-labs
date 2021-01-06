@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.2.2",
     "@version/react-router-v3": "^1.0.0",
+    "immer": "^8.0.0",
     "node-sass": "^4.0.0",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
