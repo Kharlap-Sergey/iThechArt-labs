@@ -22,5 +22,5 @@ export function formatDate(dateString) {
 
 export function formatNumberToTypeOfAd(t) {
   if (t === 1) return "to lease";
-  return "to rent";
+  if (t === 2) return "to rent";
 }
