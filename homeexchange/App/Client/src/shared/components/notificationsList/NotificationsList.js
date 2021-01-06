@@ -4,12 +4,11 @@ import {
   addNotificationsAction,
   clearNotificationsAction,
 } from "shared/redux/notifications/actions";
-import { auth } from "shared/utils/auth";
 import { connect } from "react-redux";
 import { getNotificationsFetch } from "shared/redux/notifications/thunkActions";
 import Notification from "shared/components/notification/Notification";
-import { pathHub } from 'shared/utils/path';
 import "./notifications-list.scss";
+import { selectNotifications } from './../../redux/notifications/selectors';
 
 class NotificationsList extends PureComponent {
   constructor(props) {
@@ -17,19 +16,9 @@ class NotificationsList extends PureComponent {
 
     this.deNotify = this.deNotify.bind(this);
   }
-  hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl(pathHub.notification, {
-      accessTokenFactory: () => auth.getToken(),
-    })
-    .build();
 
   componentDidMount() {
     this.props.getNotificationsFetch();
-    this.hubConnection.start().catch((err) => {
-    });
-    this.hubConnection.on("Notify", (notification) => {
-      this.props.addNotificationsAction([notification]);
-    });
   }
 
   componentDidUpdate(prevProps) {
@@ -65,11 +54,10 @@ class NotificationsList extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  notifications: [...state.notifications],
+  notifications: selectNotifications(state),
 });
 
 const mapDispatchToProps = {
-  addNotificationsAction,
   getNotificationsFetch,
   clearNotificationsAction,
 };

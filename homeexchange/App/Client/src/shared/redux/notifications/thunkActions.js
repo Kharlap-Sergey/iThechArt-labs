@@ -1,7 +1,31 @@
-import { pathApi } from "../../utils/path";
-import { requestWrapper } from "../../utils/requestWrapper";
+import { requestWrapper } from "shared/utils/requestWrapper";
 import { addNotificationsAction, deleteNotificationByIdAction } from "./actions";
-import { toastrNotifier } from '../tostrNotifier';
+import { toastrNotifier } from 'shared/redux/tostrNotifier';
+import * as signalR from "@microsoft/signalr";
+import { pathHub, pathApi } from "shared/utils/path";
+import { auth } from "shared/utils/auth";
+
+const chatHub = new signalR.HubConnectionBuilder()
+  .withUrl(pathHub.notification, {
+    transport: signalR.HttpTransportType.WebSockets,
+    accessTokenFactory: () => auth.getToken(),
+  })
+  .build();
+
+export const connectToNotification = () => {
+  return async (dispatch) => {
+    await chatHub.start().catch((err) => {});
+    if (!chatHub.methods.recieve)
+      await chatHub.on("Notify", (notification) => {
+        this.props.addNotificationsAction([notification]);
+      });
+  };
+};
+export const disconnectFromNotification = () => {
+  return async (dispatch) => {
+    await chatHub.stop();
+  };
+};
 
 export function getNotificationsFetch() {
   return async (dispatch) => {

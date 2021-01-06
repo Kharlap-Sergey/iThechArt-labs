@@ -9,7 +9,14 @@ import {
   enableRegistrationActin,
 } from "shared/redux/loader/actions";
 import { toastrNotifier } from "shared/redux/tostrNotifier";
-import { connectToChat, disconnectFromChat } from 'shared/redux/chat/thunkActions';
+import {
+  connectToChat,
+  disconnectFromChat,
+} from "shared/redux/chat/thunkActions";
+import {
+  connectToNotification,
+  disconnectFromNotification,
+} from "../notifications/thunkActions";
 
 export function loginUserPost(user) {
   return async (dispatch) => {
@@ -99,6 +106,7 @@ export function applyLoginSettings(data) {
         })
       );
       dispatch(connectToChat());
+      dispatch(connectToNotification());
     } catch (e) {
       toastrNotifier.tryAgainLater();
     }
@@ -107,9 +115,10 @@ export function applyLoginSettings(data) {
 export function applyLogoutSettings() {
   return (dispatch) => {
     try {
-      dispatch(logoutAction())
+      dispatch(logoutAction());
       auth.clearToken();
       dispatch(disconnectFromChat());
+      dispatch(disconnectFromNotification());
     } catch (e) {
       toastrNotifier.tryAgainLater();
     }
