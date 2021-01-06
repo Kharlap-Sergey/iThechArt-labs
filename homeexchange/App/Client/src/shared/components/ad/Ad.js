@@ -7,13 +7,11 @@ import Authorized from "./Authorized";
 import { getAd } from "shared/redux/ad/thunkActions";
 import { selectAd } from "shared/redux/ad/selectors";
 import "./ad.scss";
+import { selectUser } from "shared/redux/account/selectors";
 
 class Ad extends PureComponent {
   componentDidMount() {
     this.props.getAd(this.props.adId);
-  }
-  componentWillUnmount() {
-    //this.props.clearAdsAction();
   }
   handleLessClick(adId, event) {
     this.props.handleLessClick(adId, event);
@@ -34,7 +32,7 @@ class Ad extends PureComponent {
             </div>
           </div>
           <div className="ad__discription">{ad.description}</div>
-          {this.props.userId && !ad.isResponded ? (
+          {this.props.user.userId && !ad.isResponded ? (
             <Authorized authorId={ad.authorId} adId={ad.id} />
           ) : null}
           {this.handleLessClick ? (
@@ -57,7 +55,8 @@ class Ad extends PureComponent {
 
 const mapStateToProps = (state) => ({
   ad: selectAd(state),
-})
+  user: selectUser(state),
+});
 
 const mapDispatchToProps = {
   getAd,

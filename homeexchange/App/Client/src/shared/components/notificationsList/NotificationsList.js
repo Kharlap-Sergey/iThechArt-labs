@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import * as signalR from "@microsoft/signalr";
 import {
-  addNotificationsAction,
   clearNotificationsAction,
 } from "shared/redux/notifications/actions";
 import { connect } from "react-redux";

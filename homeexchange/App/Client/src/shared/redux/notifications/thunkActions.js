@@ -1,29 +1,31 @@
 import { requestWrapper } from "shared/utils/requestWrapper";
-import { addNotificationsAction, deleteNotificationByIdAction } from "./actions";
-import { toastrNotifier } from 'shared/redux/tostrNotifier';
+import {
+  addNotificationsAction,
+  deleteNotificationByIdAction,
+} from "./actions";
+import { toastrNotifier } from "shared/redux/tostrNotifier";
 import * as signalR from "@microsoft/signalr";
 import { pathHub, pathApi } from "shared/utils/path";
 import { auth } from "shared/utils/auth";
 
-const chatHub = new signalR.HubConnectionBuilder()
+const notificationHub = new signalR.HubConnectionBuilder()
   .withUrl(pathHub.notification, {
-    transport: signalR.HttpTransportType.WebSockets,
     accessTokenFactory: () => auth.getToken(),
   })
   .build();
 
 export const connectToNotification = () => {
   return async (dispatch) => {
-    await chatHub.start().catch((err) => {});
-    if (!chatHub.methods.recieve)
-      await chatHub.on("Notify", (notification) => {
-        this.props.addNotificationsAction([notification]);
+    await notificationHub.start().catch((err) => {});
+    if (!notificationHub.methods.notify)
+      await notificationHub.on("Notify", (notification) => {
+        dispatch(addNotificationsAction([notification]));
       });
   };
 };
 export const disconnectFromNotification = () => {
   return async (dispatch) => {
-    await chatHub.stop();
+    await notificationHub.stop();
   };
 };
 
@@ -34,18 +36,17 @@ export function getNotificationsFetch() {
       const response = await requestWrapper.get(url);
       if (response.ok) {
         const data = await response.json();
-        
+
         dispatch(addNotificationsAction([...data]));
       } else {
         toastrNotifier.alertBadResponse(response);
       }
     } catch (e) {
-      toastrNotifier.tryAgainLater()
+      toastrNotifier.tryAgainLater();
     } finally {
     }
   };
 }
-
 
 export function deleteNotificationFetch(notificationId) {
   return async (dispatch) => {
@@ -55,11 +56,11 @@ export function deleteNotificationFetch(notificationId) {
       if (response.ok) {
         const data = await response.json();
         dispatch(deleteNotificationByIdAction(notificationId));
-      }else {
+      } else {
         toastrNotifier.alertBadResponse(response);
       }
     } catch (e) {
-      toastrNotifier.tryAgainLater()
+      toastrNotifier.tryAgainLater();
     } finally {
     }
   };

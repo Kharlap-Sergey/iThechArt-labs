@@ -29,7 +29,6 @@ export const disconnectFromChat = () => {
 };
 export const sendMessageToChat = (message) => {
   return async () => {
-    debugger;
     await chatHub.invoke("Send", message);
   };
 };
