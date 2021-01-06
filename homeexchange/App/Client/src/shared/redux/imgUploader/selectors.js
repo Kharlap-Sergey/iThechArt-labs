@@ -1,2 +1,2 @@
-export const selectProfileImg = (state) => state.profileImg;
+export const selectProfileImg = (state) => state.profileImg.imgs;
 
