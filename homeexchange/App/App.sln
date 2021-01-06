@@ -26,6 +26,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Client", "Client\", "{D729F
 		SlnRelativePath = "Client\"
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeexchangeApi.Tests", "HomeexchangeApi.Tests\HomeexchangeApi.Tests.csproj", "{BAA7BB86-0C80-407A-88AB-ACE6E263DEA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{D729F986-D976-4A86-9268-3910F8993D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D729F986-D976-4A86-9268-3910F8993D19}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{D729F986-D976-4A86-9268-3910F8993D19}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{BAA7BB86-0C80-407A-88AB-ACE6E263DEA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAA7BB86-0C80-407A-88AB-ACE6E263DEA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAA7BB86-0C80-407A-88AB-ACE6E263DEA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAA7BB86-0C80-407A-88AB-ACE6E263DEA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
