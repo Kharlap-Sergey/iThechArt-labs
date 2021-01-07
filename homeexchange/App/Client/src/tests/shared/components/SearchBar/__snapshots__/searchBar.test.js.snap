@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expect component change tree via props 1`] = `
+<div
+  className="search-bar-container"
+>
+  <input
+    autoFocus={false}
+    onChange={[Function]}
+    placeholder="Search by location..."
+    type="text"
+    value=""
+  />
+  <div
+    className="search"
+  />
+</div>
+`;
+
+exports[`expect component change tree via props 2`] = `
+<div
+  className="search-bar-container search-bar-container--show"
+>
+  <input
+    autoFocus={true}
+    onChange={[Function]}
+    placeholder="Search by location..."
+    type="text"
+    value=""
+  />
+  <div
+    className="search"
+  />
+</div>
+`;
+
+exports[`expect component change val 1`] = `
+<div
+  className="search-bar-container search-bar-container--show"
+>
+  <input
+    autoFocus={true}
+    onChange={[Function]}
+    placeholder="Search by location..."
+    type="text"
+    value=""
+  />
+  <div
+    className="search"
+  />
+</div>
+`;
+
+exports[`expect component change val 2`] = `
+<div
+  className="search-bar-container search-bar-container--show"
+>
+  <input
+    autoFocus={true}
+    onChange={[Function]}
+    placeholder="Search by location..."
+    type="text"
+    value="some lasdjfaklsdf"
+  />
+  <div
+    className="search"
+  />
+</div>
+`;
+
+exports[`expected component will have open state class 1`] = `
+<div
+  className="search-bar-container search-bar-container--show"
+>
+  <input
+    autoFocus={true}
+    onChange={[Function]}
+    placeholder="Search by location..."
+    type="text"
+    value=""
+  />
+  <div
+    className="search"
+  />
+</div>
+`;
+
+exports[`expected component will have search-bar-container class 1`] = `
+<div
+  className="search-bar-container"
+>
+  <input
+    autoFocus={false}
+    onChange={[Function]}
+    placeholder="Search by location..."
+    type="text"
+    value=""
+  />
+  <div
+    className="search"
+  />
+</div>
+`;
