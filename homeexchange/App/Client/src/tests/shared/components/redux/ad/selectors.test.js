@@ -1,6 +1,7 @@
 import * as selectors from 'shared/redux/ad/selectors';
 
 describe("test ad selectors", () => {
+
   let mockState
   const mockAd = {
     id: 1,
