@@ -16,9 +16,9 @@ export function createNewAd(ad) {
       const url = pathApi.ad.create;
       const response = await requestWrapper.post(url, ad);
       if (response.ok) {
-        dispatch(redirectToAction(path.profile));
+        dispatch(redirectToAction(path.home));
       } else {
-        toastrNotifier.alertBadResponse(response);
+        await toastrNotifier.alertBadResponse(response);
       }
     } catch (e) {
       toastrNotifier.tryAgainLater();
