@@ -9,7 +9,7 @@ import { selectAd } from "shared/redux/ad/selectors";
 import "./ad.scss";
 import { selectUser } from "shared/redux/account/selectors";
 
-class Ad extends PureComponent {
+export class Ad extends PureComponent {
   componentDidMount() {
     this.props.getAd(this.props.adId);
   }
