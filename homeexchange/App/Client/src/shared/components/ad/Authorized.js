@@ -38,12 +38,14 @@ class Authorized extends PureComponent {
             <button
               className="ad__action-btn"
               onClick={this.editClickHandler}
+              id="ad-action__edit-btn"
             >
               edit
             </button>
             <button
               className="ad__action-btn"
               onClick={this.removeClickHandler}
+              id="ad-action__remove-btn"
             >
               remove
             </button>

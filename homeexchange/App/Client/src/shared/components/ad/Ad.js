@@ -6,8 +6,8 @@ import AccountAvatar from "shared/components/accountAvatar/AccountAvatar";
 import Authorized from "./Authorized";
 import { getAd } from "shared/redux/ad/thunkActions";
 import { selectAd } from "shared/redux/ad/selectors";
-import "./ad.scss";
 import { selectUser } from "shared/redux/account/selectors";
+import "./ad.scss";
 
 export class Ad extends PureComponent {
   componentDidMount() {
