@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { redirectToAction } from "shared/redux/redirect/actions";
 import { formatNumberToTypeOfAd, formatDate } from "shared/utils/formater";
 import "./short-ad.scss";
+import { trimText } from "shared/utils/trimmer";
 
 class ShortAd extends PureComponent {
   static propTypes = {
@@ -31,7 +32,7 @@ class ShortAd extends PureComponent {
         </div>
         <div className="short-ad__main">
           <h2 className="short-ad__title">{this.props.title}</h2>
-          <div className="short-ad__discription">{this.props.description}</div>
+          <div className="short-ad__discription">{trimText(this.props.description, 20, "...")}</div>
           <div className="short-ad__more">
             <button
               className="short-ad__more-btn"
