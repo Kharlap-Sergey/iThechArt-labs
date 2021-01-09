@@ -74,13 +74,12 @@ namespace HomeexchangeApi.Services
             }
             return res;
         }
-        public AdsPage GetAdsPageShortDesc(GetAdsPageRequest request)
+        public AdsPage GetAdsPage(GetAdsPageRequest request)
         {
             int page = request.Page;
             AdFilter adFilter = request.Filter;
             string searchString = request.SearchString;
             int pageSize = 4;
-            int descriptionLength = 20;
 
             var ads = adRepository
                 .Get(ad => !ad.IsResponded && ad.IsMatch(adFilter) 
@@ -90,13 +89,7 @@ namespace HomeexchangeApi.Services
                                                 searchString))
                 .OrderByDescending(ad => ad.DateOfPublication).ToList();
 
-            var adsBuf = ads.Skip((page - 1) * pageSize).Take(pageSize);
-            var adsToSend = adsBuf.Select(ad =>
-            {
-                ad.Desc = ad.Desc.Substring(0, Math.Min(ad.Desc.Length, descriptionLength))
-                + "...";
-                return ad;
-            });
+            var adsToSend = ads.Skip((page - 1) * pageSize).Take(pageSize);
             var result = new AdsPage
             {
                 HasNext = ads.Count > (page - 1) * pageSize + adsToSend.Count(),

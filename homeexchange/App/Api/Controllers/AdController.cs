@@ -38,7 +38,7 @@ namespace HomeexchangeApi.Controllers
         [HttpPost]
         public IActionResult GetAdsPage([FromBody] GetAdsPageRequest request)
         {
-            return Json(adService.GetAdsPageShortDesc(request));
+            return Json(adService.GetAdsPage(request));
         }
 
         [HttpPost("{adId}")]
