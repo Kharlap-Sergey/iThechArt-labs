@@ -9,7 +9,7 @@ namespace HomeexchangeApi.Models
     public sealed class AdFilter
     {
         [JsonPropertyName("type")]
-        public List<Ad.AdType> Types { set; get; }
+        public Ad.AdType Type { set; get; }
 
         [JsonPropertyName("authorId")]
         public int? AuthorId { set; get; }

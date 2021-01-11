@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { clearAdsAction } from "shared/redux/ad/actions";
-import { getAds } from "shared/redux/ad/thunkActions";
+import { clearAdsAction} from "shared/redux/ad/actions";
+import { getAds } from 'shared/redux/ad/thunkActions'
 import "./ads-page-list.scss";
 import Page from "./Page";
 import Loader from "shared/components/Loader/Loader";
@@ -13,10 +13,10 @@ import { selectAdLoaderStatus } from "shared/redux/loader/selectors";
 class AdsPageList extends PureComponent {
   constructor(props) {
     super(props);
-    
+
     this.initialState = {
       currentPage: 1,
-      type: { 1: false, 2: false },
+      type: 0,
       searchVal: "",
       isOpen: false,
     };
@@ -41,13 +41,9 @@ class AdsPageList extends PureComponent {
   }
 
   loadPage() {
-    const types = [];
-    for(let e in this.state.type){
-      if(this.state.type[e]) types.push(+e);
-    }
     this.props.getAds(
       this.state.currentPage,
-      types,
+      this.state.type,
       this.state.searchVal,
       this.props.userId
     );
@@ -71,11 +67,7 @@ class AdsPageList extends PureComponent {
 
     this.setState(
       (state) => {
-        return {
-          ...state,
-          type: { ...state.type, [selectedId]: !state.type[selectedId] },
-          currentPage: 1,
-        };
+        return { ...state, type: selectedId, currentPage: 1 };
       },
       () => {
         this.loadPage();
@@ -112,7 +104,7 @@ class AdsPageList extends PureComponent {
     }
   }
   render() {
-    const { ads, hasNext, hasPrevious } = this.props.adsPage;
+    const {ads, hasNext, hasPrevious} = this.props.adsPage;
     const userWasDefinedFlag = Boolean(this.props.userId);
     return (
       <div className="ads-list">

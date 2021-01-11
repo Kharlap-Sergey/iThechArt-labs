@@ -11,6 +11,7 @@ namespace HomeexchangeApi.Models
     {
         public enum AdType
         {
+            both = 0,
             tenancy = 1,
             toRent = 2
         }
@@ -39,14 +40,14 @@ namespace HomeexchangeApi.Models
             if (authorId == null || authorId == 0) return true;
             return authorId == AuthorId;
         }
-        bool IsTypeMatch(List<AdType> adTypes)
+        bool IsTypeMatch(AdType adType)
         {
-            if (adTypes.Count == 0) return true;
-            return adTypes.Contains(this.Type);
+            if (adType == AdType.both) return true;
+            return adType == Type;
         }
         public bool IsMatch(AdFilter filter) {
             bool isAuthorMatch = IsAuthorMatch(filter.AuthorId);
-            bool isTypeMatch = IsTypeMatch(filter.Types);
+            bool isTypeMatch = IsTypeMatch(filter.Type);
             return isAuthorMatch && isTypeMatch;
         }
     }

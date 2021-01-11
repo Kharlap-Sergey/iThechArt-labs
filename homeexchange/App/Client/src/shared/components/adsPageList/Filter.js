@@ -1,24 +1,21 @@
 import React from "react";
 import "./filter.scss";
 function Filter({ type, onChange }) {
-  const template = [
-    { content: "lease", type: 1 },
-    { content: "rent", type: 2 },
-  ];
+  const template = ["all", "lease", "rent"];
   return (
     <ul className="filter">
-      {template.map((element) => (
-        <li className="filter__option filter-option" key={element.type}>
+      {template.map((content, id) => (
+        <li className="filter__option filter-option" key={id}>
           <button
             className={`filter-option__btn${
-              type[element.type] ? " filter-option__btn--selected" : ""
+              type === id ? " filter-option__btn--selected" : ""
             }`}
             onClick={(e) => {
               onChange(e);
             }}
-            value={element.type}
+            value={id}
           >
-            {element.content}
+            {content}
           </button>
         </li>
       ))}
