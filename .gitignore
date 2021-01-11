@@ -2,6 +2,7 @@
 dist
 test
 *cache*
+*logger.txt
 # Created by https://www.toptal.com/developers/gitignore/api/vscode,vs,webstorm,git,web
 # Edit at https://www.toptal.com/developers/gitignore?templates=vscode,vs,webstorm,git,web
 
