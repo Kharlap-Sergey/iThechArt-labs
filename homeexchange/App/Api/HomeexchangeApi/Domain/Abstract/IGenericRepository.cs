@@ -16,7 +16,7 @@ namespace HomeexchangeApi.Domain.Abstract
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "");
-        public IEnumerable<TEntity> GetPart(int page, int pageSize, Expression<Func<TEntity, bool>> predicate);
+        public IEnumerable<TEntity> GetPart(int skip, int take, Expression<Func<TEntity, bool>> predicate);
         public IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties);
         public IEnumerable<TEntity> GetWithInclude(Expression<Func<TEntity, bool>> predicate,
             params Expression<Func<TEntity, object>>[] includeProperties);

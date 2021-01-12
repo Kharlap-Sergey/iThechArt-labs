@@ -82,19 +82,17 @@ namespace HomeexchangeApi.Services
             int pageSize = 4;
 
             var ads = adRepository
-                .Get(ad => !ad.IsResponded && ad.IsMatch(adFilter) 
+                .GetPart((page - 1) * pageSize, pageSize, ad => !ad.IsResponded && ad.IsMatch(adFilter) 
                                            && IsMatchToSearchString(
                                                 ad,
                                                 userContext.GetById(ad.AuthorId),
                                                 searchString))
                 .OrderByDescending(ad => ad.DateOfPublication).ToList();
-
-            var adsToSend = ads.Skip((page - 1) * pageSize).Take(pageSize);
             var result = new AdsPage
             {
-                HasNext = ads.Count > (page - 1) * pageSize + adsToSend.Count(),
+                HasNext = ads.Count > (page - 1) * pageSize + ads.Count(),
                 HasPrevious = (page - 1) * pageSize > 0,
-                Ads = adsToSend
+                Ads = ads
             };
 
             return result;
