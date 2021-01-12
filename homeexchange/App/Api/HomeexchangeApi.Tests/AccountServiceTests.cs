@@ -72,7 +72,7 @@ namespace HomeexchangeApi.Tests
                             {
                                 testUser
                             });
-            mockUserRepo.Setup(repo => repo.FindById(userId))
+            mockUserRepo.Setup(repo => repo.GetById(userId))
                       .Returns(testUser);
 
             var accoutService = new AccounService(mockUserRepo.Object);
@@ -93,7 +93,7 @@ namespace HomeexchangeApi.Tests
             mockUserRepo.Setup(repo => repo.Get(It.IsAny<Func<User, bool>>()))
                         .Returns(new List<User>());
 
-            mockUserRepo.Setup(repo => repo.FindById(userId))
+            mockUserRepo.Setup(repo => repo.GetById(userId))
                       .Returns(null as User);
 
             var accoutService = new AccounService(mockUserRepo.Object);

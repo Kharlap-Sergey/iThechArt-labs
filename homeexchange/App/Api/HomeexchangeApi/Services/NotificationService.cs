@@ -43,7 +43,7 @@ namespace HomeexchangeApi.Services
 
         public Notification Delete(int notificationId, int commiterId)
         {
-            var notification = notificationRepository.FindById(notificationId);
+            var notification = notificationRepository.GetById(notificationId);
 
             if(commiterId != notification.TargetUserId)
             {

@@ -28,7 +28,7 @@ namespace HomeexchangeApi.Tests
                 Languages = "Ru En",
             };
             var mockUserRepo = new Mock<IGenericRepository<User>>();
-            mockUserRepo.Setup(repo => repo.FindById(testUser.Id))
+            mockUserRepo.Setup(repo => repo.GetById(testUser.Id))
                         .Returns(null as User);
 
             var userService = new UserService(mockUserRepo.Object);
@@ -55,7 +55,7 @@ namespace HomeexchangeApi.Tests
                 Languages = "Ru En",
             };
             var mockUserRepo = new Mock<IGenericRepository<User>>();
-            mockUserRepo.Setup(repo => repo.FindById(testUser.Id))
+            mockUserRepo.Setup(repo => repo.GetById(testUser.Id))
                         .Returns(testUser);
 
             var userService = new UserService(mockUserRepo.Object);

@@ -30,7 +30,7 @@ namespace HomeexchangeApi.Services
         }
         public PhysicalFileResult GetPrfileImg(int targetUserId)
         {
-            var user = userRepository.FindById(targetUserId);
+            var user = userRepository.GetById(targetUserId);
             int imgId = user.ProfileImgId;
             if(imgId <= 0)
             {

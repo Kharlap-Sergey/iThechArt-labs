@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace HomeexchangeApi.Domain.Abstract
@@ -8,10 +9,18 @@ namespace HomeexchangeApi.Domain.Abstract
     public interface IGenericRepository<TEntity> where TEntity : class
     {
         TEntity Create(TEntity item);
-        TEntity FindById(int id);
+        TEntity GetById(object id);
         IEnumerable<TEntity> Get();
-        IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
-        IQueryable<TEntity> GetQuerable();
+        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
+        IEnumerable<TEntity> Get(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "");
+        public IEnumerable<TEntity> GetPart(int page, int pageSize, Expression<Func<TEntity, bool>> predicate);
+        public IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties);
+        public IEnumerable<TEntity> GetWithInclude(Expression<Func<TEntity, bool>> predicate,
+            params Expression<Func<TEntity, object>>[] includeProperties);
+        TEntity Remove(object id);
         TEntity Remove(TEntity item);
         TEntity Update(TEntity item);
     }

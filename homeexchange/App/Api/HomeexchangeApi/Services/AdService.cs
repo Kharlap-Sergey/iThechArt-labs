@@ -30,7 +30,7 @@ namespace HomeexchangeApi.Services
 
         public Ad Create(Ad ad, int committerId)
         {
-            var user = userContext.FindById(committerId);
+            var user = userContext.GetById(committerId);
 
             ad.AuthorId = committerId;
             ad.DateOfPublication = DateTime.Now;
@@ -40,7 +40,7 @@ namespace HomeexchangeApi.Services
 
         public Ad Delete(int adId, int committerId)
         {
-            var ad = adRepository.FindById(adId);
+            var ad = adRepository.GetById(adId);
 
             if (ad.AuthorId != committerId)
             {
@@ -52,7 +52,7 @@ namespace HomeexchangeApi.Services
 
         public Ad FindById(int adId)
         {
-            return adRepository.FindById(adId);
+            return adRepository.GetById(adId);
         }
 
         static bool IsKeyWordPresent(Ad ad, User Author, string keyWord)
@@ -85,7 +85,7 @@ namespace HomeexchangeApi.Services
                 .Get(ad => !ad.IsResponded && ad.IsMatch(adFilter) 
                                            && IsMatchToSearchString(
                                                 ad,
-                                                userContext.FindById(ad.AuthorId),
+                                                userContext.GetById(ad.AuthorId),
                                                 searchString))
                 .OrderByDescending(ad => ad.DateOfPublication).ToList();
 

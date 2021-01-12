@@ -42,7 +42,7 @@ namespace HomeexchangeApi.Services
 
         public LoginResponse Reenter(int userId)
         {
-            var user = userRepository.FindById(userId);
+            var user = userRepository.GetById(userId);
             var account = new Account { 
                 Login = user.Email
                 ,Password = user.Password 

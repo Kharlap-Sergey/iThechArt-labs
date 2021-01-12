@@ -24,12 +24,12 @@ namespace HomeexchangeApi.Services
 
         public User FindById(int userId)
         {
-            return userRepository.FindById(userId);
+            return userRepository.GetById(userId);
         }
 
         public User GetProfile(int userId)
         {
-            var profile = userRepository.FindById(userId);
+            var profile = userRepository.GetById(userId);
             profile.Password = null;
             return profile;
         }

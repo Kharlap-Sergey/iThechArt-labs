@@ -153,7 +153,7 @@ namespace HomeexchangeApi.Services
             }
 
 
-            return chatRepository.FindById(pw.ChatId);
+            return chatRepository.GetById(pw.ChatId);
         }
 
         public IEnumerable<ChatListItemResponse> GetChatResponsesList(int userId)
