@@ -114,7 +114,7 @@ namespace HomeexchangeApi.Services
         {
             if(ad.IsResponded)
             {
-                throw new AdAlreadyHasRepliedException($"the ad alreade has been responded");
+                throw new AdAlreadyHasBeenRepliedException($"the ad alreade has been responded");
             }
 
             var chat = chatService.GetChatOrCreateForTowMembers(committerId, ad.AuthorId);

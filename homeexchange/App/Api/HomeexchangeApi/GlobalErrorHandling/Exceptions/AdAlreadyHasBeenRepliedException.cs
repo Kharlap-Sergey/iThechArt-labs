@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace HomeexchangeApi.Exceptions
 {
-    public class AdAlreadyHasRepliedException : Exception
+    public class AdAlreadyHasBeenRepliedException : Exception
     {
-        public AdAlreadyHasRepliedException(string message)
+        public AdAlreadyHasBeenRepliedException(string message)
         : base(message)
         { }
     }
