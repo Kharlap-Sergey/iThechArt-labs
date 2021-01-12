@@ -1,10 +1,6 @@
-﻿using HomeexchangeApi.GlobalErrorHandling.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
-using System.Net;
+﻿using Microsoft.AspNetCore.Builder;
 
-namespace HomeexchangeApi.GlobalErrorHandling
+namespace Homeexchange.GlobalErrorHandling
 {
     public static class ExceptionMiddlewareExtensions
     {

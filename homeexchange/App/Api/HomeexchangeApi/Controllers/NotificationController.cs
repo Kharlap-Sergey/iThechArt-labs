@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using HomeexchangeApi.Services;
+using Homeexchange.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeexchangeApi.Controllers
+namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
     public class NotificationController : Controller

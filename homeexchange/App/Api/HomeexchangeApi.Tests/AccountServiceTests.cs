@@ -1,17 +1,16 @@
-﻿using HomeexchangeApi.Domain.Abstract;
-using HomeexchangeApi.Exceptions;
-using HomeexchangeApi.GlobalErrorHandling.Exceptions;
-using HomeexchangeApi.Models;
-using HomeexchangeApi.Responses;
-using HomeexchangeApi.Services;
+﻿using Homeexchange.Domain.Abstract;
+using Homeexchange.Models.Exceptions;
+using Homeexchange.Models.ViewModels;
+using Homeexchange.Responses;
+using Homeexchange.Services;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq.Expressions;
 using Xunit;
 
-namespace HomeexchangeApi.Tests
+namespace Homeexchange.Tests
 {
     public class AccountServiceTests
     {
@@ -46,7 +45,7 @@ namespace HomeexchangeApi.Tests
         {
             var testAccount = new Account { Login = "snovis@gmail.com", Password = "12345678" };
             var mockUserRepo = new Mock<IGenericRepository<User>>();
-            mockUserRepo.Setup(repo => repo.Get(It.IsAny<Func<User, bool>>()))
+            mockUserRepo.Setup(repo => repo.Get(It.IsAny<Expression<Func<User, bool>>>()))
                         .Returns(new List<User>
                             {
                                 new User{Email = "snovis@gmail.com", Password = "12345678"}
@@ -67,7 +66,7 @@ namespace HomeexchangeApi.Tests
             var testAccount = new Account { Login = "snovis@gmail.com", Password = "12345678" };
             var testUser = new User { Email = "snovis@gmail.com", Password = "12345678" };
             var mockUserRepo = new Mock<IGenericRepository<User>>();
-            mockUserRepo.Setup(repo => repo.Get(It.IsAny<Func<User, bool>>()))
+            mockUserRepo.Setup(repo => repo.Get(It.IsAny<Expression<Func<User, bool>>>()))
                         .Returns(new List<User>
                             {
                                 testUser
@@ -90,7 +89,7 @@ namespace HomeexchangeApi.Tests
             var testAccount = new Account { Login = "snovis@gmail.com", Password = "12345678" };
             var testUser = new User { Email = "snovis@gmail.com", Password = "12345678" };
             var mockUserRepo = new Mock<IGenericRepository<User>>();
-            mockUserRepo.Setup(repo => repo.Get(It.IsAny<Func<User, bool>>()))
+            mockUserRepo.Setup(repo => repo.Get(It.IsAny<Expression<Func<User, bool>>>()))
                         .Returns(new List<User>());
 
             mockUserRepo.Setup(repo => repo.GetById(userId))

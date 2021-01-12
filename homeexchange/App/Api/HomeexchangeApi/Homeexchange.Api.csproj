@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="GlobalErrorHandling\Extensions\**" />
+    <Content Remove="GlobalErrorHandling\Extensions\**" />
+    <EmbeddedResource Remove="GlobalErrorHandling\Extensions\**" />
+    <None Remove="GlobalErrorHandling\Extensions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Homeexchange.Domain.csproj" />
+    <ProjectReference Include="..\Models\Homeexchange.Models.csproj" />
+    <ProjectReference Include="..\Services\Homeexchange.Services.csproj" />
+  </ItemGroup>
+</Project>

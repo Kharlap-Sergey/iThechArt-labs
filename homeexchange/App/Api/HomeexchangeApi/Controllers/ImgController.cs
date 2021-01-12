@@ -1,26 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using HomeexchangeApi.Services;
+﻿using System.Linq;
+using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HomeexchangeApi.Controllers
+namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
 
     public class ImgController : Controller
     {
         readonly IImgService imgService;
+        readonly IWebHostEnvironment webHostEnviroment; 
         public ImgController(
-            IImgService imgService
+            IImgService imgService,
+            IWebHostEnvironment webHostEnviroment
             )
         {
             this.imgService = imgService;
+            this.webHostEnviroment = webHostEnviroment;
         }
 
         [HttpPost]
@@ -28,7 +27,7 @@ namespace HomeexchangeApi.Controllers
         public IActionResult AddFileAsync(IFormCollection uploadedFiles)
         {
             IFormFile uploadedFile = uploadedFiles.Files.FirstOrDefault();
-            var file = imgService.Save(uploadedFile, GetUserId());
+            var file = imgService.Save(uploadedFile, GetUserId(), webHostEnviroment.WebRootPath);
             var res = file.Result.Name;
             return Json(res);
         }
@@ -37,7 +36,7 @@ namespace HomeexchangeApi.Controllers
         public IActionResult Get(int userId)
         {
 
-            var file = imgService.GetPrfileImg(userId);
+            PhysicalFileResult file = imgService.GetPrfileImg(userId, webHostEnviroment.WebRootPath);
             return file;
         }
 

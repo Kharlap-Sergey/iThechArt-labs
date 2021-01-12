@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using HomeexchangeApi.Models;
-using HomeexchangeApi.Services;
-using HomeexchangeApi.Requests;
+using Homeexchange.Services;
+using Homeexchange.Models.ViewModels;
+using Homeexchange.Models.Requests;
 
-namespace HomeexchangeApi.Controllers
+namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
     public class AdController : Controller

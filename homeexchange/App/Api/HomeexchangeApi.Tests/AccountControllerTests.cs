@@ -1,12 +1,11 @@
-﻿using HomeexchangeApi.Controllers;
-using HomeexchangeApi.Exceptions;
-using HomeexchangeApi.Models;
-using HomeexchangeApi.Services;
+﻿using Homeexchange.Api.Controllers;
+using Homeexchange.Models.Exceptions;
+using Homeexchange.Models.ViewModels;
+using Homeexchange.Services;
 using Moq;
-using System;
 using Xunit;
 
-namespace HomeexchangeApi.Tests
+namespace Homeexchange.Tests
 {
     public class AccountControllerTests
     {

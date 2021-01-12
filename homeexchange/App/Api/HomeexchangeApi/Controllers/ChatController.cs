@@ -1,15 +1,11 @@
-﻿using HomeexchangeApi.Domain.Abstract;
-using HomeexchangeApi.Domain.Entities;
-using HomeexchangeApi.Requests;
-using HomeexchangeApi.Services;
+﻿using Homeexchange.Domain.Abstract;
+using Homeexchange.Models.Entities;
+using Homeexchange.Models.Requests;
+using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace HomeexchangeApi.Controllers
+namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action = GetChatList}")]
     public sealed class ChatController : Controller

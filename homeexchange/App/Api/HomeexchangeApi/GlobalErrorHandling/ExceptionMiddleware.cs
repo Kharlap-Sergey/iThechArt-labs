@@ -1,18 +1,13 @@
-﻿using HomeexchangeApi.Exceptions;
-using HomeexchangeApi.GlobalErrorHandling.Exceptions;
-using HomeexchangeApi.GlobalErrorHandling.Models;
-using HomeexchangeApi.Logger;
+﻿using Homeexchange.Api.Logger;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Security.Authentication;
 using System.Threading.Tasks;
+using Homeexchange.Models.Exceptions;
 
-namespace HomeexchangeApi.GlobalErrorHandling
+namespace Homeexchange.GlobalErrorHandling
 {
     public sealed class ExceptionMiddleware
     {

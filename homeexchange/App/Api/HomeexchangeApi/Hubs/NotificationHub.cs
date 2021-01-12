@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using HomeexchangeApi.Services;
+using Homeexchange.Services;
 using System.Threading.Tasks;
-using HomeexchangeApi.Requests;
 
-namespace HomeexchangeApi.Hubs
+namespace Homeexchange.Api.Hubs
 {
     [Authorize]
     public sealed class NotificationHub : Hub

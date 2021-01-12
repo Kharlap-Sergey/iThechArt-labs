@@ -1,14 +1,14 @@
-﻿using HomeexchangeApi.Domain.Abstract;
-using HomeexchangeApi.Exceptions;
-using HomeexchangeApi.Models;
-using HomeexchangeApi.Services;
+﻿using Homeexchange.Domain.Abstract;
+using Homeexchange.Exceptions;
+using Homeexchange.Models;
+using Homeexchange.Services;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace HomeexchangeApi.Tests
+namespace Homeexchange.Tests
 {
     public class UserServiceTest
     {

@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using HomeexchangeApi.Exceptions;
-using HomeexchangeApi.Models;
-using HomeexchangeApi.Responses;
-using HomeexchangeApi.Services;
-using System;
+using Homeexchange.Responses;
+using Homeexchange.Services;
+using Homeexchange.Models.ViewModels;
 
-
-namespace HomeexchangeApi.Controllers
+namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
     public sealed class AccountController : Controller

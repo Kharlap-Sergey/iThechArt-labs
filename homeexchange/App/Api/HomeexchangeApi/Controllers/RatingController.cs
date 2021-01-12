@@ -1,13 +1,9 @@
-﻿using HomeexchangeApi.Requests;
-using HomeexchangeApi.Services;
+﻿using Homeexchange.Models.Requests;
+using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace HomeexchangeApi.Controllers
+namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
 

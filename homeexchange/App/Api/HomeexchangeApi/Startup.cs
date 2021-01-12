@@ -7,20 +7,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using HomeexchangeApi.Domain;
-using HomeexchangeApi.Domain.Abstract;
-using HomeexchangeApi.Domain.Concrete;
-using HomeexchangeApi.Hubs;
-using HomeexchangeApi.Infrastructure;
-using HomeexchangeApi.Models;
-using HomeexchangeApi.Services;
+using Homeexchange.Domain;
+using Homeexchange.Domain.Abstract;
+using Homeexchange.Domain.Concrete;
+using Homeexchange.Api.Hubs;
+using Homeexchange.Services;
 using System.Threading.Tasks;
-using HomeexchangeApi.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using HomeexchangeApi.GlobalErrorHandling;
+using Homeexchange.GlobalErrorHandling;
+using Homeexchange.Models.ViewModels;
+using Homeexchange.Models.Entities;
+using Homeexchange.Services.Infrastructure;
 
-namespace HomeexchangeApi
+namespace Homeexchange.Api
 {
     public class Startup
     {
