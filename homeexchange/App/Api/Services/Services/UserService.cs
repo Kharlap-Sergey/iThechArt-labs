@@ -16,17 +16,17 @@ namespace Homeexchange.Services
         }
         public User Create(User user)
         {
-            return userRepository.Create(user);
+            return userRepository.CreateAsync(user);
         }
 
         public User FindById(int userId)
         {
-            return userRepository.GetById(userId);
+            return userRepository.GetByIdAsync(userId);
         }
 
         public User GetProfile(int userId)
         {
-            var profile = userRepository.GetById(userId);
+            var profile = userRepository.GetByIdAsync(userId);
             profile.Password = null;
             return profile;
         }
@@ -38,9 +38,9 @@ namespace Homeexchange.Services
                 throw new PermissionException("data can't be updated");
             }
 
-            user.Password = userRepository.Get(u => u.Id == commiterId).FirstOrDefault().Password;
+            user.Password = userRepository.GetAsync(u => u.Id == commiterId).FirstOrDefault().Password;
 
-            return userRepository.Update(user);
+            return userRepository.UpdateAsync(user);
         }
     }
 }
