@@ -22,14 +22,12 @@ namespace Homeexchange.Api
 {
     public class Startup
     {
+        private IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -44,7 +42,6 @@ namespace Homeexchange.Api
             services.AddScoped<IGenericRepository<Rating>, GenericRepository<Rating>>();
             services.AddScoped<IGenericRepository<Img>, GenericRepository<Img>>();
 
-
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IChatService, ChatService>();
@@ -52,33 +49,26 @@ namespace Homeexchange.Api
             services.AddScoped<IAccounService, AccounService>();
             services.AddScoped<IRatingService, RatingService>();
             services.AddScoped<IImgService, ImgService>();
+
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<CustomDbContext>(options =>
               options.UseSqlServer(connection));
 
-            //auth trow jwt
+            //auth through jwt
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
-                        //будет ли использоваться ssl !!!!! только для тестирования
                         options.RequireHttpsMetadata = false;
 
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
-                            // укзывает, будет ли валидироваться издатель при валидации токена
                             ValidateIssuer = true,
-                            // строка, представляющая издателя
                             ValidIssuer = AuthOptions.ISSUER,
-                            // будет ли валидироваться потребитель токена
                             ValidateAudience = true,
-                            // установка потребителя токена
                             ValidAudience = AuthOptions.AUDIENCE,
-                            // будет ли валидироваться время существования
                             ValidateLifetime = true,
-                            // установка ключа безопасности
                             IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-                            // валидация ключа безопасности
                             ValidateIssuerSigningKey = true,
                         };
 
@@ -88,14 +78,12 @@ namespace Homeexchange.Api
                             {
                                 var accessToken = context.Request.Query["access_token"];
 
-                                // если запрос направлен хабу
                                 var path = context.HttpContext.Request.Path;
                                 if (!string.IsNullOrEmpty(accessToken) &&
                                     (path.StartsWithSegments("/hub/notification")
                                     | path.StartsWithSegments("/hub/chat"))
                                     )
                                 {
-                                    // получаем токен из строки запроса
                                     context.Token = accessToken;
                                 }
                                 return Task.CompletedTask;
@@ -112,7 +100,6 @@ namespace Homeexchange.Api
             services.AddControllers();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -125,13 +112,14 @@ namespace Homeexchange.Api
             app.ConfigureExceptionHandler();
             app.UseHttpsRedirection();
             app.UseRouting();
+
             //include CORS
             app.UseCors(builder => builder.WithOrigins(Configuration["Cors:AvailabelHosts"]).AllowCredentials()
                             .AllowAnyMethod()
                             .AllowAnyHeader());
 
             app.UseAuthentication();
-          
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
