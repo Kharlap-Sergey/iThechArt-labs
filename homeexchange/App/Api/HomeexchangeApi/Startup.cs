@@ -126,7 +126,7 @@ namespace Homeexchange.Api
             app.UseHttpsRedirection();
             app.UseRouting();
             //include CORS
-            app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowCredentials()
+            app.UseCors(builder => builder.WithOrigins(Configuration["Cors:AvailabelHosts"]).AllowCredentials()
                             .AllowAnyMethod()
                             .AllowAnyHeader());
 
