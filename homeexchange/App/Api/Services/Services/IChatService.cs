@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Homeexchange.Services
 {
-    public interface IChatService
+    public interface IChatService : IHubSubscribers
     {
         public IEnumerable<Chat> GetChatList(int userId);
         public IEnumerable<ChatListItemResponse> GetChatResponsesList(int userId);
@@ -22,5 +22,6 @@ namespace Homeexchange.Services
         public Chat GetChatOrCreateForTowMembers(int member1, int member2);
 
         public void AddMemberToChat(int chatId, int memberId);
+
     }
 }

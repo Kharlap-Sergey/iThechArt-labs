@@ -47,7 +47,7 @@ namespace Homeexchange.Services
         {
             var members = GetChatMembersId(message.ChatId);
             var recievers = new List<string>();
-            var subscribers = Subscribers;//ChatHub.GetSubscribers();
+            var subscribers = ChatService.Subscribers;//ChatHub.GetSubscribers();
             foreach (var memberId in members)
             {
                 if (subscribers.ContainsKey(memberId))
@@ -62,7 +62,7 @@ namespace Homeexchange.Services
         private ChatMessage AddChatMessage(ChatMessage message)
         {
             var chatMessage = chatMessageRepository.Create(message);
-            //SendMessageToChat(chatMessage);
+            SendMessageToChat(chatMessage);
             return chatMessage;
         }
         public ChatMessage AddMessage(MessageRequest message, int comnitterId)
@@ -165,6 +165,16 @@ namespace Homeexchange.Services
                     .OrderByDescending(cm => cm.PublicationDate)
                     .FirstOrDefault()
             });
+        }
+
+        public void AddSubscriber(int userId, string connection)
+        {
+            ChatService.Subscribers[userId] = connection;
+        }
+
+        public void RemoveSubscriber(int userId)
+        {
+            if(ChatService.Subscribers.ContainsKey(userId)) ChatService.Subscribers.Remove(userId);
         }
     }
 }
