@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
@@ -21,14 +22,13 @@ namespace Homeexchange.Services
             this.userRepository = userRepository;
         }
 
-        public LoginResponse Login(Account account)
+        public async Task<LoginResponse> LoginAsync(Account account)
         {
-            ClaimsIdentity identity;
-            identity = GetIdentity(account);
-           
-            // создаем JWT-токен
+            ClaimsIdentity identity = await GetIdentity(account);
             var encodedJwt = CustomJWTCreator.CreateJWT(identity);
-            User user = userRepository.GetAsync(u => u.Email == account.Login).FirstOrDefault();
+
+            User user = (await userRepository.GetAsync(u => u.Email == account.Login))
+                        .FirstOrDefault();
 
             var response = new LoginResponse
             {
@@ -38,22 +38,22 @@ namespace Homeexchange.Services
             return response;
         }
 
-        public LoginResponse Reenter(int userId)
+        public async Task<LoginResponse> ReenterAsync(int userId)
         {
-            var user = userRepository.GetByIdAsync(userId);
+            var user = await userRepository.GetByIdAsync(userId);
             var account = new Account { 
                 Login = user.Email
                 ,Password = user.Password 
             };
 
-            return Login(account);
+            return await LoginAsync(account);
         }
 
-        public User Registrate(User user)
+        public async Task<User> RegistrateAsync(User user)
         {
             try
             {
-                return userRepository.CreateAsync(user);
+                return await userRepository.CreateAsync(user);
             }
             catch (DbUpdateException e)
             {
@@ -68,10 +68,14 @@ namespace Homeexchange.Services
             }
         }
 
-        private ClaimsIdentity GetIdentity(Account account)
+        private async Task<ClaimsIdentity> GetIdentity(Account account)
         {
-            var person = userRepository.GetAsync(u => u.Email == account.Login
-            && u.Password == account.Password).FirstOrDefault();
+            var person = (await userRepository.GetAsync
+                (
+                    u => u.Email == account.Login
+                         && u.Password == account.Password
+                )).FirstOrDefault();
+
             if (person == null)
             {
                 throw new InvalidCredentialExeption("The user name or password is not correct");
@@ -79,11 +83,16 @@ namespace Homeexchange.Services
 
             var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Id.ToString()),
+                    new Claim(
+                        ClaimsIdentity.DefaultNameClaimType,
+                        person.Id.ToString()),
                 };
 
             ClaimsIdentity claimsIdentity =
-            new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+            new ClaimsIdentity(
+                claims, 
+                "Token", 
+                ClaimsIdentity.DefaultNameClaimType,
                 ClaimsIdentity.DefaultRoleClaimType);
             return claimsIdentity;
         }

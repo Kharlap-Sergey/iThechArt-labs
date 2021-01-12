@@ -2,6 +2,7 @@
 using Homeexchange.Models.Exceptions;
 using Homeexchange.Models.ViewModels;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
@@ -14,33 +15,34 @@ namespace Homeexchange.Services
         {
             this.userRepository = userRepository;
         }
-        public User Create(User user)
+        public async Task<User> CreateAsync(User user)
         {
-            return userRepository.CreateAsync(user);
+            return await userRepository.CreateAsync(user);
         }
 
-        public User FindById(int userId)
+        public async Task<User> FindByIdAsync(int userId)
         {
-            return userRepository.GetByIdAsync(userId);
+            return await userRepository.GetByIdAsync(userId);
         }
 
-        public User GetProfile(int userId)
+        public async Task<User> GetProfileAsync(int userId)
         {
-            var profile = userRepository.GetByIdAsync(userId);
+            var profile = await userRepository.GetByIdAsync(userId);
             profile.Password = null;
             return profile;
         }
 
-        public User Update(User user, int commiterId)
+        public async Task<User> UpdateAsync(User user, int commiterId)
         {
             if (commiterId != user.Id)
             {
                 throw new PermissionException("data can't be updated");
             }
 
-            user.Password = userRepository.GetAsync(u => u.Id == commiterId).FirstOrDefault().Password;
+            user.Password = (await userRepository.GetAsync(u => u.Id == commiterId))
+                            .FirstOrDefault().Password;
 
-            return userRepository.UpdateAsync(user);
+            return await userRepository.UpdateAsync(user);
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using Homeexchange.Models.ViewModels;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
     public interface IUserService
     {
-        public User FindById(int userId);
-        public User Create(User user);
-        public User Update(User user, int commiterId);
-        public User GetProfile(int userId);
+        public Task<User> FindByIdAsync(int userId);
+        public Task<User> CreateAsync(User user);
+        public Task<User> UpdateAsync(User user, int commiterId);
+        public Task<User> GetProfileAsync(int userId);
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Homeexchange.Responses;
 using Homeexchange.Services;
 using Homeexchange.Models.ViewModels;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers
 {
@@ -21,43 +22,43 @@ namespace Homeexchange.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody] Account account)
+        public async Task<IActionResult> Login([FromBody] Account account)
         {
             LoginResponse response;
-            response = accounService.Login(account);
+            response = await accounService.LoginAsync(account);
             return Json(response);
         }
 
         [HttpPost]
-        public IActionResult Registrate([FromBody] User user)
+        public async Task<IActionResult> Registrate([FromBody] User user)
         {
-            user = accounService.Registrate(user);
+            user = await accounService.RegistrateAsync(user);
             var res = Json(user);
             return res;
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult Update([FromBody] User user)
+        public async Task<IActionResult> Update([FromBody] User user)
         {
             var commiterId = GetCommitterId();
-            user = userService.Update(user, commiterId);
+            user = await userService.UpdateAsync(user, commiterId);
             return Json(user);
         }
 
         [HttpGet("{userId}")]
-        public IActionResult Get(int userId)
+        public async Task<IActionResult> Get(int userId)
         {
-            var user = userService.GetProfile(userId);
+            var user = await userService.GetProfileAsync(userId);
             return Json(user);
         }
 
         [HttpGet]
         [Authorize]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
             var userId = GetCommitterId();
-            return Json(accounService.Reenter(userId));
+            return Json(await accounService.ReenterAsync(userId));
         }
 
     }

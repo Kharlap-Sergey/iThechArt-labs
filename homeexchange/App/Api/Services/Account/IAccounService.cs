@@ -1,12 +1,13 @@
 ﻿using Homeexchange.Models.ViewModels;
 using Homeexchange.Responses;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
     public interface IAccounService
     {
-        public User Registrate(User user);
-        public LoginResponse Login(Account account);
-        public LoginResponse Reenter(int userId);
+        public Task<User> RegistrateAsync(User user);
+        public Task<LoginResponse> LoginAsync(Account account);
+        public Task<LoginResponse> ReenterAsync(int userId);
     }
 }

@@ -46,7 +46,7 @@ namespace Homeexchange.Api.Controllers
         public IActionResult Reply(int adId)
         {
             var userId = GetCommitterId();
-            var responder = userService.FindById(userId);
+            var responder = userService.FindByIdAsync(userId);
             var ad = adService.FindById(adId);
             return Json(adService.ReplyOnAd(ad, responder.Id));
         }
@@ -56,7 +56,7 @@ namespace Homeexchange.Api.Controllers
         public IActionResult Delete(int adId)
         {
             var userId = GetCommitterId();
-            var committer = userService.FindById(userId);
+            var committer = userService.FindByIdAsync(userId);
             var ad = adService.Delete(adId, committer.Id);
             return new OkResult();
         }
@@ -65,7 +65,7 @@ namespace Homeexchange.Api.Controllers
         public IActionResult Update([FromBody] Ad ad)
         {
             var userId = GetCommitterId();
-            var committer = userService.FindById(userId);
+            var committer = userService.FindByIdAsync(userId);
             adService.Update(ad, committer.Id);
 
             return Ok();

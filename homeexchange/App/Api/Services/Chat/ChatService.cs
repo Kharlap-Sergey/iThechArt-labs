@@ -143,8 +143,8 @@ namespace Homeexchange.Services
             if (pw == null)
             {
                 var chat = 
-                    CreateChat($"{userService.FindById(member1).Nickname}" +
-                    $"/{userService.FindById(member2).Nickname}");
+                    CreateChat($"{userService.FindByIdAsync(member1).Nickname}" +
+                    $"/{userService.FindByIdAsync(member2).Nickname}");
 
                 pw = CreatePrivateRoom(chat.Id, member1, member2);
                 AddMemberToChat(chat.Id, member1);
