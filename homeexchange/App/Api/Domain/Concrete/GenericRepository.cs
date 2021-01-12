@@ -29,6 +29,11 @@ namespace Homeexchange.Domain.Concrete
             var entity = await _entities.FindAsync(id);
             return entity;
         }
+
+        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _entities.AsNoTracking().Where(predicate).ToList();
+        }
         public async Task<IEnumerable<TEntity>> GetAsync()
         {
             return await _entities.AsNoTracking().ToListAsync();

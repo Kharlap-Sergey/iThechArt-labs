@@ -10,6 +10,8 @@ namespace Homeexchange.Domain.Abstract
     {
         Task<TEntity> CreateAsync(TEntity item);
         Task<TEntity> GetByIdAsync(object id);
+
+        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
         Task<IEnumerable<TEntity>> GetAsync();
         Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate);
         Task<IEnumerable<TEntity>> GetAsync(

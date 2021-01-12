@@ -168,14 +168,15 @@ namespace Homeexchange.Services
         {
             var chats = await this.GetChatListAsync(userId);
 
-            var result = chats.Select(async chat => new ChatListItemResponse
+            var result = chats.Select(chat => new ChatListItemResponse
             {
                 Chat = chat,
-                LastMessage = (await chatMessageRepository.GetAsync(cm => cm.ChatId == chat.Id))
+                LastMessage = chatMessageRepository.Get(cm => cm.ChatId == chat.Id)
                                .OrderByDescending(cm => cm.PublicationDate)
                                .FirstOrDefault()
             });
-            return (IEnumerable<ChatListItemResponse>)result;
+            var res = result.ToList() as IEnumerable<ChatListItemResponse>;
+            return res;
         }
 
         public void AddSubscriber(int userId, string connection)

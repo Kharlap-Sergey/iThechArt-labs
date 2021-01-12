@@ -21,18 +21,18 @@ namespace Homeexchange.Api.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult GetNotifications()
+        public async Task<IActionResult> GetNotifications()
         {
             var targetUserId = GetCommitterId();
-            return Json(notificationService.GetAllNotificationForUserByUserIdAsync(targetUserId));
+            return Json(await notificationService.GetAllNotificationForUserByUserIdAsync(targetUserId));
         }
 
         [HttpDelete("{notificationId}")]
         [Authorize]
-        public IActionResult DeleteNotificaton(int notificationId)
+        public async Task<IActionResult> DeleteNotificaton(int notificationId)
         {
             int commiterId = GetCommitterId();
-            var not = Json(notificationService.DeleteAsync(notificationId, commiterId));
+            var not = Json(await notificationService.DeleteAsync(notificationId, commiterId));
             return not;
         }
 
