@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Homeexchange.Services;
 using Homeexchange.Models.ViewModels;
 using Homeexchange.Models.Requests;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers
 {
@@ -21,52 +22,52 @@ namespace Homeexchange.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Create([FromBody] Ad ad)
+        public async Task<IActionResult> Create([FromBody] Ad ad)
         {
             var authorId = GetCommitterId();
-            return Json(adService.Create(ad, authorId));
+            return Json(await adService.CreateAsync(ad, authorId));
         }
 
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var ad = adService.FindById(id);
+            var ad = await adService.FindByIdAsync(id);
             return Json(ad);
         }
 
         [HttpPost]
-        public IActionResult GetAdsPage([FromBody] GetAdsPageRequest request)
+        public async Task<IActionResult> GetAdsPage([FromBody] GetAdsPageRequest request)
         {
-            return Json(adService.GetAdsPage(request));
+            return Json(await adService.GetAdsPageAsync(request));
         }
 
         [HttpPost("{adId}")]
         [Authorize]
-        public IActionResult Reply(int adId)
+        public async Task<IActionResult> Reply(int adId)
         {
             var userId = GetCommitterId();
-            var responder = userService.FindByIdAsync(userId);
-            var ad = adService.FindById(adId);
-            return Json(adService.ReplyOnAd(ad, responder.Id));
+            var responder = await userService.FindByIdAsync(userId);
+            var ad = await adService.FindByIdAsync(adId);
+            return Json(await adService.ReplyOnAdAsync(ad, responder.Id));
         }
 
         [HttpDelete("{adId}")]
         [Authorize]
-        public IActionResult Delete(int adId)
+        public async Task<IActionResult> Delete(int adId)
         {
             var userId = GetCommitterId();
-            var committer = userService.FindByIdAsync(userId);
-            var ad = adService.Delete(adId, committer.Id);
+            var committer = await userService.FindByIdAsync(userId);
+            await adService.DeleteAsync(adId, committer.Id);
             return new OkResult();
         }
 
         [Authorize]
-        public IActionResult Update([FromBody] Ad ad)
+        public async Task<IActionResult> Update([FromBody] Ad ad)
         {
             var userId = GetCommitterId();
-            var committer = userService.FindByIdAsync(userId);
-            adService.Update(ad, committer.Id);
+            var committer = await userService.FindByIdAsync(userId);
+            await adService.UpdateAsync(ad, committer.Id);
 
             return Ok();
         }

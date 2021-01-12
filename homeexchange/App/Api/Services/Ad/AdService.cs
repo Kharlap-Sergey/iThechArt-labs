@@ -6,6 +6,7 @@ using Homeexchange.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
@@ -28,31 +29,31 @@ namespace Homeexchange.Services
             this.notificationService = notificationService;
         }
 
-        public Ad Create(Ad ad, int committerId)
+        public async Task<Ad> CreateAsync(Ad ad, int committerId)
         {
             var user = userContext.GetByIdAsync(committerId);
 
             ad.AuthorId = committerId;
             ad.DateOfPublication = DateTime.Now;
 
-            return adRepository.CreateAsync(ad);
+            return await adRepository.CreateAsync(ad);
         }
 
-        public Ad Delete(int adId, int committerId)
+        public async Task<Ad> DeleteAsync(int adId, int committerId)
         {
-            var ad = adRepository.GetByIdAsync(adId);
+            var ad = await adRepository.GetByIdAsync(adId);
 
             if (ad.AuthorId != committerId)
             {
                 throw new PermissionException("to remove an ad");
             }
 
-            return adRepository.RemoveAsync(ad);
+            return await adRepository.RemoveAsync(ad);
         }
 
-        public Ad FindById(int adId)
+        public async Task<Ad> FindByIdAsync(int adId)
         {
-            return adRepository.GetByIdAsync(adId);
+            return await adRepository.GetByIdAsync(adId);
         }
 
         static bool IsKeyWordPresent(Ad ad, User Author, string keyWord)
@@ -61,7 +62,7 @@ namespace Homeexchange.Services
         }
 
         
-        public AdsPage GetAdsPage(GetAdsPageRequest request)
+        public async Task<AdsPage> GetAdsPageAsync(GetAdsPageRequest request)
         {
             const int pageSize = 4;
             int pageNumber = request.Page;
@@ -78,7 +79,7 @@ namespace Homeexchange.Services
             specification.Conditions.Add(ad => searchString.Length == 0
                                                || searchString.Contains(ad.Author.City.ToLower()) 
                                                || searchString.Contains(ad.Author.Country.ToLower()));
-            var ads = adRepository
+            var ads = await adRepository
                 .GetAsync(specification);
 
             
@@ -93,17 +94,17 @@ namespace Homeexchange.Services
             return result;
         }
 
-        public Ad Update(Ad ad, int committerId)
+        public async Task<Ad> UpdateAsync(Ad ad, int committerId)
         {
             if (committerId != ad.AuthorId)
             {
                 throw new UnauthorizedAccessException("access denied");
             }
 
-            return adRepository.UpdateAsync(ad);
+            return await adRepository.UpdateAsync(ad);
         }
 
-        public Ad ReplyOnAd(Ad ad, int committerId, string message = "")
+        public async Task<Ad> ReplyOnAdAsync(Ad ad, int committerId, string message = "")
         {
             if(ad.IsResponded)
             {
@@ -121,7 +122,7 @@ namespace Homeexchange.Services
             notificationService.Create(notification);
 
             ad.IsResponded = true;
-            return adRepository.UpdateAsync(ad);
+            return await adRepository.UpdateAsync(ad);
         }
     }
 }
