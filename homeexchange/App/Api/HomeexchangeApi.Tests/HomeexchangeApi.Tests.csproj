@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api\HomeexchangeApi.csproj" />
+    <ProjectReference Include="..\HomeexchangeApi\HomeexchangeApi.csproj" />
   </ItemGroup>
 
 </Project>
