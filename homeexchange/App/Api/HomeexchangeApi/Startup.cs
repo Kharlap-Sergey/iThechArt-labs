@@ -22,7 +22,9 @@ namespace Homeexchange.Api
 {
     public class Startup
     {
-        private IConfiguration Configuration { get; }
+        private readonly IConfiguration Configuration;
+        private const string CHAT_HUB_ROUTE = "/hub/chat";
+        private const string NOTIFICATION_HUB_ROUTE = "/hub/notification";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -80,8 +82,8 @@ namespace Homeexchange.Api
 
                                 var path = context.HttpContext.Request.Path;
                                 if (!string.IsNullOrEmpty(accessToken) &&
-                                    (path.StartsWithSegments("/hub/notification")
-                                    | path.StartsWithSegments("/hub/chat"))
+                                    (path.StartsWithSegments(NOTIFICATION_HUB_ROUTE)
+                                    | path.StartsWithSegments(CHAT_HUB_ROUTE))
                                     )
                                 {
                                     context.Token = accessToken;
@@ -125,12 +127,14 @@ namespace Homeexchange.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<NotificationHub>("/hub/notification",
+                endpoints.MapHub<NotificationHub>(
+                    CHAT_HUB_ROUTE,
                     options =>
                     {
                         options.Transports = HttpTransportType.ServerSentEvents;
                     });
-                endpoints.MapHub<ChatHub>("/hub/chat",
+                endpoints.MapHub<ChatHub>(
+                    CHAT_HUB_ROUTE,
                     options =>
                     {
                         options.Transports = HttpTransportType.WebSockets;
