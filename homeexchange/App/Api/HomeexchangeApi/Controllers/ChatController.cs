@@ -8,17 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action = GetChatList}")]
-    public sealed class ChatController : Controller
+    public sealed class ChatController : BaseController
     {
         IChatService chatService;
-        IGenericRepository<ChatMessage> mesRep;
         public ChatController(
-            IGenericRepository<ChatMessage> mesRep,
             IChatService chatService
             )
         {
             this.chatService = chatService;
-            this.mesRep = mesRep;
         }
  
         [HttpGet]
@@ -46,9 +43,5 @@ namespace Homeexchange.Api.Controllers
             return Json(chatMessages);
         }
 
-        int GetCommitterId()
-        {
-            return int.Parse(User.Identity.Name);
-        }
     }
 }

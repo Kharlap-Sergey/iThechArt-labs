@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
-    public class NotificationController : Controller
+    public class NotificationController : BaseController
     {
         INotificationService notificationService;
         public NotificationController(
@@ -23,7 +23,7 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public IActionResult GetNotifications()
         {
-            var targetUserId = GetCommitter();
+            var targetUserId = GetCommitterId();
             return Json(notificationService.GetAllNotificationForUserByUserId(targetUserId));
         }
 
@@ -31,14 +31,10 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public IActionResult DeleteNotificaton(int notificationId)
         {
-            int commiterId = GetCommitter();
+            int commiterId = GetCommitterId();
             var not = Json(notificationService.Delete(notificationId, commiterId));
             return not;
         }
 
-        int GetCommitter()
-        {
-            return int.Parse(User.Identity.Name);
-        }
     }
 }

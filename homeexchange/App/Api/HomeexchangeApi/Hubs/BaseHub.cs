@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Homeexchange.Models.Exceptions;
 
 namespace Homeexchange.Api.Hubs
 {
@@ -8,7 +9,7 @@ namespace Homeexchange.Api.Hubs
         {
             if(Context.User.Identity == null)
             {
-                throw new AnauthorizedException();
+                throw new UnauthorizedException();
             }
             return int.Parse(Context.User.Identity.Name);
         }

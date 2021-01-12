@@ -8,7 +8,6 @@ namespace Homeexchange.Models.Entities
     {
         [Key]
         public int Id { set; get; }
-
         [ForeignKey("TargetId")]
         [Required]
         public int TargetId { set; get; }
@@ -17,7 +16,6 @@ namespace Homeexchange.Models.Entities
         [Required]
         public int CommitterId { set; get; }
         public User Committer { set; get; }
-
         [Required]
         public int Mark { set; get; }
     }

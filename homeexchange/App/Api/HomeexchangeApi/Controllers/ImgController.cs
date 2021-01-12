@@ -9,7 +9,7 @@ namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
 
-    public class ImgController : Controller
+    public class ImgController : BaseController
     {
         readonly IImgService imgService;
         readonly IWebHostEnvironment webHostEnviroment; 
@@ -27,7 +27,7 @@ namespace Homeexchange.Api.Controllers
         public IActionResult AddFileAsync(IFormCollection uploadedFiles)
         {
             IFormFile uploadedFile = uploadedFiles.Files.FirstOrDefault();
-            var file = imgService.Save(uploadedFile, GetUserId(), webHostEnviroment.WebRootPath);
+            var file = imgService.Save(uploadedFile, GetCommitterId(), webHostEnviroment.WebRootPath);
             var res = file.Result.Name;
             return Json(res);
         }
@@ -38,11 +38,6 @@ namespace Homeexchange.Api.Controllers
 
             PhysicalFileResult file = imgService.GetPrfileImg(userId, webHostEnviroment.WebRootPath);
             return file;
-        }
-
-        int GetUserId()
-        {
-            return int.Parse(User.Identity.Name);
         }
     }
 }

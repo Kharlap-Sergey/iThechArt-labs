@@ -7,7 +7,7 @@ using Homeexchange.Models.ViewModels;
 namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
-    public sealed class AccountController : Controller
+    public sealed class AccountController : BaseController
     {
         readonly IAccounService accounService;
         readonly IUserService userService;
@@ -40,7 +40,7 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public IActionResult Update([FromBody] User user)
         {
-            var commiterId = GetCommitter();
+            var commiterId = GetCommitterId();
             user = userService.Update(user, commiterId);
             return Json(user);
         }
@@ -56,13 +56,8 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public IActionResult Get()
         {
-            var userId = GetCommitter();
+            var userId = GetCommitterId();
             return Json(accounService.Reenter(userId));
-        }
-
-        int GetCommitter()
-        {
-            return int.Parse(User.Identity.Name);
         }
 
     }

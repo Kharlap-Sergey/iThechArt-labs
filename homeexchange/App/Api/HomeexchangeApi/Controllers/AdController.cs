@@ -7,7 +7,7 @@ using Homeexchange.Models.Requests;
 namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
-    public class AdController : Controller
+    public class AdController : BaseController
     {
         IUserService userService;
         IAdService adService;
@@ -23,7 +23,7 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public IActionResult Create([FromBody] Ad ad)
         {
-            var authorId = GetCommitter();
+            var authorId = GetCommitterId();
             return Json(adService.Create(ad, authorId));
         }
 
@@ -45,7 +45,7 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public IActionResult Reply(int adId)
         {
-            var userId = GetCommitter();
+            var userId = GetCommitterId();
             var responder = userService.FindById(userId);
             var ad = adService.FindById(adId);
             return Json(adService.ReplyOnAd(ad, responder.Id));
@@ -55,7 +55,7 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public IActionResult Delete(int adId)
         {
-            var userId = GetCommitter();
+            var userId = GetCommitterId();
             var committer = userService.FindById(userId);
             var ad = adService.Delete(adId, committer.Id);
             return new OkResult();
@@ -64,16 +64,11 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public IActionResult Update([FromBody] Ad ad)
         {
-            var userId = GetCommitter();
+            var userId = GetCommitterId();
             var committer = userService.FindById(userId);
             adService.Update(ad, committer.Id);
 
             return Ok();
-        }
-
-        int GetCommitter()
-        {
-            return int.Parse(User.Identity.Name);
         }
     }
 }

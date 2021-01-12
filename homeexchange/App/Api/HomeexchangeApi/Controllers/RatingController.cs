@@ -7,7 +7,7 @@ namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
 
-    public class RatingController : Controller
+    public class RatingController : BaseController
     {
         IRatingService ratingService;
         public RatingController(
@@ -28,14 +28,9 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public IActionResult Set([FromBody] RatingRequest request)
         {
-            int committerId = GetUserId();
+            int committerId = GetCommitterId();
             var res = ratingService.Set(request, committerId);
             return Json(res);   
-        }
-
-        int GetUserId()
-        {
-            return int.Parse(User.Identity.Name);
         }
     }
 }
