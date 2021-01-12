@@ -24,7 +24,7 @@ namespace Homeexchange.Api.Controllers
         public IActionResult GetNotifications()
         {
             var targetUserId = GetCommitterId();
-            return Json(notificationService.GetAllNotificationForUserByUserId(targetUserId));
+            return Json(notificationService.GetAllNotificationForUserByUserIdAsync(targetUserId));
         }
 
         [HttpDelete("{notificationId}")]
@@ -32,7 +32,7 @@ namespace Homeexchange.Api.Controllers
         public IActionResult DeleteNotificaton(int notificationId)
         {
             int commiterId = GetCommitterId();
-            var not = Json(notificationService.Delete(notificationId, commiterId));
+            var not = Json(notificationService.DeleteAsync(notificationId, commiterId));
             return not;
         }
 

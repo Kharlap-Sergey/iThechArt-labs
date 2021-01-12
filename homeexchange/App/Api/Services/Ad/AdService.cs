@@ -119,7 +119,7 @@ namespace Homeexchange.Services
                 ChatId = chat.Id,
                 Type = Notification.NotificationType.NewResponse
             };
-            notificationService.Create(notification);
+            notificationService.CreateAsync(notification);
 
             ad.IsResponded = true;
             return await adRepository.UpdateAsync(ad);

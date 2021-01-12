@@ -30,7 +30,7 @@ namespace Homeexchange.Api.Hubs
         {
             var chatMessage = chatService.AddMessageAsync(message, GetCommitterId());
 
-            var members = chatService.GetChatMembersIdAsync(message.ChatId);
+            var members = await chatService.GetChatMembersIdAsync(message.ChatId);
             var recievers = new List<string>();
             var subscribers = ChatHub.GetSubscribers();
             foreach (var memberId in members)

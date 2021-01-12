@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -24,19 +25,19 @@ namespace Homeexchange.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddFileAsync(IFormCollection uploadedFiles)
+        public async Task<IActionResult> AddFile(IFormCollection uploadedFiles)
         {
             IFormFile uploadedFile = uploadedFiles.Files.FirstOrDefault();
-            var file = imgService.SaveAsync(uploadedFile, GetCommitterId(), webHostEnviroment.WebRootPath);
-            var res = file.Result.Name;
+            var file = await imgService.SaveAsync(uploadedFile, GetCommitterId(), webHostEnviroment.WebRootPath);
+            var res = file.Name;
             return Json(res);
         }
 
         [HttpGet("{userId}")]
-        public IActionResult Get(int userId)
+        public async Task<IActionResult> Get(int userId)
         {
 
-            PhysicalFileResult file = imgService.GetPrfileImgAsync(userId, webHostEnviroment.WebRootPath);
+            PhysicalFileResult file = await imgService.GetPrfileImgAsync(userId, webHostEnviroment.WebRootPath);
             return file;
         }
     }

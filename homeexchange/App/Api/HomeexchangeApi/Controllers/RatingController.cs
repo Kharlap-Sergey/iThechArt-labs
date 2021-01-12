@@ -2,6 +2,7 @@
 using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers
 {
@@ -18,18 +19,18 @@ namespace Homeexchange.Api.Controllers
         }
 
         [HttpGet("{profileId}")]
-        public IActionResult Get(int profileId)
+        public async Task<IActionResult> Get(int profileId)
         {
-            var res = ratingService.Get(profileId);
+            var res = await ratingService.GetAsync(profileId);
             return Json(res);
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult Set([FromBody] RatingRequest request)
+        public async Task<IActionResult> Set([FromBody] RatingRequest request)
         {
             int committerId = GetCommitterId();
-            var res = ratingService.SetAsync(request, committerId);
+            var res = await ratingService.SetAsync(request, committerId);
             return Json(res);   
         }
     }

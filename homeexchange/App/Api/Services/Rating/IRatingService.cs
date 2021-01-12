@@ -1,6 +1,7 @@
 ﻿using Homeexchange.Models.Entities;
 using Homeexchange.Models.Requests;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
@@ -8,6 +9,6 @@ namespace Homeexchange.Services
     {
         public Task<IEnumerable<Rating>> GetAsync(int targetId);
 
-        public Rating SetAsync(RatingRequest request, int committerId);
+        public Task<Rating> SetAsync(RatingRequest request, int committerId);
     }
 }

@@ -125,7 +125,10 @@ namespace Homeexchange.Services
 
         public async Task<IEnumerable<ChatMessage>> GetChatMessagesAsync(int chatId, int commiterId)
         {
-            var chatMem = chatMemberRepository.GetAsync(cm => cm.ChatId == chatId && cm.UserId == commiterId).FirstOrDefault();
+            var chatMem = (await chatMemberRepository.GetAsync(cm => 
+                                                                    cm.ChatId == chatId 
+                                                                    && cm.UserId == commiterId))
+                          .FirstOrDefault();
             if (chatMem == null)
             {
                 throw new PermissionException("couldn't load not yours messages");
@@ -142,7 +145,10 @@ namespace Homeexchange.Services
                 member1 = member2;
                 member2 = temp;
             }
-            var pw = privateRoomRepository.GetAsync(pw => pw.Member1Id == member1 && pw.Member2Id == member2).FirstOrDefault();
+            var pw = (await privateRoomRepository.GetAsync(pw => 
+                                                        pw.Member1Id == member1 
+                                                        && pw.Member2Id == member2))
+                    .FirstOrDefault();
             if (pw == null)
             {
                 var chat = await
@@ -155,7 +161,7 @@ namespace Homeexchange.Services
             }
 
 
-            return chatRepository.GetByIdAsync(pw.ChatId);
+            return await chatRepository.GetByIdAsync(pw.ChatId);
         }
 
         public async Task<IEnumerable<ChatListItemResponse>> GetChatResponsesListAsync(int userId)

@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Homeexchange.Models.ViewModels;
 
 namespace Homeexchange.Services
 {
     public interface INotificationService
     {
-        public void Create(Notification notification);
+        public Task CreateAsync(Notification notification);
 
-        public Notification Delete(int notificationId, int commiterId);
-        public IEnumerable<Notification> GetAllNotificationForUserByUserId(int userID);
+        public Task<Notification> DeleteAsync(int notificationId, int commiterId);
+        public Task<IEnumerable<Notification>> GetAllNotificationForUserByUserIdAsync(int userID);
         
     }
 }
