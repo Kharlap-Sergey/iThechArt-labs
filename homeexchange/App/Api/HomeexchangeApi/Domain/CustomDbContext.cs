@@ -14,9 +14,8 @@ namespace HomeexchangeApi.Domain
         public CustomDbContext(DbContextOptions<CustomDbContext> options)
             : base(options)
         {
-           
             //Database.EnsureDeleted();
-            Database.EnsureCreated();   // создаем базу данных при первом обращении
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
