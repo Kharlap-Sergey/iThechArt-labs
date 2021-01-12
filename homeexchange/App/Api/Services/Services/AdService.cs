@@ -3,6 +3,7 @@ using Homeexchange.Domain.Abstract;
 using Homeexchange.Models.Exceptions;
 using Homeexchange.Models.Requests;
 using Homeexchange.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -58,21 +59,6 @@ namespace Homeexchange.Services
         {
             return keyWord =="" || keyWord == Author.City.ToLower() || keyWord == Author.Country.ToLower();
         }
-        static bool IsMatchToSearchString(Ad ad, User author, string searchString)
-        {
-            searchString = searchString.ToLower();
-            var keyWords = searchString.Split();
-            if (keyWords.Length == 0) return true;
-            bool res = false;
-
-            foreach(var keyWord in keyWords)
-            {
-                if (res) break;
-
-                res = IsKeyWordPresent(ad, author, keyWord);
-            }
-            return res;
-        }
 
         
         public AdsPage GetAdsPage(GetAdsPageRequest request)
@@ -81,14 +67,6 @@ namespace Homeexchange.Services
             int pageNumber = request.Page;
             AdFilter adFilter = request.Filter;
             string searchString = request.SearchString;
-            bool IsMatch(Ad ad)
-            {
-                IsMatchToSearchString(
-                    ad,
-                    userContext.GetById(ad.AuthorId),
-                    searchString);
-                return !ad.IsResponded;
-            };
 
             var specification = new Specification<Ad>();
             specification.Skip = (pageNumber - 1) * pageSize;
@@ -97,9 +75,13 @@ namespace Homeexchange.Services
             specification.Conditions.Add(ad => !ad.IsResponded);
             specification.Conditions.Add(ad => adFilter.AuthorId == null || ad.AuthorId == adFilter.AuthorId);
             specification.Conditions.Add(ad => adFilter.Types.Count == 0 || adFilter.Types.Contains(ad.Type));
+            specification.Conditions.Add(ad => searchString.Length == 0
+                                               || searchString.Contains(ad.Author.City.ToLower()) 
+                                               || searchString.Contains(ad.Author.Country.ToLower()));
             var ads = adRepository
                 .Get(specification);
 
+            
             var pageInfo = new PagingInfo(ads.Count(), pageNumber, pageSize);
             var result = new AdsPage
             {

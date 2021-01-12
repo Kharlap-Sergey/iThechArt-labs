@@ -63,4 +63,5 @@ namespace Homeexchange.Domain
             return query;
         }
     }
+
 }
