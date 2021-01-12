@@ -30,29 +30,29 @@ namespace Homeexchange.Services
 
         public Ad Create(Ad ad, int committerId)
         {
-            var user = userContext.GetById(committerId);
+            var user = userContext.GetByIdAsync(committerId);
 
             ad.AuthorId = committerId;
             ad.DateOfPublication = DateTime.Now;
 
-            return adRepository.Create(ad);
+            return adRepository.CreateAsync(ad);
         }
 
         public Ad Delete(int adId, int committerId)
         {
-            var ad = adRepository.GetById(adId);
+            var ad = adRepository.GetByIdAsync(adId);
 
             if (ad.AuthorId != committerId)
             {
                 throw new PermissionException("to remove an ad");
             }
 
-            return adRepository.Remove(ad);
+            return adRepository.RemoveAsync(ad);
         }
 
         public Ad FindById(int adId)
         {
-            return adRepository.GetById(adId);
+            return adRepository.GetByIdAsync(adId);
         }
 
         static bool IsKeyWordPresent(Ad ad, User Author, string keyWord)
@@ -79,7 +79,7 @@ namespace Homeexchange.Services
                                                || searchString.Contains(ad.Author.City.ToLower()) 
                                                || searchString.Contains(ad.Author.Country.ToLower()));
             var ads = adRepository
-                .Get(specification);
+                .GetAsync(specification);
 
             
             var pageInfo = new PagingInfo(ads.Count(), pageNumber, pageSize);
@@ -100,7 +100,7 @@ namespace Homeexchange.Services
                 throw new UnauthorizedAccessException("access denied");
             }
 
-            return adRepository.Update(ad);
+            return adRepository.UpdateAsync(ad);
         }
 
         public Ad ReplyOnAd(Ad ad, int committerId, string message = "")
@@ -121,7 +121,7 @@ namespace Homeexchange.Services
             notificationService.Create(notification);
 
             ad.IsResponded = true;
-            return adRepository.Update(ad);
+            return adRepository.UpdateAsync(ad);
         }
     }
 }

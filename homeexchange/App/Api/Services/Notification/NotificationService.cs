@@ -29,25 +29,25 @@ namespace Homeexchange.Services
         }
         public void Create(Notification notification)
         {
-            var notif = notificationRepository.Create(notification);
+            var notif = notificationRepository.CreateAsync(notification);
             NotifySubscribers(notif);
         }
 
         public IEnumerable<Notification> GetAllNotificationForUserByUserId(int userID)
         {
-            return notificationRepository.Get(n => n.TargetUserId == userID);
+            return notificationRepository.GetAsync(n => n.TargetUserId == userID);
         }
 
         public Notification Delete(int notificationId, int commiterId)
         {
-            var notification = notificationRepository.GetById(notificationId);
+            var notification = notificationRepository.GetByIdAsync(notificationId);
 
             if(commiterId != notification.TargetUserId)
             {
                 throw new PermissionException("this isn't your notification");
             }
 
-            return notificationRepository.Remove(notification);
+            return notificationRepository.RemoveAsync(notification);
         }
     }
 }

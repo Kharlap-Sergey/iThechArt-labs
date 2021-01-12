@@ -28,7 +28,7 @@ namespace Homeexchange.Services
            
             // создаем JWT-токен
             var encodedJwt = CustomJWTCreator.CreateJWT(identity);
-            User user = userRepository.Get(u => u.Email == account.Login).FirstOrDefault();
+            User user = userRepository.GetAsync(u => u.Email == account.Login).FirstOrDefault();
 
             var response = new LoginResponse
             {
@@ -40,7 +40,7 @@ namespace Homeexchange.Services
 
         public LoginResponse Reenter(int userId)
         {
-            var user = userRepository.GetById(userId);
+            var user = userRepository.GetByIdAsync(userId);
             var account = new Account { 
                 Login = user.Email
                 ,Password = user.Password 
@@ -53,7 +53,7 @@ namespace Homeexchange.Services
         {
             try
             {
-                return userRepository.Create(user);
+                return userRepository.CreateAsync(user);
             }
             catch (DbUpdateException e)
             {
@@ -70,7 +70,7 @@ namespace Homeexchange.Services
 
         private ClaimsIdentity GetIdentity(Account account)
         {
-            var person = userRepository.Get(u => u.Email == account.Login
+            var person = userRepository.GetAsync(u => u.Email == account.Login
             && u.Password == account.Password).FirstOrDefault();
             if (person == null)
             {
