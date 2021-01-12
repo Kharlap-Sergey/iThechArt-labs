@@ -111,8 +111,8 @@ namespace Homeexchange.Services
                 throw new AdAlreadyHasBeenRepliedException($"the ad alreade has been responded");
             }
 
-            var chat = chatService.GetChatOrCreateForTowMembers(committerId, ad.AuthorId);
-            var chatMess = chatService.AddReply(chat.Id, committerId, $"{ad.Id}");
+            var chat = chatService.GetChatOrCreateForTowMembersAsync(committerId, ad.AuthorId);
+            var chatMess = chatService.AddReplyAsync(chat.Id, committerId, $"{ad.Id}");
             var notification = new Notification
             {
                 TargetUserId = ad.AuthorId,

@@ -28,9 +28,9 @@ namespace Homeexchange.Api.Hubs
 
         public async Task Send(MessageRequest message)
         {
-            var chatMessage = chatService.AddMessage(message, GetCommitterId());
+            var chatMessage = chatService.AddMessageAsync(message, GetCommitterId());
 
-            var members = chatService.GetChatMembersId(message.ChatId);
+            var members = chatService.GetChatMembersIdAsync(message.ChatId);
             var recievers = new List<string>();
             var subscribers = ChatHub.GetSubscribers();
             foreach (var memberId in members)

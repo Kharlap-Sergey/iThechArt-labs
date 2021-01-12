@@ -23,7 +23,7 @@ namespace Homeexchange.Api.Controllers
         public IActionResult GetChatList()
         {
             var userId = GetCommitterId();
-            var chatList = chatService.GetChatResponsesList(userId); 
+            var chatList = chatService.GetChatResponsesListAsync(userId); 
             return Json(chatList);
         }
 
@@ -31,7 +31,7 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public IActionResult GetPrivateRoomId([FromBody]GetPrivateRoomIdRequest request)
         {
-            var chat= chatService.GetChatOrCreateForTowMembers(request.Member1Id, request.Member2Id);
+            var chat= chatService.GetChatOrCreateForTowMembersAsync(request.Member1Id, request.Member2Id);
             return Json(chat.Id);
         }
 
@@ -39,7 +39,7 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public IActionResult GetChatMessages(int chatId)
         {
-            var chatMessages = chatService.GetChatMessages(chatId, GetCommitterId());
+            var chatMessages = chatService.GetChatMessagesAsync(chatId, GetCommitterId());
             return Json(chatMessages);
         }
 

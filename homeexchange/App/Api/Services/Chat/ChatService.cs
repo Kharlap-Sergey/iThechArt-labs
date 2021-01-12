@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
@@ -37,7 +38,7 @@ namespace Homeexchange.Services
             this.userService = userService;
         }
 
-        public void AddMemberToChat(int chatId, int memberId)
+        public void AddMemberToChatAsync(int chatId, int memberId)
         {
             var chatMember = new ChatMember { ChatId = chatId, UserId = memberId };
             chatMemberRepository.CreateAsync(chatMember);
@@ -45,7 +46,7 @@ namespace Homeexchange.Services
 
         public async void SendMessageToChat(ChatMessage message)
         {
-            var members = GetChatMembersId(message.ChatId);
+            var members = await GetChatMembersIdAsync(message.ChatId);
             var recievers = new List<string>();
             var subscribers = ChatService.Subscribers;//ChatHub.GetSubscribers();
             foreach (var memberId in members)
@@ -59,13 +60,13 @@ namespace Homeexchange.Services
             await this.chatHubContext.Clients.Clients(recievers).SendAsync("Recieve", message);
         }
 
-        private ChatMessage AddChatMessage(ChatMessage message)
+        private async Task<ChatMessage> AddChatMessageAsync(ChatMessage message)
         {
-            var chatMessage = chatMessageRepository.CreateAsync(message);
+            var chatMessage = await chatMessageRepository.CreateAsync(message);
             SendMessageToChat(chatMessage);
             return chatMessage;
         }
-        public ChatMessage AddMessage(MessageRequest message, int comnitterId)
+        public async Task<ChatMessage> AddMessageAsync(MessageRequest message, int comnitterId)
         {
             var chatMessage = new ChatMessage
             {
@@ -75,10 +76,10 @@ namespace Homeexchange.Services
                 PublicationDate = DateTime.Now
             };
 
-            return AddChatMessage(chatMessage);
+            return await AddChatMessageAsync(chatMessage);
         }
 
-        public ChatMessage AddReply(int chatId, int comnitterId, string message)
+        public async Task<ChatMessage> AddReplyAsync(int chatId, int comnitterId, string message)
         {
             var chatMessage = new ChatMessage
             {
@@ -88,15 +89,15 @@ namespace Homeexchange.Services
                 PublicationDate = DateTime.Now
             };
 
-            return AddChatMessage(chatMessage);
+            return await AddChatMessageAsync(chatMessage);
         }
 
-        public Chat CreateChat(string title)
+        public async Task<Chat> CreateChatAsync(string title)
         {
-            return chatRepository.CreateAsync(new Chat { Title = title });
+            return await chatRepository.CreateAsync(new Chat { Title = title });
         }
 
-        public PrivateRoom CreatePrivateRoom(int chatId, int member1, int member2)
+        public async Task<PrivateRoom> CreatePrivateRoomAsync(int chatId, int member1, int member2)
         {
             var privateRoom = new PrivateRoom
             {
@@ -105,33 +106,35 @@ namespace Homeexchange.Services
                 ChatId = chatId
             };
 
-            return privateRoomRepository.CreateAsync(privateRoom);
+            return await privateRoomRepository.CreateAsync(privateRoom);
         }
 
-        public IEnumerable<Chat> GetChatList(int userId)
+        public async Task<IEnumerable<Chat>> GetChatListAsync(int userId)
         {
-            var chatIds = chatMemberRepository.GetAsync(cm => cm.UserId == userId).Select(cm => cm.ChatId);
-            return chatRepository.GetAsync().Where(chat => chatIds.Contains(chat.Id));
+            var chatIds = (await chatMemberRepository.GetAsync(cm => cm.UserId == userId))
+                          .Select(cm => cm.ChatId);
+            return (await chatRepository.GetAsync())
+                    .Where(chat => chatIds.Contains(chat.Id)).ToList();
         }
 
-        public IEnumerable<int> GetChatMembersId(int chatId)
+        public async Task<IEnumerable<int>> GetChatMembersIdAsync(int chatId)
         {
-            var members = chatMemberRepository.GetAsync(cm => cm.ChatId == chatId);
+            var members = await chatMemberRepository.GetAsync(cm => cm.ChatId == chatId);
             return members.Select(cm => cm.UserId);
         }
 
-        public IEnumerable<ChatMessage> GetChatMessages(int chatId, int commiterId)
+        public async Task<IEnumerable<ChatMessage>> GetChatMessagesAsync(int chatId, int commiterId)
         {
             var chatMem = chatMemberRepository.GetAsync(cm => cm.ChatId == chatId && cm.UserId == commiterId).FirstOrDefault();
             if (chatMem == null)
             {
                 throw new PermissionException("couldn't load not yours messages");
             }
-            var result = chatMessageRepository.GetAsync(m => m.ChatId == chatId);
+            var result = await chatMessageRepository.GetAsync(m => m.ChatId == chatId);
             return result;
         }
 
-        public Chat GetChatOrCreateForTowMembers(int member1, int member2)
+        public async Task<Chat> GetChatOrCreateForTowMembersAsync(int member1, int member2)
         {
             if (member1 > member2)
             {
@@ -142,29 +145,31 @@ namespace Homeexchange.Services
             var pw = privateRoomRepository.GetAsync(pw => pw.Member1Id == member1 && pw.Member2Id == member2).FirstOrDefault();
             if (pw == null)
             {
-                var chat = 
-                    CreateChat($"{userService.FindByIdAsync(member1).Nickname}" +
-                    $"/{userService.FindByIdAsync(member2).Nickname}");
+                var chat = await
+                    CreateChatAsync($"{(await userService.FindByIdAsync(member1)).Nickname}" +
+                    $"/{(await userService.FindByIdAsync(member2)).Nickname}");
 
-                pw = CreatePrivateRoom(chat.Id, member1, member2);
-                AddMemberToChat(chat.Id, member1);
-                if (member1 != member2) AddMemberToChat(chat.Id, member2);
+                pw = await CreatePrivateRoomAsync(chat.Id, member1, member2);
+                AddMemberToChatAsync(chat.Id, member1);
+                if (member1 != member2) AddMemberToChatAsync(chat.Id, member2);
             }
 
 
             return chatRepository.GetByIdAsync(pw.ChatId);
         }
 
-        public IEnumerable<ChatListItemResponse> GetChatResponsesList(int userId)
+        public async Task<IEnumerable<ChatListItemResponse>> GetChatResponsesListAsync(int userId)
         {
-            var chats = this.GetChatList(userId);
-            return chats.Select(chat => new ChatListItemResponse
+            var chats = await this.GetChatListAsync(userId);
+
+            var result = chats.Select(async chat => new ChatListItemResponse
             {
                 Chat = chat,
-                LastMessage = chatMessageRepository.GetAsync(cm => cm.ChatId == chat.Id)
-                    .OrderByDescending(cm => cm.PublicationDate)
-                    .FirstOrDefault()
+                LastMessage = (await chatMessageRepository.GetAsync(cm => cm.ChatId == chat.Id))
+                               .OrderByDescending(cm => cm.PublicationDate)
+                               .FirstOrDefault()
             });
+            return (IEnumerable<ChatListItemResponse>)result;
         }
 
         public void AddSubscriber(int userId, string connection)
@@ -174,7 +179,7 @@ namespace Homeexchange.Services
 
         public void RemoveSubscriber(int userId)
         {
-            if(ChatService.Subscribers.ContainsKey(userId)) ChatService.Subscribers.Remove(userId);
+            if (ChatService.Subscribers.ContainsKey(userId)) ChatService.Subscribers.Remove(userId);
         }
     }
 }
