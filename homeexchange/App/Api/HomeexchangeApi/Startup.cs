@@ -116,7 +116,8 @@ namespace Homeexchange.Api
             app.UseRouting();
 
             //include CORS
-            app.UseCors(builder => builder.WithOrigins(Configuration["Cors:AvailabelHosts"]).AllowCredentials()
+            string host = Configuration["Cors:AvailabelHosts"];
+            app.UseCors(builder => builder.WithOrigins(host).AllowCredentials()
                             .AllowAnyMethod()
                             .AllowAnyHeader());
 
@@ -128,7 +129,7 @@ namespace Homeexchange.Api
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<NotificationHub>(
-                    CHAT_HUB_ROUTE,
+                    NOTIFICATION_HUB_ROUTE,
                     options =>
                     {
                         options.Transports = HttpTransportType.ServerSentEvents;

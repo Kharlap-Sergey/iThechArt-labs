@@ -63,7 +63,7 @@ namespace Homeexchange.Services
         private async Task<ChatMessage> AddChatMessageAsync(ChatMessage message)
         {
             var chatMessage = await chatMessageRepository.CreateAsync(message);
-            SendMessageToChat(chatMessage);
+            //SendMessageToChat(chatMessage);
             return chatMessage;
         }
         public async Task<ChatMessage> AddMessageAsync(MessageRequest message, int comnitterId)
@@ -120,7 +120,7 @@ namespace Homeexchange.Services
         public async Task<IEnumerable<int>> GetChatMembersIdAsync(int chatId)
         {
             var members = await chatMemberRepository.GetAsync(cm => cm.ChatId == chatId);
-            return members.Select(cm => cm.UserId);
+            return members.Select(cm => cm.UserId).ToList();
         }
 
         public async Task<IEnumerable<ChatMessage>> GetChatMessagesAsync(int chatId, int commiterId)
