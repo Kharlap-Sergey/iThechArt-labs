@@ -76,22 +76,24 @@ namespace HomeexchangeApi.Services
         }
         public AdsPage GetAdsPage(GetAdsPageRequest request)
         {
-            int page = request.Page;
+            const int pageSize = 4;
+            int pageNumber = request.Page;
             AdFilter adFilter = request.Filter;
             string searchString = request.SearchString;
-            int pageSize = 4;
 
             var ads = adRepository
-                .GetPart((page - 1) * pageSize, pageSize, ad => !ad.IsResponded && ad.IsMatch(adFilter) 
+                .GetPart((pageNumber - 1) * pageSize, pageSize, ad => !ad.IsResponded && ad.IsMatch(adFilter) 
                                            && IsMatchToSearchString(
                                                 ad,
                                                 userContext.GetById(ad.AuthorId),
                                                 searchString))
                 .OrderByDescending(ad => ad.DateOfPublication).ToList();
+
+            var pageInfo = new PagingInfo(ads.Count(), pageNumber, pageSize);
             var result = new AdsPage
             {
-                HasNext = ads.Count > (page - 1) * pageSize + ads.Count(),
-                HasPrevious = (page - 1) * pageSize > 0,
+                HasNext = pageInfo.HasNextPage,
+                HasPrevious = pageInfo.HasPreviousPage,
                 Ads = ads
             };
 
