@@ -7,8 +7,6 @@ namespace Homeexchange.Models.ViewModels
     {
         [JsonPropertyName("type")]
         public List<Ad.AdType> Types { set; get; }
-
-        [JsonPropertyName("authorId")]
         public int? AuthorId { set; get; }
     }
 }

@@ -18,16 +18,13 @@ namespace Homeexchange.Models.ViewModels
         [JsonPropertyName("lastname")]
         public string Lastname { get; set; }
         [Required]
-        [JsonPropertyName("email")]
         public string Email { get; set; }
         [Required]
-        [JsonPropertyName("nickname")]
         public string Nickname { get; set; }
         [Required]
         public string Password { get; set; }
 
         [Required]
-        [JsonPropertyName("language")]
         public string Languages { get; set; }
 
         public string Country { get; set; }
@@ -44,7 +41,6 @@ namespace Homeexchange.Models.ViewModels
             new List<Notification>();
 
         [Required]
-        [JsonPropertyName("ProfileImgId")]
         public int ProfileImgId { get; set; }
         [NotMapped]
         public Img ProfileImg { set; get; }

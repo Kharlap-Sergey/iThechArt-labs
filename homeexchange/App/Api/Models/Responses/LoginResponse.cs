@@ -8,7 +8,6 @@ namespace Homeexchange.Responses
         [JsonPropertyName("jwt")]
         public string JWT { set; get; }
 
-        [JsonPropertyName("user")]
         public User User { set; get; }
     }
 }
