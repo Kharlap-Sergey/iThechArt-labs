@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace Homeexchange.Api.Hubs
 {
     [Authorize]
-    public class ChatHub : Hub
+    public sealed class ChatHub : BaseHub
     {
-        static Dictionary<int, string> Subscribers = new Dictionary<int, string>();
+        private static Dictionary<int, string> Subscribers = new Dictionary<int, string>();
 
-        IChatService chatService;
+        private readonly IChatService chatService;
         public ChatHub(
             IChatService chatService
             )
@@ -32,7 +32,7 @@ namespace Homeexchange.Api.Hubs
 
             var members = chatService.GetChatMembersId(message.ChatId);
             var recievers = new List<string>();
-            var subscribers = Subscribers;//ChatHub.GetSubscribers();
+            var subscribers = ChatHub.GetSubscribers();
             foreach (var memberId in members)
             {
                 if (subscribers.ContainsKey(memberId))
@@ -46,7 +46,7 @@ namespace Homeexchange.Api.Hubs
 
         public override async Task OnConnectedAsync()
         {
-            int userId = int.Parse(Context.User.Identity.Name);
+            int userId = GetCommitterId();
             string connectionId = this.Context.ConnectionId;
             Subscribers[userId] = connectionId;
             chatService.AddSubscriber(userId, connectionId);
@@ -54,16 +54,12 @@ namespace Homeexchange.Api.Hubs
         }
         public override async Task OnDisconnectedAsync(Exception e)
         {
-            int userId = int.Parse(Context.User.Identity.Name);
-            
-            if(Subscribers.ContainsKey(userId)) Subscribers.Remove(userId);
+            int userId = GetCommitterId();
+
+            if (Subscribers.ContainsKey(userId)) Subscribers.Remove(userId);
             chatService.RemoveSubscriber(userId);
 
             await base.OnDisconnectedAsync(e);
-        }
-        int GetCommitterId()
-        {
-            return int.Parse(Context.User.Identity.Name);
         }
     }
 }
