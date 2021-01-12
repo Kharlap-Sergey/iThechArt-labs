@@ -1,4 +1,5 @@
-﻿using Homeexchange.Domain.Abstract;
+﻿using Homeexchange.Domain;
+using Homeexchange.Domain.Abstract;
 using Homeexchange.Models.Exceptions;
 using Homeexchange.Models.Requests;
 using Homeexchange.Models.ViewModels;
@@ -72,20 +73,32 @@ namespace Homeexchange.Services
             }
             return res;
         }
+
+        
         public AdsPage GetAdsPage(GetAdsPageRequest request)
         {
             const int pageSize = 4;
             int pageNumber = request.Page;
             AdFilter adFilter = request.Filter;
             string searchString = request.SearchString;
+            bool IsMatch(Ad ad)
+            {
+                IsMatchToSearchString(
+                    ad,
+                    userContext.GetById(ad.AuthorId),
+                    searchString);
+                return !ad.IsResponded;
+            };
 
+            var specification = new Specification<Ad>();
+            specification.Skip = (pageNumber - 1) * pageSize;
+            specification.Take = pageSize;
+            specification.OrderBy = ads => ads.OrderByDescending(ad => ad.DateOfPublication);
+            specification.Conditions.Add(ad => !ad.IsResponded);
+            specification.Conditions.Add(ad => adFilter.AuthorId == null || ad.AuthorId == adFilter.AuthorId);
+            specification.Conditions.Add(ad => adFilter.Types.Count == 0 || adFilter.Types.Contains(ad.Type));
             var ads = adRepository
-                .GetPart((pageNumber - 1) * pageSize, pageSize, ad => !ad.IsResponded && ad.IsMatch(adFilter) 
-                                           && IsMatchToSearchString(
-                                                ad,
-                                                userContext.GetById(ad.AuthorId),
-                                                searchString))
-                .OrderByDescending(ad => ad.DateOfPublication).ToList();
+                .Get(specification);
 
             var pageInfo = new PagingInfo(ads.Count(), pageNumber, pageSize);
             var result = new AdsPage

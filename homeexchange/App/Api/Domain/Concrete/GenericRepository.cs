@@ -3,8 +3,8 @@ using Homeexchange.Domain.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
+using Homeexchange.Domain;
 
 namespace Homeexchange.Domain.Concrete
 {
@@ -59,9 +59,15 @@ namespace Homeexchange.Domain.Concrete
                 return query.ToList();
             }
         }
-        public IEnumerable<TEntity> GetPart(int skip, int take, Expression<Func<TEntity, bool>> predicate)
+         public IEnumerable<TEntity> Get(Specification<TEntity> specification)
         {
-            return _entities.AsNoTracking().Where(predicate).Skip(skip).Take(take).ToList();
+            IQueryable<TEntity> query = _entities.AsNoTracking();
+            if (specification != null)
+            {
+                query = query.GetSpecifiedQuery<TEntity>(specification);
+            }
+            //return _entities.AsNoTracking().Where(predicate).Skip(skip).Take(take).ToList();
+            return query;
         }
         
         public IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
