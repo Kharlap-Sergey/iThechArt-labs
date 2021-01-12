@@ -6,8 +6,8 @@ namespace Homeexchange.Services
 {
     public interface IRatingService
     {
-        public IEnumerable<Rating> Get(int targetId);
+        public Task<IEnumerable<Rating>> GetAsync(int targetId);
 
-        public Rating Set(RatingRequest request, int committerId);
+        public Rating SetAsync(RatingRequest request, int committerId);
     }
 }

@@ -3,6 +3,7 @@ using Homeexchange.Models.Entities;
 using Homeexchange.Models.Requests;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
@@ -17,20 +18,21 @@ namespace Homeexchange.Services
             this.ratingRepository = ratingRepository;
         }
 
-        public IEnumerable<Rating> Get(int targetId)
+        public async Task<IEnumerable<Rating>> GetAsync(int targetId)
         {
-            return ratingRepository.GetAsync(r => r.TargetId == targetId);
+            return await ratingRepository.GetAsync(r => r.TargetId == targetId);
         }
 
-        public Rating Set(RatingRequest request, int committerId)
+        public async Task<Rating> SetAsync(RatingRequest request, int committerId)
         {
-            var rate = ratingRepository
-                .GetAsync(r => r.TargetId == request.TargetId && r.CommitterId == committerId)
+            var rate = 
+                (await ratingRepository
+                    .GetAsync(r => r.TargetId == request.TargetId && r.CommitterId == committerId))
                 .FirstOrDefault();
 
             if(rate is null)
             {
-                rate = ratingRepository.CreateAsync(new Rating
+                rate = await  ratingRepository.CreateAsync(new Rating
                 {
                     TargetId = request.TargetId,
                     CommitterId = committerId,
@@ -40,7 +42,7 @@ namespace Homeexchange.Services
             else
             {
                 rate.Mark = request.Mark;
-                rate = ratingRepository.Update(rate);
+                rate = await ratingRepository.UpdateAsync(rate);
             }
 
 

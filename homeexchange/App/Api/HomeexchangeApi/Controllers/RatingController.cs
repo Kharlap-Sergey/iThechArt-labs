@@ -29,7 +29,7 @@ namespace Homeexchange.Api.Controllers
         public IActionResult Set([FromBody] RatingRequest request)
         {
             int committerId = GetCommitterId();
-            var res = ratingService.Set(request, committerId);
+            var res = ratingService.SetAsync(request, committerId);
             return Json(res);   
         }
     }
