@@ -23,16 +23,16 @@ namespace Homeexchange.Services
             this.imgRepository = imgRepository;
             this.userRepository = userRepository;
         }
-        public PhysicalFileResult GetPrfileImg(int targetUserId, string webRootPath)
+        public async Task<PhysicalFileResult> GetPrfileImgAsync(int targetUserId, string webRootPath)
         {
-            var user = userRepository.GetByIdAsync(targetUserId);
+            var user = await userRepository.GetByIdAsync(targetUserId);
             int imgId = user.ProfileImgId;
             if(imgId <= 0)
             {
                 throw new ImgNotFoundException("coldn't find the profile img");
             }
 
-            var img = imgRepository.GetAsync(i => i.Id == imgId).FirstOrDefault();
+            var img = (await imgRepository.GetAsync(i => i.Id == imgId)).FirstOrDefault();
             var path = img.Path;
 
             using (var fileStream = new FileStream(webRootPath + path, FileMode.Open))
@@ -44,7 +44,7 @@ namespace Homeexchange.Services
             throw new Exception();
         }
 
-        public async Task<IFormFile> Save(IFormFile formFIle, int commiterId, string webRootPath)
+        public async Task<IFormFile> SaveAsync(IFormFile formFIle, int commiterId, string webRootPath)
         {
             if (formFIle != null)
             {
@@ -57,10 +57,11 @@ namespace Homeexchange.Services
                 }
 
                 var imgEnt = new Img { Title = "profile", Path = path };
-                var user = userRepository.GetAsync(u => u.Id == commiterId).FirstOrDefault();
-                imgEnt = imgRepository.CreateAsync(imgEnt);
+                var user = (await userRepository.GetAsync(u => u.Id == commiterId))
+                           .FirstOrDefault();
+                imgEnt = await imgRepository.CreateAsync(imgEnt);
                 user.ProfileImgId = imgEnt.Id;
-                userRepository.Update(user);
+                await userRepository.UpdateAsync(user);
             }
 
             return formFIle;

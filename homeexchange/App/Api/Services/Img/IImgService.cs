@@ -6,7 +6,7 @@ namespace Homeexchange.Services
 {
     public interface IImgService
     {
-        public Task<IFormFile> Save(IFormFile formFIle, int commiterId, string webRootPath);
-        public PhysicalFileResult GetPrfileImg(int targetUserId, string webRootPath);
+        public Task<IFormFile> SaveAsync(IFormFile formFIle, int commiterId, string webRootPath);
+        public Task<PhysicalFileResult> GetPrfileImgAsync(int targetUserId, string webRootPath);
     }
 }

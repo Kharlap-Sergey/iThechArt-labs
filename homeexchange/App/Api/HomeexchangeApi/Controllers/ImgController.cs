@@ -27,7 +27,7 @@ namespace Homeexchange.Api.Controllers
         public IActionResult AddFileAsync(IFormCollection uploadedFiles)
         {
             IFormFile uploadedFile = uploadedFiles.Files.FirstOrDefault();
-            var file = imgService.Save(uploadedFile, GetCommitterId(), webHostEnviroment.WebRootPath);
+            var file = imgService.SaveAsync(uploadedFile, GetCommitterId(), webHostEnviroment.WebRootPath);
             var res = file.Result.Name;
             return Json(res);
         }
@@ -36,7 +36,7 @@ namespace Homeexchange.Api.Controllers
         public IActionResult Get(int userId)
         {
 
-            PhysicalFileResult file = imgService.GetPrfileImg(userId, webHostEnviroment.WebRootPath);
+            PhysicalFileResult file = imgService.GetPrfileImgAsync(userId, webHostEnviroment.WebRootPath);
             return file;
         }
     }
