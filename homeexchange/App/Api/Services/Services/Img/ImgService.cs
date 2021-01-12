@@ -25,14 +25,14 @@ namespace Homeexchange.Services
         }
         public PhysicalFileResult GetPrfileImg(int targetUserId, string webRootPath)
         {
-            var user = userRepository.GetByIdAsync(targetUserId);
+            var user = userRepository.GetById(targetUserId);
             int imgId = user.ProfileImgId;
             if(imgId <= 0)
             {
                 throw new ImgNotFoundException("coldn't find the profile img");
             }
 
-            var img = imgRepository.GetAsync(i => i.Id == imgId).FirstOrDefault();
+            var img = imgRepository.Get(i => i.Id == imgId).FirstOrDefault();
             var path = img.Path;
 
             using (var fileStream = new FileStream(webRootPath + path, FileMode.Open))
@@ -57,8 +57,8 @@ namespace Homeexchange.Services
                 }
 
                 var imgEnt = new Img { Title = "profile", Path = path };
-                var user = userRepository.GetAsync(u => u.Id == commiterId).FirstOrDefault();
-                imgEnt = imgRepository.CreateAsync(imgEnt);
+                var user = userRepository.Get(u => u.Id == commiterId).FirstOrDefault();
+                imgEnt = imgRepository.Create(imgEnt);
                 user.ProfileImgId = imgEnt.Id;
                 userRepository.Update(user);
             }
