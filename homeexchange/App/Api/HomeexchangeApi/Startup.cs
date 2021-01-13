@@ -11,10 +11,6 @@ using Homeexchange.GlobalErrorHandling;
 using Homeexchange.Api.Configuration;
 using System;
 using System.Linq;
-using System.Collections.Generic;
-using System.Reflection;
-using System.IO;
-using Homeexchange.Services;
 
 namespace Homeexchange.Api
 {
@@ -31,15 +27,8 @@ namespace Homeexchange.Api
         public void ConfigureServices(IServiceCollection services)
         {
             //own extension to implement DI
-            var a = Microsoft.Extensions.DependencyModel.DependencyContext.Default.RuntimeLibraries.Select(d => new { type = d.GetType() }).ToList();
-            List<Assembly> allAssemblies = new List<Assembly>();
-            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-            foreach (string dll in Directory.GetFiles(path, "*.dll"))
-                allAssemblies.Add(Assembly.LoadFile(dll));
-
-            IAdService d;
-            var assemblies = allAssemblies
+            var assemblies = AppDomain.CurrentDomain
+                                .GetAssemblies()
                                 .Where(a => a.GetName()
                                             .Name
                                             .ToLower()
