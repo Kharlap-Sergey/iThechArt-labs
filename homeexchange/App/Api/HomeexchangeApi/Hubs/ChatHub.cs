@@ -1,4 +1,5 @@
-﻿using Homeexchange.Models.Requests;
+﻿using Homeexchange.Models.Entities;
+using Homeexchange.Models.Requests;
 using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
@@ -12,7 +13,6 @@ namespace Homeexchange.Api.Hubs
     public sealed class ChatHub : BaseHub
     {
         private static Dictionary<int, string> Subscribers = new Dictionary<int, string>();
-
         private readonly IChatService chatService;
 
         public ChatHub(
@@ -29,11 +29,13 @@ namespace Homeexchange.Api.Hubs
 
         public async Task Send(MessageRequest message)
         {
-            var chatMessage = await chatService.AddMessageAsync(message, GetCommitterId());
-
-            var members = await chatService.GetChatMembersIdAsync(message.ChatId);
+            ChatMessage chatMessage = 
+                await chatService.AddMessageAsync(message, GetCommitterId());
+            IEnumerable<int> members = 
+                await chatService.GetChatMembersIdAsync(message.ChatId);
             var recievers = new List<string>();
-            var subscribers = ChatHub.Subscribers;
+            Dictionary<int, string> subscribers = ChatHub.Subscribers;
+
             foreach (var memberId in members)
             {
                 if (subscribers.ContainsKey(memberId))
@@ -42,23 +44,22 @@ namespace Homeexchange.Api.Hubs
                 }
             }
 
-            await Clients.Clients(recievers).SendAsync("Recieve", chatMessage);
+            await Clients.Clients(recievers).SendAsync("Receive", chatMessage);
         }
 
         public override async Task OnConnectedAsync()
         {
             int userId = GetCommitterId();
-            string connectionId = this.Context.ConnectionId;
-            Subscribers[userId] = connectionId;
-            chatService.AddSubscriber(userId, connectionId);
+            string connectionId = Context.ConnectionId;
+            ChatHub.Subscribers[userId] = connectionId;
             await base.OnConnectedAsync();
         }
         public override async Task OnDisconnectedAsync(Exception e)
         {
             int userId = GetCommitterId();
 
-            if (Subscribers.ContainsKey(userId)) Subscribers.Remove(userId);
-            chatService.RemoveSubscriber(userId);
+            if (ChatHub.Subscribers.ContainsKey(userId)) 
+                ChatHub.Subscribers.Remove(userId);
 
             await base.OnDisconnectedAsync(e);
         }

@@ -43,7 +43,7 @@ namespace Homeexchange.Api
             services.AddDbContext<CustomDbContext>(options =>
               options.UseSqlServer(connection));
 
-            //own extension to auth
+            //own extension to authentication
             services.ConfigureAuthentication(Configuration);
 
             services.Configure<IISServerOptions>(options =>
@@ -81,7 +81,6 @@ namespace Homeexchange.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-
                 endpoints.MapHub<NotificationHub>(
                     NOTIFICATION_HUB_ROUTE,
                     options =>

@@ -17,7 +17,7 @@ export const connectToChat = () => {
   return async (dispatch) => {
     await chatHub.start().catch((err) => {});
     if (!chatHub.methods.recieve)
-      await chatHub.on("Recieve", function ReciveMessage(message) {
+      await chatHub.on("Receive", function ReciveMessage(message) {
         dispatch(addChatMessagesAction([message]));
       });
   };

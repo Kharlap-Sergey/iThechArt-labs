@@ -8,29 +8,34 @@ namespace Homeexchange.GlobalErrorHandling
 {
     public sealed class ExceptionMiddleware
     {
-        private readonly RequestDelegate _next;
-        private static readonly log4net.ILog _log4net = log4net.LogManager.GetLogger(typeof(ExceptionMiddleware));
-        public ExceptionMiddleware(RequestDelegate next)
+        private readonly RequestDelegate next;
+        private static readonly log4net.ILog log4net = global::log4net.LogManager.GetLogger(typeof(ExceptionMiddleware));
+        public ExceptionMiddleware(
+            RequestDelegate next
+            )
         {
-            _next = next;
+            this.next = next;
         }
         public async Task InvokeAsync(HttpContext httpContext)
         {
             try
             {
-                await _next(httpContext);
+                await next(httpContext);
             }
             catch (Exception ex)
             {
-                ExceptionMiddleware._log4net.Error($"Processing request {ex}", ex);
+                ExceptionMiddleware.log4net.Error($"Processing request {ex}", ex);
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
-        private Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private Task HandleExceptionAsync(
+            HttpContext context, 
+            Exception exception
+            )
         {
             context.Response.ContentType = "application/json";
-            var statusCode = HttpStatusCode.InternalServerError;
-            string message = "Somthing was incorrect";
+            HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
+            string message = "Something was incorrect";
 
             //code logic here
             if (exception is InvalidCredentialExeption)
@@ -41,13 +46,11 @@ namespace Homeexchange.GlobalErrorHandling
             }
             else if (exception is DuplicateEmailException)
             {
-                var e = exception as DuplicateEmailException;
                 message = "this email is already taken";
                 statusCode = HttpStatusCode.Forbidden;
             }
             else if (exception is DuplicateNicknameException)
             {
-                var e = exception as DuplicateEmailException;
                 message = "this nickname is already taken";
                 statusCode = HttpStatusCode.Forbidden;
             }
