@@ -35,7 +35,7 @@ namespace Homeexchange.Api
                                             .Name
                                             .ToLower()
                                             .Contains("homeexchange"))
-                                 .ToArray();
+                                .ToArray();
             services.InjectDependencies(assemblies);
 
             //db connect

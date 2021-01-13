@@ -51,8 +51,8 @@ namespace Homeexchange.Services
         {
             if (formFIle != null)
             {
-                Directory.CreateDirectory(webRootPath + $"\\AccountFilse\\${commiterId}");
-                string path = $"\\AccountFilse\\${commiterId}\\" + "profile.img";
+                Directory.CreateDirectory(webRootPath + $"\\${commiterId}");
+                string path = $"\\${commiterId}\\" + "profile.img";
 
                 using (var fileStream = new FileStream(webRootPath + path, FileMode.Create))
                 {
