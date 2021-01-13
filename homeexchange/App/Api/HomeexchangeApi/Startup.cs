@@ -29,7 +29,7 @@ namespace Homeexchange.Api
         public void ConfigureServices(IServiceCollection services)
         {
             //own extension to implement DI
-            services.InjectDependencies();
+            services.InjectDependencies( new[] { typeof(CustomJWTCreator).Assembly });
 
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");

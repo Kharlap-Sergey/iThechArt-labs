@@ -11,23 +11,44 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Configuration
 {
     public static class ConfigurationServicesExtension
     {
-        public static void InjectDependencies(this IServiceCollection services)
+        public static void InjectDependencies(this IServiceCollection services, Assembly[] assemblies)
         {
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
+            var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes.Where(t => t.GetCustomAttribute(typeof (IsServiceInterfaceAttribute))  != null )).ToList();
+            foreach(Type type in typesFromAssemblies)
+            {
+                services.RegisterType(type, assemblies);
+            }
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IChatService, ChatService>();
             services.AddScoped<IAdService, AdService>();
-            services.AddScoped<IAccounService, AccounService>();
+            //services.AddScoped<IAccounService, AccounService>();
             services.AddScoped<IRatingService, RatingService>();
             services.AddScoped<IImgService, ImgService>();
+        }
+
+        public static void RegisterType(this IServiceCollection services, Type t, Assembly[] assemblies,
+               ServiceLifetime lifetime = ServiceLifetime.Transient)
+        {
+            var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes.Where(x => x.GetInterfaces().Contains(t)));
+            foreach (var type in typesFromAssemblies)
+                services.AddScoped(t, type);
+        }
+        public static void RegisterAllTypes<T>(this IServiceCollection services, Assembly[] assemblies,
+               ServiceLifetime lifetime = ServiceLifetime.Transient)
+        {
+            var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes.Where(x => x.GetInterfaces().Contains(typeof(T))));
+            foreach (var type in typesFromAssemblies)
+                services.Add(new ServiceDescriptor(typeof(T), type, lifetime));
         }
 
         public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration Configuration)
