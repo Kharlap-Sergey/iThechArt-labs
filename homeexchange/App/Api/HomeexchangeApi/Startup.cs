@@ -11,6 +11,7 @@ using Homeexchange.GlobalErrorHandling;
 using Homeexchange.Api.Configuration;
 using System;
 using System.Linq;
+using Homeexchange.Services;
 
 namespace Homeexchange.Api
 {
@@ -27,6 +28,7 @@ namespace Homeexchange.Api
         public void ConfigureServices(IServiceCollection services)
         {
             //own extension to implement DI
+            IAdService adService;
             var assemblies = AppDomain.CurrentDomain
                                 .GetAssemblies()
                                 .Where(a => a.GetName()
