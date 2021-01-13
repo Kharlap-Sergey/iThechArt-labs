@@ -8,9 +8,9 @@ namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
 
-    public class RatingController : BaseController
+    public sealed class RatingController : BaseController
     {
-        IRatingService ratingService;
+        private readonly IRatingService ratingService;
         public RatingController(
             IRatingService ratingService
             )

@@ -1,14 +1,16 @@
-﻿using Homeexchange.Services;
+﻿using Homeexchange.Models.ViewModels;
+using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
-    public class NotificationController : BaseController
+    public sealed class NotificationController : BaseController
     {
-        INotificationService notificationService;
+        private readonly INotificationService notificationService;
         public NotificationController(
             INotificationService notificationService
             )
@@ -20,8 +22,10 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public async Task<IActionResult> GetNotifications()
         {
-            var targetUserId = GetCommitterId();
-            return Json(await notificationService.GetAllNotificationForUserByUserIdAsync(targetUserId));
+            int targetUserId = GetCommitterId();
+            IEnumerable<Notification> notifications =
+                await notificationService.GetAllNotificationForUserByUserIdAsync(targetUserId);
+            return Json(notifications);
         }
 
         [HttpDelete("{notificationId}")]
@@ -29,8 +33,8 @@ namespace Homeexchange.Api.Controllers
         public async Task<IActionResult> DeleteNotificaton(int notificationId)
         {
             int commiterId = GetCommitterId();
-            var not = Json(await notificationService.DeleteAsync(notificationId, commiterId));
-            return not;
+            await notificationService.DeleteAsync(notificationId, commiterId);
+            return Ok();
         }
 
     }

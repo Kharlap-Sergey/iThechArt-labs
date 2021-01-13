@@ -11,7 +11,7 @@ namespace Homeexchange.Api.Controllers
 {
     [Route("[controller]/{action}")]
 
-    public class ImgController : BaseController
+    public sealed class ImgController : BaseController
     {
         private readonly IImageService imgService;
         private readonly string rootPath;
@@ -22,17 +22,18 @@ namespace Homeexchange.Api.Controllers
             )
         {
             this.imgService = imgService;
-            this.rootPath = webHostEnviroment.WebRootPath + configuration["Path:img"];
+            this.rootPath = webHostEnviroment.WebRootPath + configuration["Path:Imps"];
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> AddFile(IFormCollection uploadedFiles)
         {
-            IFormFile uploadedFile = uploadedFiles.Files.FirstOrDefault();
-            var file = await imgService.SaveAsync(uploadedFile, GetCommitterId(), rootPath);
-            var res = file.Name;
-            return Json(res);
+            int committerId = GetCommitterId();
+            IFormFile uploadedFile = uploadedFiles.Files
+                                                  .FirstOrDefault();
+            IFormFile file = await imgService.SaveAsync(uploadedFile, committerId, rootPath);
+            return Json(file.Name);
         }
 
         [HttpGet("{userId}")]

@@ -1,7 +1,10 @@
-﻿using Homeexchange.Models.Requests;
+﻿using Homeexchange.Models.Entities;
+using Homeexchange.Models.Requests;
+using Homeexchange.Models.Responses;
 using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers
@@ -9,7 +12,7 @@ namespace Homeexchange.Api.Controllers
     [Route("[controller]/{action = GetChatList}")]
     public sealed class ChatController : BaseController
     {
-        IChatService chatService;
+        private readonly IChatService chatService;
         public ChatController(
             IChatService chatService
             )
@@ -21,8 +24,8 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public async Task<IActionResult> GetChatList()
         {
-            var userId = GetCommitterId();
-            var chatList = await chatService.GetChatResponsesListAsync(userId);
+            int userId = GetCommitterId();
+            IEnumerable<ChatListItemResponse> chatList = await chatService.GetChatResponsesListAsync(userId);
             return Json(chatList);
         }
 
@@ -30,7 +33,8 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public async Task<IActionResult> GetPrivateRoomId([FromBody] GetPrivateRoomIdRequest request)
         {
-            var chat = await chatService.GetChatOrCreateForTowMembersAsync(request.Member1Id, request.Member2Id);
+            Chat chat = 
+                await chatService.GetChatOrCreateForTowMembersAsync(request.Member1Id, request.Member2Id);
             return Json(chat.Id);
         }
 
@@ -38,7 +42,9 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public async Task<IActionResult> GetChatMessages(int chatId)
         {
-            var chatMessages = await chatService.GetChatMessagesAsync(chatId, GetCommitterId());
+            int committerId = GetCommitterId();
+            IEnumerable<ChatMessage> chatMessages = 
+                await chatService.GetChatMessagesAsync(chatId, committerId);
             return Json(chatMessages);
         }
 

@@ -81,6 +81,7 @@ namespace Homeexchange.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
                 endpoints.MapHub<NotificationHub>(
                     NOTIFICATION_HUB_ROUTE,
                     options =>

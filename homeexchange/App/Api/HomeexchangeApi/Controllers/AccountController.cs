@@ -10,8 +10,8 @@ namespace Homeexchange.Api.Controllers
     [Route("[controller]/{action}")]
     public sealed class AccountController : BaseController
     {
-        readonly IAccounService accounService;
-        readonly IUserService userService;
+        private readonly IAccounService accounService;
+        private readonly IUserService userService;
         public AccountController(
              IUserService userService,
              IAccounService accounService
@@ -24,8 +24,7 @@ namespace Homeexchange.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] Account account)
         {
-            LoginResponse response;
-            response = await accounService.LoginAsync(account);
+            LoginResponse response = await accounService.LoginAsync(account);
             return Json(response);
         }
 
@@ -33,15 +32,14 @@ namespace Homeexchange.Api.Controllers
         public async Task<IActionResult> Registrate([FromBody] User user)
         {
             user = await accounService.RegistrateAsync(user);
-            var res = Json(user);
-            return res;
+            return Json(user);;
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Update([FromBody] User user)
         {
-            var commiterId = GetCommitterId();
+            int commiterId = GetCommitterId();
             user = await userService.UpdateAsync(user, commiterId);
             return Json(user);
         }
@@ -49,7 +47,7 @@ namespace Homeexchange.Api.Controllers
         [HttpGet("{userId}")]
         public async Task<IActionResult> Get(int userId)
         {
-            var user = await userService.GetProfileAsync(userId);
+            User user = await userService.GetProfileAsync(userId);
             return Json(user);
         }
 
@@ -57,8 +55,9 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         public async Task<IActionResult> Get()
         {
-            var userId = GetCommitterId();
-            return Json(await accounService.ReenterAsync(userId));
+            int userId = GetCommitterId();
+            LoginResponse response = await accounService.ReenterAsync(userId);
+            return Json(response);
         }
 
     }

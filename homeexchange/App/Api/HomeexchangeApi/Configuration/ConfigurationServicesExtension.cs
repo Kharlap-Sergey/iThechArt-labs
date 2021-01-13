@@ -4,6 +4,7 @@
     using Homeexchange.Domain.Concrete;
     using Homeexchange.Services.Infrastructure;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
@@ -11,50 +12,49 @@
     using System.Reflection;
     using System.Threading.Tasks;
 
-    /// <summary>
-    /// Defines the <see cref="ConfigurationServicesExtension" />.
-    /// </summary>
     public static class ConfigurationServicesExtension
     {
-        /// <summary>
-        /// The InjectDependencies.
-        /// </summary>
-        /// <param name="services">The services<see cref="IServiceCollection"/>.</param>
-        /// <param name="assemblies">The assemblies<see cref="Assembly[]"/>.</param>
-        public static void InjectDependencies(this IServiceCollection services, Assembly[] assemblies)
+        public static void InjectDependencies(
+            this IServiceCollection services,
+            Assembly[] assemblies
+            )
         {
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             services.InjectServiсes(assemblies);
         }
 
-        /// <summary>
-        /// The InjectServiсes.
-        /// </summary>
-        /// <param name="services">The services<see cref="IServiceCollection"/>.</param>
-        /// <param name="assemblies">The assemblies<see cref="Assembly[]"/>.</param>
-        public static void InjectServiсes(this IServiceCollection services, Assembly[] assemblies)
+        public static void InjectServiсes(
+            this IServiceCollection services,
+            Assembly[] assemblies
+            )
         {
-            var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes).ToList();
-            typesFromAssemblies = typesFromAssemblies.Where(t => t.CustomAttributes.ToList().Count > 0).ToList();
-            var T = typeof(IsServiceImplementationAttribute);
-            var typesFromAssemblies1 = typesFromAssemblies.Select(t => new { t, atr = t.GetCustomAttribute(typeof(IsServiceImplementationAttribute)) }).ToList();
+            var typesFromAssemblies = assemblies.SelectMany
+                (
+                    a =>
+                        a.DefinedTypes
+                        .Where
+                        (
+                            t =>
+                                t.GetCustomAttribute(typeof(IsServiceImplementationAttribute)) != null
+                        )
+                ).ToList();
+
             foreach (var type in typesFromAssemblies)
             {
-                IsServiceImplementationAttribute attr = type.GetCustomAttribute<IsServiceImplementationAttribute>();
+                IsServiceImplementationAttribute attr =
+                    type.GetCustomAttribute<IsServiceImplementationAttribute>();
                 services.Add(new ServiceDescriptor(attr.ServiceType, type, attr.Lifetime));
             }
         }
 
-        /// <summary>
-        /// The ConfigureAuthentication.
-        /// </summary>
-        /// <param name="services">The services<see cref="IServiceCollection"/>.</param>
-        /// <param name="Configuration">The Configuration<see cref="IConfiguration"/>.</param>
-        public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration Configuration)
+        public static void ConfigureAuthentication(
+            this IServiceCollection services,
+            IConfiguration Configuration
+            )
         {
-            //auth through jwt
-            var section = Configuration.GetSection(JwtAuthOptions.SectionName);
+            //authorize through JWT
+            IConfigurationSection section = Configuration.GetSection(JwtAuthOptions.SectionName);
             JwtAuthOptions.AUDIENCE = section["AUDIENCE"];
             JwtAuthOptions.ISSUER = section["ISSUER"];
             JwtAuthOptions.KEY = section["KEY"];
@@ -80,9 +80,9 @@
                         {
                             OnMessageReceived = context =>
                             {
-                                var accessToken = context.Request.Query["access_token"];
+                                string accessToken = context.Request.Query["access_token"];
 
-                                var path = context.HttpContext.Request.Path;
+                                PathString path = context.HttpContext.Request.Path;
                                 if (!string.IsNullOrEmpty(accessToken) &&
                                     (path.StartsWithSegments(Startup.NOTIFICATION_HUB_ROUTE)
                                     | path.StartsWithSegments(Startup.CHAT_HUB_ROUTE))
