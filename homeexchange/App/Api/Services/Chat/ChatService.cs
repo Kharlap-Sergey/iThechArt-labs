@@ -3,7 +3,9 @@ using Homeexchange.Models.Entities;
 using Homeexchange.Models.Exceptions;
 using Homeexchange.Models.Requests;
 using Homeexchange.Models.Responses;
+using Homeexchange.Services.Infrastructure;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
+    [IsServiceImplementation(typeof(IChatService), ServiceLifetime.Scoped)]
     public sealed class ChatService : IChatService
     {
         readonly IGenericRepository<Chat> chatRepository;

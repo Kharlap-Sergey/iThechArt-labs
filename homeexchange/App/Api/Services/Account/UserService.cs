@@ -1,11 +1,14 @@
 ﻿using Homeexchange.Domain.Abstract;
 using Homeexchange.Models.Exceptions;
 using Homeexchange.Models.ViewModels;
+using Homeexchange.Services.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
+    [IsServiceImplementation(typeof(IUserService), ServiceLifetime.Scoped)]
     public sealed class UserService : IUserService
     {
         IGenericRepository<User> userRepository;

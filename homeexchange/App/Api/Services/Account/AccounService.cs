@@ -4,6 +4,7 @@ using Homeexchange.Models.ViewModels;
 using Homeexchange.Responses;
 using Homeexchange.Services.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
+    [IsServiceImplementation(typeof(IAccounService), ServiceLifetime.Scoped)]
     public class AccounService : IAccounService
     {
         IGenericRepository<User> userRepository;

@@ -8,9 +8,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Homeexchange.Models.Exceptions;
+using Homeexchange.Services.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Homeexchange.Services
 {
+    [IsServiceImplementation(typeof(IImgService), ServiceLifetime.Scoped)]
     public sealed class ImgService : IImgService
     {
         readonly IGenericRepository<Img> imgRepository;

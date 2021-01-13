@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
-    [IsServiceInterface]
     public interface IAccounService
     {
         public Task<User> RegistrateAsync(User user);

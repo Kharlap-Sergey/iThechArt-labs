@@ -1,12 +1,15 @@
 ﻿using Homeexchange.Domain.Abstract;
 using Homeexchange.Models.Entities;
 using Homeexchange.Models.Requests;
+using Homeexchange.Services.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
+    [IsServiceImplementation(typeof(IRatingService), ServiceLifetime.Scoped)]
     public sealed class RatingService : IRatingService
     {
         IGenericRepository<Rating> ratingRepository;

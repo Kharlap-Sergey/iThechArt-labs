@@ -22,33 +22,17 @@ namespace Homeexchange.Api.Configuration
         {
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-            var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes.Where(t => t.GetCustomAttribute(typeof (IsServiceInterfaceAttribute))  != null )).ToList();
-            foreach(Type type in typesFromAssemblies)
-            {
-                services.RegisterType(type, assemblies);
-            }
-            services.AddScoped<INotificationService, NotificationService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IChatService, ChatService>();
-            services.AddScoped<IAdService, AdService>();
-            //services.AddScoped<IAccounService, AccounService>();
-            services.AddScoped<IRatingService, RatingService>();
-            services.AddScoped<IImgService, ImgService>();
+            services.InjectServiсes(assemblies);
         }
 
-        public static void RegisterType(this IServiceCollection services, Type t, Assembly[] assemblies,
-               ServiceLifetime lifetime = ServiceLifetime.Transient)
+        public static void InjectServiсes(this IServiceCollection services,Assembly[] assemblies)
         {
-            var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes.Where(x => x.GetInterfaces().Contains(t)));
+             var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes.Where(t => t.GetCustomAttribute(typeof (IsServiceImplementationAttribute))  != null )).ToList();
             foreach (var type in typesFromAssemblies)
-                services.AddScoped(t, type);
-        }
-        public static void RegisterAllTypes<T>(this IServiceCollection services, Assembly[] assemblies,
-               ServiceLifetime lifetime = ServiceLifetime.Transient)
-        {
-            var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes.Where(x => x.GetInterfaces().Contains(typeof(T))));
-            foreach (var type in typesFromAssemblies)
-                services.Add(new ServiceDescriptor(typeof(T), type, lifetime));
+            {
+                IsServiceImplementationAttribute attr = type.GetCustomAttribute<IsServiceImplementationAttribute>();
+                services.Add(new ServiceDescriptor(attr.ServiceType, type, attr.Lifetime));
+            }
         }
 
         public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration Configuration)

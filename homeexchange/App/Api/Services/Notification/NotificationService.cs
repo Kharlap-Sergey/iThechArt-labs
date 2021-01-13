@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Homeexchange.Models.ViewModels;
 using Homeexchange.Models.Exceptions;
 using System;
+using Homeexchange.Services.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Homeexchange.Services
 {
+    [IsServiceImplementation(typeof(INotificationService), ServiceLifetime.Scoped)]
     public sealed class NotificationService : INotificationService
     {
         private static event Action<Notification> Notify;

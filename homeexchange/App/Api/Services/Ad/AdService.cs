@@ -4,13 +4,15 @@ using Homeexchange.Models.Entities;
 using Homeexchange.Models.Exceptions;
 using Homeexchange.Models.Requests;
 using Homeexchange.Models.ViewModels;
-using Microsoft.EntityFrameworkCore;
+using Homeexchange.Services.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
+    [IsServiceImplementation(typeof(IAdService), ServiceLifetime.Scoped)]
     public sealed class AdService : IAdService
     {
         IGenericRepository<Ad> adRepository;
