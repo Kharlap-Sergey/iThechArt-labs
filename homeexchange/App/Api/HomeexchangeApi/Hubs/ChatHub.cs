@@ -14,6 +14,7 @@ namespace Homeexchange.Api.Hubs
         private static Dictionary<int, string> Subscribers = new Dictionary<int, string>();
 
         private readonly IChatService chatService;
+
         public ChatHub(
             IChatService chatService
             )

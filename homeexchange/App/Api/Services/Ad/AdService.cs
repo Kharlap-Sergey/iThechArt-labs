@@ -1,5 +1,6 @@
 ﻿using Homeexchange.Domain;
 using Homeexchange.Domain.Abstract;
+using Homeexchange.Models.Entities;
 using Homeexchange.Models.Exceptions;
 using Homeexchange.Models.Requests;
 using Homeexchange.Models.ViewModels;
@@ -111,15 +112,15 @@ namespace Homeexchange.Services
                 throw new AdAlreadyHasBeenRepliedException($"the ad alreade has been responded");
             }
 
-            var chat = chatService.GetChatOrCreateForTowMembersAsync(committerId, ad.AuthorId);
-            var chatMess = chatService.AddReplyAsync(chat.Id, committerId, $"{ad.Id}");
+            Chat chat = await chatService.GetChatOrCreateForTowMembersAsync(committerId, ad.AuthorId);
+            ChatMessage chatMess = await chatService.AddReplyAsync(chat.Id, committerId, $"{ad.Id}");
             var notification = new Notification
             {
                 TargetUserId = ad.AuthorId,
                 ChatId = chat.Id,
                 Type = Notification.NotificationType.NewResponse
             };
-            notificationService.CreateAsync(notification);
+            await notificationService.CreateAsync(notification);
 
             ad.IsResponded = true;
             return await adRepository.UpdateAsync(ad);

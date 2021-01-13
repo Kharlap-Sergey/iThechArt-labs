@@ -4,28 +4,19 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Homeexchange.Models.ViewModels;
 using Homeexchange.Models.Exceptions;
+using System;
 
 namespace Homeexchange.Services
 {
     public sealed class NotificationService : INotificationService
     {
-        public static Dictionary<int, string> Subscribers = new Dictionary<int, string>();
+        private static event Action<Notification> Notify;
 
         IGenericRepository<Notification> notificationRepository;
-        IHubContext<Hub> hubContext;
         public NotificationService(
-            IHubContext<Hub> hubContext,
             IGenericRepository<Notification> notificationRepository)
         {
             this.notificationRepository = notificationRepository;
-            this.hubContext = hubContext;
-        }
-
-        private void NotifySubscribers(Notification notification)
-        {
-            var targetId = notification.TargetUserId;
-            var habCLientId = NotificationService.Subscribers[targetId];
-            hubContext.Clients.Client(habCLientId).SendAsync("Notify", notification);
         }
         public async Task CreateAsync(Notification notification)
         {
@@ -48,6 +39,18 @@ namespace Homeexchange.Services
             }
 
             return await notificationRepository.RemoveAsync(notification);
+        }
+
+        public void SetNotificationHandler(Action<Notification> notificationHandler)
+        {
+            if(NotificationService.Notify == null)
+            {
+                NotificationService.Notify = notificationHandler;
+            }
+        }
+        private void NotifySubscribers(Notification notification)
+        {
+            NotificationService.Notify?.Invoke(notification);
         }
     }
 }

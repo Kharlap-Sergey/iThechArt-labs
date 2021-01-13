@@ -25,6 +25,7 @@ namespace Homeexchange.Models.ViewModels
         public string Password { get; set; }
 
         [Required]
+        [JsonPropertyName("Language")]
         public string Languages { get; set; }
 
         public string Country { get; set; }
