@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using Homeexchange.Domain;
 using Homeexchange.Api.Hubs;
 using Homeexchange.GlobalErrorHandling;
-using Homeexchange.Services.Infrastructure;
 using Homeexchange.Api.Configuration;
 using System;
 using System.Linq;
@@ -28,14 +27,14 @@ namespace Homeexchange.Api
         public void ConfigureServices(IServiceCollection services)
         {
             //own extension to implement DI
-            var asem = AppDomain.CurrentDomain
+            var assemblies = AppDomain.CurrentDomain
                                 .GetAssemblies()
                                 .Where(a => a.GetName()
                                             .Name
                                             .ToLower()
                                             .Contains("homeexchange"))
                                  .ToArray();
-            services.InjectDependencies( asem );
+            services.InjectDependencies(assemblies);
 
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");
