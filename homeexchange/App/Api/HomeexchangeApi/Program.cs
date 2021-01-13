@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace Homeexchange.Api
 {
@@ -8,6 +10,9 @@ namespace Homeexchange.Api
     {
         public static void Main(string[] args)
         {
+            var log4netRepository = log4net.LogManager.GetRepository(Assembly.GetEntryAssembly());
+            log4net.Config.XmlConfigurator.Configure(log4netRepository, new FileInfo("log4net.config"));
+
             CreateHostBuilder(args).Build().Run();
 
             Console.WriteLine();

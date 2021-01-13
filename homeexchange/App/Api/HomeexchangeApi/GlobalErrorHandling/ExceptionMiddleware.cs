@@ -1,8 +1,5 @@
-﻿using Homeexchange.Api.Logger;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Homeexchange.Models.Exceptions;
@@ -12,11 +9,10 @@ namespace Homeexchange.GlobalErrorHandling
     public sealed class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILoggerFactory loggerFactory;
-        public ExceptionMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
+        private static readonly log4net.ILog _log4net = log4net.LogManager.GetLogger(typeof(ExceptionMiddleware));
+        public ExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
-            this.loggerFactory = loggerFactory;
         }
         public async Task InvokeAsync(HttpContext httpContext)
         {
@@ -26,10 +22,7 @@ namespace Homeexchange.GlobalErrorHandling
             }
             catch (Exception ex)
             {
-                loggerFactory.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logger.txt"));
-                var logger = loggerFactory.CreateLogger("FileLogger");
-                logger.LogInformation("Processing request {0}", ex);
-                var t = ex.GetType();
+                ExceptionMiddleware._log4net.Error($"Processing request {ex}", ex);
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
