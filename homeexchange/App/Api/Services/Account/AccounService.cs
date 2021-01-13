@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 namespace Homeexchange.Services
 {
     [IsServiceImplementation(typeof(IAccounService), ServiceLifetime.Scoped)]
-    public class AccounService : IAccounService
+    public sealed class AccounService : IAccounService
     {
-        IGenericRepository<User> userRepository;
+        private readonly IGenericRepository<User> userRepository;
         public AccounService(
             IGenericRepository<User> userRepository
             )
@@ -26,8 +26,7 @@ namespace Homeexchange.Services
         public async Task<LoginResponse> LoginAsync(Account account)
         {
             ClaimsIdentity identity = await GetIdentity(account);
-            var encodedJwt = CustomJWTCreator.CreateJWT(identity);
-
+            string encodedJwt = CustomJWTCreator.CreateJWT(identity);
             User user = (await userRepository.GetAsync(u => u.Email == account.Login))
                         .FirstOrDefault();
 
@@ -38,20 +37,16 @@ namespace Homeexchange.Services
             };
             return response;
         }
-
         public async Task<LoginResponse> ReenterAsync(int userId)
         {
-            var user = await userRepository.GetByIdAsync(userId);
+            User user = await userRepository.GetByIdAsync(userId);
             var account = new Account
             {
-                Login = user.Email
-                ,
+                Login = user.Email,
                 Password = user.Password
             };
-
             return await LoginAsync(account);
         }
-
         public async Task<User> RegistrateAsync(User user)
         {
             try
@@ -68,13 +63,12 @@ namespace Homeexchange.Services
                 {
                     throw new DuplicateNicknameException("try to registrate user");
                 }
-                throw e;
+                throw;
             }
         }
-
         private async Task<ClaimsIdentity> GetIdentity(Account account)
         {
-            var person = (await userRepository.GetAsync
+            User person = (await userRepository.GetAsync
                 (
                     u => u.Email == account.Login
                          && u.Password == account.Password

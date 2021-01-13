@@ -14,26 +14,32 @@ namespace Homeexchange.Services
     {
         private static event Action<Notification> Notify;
 
-        IGenericRepository<Notification> notificationRepository;
+        private readonly IGenericRepository<Notification> notificationRepository;
         public NotificationService(
-            IGenericRepository<Notification> notificationRepository)
+            IGenericRepository<Notification> notificationRepository
+            )
         {
             this.notificationRepository = notificationRepository;
         }
         public async Task CreateAsync(Notification notification)
         {
-            var notif = await notificationRepository.CreateAsync(notification);
-            NotifySubscribers(notif);
+            notification = 
+                await notificationRepository.CreateAsync(notification);
+            NotifySubscribers(notification);
         }
-
-        public async Task<IEnumerable<Notification>> GetAllNotificationForUserByUserIdAsync(int userID)
+        public async Task<IEnumerable<Notification>> GetAllNotificationForUserByUserIdAsync(
+            int userID
+            )
         {
             return await notificationRepository.GetAsync(n => n.TargetUserId == userID);
         }
-
-        public async Task<Notification> DeleteAsync(int notificationId, int commiterId)
+        public async Task<Notification> DeleteAsync(
+            int notificationId, 
+            int commiterId
+            )
         {
-            var notification = await notificationRepository.GetByIdAsync(notificationId);
+            Notification notification = 
+                await notificationRepository.GetByIdAsync(notificationId);
 
             if (commiterId != notification.TargetUserId)
             {

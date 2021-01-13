@@ -12,7 +12,7 @@ namespace Homeexchange.Services
     [IsServiceImplementation(typeof(IRatingService), ServiceLifetime.Scoped)]
     public sealed class RatingService : IRatingService
     {
-        IGenericRepository<Rating> ratingRepository;
+        private readonly IGenericRepository<Rating> ratingRepository;
 
         public RatingService(
             IGenericRepository<Rating> ratingRepository
@@ -28,14 +28,14 @@ namespace Homeexchange.Services
 
         public async Task<Rating> SetAsync(RatingRequest request, int committerId)
         {
-            var rate =
+            Rating rating =
                 (await ratingRepository
                     .GetAsync(r => r.TargetId == request.TargetId && r.CommitterId == committerId))
                 .FirstOrDefault();
 
-            if (rate is null)
+            if (rating is null)
             {
-                rate = await ratingRepository.CreateAsync(new Rating
+                rating = await ratingRepository.CreateAsync(new Rating
                 {
                     TargetId = request.TargetId,
                     CommitterId = committerId,
@@ -44,12 +44,10 @@ namespace Homeexchange.Services
             }
             else
             {
-                rate.Mark = request.Mark;
-                rate = await ratingRepository.UpdateAsync(rate);
+                rating.Mark = request.Mark;
+                rating = await ratingRepository.UpdateAsync(rating);
             }
-
-
-            return rate;
+            return rating;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Homeexchange.Models.Entities
 {
-    public class Rating
+    public sealed class Rating
     {
         [Key]
         public int Id { set; get; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
-    public interface IChatService : IHubSubscribers
+    public interface IChatService
     {
         public Task<IEnumerable<Chat>> GetChatListAsync(int userId);
         public Task<IEnumerable<ChatListItemResponse>> GetChatResponsesListAsync(int userId);
@@ -17,8 +17,7 @@ namespace Homeexchange.Services
         public Task<PrivateRoom> CreatePrivateRoomAsync(int chatId, int member1, int member2);
         public Task<IEnumerable<ChatMessage>> GetChatMessagesAsync(int chatId, int committerId);
         public Task<Chat> GetChatOrCreateForTowMembersAsync(int member1, int member2);
-
-        public void AddMemberToChatAsync(int chatId, int memberId);
+        public Task AddMemberToChatAsync(int chatId, int memberId);
 
     }
 }

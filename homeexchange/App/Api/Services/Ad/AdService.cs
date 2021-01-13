@@ -7,6 +7,7 @@ using Homeexchange.Models.ViewModels;
 using Homeexchange.Services.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,10 +16,10 @@ namespace Homeexchange.Services
     [IsServiceImplementation(typeof(IAdService), ServiceLifetime.Scoped)]
     public sealed class AdService : IAdService
     {
-        IGenericRepository<Ad> adRepository;
-        INotificationService notificationService;
-        IGenericRepository<User> userContext;
-        IChatService chatService;
+        private readonly IGenericRepository<Ad> adCibtext;
+        private readonly INotificationService notificationService;
+        private readonly IGenericRepository<User> userContext;
+        private readonly IChatService chatService;
         public AdService(
                 IGenericRepository<Ad> adContext,
                 IGenericRepository<User> userContext,
@@ -26,7 +27,7 @@ namespace Homeexchange.Services
                 INotificationService notificationService
                         )
         {
-            adRepository = adContext;
+            this.adCibtext = adContext;
             this.userContext = userContext;
             this.chatService = chatService;
             this.notificationService = notificationService;
@@ -34,37 +35,30 @@ namespace Homeexchange.Services
 
         public async Task<Ad> CreateAsync(Ad ad, int committerId)
         {
-            var user = userContext.GetByIdAsync(committerId);
+            await userContext.GetByIdAsync(committerId);
 
             ad.AuthorId = committerId;
             ad.DateOfPublication = DateTime.Now;
 
-            return await adRepository.CreateAsync(ad);
+            return await adCibtext.CreateAsync(ad);
         }
 
         public async Task<Ad> DeleteAsync(int adId, int committerId)
         {
-            var ad = await adRepository.GetByIdAsync(adId);
+            Ad ad = await adCibtext.GetByIdAsync(adId);
 
             if (ad.AuthorId != committerId)
             {
                 throw new PermissionException("to remove an ad");
             }
 
-            return await adRepository.RemoveAsync(ad);
+            return await adCibtext.RemoveAsync(ad);
         }
 
         public async Task<Ad> FindByIdAsync(int adId)
         {
-            return await adRepository.GetByIdAsync(adId);
+            return await adCibtext.GetByIdAsync(adId);
         }
-
-        static bool IsKeyWordPresent(Ad ad, User Author, string keyWord)
-        {
-            return keyWord == "" || keyWord == Author.City.ToLower() || keyWord == Author.Country.ToLower();
-        }
-
-
         public async Task<AdsPage> GetAdsPageAsync(GetAdsPageRequest request)
         {
             const int pageSize = 4;
@@ -72,19 +66,22 @@ namespace Homeexchange.Services
             AdFilter adFilter = request.Filter;
             string searchString = request.SearchString;
 
-            var specification = new Specification<Ad>();
-            specification.Skip = (pageNumber - 1) * pageSize;
-            specification.Take = pageSize;
-            specification.OrderBy = ads => ads.OrderByDescending(ad => ad.DateOfPublication);
+            var specification = new Specification<Ad>
+            {
+                Skip = (pageNumber - 1) * pageSize,
+                Take = pageSize,
+                OrderBy = ads => ads.OrderByDescending(ad => ad.DateOfPublication)
+            };
             specification.Conditions.Add(ad => !ad.IsResponded);
-            specification.Conditions.Add(ad => adFilter.AuthorId == null || ad.AuthorId == adFilter.AuthorId);
-            specification.Conditions.Add(ad => adFilter.Types.Count == 0 || adFilter.Types.Contains(ad.Type));
+            specification.Conditions.Add(ad => adFilter.AuthorId == null 
+                                               || ad.AuthorId == adFilter.AuthorId);
+            specification.Conditions.Add(ad => adFilter.Types.Count == 0 
+                                                || adFilter.Types.Contains(ad.Type));
             specification.Conditions.Add(ad => searchString.Length == 0
                                                || searchString.Contains(ad.Author.City.ToLower())
                                                || searchString.Contains(ad.Author.Country.ToLower()));
-            var ads = await adRepository
-                .GetAsync(specification);
-
+            IEnumerable<Ad> ads = 
+                await adCibtext.GetAsync(specification);
 
             var pageInfo = new PagingInfo(ads.Count(), pageNumber, pageSize);
             var result = new AdsPage
@@ -104,14 +101,14 @@ namespace Homeexchange.Services
                 throw new UnauthorizedAccessException("access denied");
             }
 
-            return await adRepository.UpdateAsync(ad);
+            return await adCibtext.UpdateAsync(ad);
         }
 
         public async Task<Ad> ReplyOnAdAsync(Ad ad, int committerId, string message = "")
         {
             if (ad.IsResponded)
             {
-                throw new AdAlreadyHasBeenRepliedException($"the ad alreade has been responded");
+                throw new AdAlreadyHasBeenRepliedException($"the ad already has been responded");
             }
 
             Chat chat = await chatService.GetChatOrCreateForTowMembersAsync(committerId, ad.AuthorId);
@@ -125,7 +122,7 @@ namespace Homeexchange.Services
             await notificationService.CreateAsync(notification);
 
             ad.IsResponded = true;
-            return await adRepository.UpdateAsync(ad);
+            return await adCibtext.UpdateAsync(ad);
         }
     }
 }

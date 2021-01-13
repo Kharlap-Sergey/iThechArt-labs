@@ -16,57 +16,39 @@ namespace Homeexchange.Services
     [IsServiceImplementation(typeof(IChatService), ServiceLifetime.Scoped)]
     public sealed class ChatService : IChatService
     {
-        readonly IGenericRepository<Chat> chatRepository;
-        readonly IGenericRepository<ChatMember> chatMemberRepository;
-        readonly IGenericRepository<ChatMessage> chatMessageRepository;
-        readonly IGenericRepository<PrivateRoom> privateRoomRepository;
-        readonly IHubContext<Hub> chatHubContext;
-        readonly IUserService userService;
-        static Dictionary<int, string> Subscribers = new Dictionary<int, string>();
-
+        private readonly IGenericRepository<Chat> chatRepository;
+        private readonly IGenericRepository<ChatMember> chatMemberRepository;
+        private readonly IGenericRepository<ChatMessage> chatMessageRepository;
+        private readonly IGenericRepository<PrivateRoom> privateRoomRepository;
+        private readonly IUserService userService;
         public ChatService(
             IGenericRepository<Chat> chatRepository,
             IGenericRepository<ChatMember> chatMemberRepository,
             IGenericRepository<ChatMessage> chatMessageRepository,
             IGenericRepository<PrivateRoom> privateRoomRepository,
-            IUserService userService,
-            IHubContext<Hub> chatHubContext
+            IUserService userService
             )
         {
             this.chatMemberRepository = chatMemberRepository;
             this.chatRepository = chatRepository;
             this.chatMessageRepository = chatMessageRepository;
             this.privateRoomRepository = privateRoomRepository;
-            this.chatHubContext = chatHubContext;
             this.userService = userService;
         }
-
-        public void AddMemberToChatAsync(int chatId, int memberId)
+        public async Task AddMemberToChatAsync(int chatId, int memberId)
         {
-            var chatMember = new ChatMember { ChatId = chatId, UserId = memberId };
-            chatMemberRepository.CreateAsync(chatMember);
-        }
-
-        public async void SendMessageToChat(ChatMessage message)
-        {
-            var members = await GetChatMembersIdAsync(message.ChatId);
-            var recievers = new List<string>();
-            var subscribers = ChatService.Subscribers;//ChatHub.GetSubscribers();
-            foreach (var memberId in members)
+            var chatMember = new ChatMember
             {
-                if (subscribers.ContainsKey(memberId))
-                {
-                    recievers.Add(subscribers[memberId]);
-                }
-            }
+                ChatId = chatId,
+                UserId = memberId
+            };
 
-            await this.chatHubContext.Clients.Clients(recievers).SendAsync("Recieve", message);
+            await chatMemberRepository.CreateAsync(chatMember);
         }
-
         private async Task<ChatMessage> AddChatMessageAsync(ChatMessage message)
         {
-            var chatMessage = await chatMessageRepository.CreateAsync(message);
-            //SendMessageToChat(chatMessage);
+            ChatMessage chatMessage =
+                await chatMessageRepository.CreateAsync(message);
             return chatMessage;
         }
         public async Task<ChatMessage> AddMessageAsync(MessageRequest message, int comnitterId)
@@ -81,7 +63,6 @@ namespace Homeexchange.Services
 
             return await AddChatMessageAsync(chatMessage);
         }
-
         public async Task<ChatMessage> AddReplyAsync(int chatId, int comnitterId, string message)
         {
             var chatMessage = new ChatMessage
@@ -94,12 +75,10 @@ namespace Homeexchange.Services
 
             return await AddChatMessageAsync(chatMessage);
         }
-
         public async Task<Chat> CreateChatAsync(string title)
         {
             return await chatRepository.CreateAsync(new Chat { Title = title });
         }
-
         public async Task<PrivateRoom> CreatePrivateRoomAsync(int chatId, int member1, int member2)
         {
             var privateRoom = new PrivateRoom
@@ -111,7 +90,6 @@ namespace Homeexchange.Services
 
             return await privateRoomRepository.CreateAsync(privateRoom);
         }
-
         public async Task<IEnumerable<Chat>> GetChatListAsync(int userId)
         {
             var chatIds = (await chatMemberRepository.GetAsync(cm => cm.UserId == userId))
@@ -122,21 +100,24 @@ namespace Homeexchange.Services
 
         public async Task<IEnumerable<int>> GetChatMembersIdAsync(int chatId)
         {
-            var members = await chatMemberRepository.GetAsync(cm => cm.ChatId == chatId);
-            return members.Select(cm => cm.UserId).ToList();
+            IEnumerable<ChatMember> members =
+                await chatMemberRepository.GetAsync(cm => cm.ChatId == chatId);
+            return members.Select(cm => cm.UserId)
+                          .ToList();
         }
 
         public async Task<IEnumerable<ChatMessage>> GetChatMessagesAsync(int chatId, int commiterId)
         {
-            var chatMem = (await chatMemberRepository.GetAsync(cm =>
+            ChatMember chatMem = (await chatMemberRepository.GetAsync(cm =>
                                                                     cm.ChatId == chatId
                                                                     && cm.UserId == commiterId))
-                          .FirstOrDefault();
+                                  .FirstOrDefault();
             if (chatMem == null)
             {
                 throw new PermissionException("couldn't load not yours messages");
             }
-            var result = await chatMessageRepository.GetAsync(m => m.ChatId == chatId);
+            IEnumerable<ChatMessage> result =
+                await chatMessageRepository.GetAsync(m => m.ChatId == chatId);
             return result;
         }
 
@@ -148,29 +129,32 @@ namespace Homeexchange.Services
                 member1 = member2;
                 member2 = temp;
             }
-            var pw = (await privateRoomRepository.GetAsync(pw =>
-                                                        pw.Member1Id == member1
-                                                        && pw.Member2Id == member2))
-                    .FirstOrDefault();
-            if (pw == null)
+
+            PrivateRoom privateRoom = (await privateRoomRepository.GetAsync(pw =>
+                                                         pw.Member1Id == member1
+                                                         && pw.Member2Id == member2))
+                                .FirstOrDefault();
+
+            if (privateRoom == null)
             {
-                var chat = await
+                Chat chat = await
                     CreateChatAsync($"{(await userService.FindByIdAsync(member1)).Nickname}" +
                     $"/{(await userService.FindByIdAsync(member2)).Nickname}");
 
-                pw = await CreatePrivateRoomAsync(chat.Id, member1, member2);
-                AddMemberToChatAsync(chat.Id, member1);
-                if (member1 != member2) AddMemberToChatAsync(chat.Id, member2);
+                privateRoom = await CreatePrivateRoomAsync(chat.Id, member1, member2);
+
+                await AddMemberToChatAsync(chat.Id, member1);
+
+                if (member1 != member2) await AddMemberToChatAsync(chat.Id, member2);
             }
 
 
-            return await chatRepository.GetByIdAsync(pw.ChatId);
+            return await chatRepository.GetByIdAsync(privateRoom.ChatId);
         }
 
         public async Task<IEnumerable<ChatListItemResponse>> GetChatResponsesListAsync(int userId)
         {
-            var chats = await this.GetChatListAsync(userId);
-
+            IEnumerable<Chat> chats = await this.GetChatListAsync(userId);
             var result = chats.Select(chat => new ChatListItemResponse
             {
                 Chat = chat,
@@ -180,16 +164,6 @@ namespace Homeexchange.Services
             });
             var res = result.ToList() as IEnumerable<ChatListItemResponse>;
             return res;
-        }
-
-        public void AddSubscriber(int userId, string connection)
-        {
-            ChatService.Subscribers[userId] = connection;
-        }
-
-        public void RemoveSubscriber(int userId)
-        {
-            if (ChatService.Subscribers.ContainsKey(userId)) ChatService.Subscribers.Remove(userId);
         }
     }
 }

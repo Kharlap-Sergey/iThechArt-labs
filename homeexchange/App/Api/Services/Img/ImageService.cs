@@ -16,8 +16,8 @@ namespace Homeexchange.Services
     [IsServiceImplementation(typeof(IImageService), ServiceLifetime.Scoped)]
     public sealed class ImageService : IImageService
     {
-        readonly IGenericRepository<Img> imgRepository;
-        readonly IGenericRepository<User> userRepository;
+        private readonly IGenericRepository<Img> imgRepository;
+        private readonly IGenericRepository<User> userRepository;
         public ImageService(
             IGenericRepository<Img> imgRepository,
             IGenericRepository<User> userRepository
@@ -26,17 +26,21 @@ namespace Homeexchange.Services
             this.imgRepository = imgRepository;
             this.userRepository = userRepository;
         }
-        public async Task<PhysicalFileResult> GetPrfileImgAsync(int targetUserId, string webRootPath)
+        public async Task<PhysicalFileResult> GetPrfileImgAsync(
+            int targetUserId, 
+            string webRootPath
+            )
         {
-            var user = await userRepository.GetByIdAsync(targetUserId);
+            User user = await userRepository.GetByIdAsync(targetUserId);
             int imgId = user.ProfileImgId;
             if (imgId <= 0)
             {
-                throw new ImgNotFoundException("coldn't find the profile img");
+                throw new ImgNotFoundException("couldn't find the profile image");
             }
 
-            var img = (await imgRepository.GetAsync(i => i.Id == imgId)).FirstOrDefault();
-            var path = img.Path;
+            Img img = (await imgRepository.GetAsync(i => i.Id == imgId))
+                                  .FirstOrDefault();
+            string path = img.Path;
 
             using (var fileStream = new FileStream(webRootPath + path, FileMode.Open))
             {
@@ -60,7 +64,7 @@ namespace Homeexchange.Services
                 }
 
                 var imgEnt = new Img { Title = "profile", Path = path };
-                var user = (await userRepository.GetAsync(u => u.Id == commiterId))
+                User user = (await userRepository.GetAsync(u => u.Id == commiterId))
                            .FirstOrDefault();
                 imgEnt = await imgRepository.CreateAsync(imgEnt);
                 user.ProfileImgId = imgEnt.Id;

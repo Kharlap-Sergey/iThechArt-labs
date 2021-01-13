@@ -11,7 +11,7 @@ namespace Homeexchange.Services
     [IsServiceImplementation(typeof(IUserService), ServiceLifetime.Scoped)]
     public sealed class UserService : IUserService
     {
-        IGenericRepository<User> userRepository;
+        private readonly IGenericRepository<User> userRepository;
         public UserService(
             IGenericRepository<User> userRepository
             )
@@ -30,7 +30,7 @@ namespace Homeexchange.Services
 
         public async Task<User> GetProfileAsync(int userId)
         {
-            var profile = await userRepository.GetByIdAsync(userId);
+            User profile = await userRepository.GetByIdAsync(userId);
             profile.Password = null;
             return profile;
         }
