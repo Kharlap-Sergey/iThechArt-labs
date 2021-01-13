@@ -10,13 +10,10 @@ namespace Homeexchange.Models.Entities
         [Required]
         public int Member1Id { set; get; }
         public User Member1 { get; set; }
-
         [ForeignKey("Member2Id")]
         [Required]
         public int Member2Id { set; get; }
         public User Member2 { get; set; }
-
-
         [ForeignKey("ChatId")]
         [Required]
         public int ChatId { set; get; }

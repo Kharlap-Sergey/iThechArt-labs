@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Homeexchange.Domain.Configurations
 {
 
-    public class PrivateRoomConfiguration 
+    public sealed class PrivateRoomConfiguration 
         : IEntityTypeConfiguration<PrivateRoom>
     {
         public void Configure(

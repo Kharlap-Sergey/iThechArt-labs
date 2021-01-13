@@ -1,8 +1,9 @@
 ﻿namespace Homeexchange.Models.Exceptions
 {
-    public class DuplicateNicknameException : DuplicateUniqueValueException
+    public sealed class DuplicateNicknameException : DuplicateUniqueValueException
     {
-        public DuplicateNicknameException(string message) : base(message)
+        public DuplicateNicknameException(string message) 
+            : base(message)
         {
         }
     }

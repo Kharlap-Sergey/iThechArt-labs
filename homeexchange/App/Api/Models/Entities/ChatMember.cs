@@ -6,12 +6,10 @@ namespace Homeexchange.Models.Entities
 {
     public sealed class ChatMember
     {
-
         [ForeignKey("ChatId")]
         [Required]
         public int ChatId { set; get; }
         public Chat Chat { get; set; }
-
         [ForeignKey("UserId")]
         [Required]
         public int UserId { set; get; }

@@ -2,7 +2,7 @@
 
 namespace Homeexchange.Models.ViewModels
 {
-    public class AdsPage
+    public sealed class AdsPage
     {
         public IEnumerable<Ad> Ads { set; get; }
         public bool HasNext { set; get; }

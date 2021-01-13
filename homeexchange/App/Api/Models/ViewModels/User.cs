@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Homeexchange.Models.ViewModels
 {
-    public class User
+    public sealed class User
     {
         [Key]
         public int Id { get; set; }
@@ -23,16 +23,12 @@ namespace Homeexchange.Models.ViewModels
         public string Nickname { get; set; }
         [Required]
         public string Password { get; set; }
-
         [Required]
         [JsonPropertyName("Language")]
         public string Languages { get; set; }
 
         public string Country { get; set; }
-
         public string City { get; set; }
-
-        //public Lang lang { get; set; }
 
         [NotMapped]
         public List<Ad> Ads { get; set; } = new List<Ad>();

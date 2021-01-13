@@ -2,7 +2,8 @@
 {
     public sealed class DuplicateEmailException : DuplicateUniqueValueException
     {
-        public DuplicateEmailException(string message) : base(message)
+        public DuplicateEmailException(string message) 
+            : base(message)
         {
         }
     }

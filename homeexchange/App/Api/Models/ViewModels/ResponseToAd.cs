@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Homeexchange.Models.ViewModels
 {
-    public class ResponseToAd
+    public sealed class ResponseToAd
     {
         [Key]
         public int Id { get; set; }
