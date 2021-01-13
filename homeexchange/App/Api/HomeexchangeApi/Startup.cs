@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Connections;
@@ -6,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Homeexchange.Domain;
 using Homeexchange.Api.Hubs;
-using System.Threading.Tasks;
 using Homeexchange.GlobalErrorHandling;
 using Homeexchange.Services.Infrastructure;
 using Homeexchange.Api.Configuration;
+using System;
+using System.Linq;
 
 namespace Homeexchange.Api
 {
@@ -29,7 +28,14 @@ namespace Homeexchange.Api
         public void ConfigureServices(IServiceCollection services)
         {
             //own extension to implement DI
-            services.InjectDependencies( new[] { typeof(CustomJWTCreator).Assembly });
+            var asem = AppDomain.CurrentDomain
+                                .GetAssemblies()
+                                .Where(a => a.GetName()
+                                            .Name
+                                            .ToLower()
+                                            .Contains("homeexchange"))
+                                 .ToArray();
+            services.InjectDependencies( asem );
 
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");
