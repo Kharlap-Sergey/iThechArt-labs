@@ -8,22 +8,26 @@ namespace Homeexchange.Domain.Abstract
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
-        Task<TEntity> CreateAsync(TEntity item);
-        Task<TEntity> GetByIdAsync(object id);
-
-        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
-        Task<IEnumerable<TEntity>> GetAsync();
-        Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate);
-        Task<IEnumerable<TEntity>> GetAsync(
+        public Task<TEntity> CreateAsync(TEntity item);
+        public Task<TEntity> GetByIdAsync(object id);
+        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
+        public Task<IEnumerable<TEntity>> GetAsync();
+        public Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate);
+        public Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "");
-        Task<IEnumerable<TEntity>> GetAsync(Specification<TEntity> specification);
-        Task<IEnumerable<TEntity>> GetWithIncludeAsync(params Expression<Func<TEntity, object>>[] includeProperties);
-        Task<IEnumerable<TEntity>> GetWithIncludeAsync(Expression<Func<TEntity, bool>> predicate,
-            params Expression<Func<TEntity, object>>[] includeProperties);
-        Task<TEntity> RemoveAsync(object id);
-        Task<TEntity> RemoveAsync(TEntity item);
-        Task<TEntity> UpdateAsync(TEntity item);
+            string includeProperties = ""
+            );
+        public Task<IEnumerable<TEntity>> GetAsync(Specification<TEntity> specification);
+        public Task<IEnumerable<TEntity>> GetWithIncludeAsync(
+            params Expression<Func<TEntity, object>>[] includeProperties
+            );
+        public Task<IEnumerable<TEntity>> GetWithIncludeAsync(
+            Expression<Func<TEntity, bool>> predicate,
+            params Expression<Func<TEntity, object>>[] includeProperties
+            );
+        public Task<TEntity> RemoveAsync(object id);
+        public Task<TEntity> RemoveAsync(TEntity item);
+        public Task<TEntity> UpdateAsync(TEntity item);
     }
 }

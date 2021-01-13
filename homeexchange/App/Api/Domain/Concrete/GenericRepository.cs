@@ -8,45 +8,57 @@ using System.Threading.Tasks;
 
 namespace Homeexchange.Domain.Concrete
 {
-    public sealed class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public sealed class GenericRepository<TEntity> 
+        : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly DbContext _context;
-        private readonly DbSet<TEntity> _entities;
-        public GenericRepository(CustomDbContext context)
+        private readonly DbContext context;
+        private readonly DbSet<TEntity> entities;
+        public GenericRepository(
+            CustomDbContext context
+            )
         {
-            _context = context;
-            _entities = context.Set<TEntity>();
+            this.context = context;
+            this.entities = context.Set<TEntity>();
         }
         public async Task<TEntity> CreateAsync(TEntity item)
         {
-            item = _entities.Add(item).Entity;
-            await _context.SaveChangesAsync();
+            item = entities.Add(item).Entity;
+            await context.SaveChangesAsync();
             return item;
         }
         public async Task<TEntity> GetByIdAsync(object id)
         {
-            var entity = await _entities.FindAsync(id);
+            var entity = await entities.FindAsync(id);
             return entity;
         }
 
-        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
+        public IEnumerable<TEntity> Get(
+            Expression<Func<TEntity, bool>> predicate
+            )
         {
-            return _entities.AsNoTracking().Where(predicate).ToList();
+            return entities.AsNoTracking()
+                           .Where(predicate)
+                           .ToList();
         }
         public async Task<IEnumerable<TEntity>> GetAsync()
         {
-            return await _entities.AsNoTracking().ToListAsync();
+            return await entities.AsNoTracking()
+                                 .ToListAsync();
         }
-        public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> GetAsync(
+            Expression<Func<TEntity, bool>> predicate
+            )
         {
-            return await _entities.AsNoTracking().Where(predicate).ToListAsync();
+            return await entities.AsNoTracking()
+                                 .Where(predicate)
+                                 .ToListAsync();
         }
         public async Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
         {
-            IQueryable<TEntity> query = _entities;
+            IQueryable<TEntity> query = entities;
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -65,46 +77,54 @@ namespace Homeexchange.Domain.Concrete
                 return await query.ToListAsync();
             }
         }
-        public async Task<IEnumerable<TEntity>> GetAsync(Specification<TEntity> specification)
+        public async Task<IEnumerable<TEntity>> GetAsync(
+            Specification<TEntity> specification
+            )
         {
-            IQueryable<TEntity> query = _entities.AsNoTracking();
+            IQueryable<TEntity> query = entities.AsNoTracking();
             if (specification != null)
             {
                 query = query.GetSpecifiedQuery<TEntity>(specification);
             }
             return await query.ToListAsync();
         }
-
-        public async Task<IEnumerable<TEntity>> GetWithIncludeAsync(params Expression<Func<TEntity, object>>[] includeProperties)
+        public async Task<IEnumerable<TEntity>> GetWithIncludeAsync(
+            params Expression<Func<TEntity, object>>[] includeProperties
+            )
         {
-            IQueryable<TEntity> query = _entities.AsNoTracking();
+            IQueryable<TEntity> query = entities.AsNoTracking();
             return await Include(query, includeProperties).ToListAsync();
         }
-        public async Task<IEnumerable<TEntity>> GetWithIncludeAsync(Expression<Func<TEntity, bool>> predicate,
-            params Expression<Func<TEntity, object>>[] includeProperties)
+        public async Task<IEnumerable<TEntity>> GetWithIncludeAsync(
+            Expression<Func<TEntity, bool>> predicate,
+            params Expression<Func<TEntity, object>>[] includeProperties
+            )
         {
-            IQueryable<TEntity> query = _entities.AsNoTracking();
+            IQueryable<TEntity> query = entities.AsNoTracking();
             query = Include(query.Where(predicate), includeProperties);
             return await query.ToListAsync();
         }
         public async Task<TEntity> RemoveAsync(object id)
         {
-            TEntity entityToRemove = _entities.Find(id);
+            TEntity entityToRemove = entities.Find(id);
             return await RemoveAsync(entityToRemove);
         }
         public async Task<TEntity> RemoveAsync(TEntity item)
         {
-            _context.Entry(item).State = EntityState.Deleted;
-            await _context.SaveChangesAsync();
+            context.Entry(item).State = EntityState.Deleted;
+            await context.SaveChangesAsync();
             return item;
         }
         public async Task<TEntity> UpdateAsync(TEntity item)
         {
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            context.Entry(item).State = EntityState.Modified;
+            await context.SaveChangesAsync();
             return item;
         }
-        private IQueryable<TEntity> Include(IQueryable<TEntity> query, params Expression<Func<TEntity, object>>[] includeProperties)
+        private IQueryable<TEntity> Include(
+            IQueryable<TEntity> query, 
+            params Expression<Func<TEntity, object>>[] includeProperties
+            )
         {
             return includeProperties
                 .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));

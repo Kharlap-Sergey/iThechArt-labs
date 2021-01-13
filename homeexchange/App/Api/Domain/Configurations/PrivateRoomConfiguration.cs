@@ -5,9 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Homeexchange.Domain.Configurations
 {
 
-    public class PrivateRoomConfiguration : IEntityTypeConfiguration<PrivateRoom>
+    public class PrivateRoomConfiguration 
+        : IEntityTypeConfiguration<PrivateRoom>
     {
-        public void Configure(EntityTypeBuilder<PrivateRoom> builder)
+        public void Configure(
+            EntityTypeBuilder<PrivateRoom> builder
+            )
         {
             builder.HasKey(pr => new { pr.Member1Id, pr.Member2Id });
         }
