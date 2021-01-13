@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Homeexchange.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Homeexchange.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers

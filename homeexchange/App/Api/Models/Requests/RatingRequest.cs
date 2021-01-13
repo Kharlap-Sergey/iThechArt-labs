@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Homeexchange.Models.Requests
+﻿namespace Homeexchange.Models.Requests
 {
     public sealed class RatingRequest
     {

@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Homeexchange.Domain.Configurations;
-using System.Linq;
-using Homeexchange.Models.ViewModels;
+﻿using Homeexchange.Domain.Configurations;
 using Homeexchange.Models.Entities;
+using Homeexchange.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Homeexchange.Domain
 {

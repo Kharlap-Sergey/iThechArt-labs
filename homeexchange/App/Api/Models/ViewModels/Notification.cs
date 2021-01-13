@@ -17,7 +17,7 @@ namespace Homeexchange.Models.ViewModels
 
         [ForeignKey("TargetUserId")]
         [Required]
-        public int TargetUserId{ get; set; }
+        public int TargetUserId { get; set; }
         public User TargetUser { get; set; }
 
         [ForeignKey("ChatId")]

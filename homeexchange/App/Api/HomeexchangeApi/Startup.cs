@@ -1,3 +1,8 @@
+using Homeexchange.Api.Configuration;
+using Homeexchange.Api.Hubs;
+using Homeexchange.Domain;
+using Homeexchange.GlobalErrorHandling;
+using Homeexchange.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Connections;
@@ -5,13 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Homeexchange.Domain;
-using Homeexchange.Api.Hubs;
-using Homeexchange.GlobalErrorHandling;
-using Homeexchange.Api.Configuration;
 using System;
 using System.Linq;
-using Homeexchange.Services;
 
 namespace Homeexchange.Api
 {

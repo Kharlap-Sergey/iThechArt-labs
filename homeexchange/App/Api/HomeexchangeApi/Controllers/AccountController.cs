@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Homeexchange.Models.ViewModels;
 using Homeexchange.Responses;
 using Homeexchange.Services;
-using Homeexchange.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers

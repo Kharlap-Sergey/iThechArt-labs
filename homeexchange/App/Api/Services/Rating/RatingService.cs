@@ -28,14 +28,14 @@ namespace Homeexchange.Services
 
         public async Task<Rating> SetAsync(RatingRequest request, int committerId)
         {
-            var rate = 
+            var rate =
                 (await ratingRepository
                     .GetAsync(r => r.TargetId == request.TargetId && r.CommitterId == committerId))
                 .FirstOrDefault();
 
-            if(rate is null)
+            if (rate is null)
             {
-                rate = await  ratingRepository.CreateAsync(new Rating
+                rate = await ratingRepository.CreateAsync(new Rating
                 {
                     TargetId = request.TargetId,
                     CommitterId = committerId,

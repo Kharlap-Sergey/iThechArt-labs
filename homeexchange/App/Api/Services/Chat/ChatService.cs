@@ -128,8 +128,8 @@ namespace Homeexchange.Services
 
         public async Task<IEnumerable<ChatMessage>> GetChatMessagesAsync(int chatId, int commiterId)
         {
-            var chatMem = (await chatMemberRepository.GetAsync(cm => 
-                                                                    cm.ChatId == chatId 
+            var chatMem = (await chatMemberRepository.GetAsync(cm =>
+                                                                    cm.ChatId == chatId
                                                                     && cm.UserId == commiterId))
                           .FirstOrDefault();
             if (chatMem == null)
@@ -148,8 +148,8 @@ namespace Homeexchange.Services
                 member1 = member2;
                 member2 = temp;
             }
-            var pw = (await privateRoomRepository.GetAsync(pw => 
-                                                        pw.Member1Id == member1 
+            var pw = (await privateRoomRepository.GetAsync(pw =>
+                                                        pw.Member1Id == member1
                                                         && pw.Member2Id == member2))
                     .FirstOrDefault();
             if (pw == null)

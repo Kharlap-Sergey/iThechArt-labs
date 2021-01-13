@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Homeexchange.Services;
+﻿using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers
 {
@@ -13,10 +13,10 @@ namespace Homeexchange.Api.Controllers
 
     public class ImgController : BaseController
     {
-        private readonly IImgService imgService;
-        private readonly string rootPath; 
+        private readonly IImageService imgService;
+        private readonly string rootPath;
         public ImgController(
-            IImgService imgService,
+            IImageService imgService,
             IWebHostEnvironment webHostEnviroment,
             IConfiguration configuration
             )

@@ -5,7 +5,6 @@ using Homeexchange.Responses;
 using Homeexchange.Services.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -43,9 +42,11 @@ namespace Homeexchange.Services
         public async Task<LoginResponse> ReenterAsync(int userId)
         {
             var user = await userRepository.GetByIdAsync(userId);
-            var account = new Account { 
+            var account = new Account
+            {
                 Login = user.Email
-                ,Password = user.Password 
+                ,
+                Password = user.Password
             };
 
             return await LoginAsync(account);
@@ -62,7 +63,8 @@ namespace Homeexchange.Services
                 if (e.InnerException.Message.Contains("Email"))
                 {
                     throw new DuplicateEmailException("try to registrate user");
-                }else if (e.InnerException.Message.Contains("Nickname"))
+                }
+                else if (e.InnerException.Message.Contains("Nickname"))
                 {
                     throw new DuplicateNicknameException("try to registrate user");
                 }
@@ -92,8 +94,8 @@ namespace Homeexchange.Services
 
             ClaimsIdentity claimsIdentity =
             new ClaimsIdentity(
-                claims, 
-                "Token", 
+                claims,
+                "Token",
                 ClaimsIdentity.DefaultNameClaimType,
                 ClaimsIdentity.DefaultRoleClaimType);
             return claimsIdentity;

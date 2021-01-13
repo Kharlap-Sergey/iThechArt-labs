@@ -31,7 +31,7 @@ namespace Homeexchange.Api.Controllers
         {
             int committerId = GetCommitterId();
             var res = await ratingService.SetAsync(request, committerId);
-            return Json(res);   
+            return Json(res);
         }
     }
 }

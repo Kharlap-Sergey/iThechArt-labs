@@ -1,5 +1,4 @@
 ﻿using Homeexchange.Models.ViewModels;
-using System.Text.Json.Serialization;
 
 namespace Homeexchange.Models.Requests
 {

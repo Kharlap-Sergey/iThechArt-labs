@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Homeexchange.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Homeexchange.Models.ViewModels;
 
 namespace Homeexchange.Domain.Configurations
 {

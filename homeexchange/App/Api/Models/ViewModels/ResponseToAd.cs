@@ -17,6 +17,6 @@ namespace Homeexchange.Models.ViewModels
         [Required]
         public int TargetAdId { get; set; }
         public DateTime Date { set; get; }
-        public string Message { set; get;}
+        public string Message { set; get; }
     }
 }

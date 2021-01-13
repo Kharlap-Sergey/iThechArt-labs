@@ -21,6 +21,6 @@ namespace Homeexchange.Models.Entities
         public User User { get; set; }
 
         public string Content { set; get; }
-        public DateTime PublicationDate{set; get;}
+        public DateTime PublicationDate { set; get; }
     }
 }

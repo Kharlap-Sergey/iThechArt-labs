@@ -1,6 +1,4 @@
-﻿using Homeexchange.Domain.Abstract;
-using Homeexchange.Models.Entities;
-using Homeexchange.Models.Requests;
+﻿using Homeexchange.Models.Requests;
 using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,21 +16,21 @@ namespace Homeexchange.Api.Controllers
         {
             this.chatService = chatService;
         }
- 
+
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> GetChatList()
         {
             var userId = GetCommitterId();
-            var chatList = await chatService.GetChatResponsesListAsync(userId); 
+            var chatList = await chatService.GetChatResponsesListAsync(userId);
             return Json(chatList);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> GetPrivateRoomId([FromBody]GetPrivateRoomIdRequest request)
+        public async Task<IActionResult> GetPrivateRoomId([FromBody] GetPrivateRoomIdRequest request)
         {
-            var chat= await chatService.GetChatOrCreateForTowMembersAsync(request.Member1Id, request.Member2Id);
+            var chat = await chatService.GetChatOrCreateForTowMembersAsync(request.Member1Id, request.Member2Id);
             return Json(chat.Id);
         }
 

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Homeexchange.Services.Infrastructure
 {
@@ -10,7 +8,7 @@ namespace Homeexchange.Services.Infrastructure
         public Type ServiceType { get; private set; }
         public ServiceLifetime Lifetime { get; private set; }
         public IsServiceImplementationAttribute(
-            Type serviceType, 
+            Type serviceType,
             ServiceLifetime lifetime = ServiceLifetime.Transient)
         {
             ServiceType = serviceType;

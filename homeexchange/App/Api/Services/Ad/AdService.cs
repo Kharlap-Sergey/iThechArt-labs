@@ -61,10 +61,10 @@ namespace Homeexchange.Services
 
         static bool IsKeyWordPresent(Ad ad, User Author, string keyWord)
         {
-            return keyWord =="" || keyWord == Author.City.ToLower() || keyWord == Author.Country.ToLower();
+            return keyWord == "" || keyWord == Author.City.ToLower() || keyWord == Author.Country.ToLower();
         }
 
-        
+
         public async Task<AdsPage> GetAdsPageAsync(GetAdsPageRequest request)
         {
             const int pageSize = 4;
@@ -80,12 +80,12 @@ namespace Homeexchange.Services
             specification.Conditions.Add(ad => adFilter.AuthorId == null || ad.AuthorId == adFilter.AuthorId);
             specification.Conditions.Add(ad => adFilter.Types.Count == 0 || adFilter.Types.Contains(ad.Type));
             specification.Conditions.Add(ad => searchString.Length == 0
-                                               || searchString.Contains(ad.Author.City.ToLower()) 
+                                               || searchString.Contains(ad.Author.City.ToLower())
                                                || searchString.Contains(ad.Author.Country.ToLower()));
             var ads = await adRepository
                 .GetAsync(specification);
 
-            
+
             var pageInfo = new PagingInfo(ads.Count(), pageNumber, pageSize);
             var result = new AdsPage
             {
@@ -109,7 +109,7 @@ namespace Homeexchange.Services
 
         public async Task<Ad> ReplyOnAdAsync(Ad ad, int committerId, string message = "")
         {
-            if(ad.IsResponded)
+            if (ad.IsResponded)
             {
                 throw new AdAlreadyHasBeenRepliedException($"the ad alreade has been responded");
             }

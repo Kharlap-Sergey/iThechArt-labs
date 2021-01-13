@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Homeexchange.Models.Exceptions;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using Homeexchange.Models.Exceptions;
 
 namespace Homeexchange.GlobalErrorHandling
 {

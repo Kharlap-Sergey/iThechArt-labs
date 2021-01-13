@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.SignalR;
+﻿using Homeexchange.Models.ViewModels;
 using Homeexchange.Services;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
-using Homeexchange.Models.ViewModels;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Hubs
 {
@@ -49,7 +49,7 @@ namespace Homeexchange.Api.Hubs
         {
             int userId = GetCommitterId();
 
-            if (NotificationHub.Subscribers.ContainsKey(userId)) 
+            if (NotificationHub.Subscribers.ContainsKey(userId))
                 NotificationHub.Subscribers.Remove(userId);
 
             await base.OnDisconnectedAsync(e);

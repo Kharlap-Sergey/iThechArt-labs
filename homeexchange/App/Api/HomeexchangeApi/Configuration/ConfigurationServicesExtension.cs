@@ -1,23 +1,26 @@
-﻿using Homeexchange.Domain.Abstract;
-using Homeexchange.Domain.Concrete;
-using Homeexchange.Models.Entities;
-using Homeexchange.Models.ViewModels;
-using Homeexchange.Services;
-using Homeexchange.Services.Infrastructure;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-
-namespace Homeexchange.Api.Configuration
+﻿namespace Homeexchange.Api.Configuration
 {
+    using Homeexchange.Domain.Abstract;
+    using Homeexchange.Domain.Concrete;
+    using Homeexchange.Services.Infrastructure;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.IdentityModel.Tokens;
+    using System.Linq;
+    using System.Reflection;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// Defines the <see cref="ConfigurationServicesExtension" />.
+    /// </summary>
     public static class ConfigurationServicesExtension
     {
+        /// <summary>
+        /// The InjectDependencies.
+        /// </summary>
+        /// <param name="services">The services<see cref="IServiceCollection"/>.</param>
+        /// <param name="assemblies">The assemblies<see cref="Assembly[]"/>.</param>
         public static void InjectDependencies(this IServiceCollection services, Assembly[] assemblies)
         {
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -25,9 +28,17 @@ namespace Homeexchange.Api.Configuration
             services.InjectServiсes(assemblies);
         }
 
-        public static void InjectServiсes(this IServiceCollection services,Assembly[] assemblies)
+        /// <summary>
+        /// The InjectServiсes.
+        /// </summary>
+        /// <param name="services">The services<see cref="IServiceCollection"/>.</param>
+        /// <param name="assemblies">The assemblies<see cref="Assembly[]"/>.</param>
+        public static void InjectServiсes(this IServiceCollection services, Assembly[] assemblies)
         {
-             var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes.Where(t => t.GetCustomAttribute(typeof (IsServiceImplementationAttribute))  != null )).ToList();
+            var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes).ToList();
+            typesFromAssemblies = typesFromAssemblies.Where(t => t.CustomAttributes.ToList().Count > 0).ToList();
+            var T = typeof(IsServiceImplementationAttribute);
+            var typesFromAssemblies1 = typesFromAssemblies.Select(t => new { t, atr = t.GetCustomAttribute(typeof(IsServiceImplementationAttribute)) }).ToList();
             foreach (var type in typesFromAssemblies)
             {
                 IsServiceImplementationAttribute attr = type.GetCustomAttribute<IsServiceImplementationAttribute>();
@@ -35,6 +46,11 @@ namespace Homeexchange.Api.Configuration
             }
         }
 
+        /// <summary>
+        /// The ConfigureAuthentication.
+        /// </summary>
+        /// <param name="services">The services<see cref="IServiceCollection"/>.</param>
+        /// <param name="Configuration">The Configuration<see cref="IConfiguration"/>.</param>
         public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration Configuration)
         {
             //auth through jwt

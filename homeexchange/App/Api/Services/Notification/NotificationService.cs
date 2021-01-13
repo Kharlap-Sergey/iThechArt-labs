@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using Homeexchange.Domain.Abstract;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Homeexchange.Models.ViewModels;
+﻿using Homeexchange.Domain.Abstract;
 using Homeexchange.Models.Exceptions;
-using System;
+using Homeexchange.Models.ViewModels;
 using Homeexchange.Services.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Homeexchange.Services
 {
@@ -36,7 +35,7 @@ namespace Homeexchange.Services
         {
             var notification = await notificationRepository.GetByIdAsync(notificationId);
 
-            if(commiterId != notification.TargetUserId)
+            if (commiterId != notification.TargetUserId)
             {
                 throw new PermissionException("this isn't your notification");
             }
@@ -46,7 +45,7 @@ namespace Homeexchange.Services
 
         public void SetNotificationHandler(Action<Notification> notificationHandler)
         {
-            if(NotificationService.Notify == null)
+            if (NotificationService.Notify == null)
             {
                 NotificationService.Notify = notificationHandler;
             }

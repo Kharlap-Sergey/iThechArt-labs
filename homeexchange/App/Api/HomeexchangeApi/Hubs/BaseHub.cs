@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using Homeexchange.Models.Exceptions;
+﻿using Homeexchange.Models.Exceptions;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Homeexchange.Api.Hubs
 {
@@ -7,7 +7,7 @@ namespace Homeexchange.Api.Hubs
     {
         protected int GetCommitterId()
         {
-            if(Context.User.Identity == null)
+            if (Context.User.Identity == null)
             {
                 throw new UnauthorizedException();
             }

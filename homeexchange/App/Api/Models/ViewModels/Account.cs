@@ -1,10 +1,8 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Homeexchange.Models.ViewModels
+﻿namespace Homeexchange.Models.ViewModels
 {
     public sealed class Account
     {
-        public string Login{ get; set; }
+        public string Login { get; set; }
         public string Password { get; set; }
     }
 }

@@ -1,24 +1,24 @@
 ﻿using Homeexchange.Domain.Abstract;
 using Homeexchange.Models.Entities;
+using Homeexchange.Models.Exceptions;
 using Homeexchange.Models.ViewModels;
+using Homeexchange.Services.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Homeexchange.Models.Exceptions;
-using Homeexchange.Services.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Homeexchange.Services
 {
-    [IsServiceImplementation(typeof(IImgService), ServiceLifetime.Scoped)]
-    public sealed class ImgService : IImgService
+    [IsServiceImplementation(typeof(IImageService), ServiceLifetime.Scoped)]
+    public sealed class ImageService : IImageService
     {
         readonly IGenericRepository<Img> imgRepository;
         readonly IGenericRepository<User> userRepository;
-        public ImgService(
+        public ImageService(
             IGenericRepository<Img> imgRepository,
             IGenericRepository<User> userRepository
             )
@@ -30,7 +30,7 @@ namespace Homeexchange.Services
         {
             var user = await userRepository.GetByIdAsync(targetUserId);
             int imgId = user.ProfileImgId;
-            if(imgId <= 0)
+            if (imgId <= 0)
             {
                 throw new ImgNotFoundException("coldn't find the profile img");
             }

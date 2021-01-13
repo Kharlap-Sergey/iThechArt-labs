@@ -38,7 +38,7 @@ namespace Homeexchange.Models.ViewModels
         public List<Ad> Ads { get; set; } = new List<Ad>();
 
         [NotMapped]
-        public List<Notification> NotificationsAboutResponseToAd { get; set; } = 
+        public List<Notification> NotificationsAboutResponseToAd { get; set; } =
             new List<Notification>();
 
         [Required]

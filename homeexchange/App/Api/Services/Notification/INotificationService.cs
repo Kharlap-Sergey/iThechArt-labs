@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Homeexchange.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Homeexchange.Models.ViewModels;
 
 namespace Homeexchange.Services
 {
@@ -11,6 +11,6 @@ namespace Homeexchange.Services
         public Task CreateAsync(Notification notification);
         public Task<Notification> DeleteAsync(int notificationId, int commiterId);
         public Task<IEnumerable<Notification>> GetAllNotificationForUserByUserIdAsync(int userID);
-        
+
     }
 }

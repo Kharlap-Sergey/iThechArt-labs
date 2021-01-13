@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Homeexchange.Domain.Abstract;
+﻿using Homeexchange.Domain.Abstract;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Homeexchange.Domain;
 using System.Threading.Tasks;
 
 namespace Homeexchange.Domain.Concrete
@@ -38,7 +37,7 @@ namespace Homeexchange.Domain.Concrete
         {
             return await _entities.AsNoTracking().ToListAsync();
         }
-        public async Task<IEnumerable<TEntity>>GetAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return await _entities.AsNoTracking().Where(predicate).ToListAsync();
         }
