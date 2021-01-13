@@ -27,7 +27,10 @@ namespace Homeexchange.Api.Configuration
 
         public static void InjectServiсes(this IServiceCollection services,Assembly[] assemblies)
         {
-             var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes.Where(t => t.GetCustomAttribute(typeof (IsServiceImplementationAttribute))  != null )).ToList();
+            var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes).ToList();
+            typesFromAssemblies = typesFromAssemblies.Where(t => t.CustomAttributes.ToList().Count > 0).ToList();
+            var T = typeof(IsServiceImplementationAttribute);
+            var typesFromAssemblies1 = typesFromAssemblies.Select(t => new { t, atr = t.GetCustomAttribute(typeof(IsServiceImplementationAttribute)) }).ToList();
             foreach (var type in typesFromAssemblies)
             {
                 IsServiceImplementationAttribute attr = type.GetCustomAttribute<IsServiceImplementationAttribute>();
