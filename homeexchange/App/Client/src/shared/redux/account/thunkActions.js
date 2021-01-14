@@ -98,6 +98,7 @@ export function reenter() {
 export function applyLoginSettings(data) {
   return (dispatch) => {
     try {
+      debugger;
       auth.setToken(data.jwt);
       dispatch(
         loginUserAction({

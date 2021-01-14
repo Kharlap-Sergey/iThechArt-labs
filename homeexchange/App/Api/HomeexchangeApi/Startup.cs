@@ -4,6 +4,8 @@ using Homeexchange.Domain;
 using Homeexchange.GlobalErrorHandling;
 using Homeexchange.Models.Entities;
 using Homeexchange.Services;
+using Homeexchange.Services.Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Connections;
@@ -65,10 +67,12 @@ namespace Homeexchange.Api
                 options.User.RequireUniqueEmail = false;
             });
 
-            //own extension to authentication
-            //services.ConfigureAuthentication(Configuration);
+
             services.AddIdentity<User, IdentityRole<int>>()
                     .AddEntityFrameworkStores<CustomDbContext>();
+            //own extension to authentication
+            services.ConfigureAuthentication(Configuration);
+
 
             services.Configure<IISServerOptions>(options =>
             {

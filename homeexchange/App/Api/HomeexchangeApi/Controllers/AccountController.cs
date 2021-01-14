@@ -2,9 +2,12 @@
 using Homeexchange.Models.ViewModels;
 using Homeexchange.Responses;
 using Homeexchange.Services;
+using Homeexchange.Services.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers
@@ -29,6 +32,10 @@ namespace Homeexchange.Api.Controllers
             this.signInManager = signInManager;
         }
 
+        public IActionResult  Login(string returnUrl = null)
+        {
+            return Redirect("~"+returnUrl);
+        }
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] Account account)
         {
@@ -37,9 +44,35 @@ namespace Homeexchange.Api.Controllers
             var user = userManager.FindByNameAsync(account.Login);
             //LoginResponse result = await accounService.LoginAsync(account);
             var userResult = user.Result;
-            return Json(userResult);
-        }
 
+            ClaimsIdentity identity = GetIdentity(userResult.Id);
+            string encodedJwt = CustomJWTCreator.CreateJWT(identity);
+
+            var response = new LoginResponse
+            {
+                JWT = encodedJwt,
+                User = userResult
+            };
+
+            return Json(response);
+        }
+        private ClaimsIdentity GetIdentity(int person)
+        {
+            var claims = new List<Claim>
+                {
+                    new Claim(
+                        ClaimsIdentity.DefaultNameClaimType,
+                        person.ToString()),
+                };
+
+            ClaimsIdentity claimsIdentity =
+            new ClaimsIdentity(
+                claims,
+                "Token",
+                ClaimsIdentity.DefaultNameClaimType,
+                ClaimsIdentity.DefaultRoleClaimType);
+            return claimsIdentity;
+        }
         [HttpPost]
         public async Task<IActionResult> Registrate([FromBody] RegisterUserViewModel model)
         {
