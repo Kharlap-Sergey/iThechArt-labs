@@ -3,6 +3,7 @@ using Homeexchange.Domain.Abstract;
 using Homeexchange.Models.Entities;
 using Homeexchange.Models.Exceptions;
 using Homeexchange.Models.Requests;
+using Homeexchange.Models.Shared;
 using Homeexchange.Models.ViewModels;
 using Homeexchange.Services.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;

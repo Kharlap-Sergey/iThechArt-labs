@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Homeexchange.Models.ViewModels
+namespace Homeexchange.Models.Shared
 {
     public sealed class AdFilter
     {
         [JsonPropertyName("type")]
-        public List<Ad.AdType> Types { set; get; }
+        public List<AdType> Types { set; get; }
         public int? AuthorId { set; get; }
     }
 }

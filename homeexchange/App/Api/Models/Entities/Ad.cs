@@ -1,4 +1,5 @@
-﻿using Homeexchange.Models.ViewModels;
+﻿using Homeexchange.Models.Shared;
+using Homeexchange.Models.ViewModels;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,11 +9,6 @@ namespace Homeexchange.Models.Entities
 {
     public sealed class Ad
     {
-        public enum AdType
-        {
-            tenancy = 1,
-            toRent = 2
-        }
         [Key]
         public int Id { get; set; }
         public string Title { get; set; }

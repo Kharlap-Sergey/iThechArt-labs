@@ -1,4 +1,5 @@
-﻿using Homeexchange.Models.ViewModels;
+﻿using Homeexchange.Models.Shared;
+using Homeexchange.Models.ViewModels;
 
 namespace Homeexchange.Models.Requests
 {

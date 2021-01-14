@@ -26,10 +26,19 @@ namespace Homeexchange.Services
 
         public async Task<LoginResponse> LoginAsync(Account account)
         {
-            ClaimsIdentity identity = await GetIdentity(account);
+            User user = (await userRepository.GetAsync
+                (
+                    u => u.Email == account.Login
+                         && u.Password == account.Password
+                )).FirstOrDefault();
+
+            if (user == null)
+            {
+                throw new InvalidCredentialExeption("The user name or password is not correct");
+            }
+
+            ClaimsIdentity identity = GetIdentity(user);
             string encodedJwt = CustomJWTCreator.CreateJWT(identity);
-            User user = (await userRepository.GetAsync(u => u.Email == account.Login))
-                        .FirstOrDefault();
 
             var response = new LoginResponse
             {
@@ -67,19 +76,8 @@ namespace Homeexchange.Services
                 throw;
             }
         }
-        private async Task<ClaimsIdentity> GetIdentity(Account account)
-        {
-            User person = (await userRepository.GetAsync
-                (
-                    u => u.Email == account.Login
-                         && u.Password == account.Password
-                )).FirstOrDefault();
-
-            if (person == null)
-            {
-                throw new InvalidCredentialExeption("The user name or password is not correct");
-            }
-
+        private ClaimsIdentity GetIdentity(User person)
+        { 
             var claims = new List<Claim>
                 {
                     new Claim(
