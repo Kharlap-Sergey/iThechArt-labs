@@ -45,12 +45,12 @@ namespace Homeexchange.Api.Controllers
             //LoginResponse result = await accounService.LoginAsync(account);
             var userResult = user.Result;
 
-            ClaimsIdentity identity = GetIdentity(userResult.Id);
-            string encodedJwt = CustomJWTCreator.CreateJWT(identity);
+            //ClaimsIdentity identity = GetIdentity(userResult.Id);
+            //string encodedJwt = CustomJWTCreator.CreateJWT(identity);
 
             var response = new LoginResponse
             {
-                JWT = encodedJwt,
+                JWT = "fds",
                 User = userResult
             };
 
