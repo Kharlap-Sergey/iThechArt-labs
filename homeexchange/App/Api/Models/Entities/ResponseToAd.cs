@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Homeexchange.Models.ViewModels
+namespace Homeexchange.Models.Entities
 {
     public sealed class ResponseToAd
     {

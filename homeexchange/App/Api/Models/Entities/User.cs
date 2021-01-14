@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace Homeexchange.Models.ViewModels
+namespace Homeexchange.Models.Entities
 {
     public sealed class User
     {
@@ -29,14 +29,6 @@ namespace Homeexchange.Models.ViewModels
 
         public string Country { get; set; }
         public string City { get; set; }
-
-        [NotMapped]
-        public List<Ad> Ads { get; set; } = new List<Ad>();
-
-        [NotMapped]
-        public List<Notification> NotificationsAboutResponseToAd { get; set; } =
-            new List<Notification>();
-
         [Required]
         public int ProfileImgId { get; set; }
         [NotMapped]

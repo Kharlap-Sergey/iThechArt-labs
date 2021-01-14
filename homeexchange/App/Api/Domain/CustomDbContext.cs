@@ -1,6 +1,5 @@
 ﻿using Homeexchange.Domain.Configurations;
 using Homeexchange.Models.Entities;
-using Homeexchange.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 

@@ -6,7 +6,6 @@ namespace Homeexchange.Models.Entities
     {
         [Key]
         public int Id { set; get; }
-
         public string Title { set; get; }
     }
 }

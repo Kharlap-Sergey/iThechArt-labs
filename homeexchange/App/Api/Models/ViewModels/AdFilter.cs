@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Homeexchange.Models.Entities;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Homeexchange.Models.ViewModels

@@ -1,4 +1,5 @@
-﻿using Homeexchange.Models.ViewModels;
+﻿using Homeexchange.Models.Entities;
+using Homeexchange.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

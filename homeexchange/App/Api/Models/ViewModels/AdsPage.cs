@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Homeexchange.Models.Entities;
+using System.Collections.Generic;
 
 namespace Homeexchange.Models.ViewModels
 {

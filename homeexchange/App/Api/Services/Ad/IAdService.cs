@@ -1,4 +1,5 @@
-﻿using Homeexchange.Models.Requests;
+﻿using Homeexchange.Models.Entities;
+using Homeexchange.Models.Requests;
 using Homeexchange.Models.ViewModels;
 using System.Threading.Tasks;
 
