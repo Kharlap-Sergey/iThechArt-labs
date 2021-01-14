@@ -29,7 +29,7 @@ namespace Homeexchange.Services
             User user = (await userRepository.GetAsync
                 (
                     u => u.Email == account.Login
-                         && u.Password == account.Password
+                         //&& u.Password == account.Password
                 )).FirstOrDefault();
 
             if (user == null)
@@ -53,7 +53,7 @@ namespace Homeexchange.Services
             var account = new Account
             {
                 Login = user.Email,
-                Password = user.Password
+                //Password = user.Password
             };
             return await LoginAsync(account);
         }

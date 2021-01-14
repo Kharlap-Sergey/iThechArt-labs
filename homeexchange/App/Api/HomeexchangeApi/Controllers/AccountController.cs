@@ -3,6 +3,7 @@ using Homeexchange.Models.ViewModels;
 using Homeexchange.Responses;
 using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -12,28 +13,47 @@ namespace Homeexchange.Api.Controllers
     public sealed class AccountController : BaseController
     {
         private readonly IAccounService accounService;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
         private readonly IUserService userService;
         public AccountController(
              IUserService userService,
-             IAccounService accounService
+             IAccounService accounService,
+             UserManager<User> userManager,
+             SignInManager<User> signInManager
             )
         {
             this.userService = userService;
             this.accounService = accounService;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] Account account)
         {
-            LoginResponse response = await accounService.LoginAsync(account);
-            return Json(response);
+            var result =
+                await signInManager.PasswordSignInAsync(account.Login, account.Password, true, false);
+            var user = userManager.FindByNameAsync(account.Login);
+            //LoginResponse result = await accounService.LoginAsync(account);
+            var userResult = user.Result;
+            return Json(userResult);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Registrate([FromBody] User user)
+        public async Task<IActionResult> Registrate([FromBody] RegisterUserViewModel model)
         {
-            user = await accounService.RegistrateAsync(user);
-            return Json(user);;
+            var user = new User { 
+                Email = model.Email, 
+                UserName = model.Email, 
+                Name = model.Name,
+                Nickname = model.Nickname,
+                City = model.City,
+                Country = model.Country,
+            };
+            //user = await accounService.RegistrateAsync(user);
+            var result = await userManager.CreateAsync(user, model.Password);
+            return Json(user);
         }
 
         [HttpPost]

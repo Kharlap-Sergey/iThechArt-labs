@@ -28,11 +28,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homeexchange.Api", "App\Api
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homeexchange.Tests", "App\Api\HomeexchangeApi.Tests\Homeexchange.Tests.csproj", "{BADFD002-37AE-44F2-BED1-6EC73CB0E6BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homeexchange.Models", "App\Api\Models\Homeexchange.Models.csproj", "{6582F3DB-1D7E-41B6-B1B4-B7F00D376B13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homeexchange.Models", "App\Api\Models\Homeexchange.Models.csproj", "{6582F3DB-1D7E-41B6-B1B4-B7F00D376B13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homeexchange.Services", "App\Api\Services\Homeexchange.Services.csproj", "{5E180AD1-3862-40EF-BFE8-0E6F16F54C26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homeexchange.Services", "App\Api\Services\Homeexchange.Services.csproj", "{5E180AD1-3862-40EF-BFE8-0E6F16F54C26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homeexchange.Domain", "App\Api\Domain\Homeexchange.Domain.csproj", "{008F4D15-32A2-48B9-B63B-DF9955B48499}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homeexchange.Domain", "App\Api\Domain\Homeexchange.Domain.csproj", "{008F4D15-32A2-48B9-B63B-DF9955B48499}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

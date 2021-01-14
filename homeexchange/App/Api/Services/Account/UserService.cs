@@ -32,7 +32,7 @@ namespace Homeexchange.Services
         public async Task<User> GetProfileAsync(int userId)
         {
             User profile = await userRepository.GetByIdAsync(userId);
-            profile.Password = null;
+            //profile.Password = null;
             return profile;
         }
 
@@ -43,8 +43,8 @@ namespace Homeexchange.Services
                 throw new PermissionException("data can't be updated");
             }
 
-            user.Password = (await userRepository.GetAsync(u => u.Id == commiterId))
-                            .FirstOrDefault().Password;
+            //user.Password = (await userRepository.GetAsync(u => u.Id == commiterId))
+            //                .FirstOrDefault().Password;
 
             return await userRepository.UpdateAsync(user);
         }

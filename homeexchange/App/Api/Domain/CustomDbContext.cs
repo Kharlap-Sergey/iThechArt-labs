@@ -1,13 +1,15 @@
 ﻿using Homeexchange.Domain.Configurations;
 using Homeexchange.Models.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Homeexchange.Domain
 {
-    public class CustomDbContext : DbContext
+    public class CustomDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>,int>
     {
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<ResponseToAd> ResponsesToAd { get; set; }
         public DbSet<Ad> Ads { get; set; }
