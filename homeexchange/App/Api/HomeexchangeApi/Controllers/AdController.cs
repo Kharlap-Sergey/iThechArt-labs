@@ -1,5 +1,7 @@
-﻿ using Homeexchange.Models.Entities;
+﻿using AutoMapper;
+using Homeexchange.Models.Entities;
 using Homeexchange.Models.Requests;
+using Homeexchange.Models.Shared;
 using Homeexchange.Models.ViewModels;
 using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -8,66 +10,78 @@ using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers
 {
-    [Route("[controller]/{action}")]
+    [Route( "[controller]/{action}" )]
     public sealed class AdController : BaseController
     {
         private readonly IAdService adService;
+        private readonly IMapper mapper;
+
         public AdController(
-            IAdService adService
+            IAdService adService,
+            IMapper mapper
             )
         {
             this.adService = adService;
+            this.mapper = mapper;
         }
 
-        
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Create([FromBody] Ad ad)
-        {
-            int authorId = GetCommitterId();
-            ad = await adService.CreateAsync(ad, authorId);
-            return Json(ad);
-        }
-
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet( "{id}" )]
+        public async Task<IActionResult> Get( int id )
         {
             Ad ad = await adService.FindByIdAsync(id);
-            return Json(ad);
+            return Json( ad );
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetAdsPage([FromBody] GetAdsPageRequest request)
+        public async Task<IActionResult> GetAdsPage( 
+            [FromBody] GetPageRequest<AdFilter> request 
+            )
         {
-            AdsPage page = await adService.GetAdsPageAsync(request);
-            return Json(page);
+            Page<Ad> page = await adService.GetAdsPageAsync(request.Page, request.Filter);
+            var adsPage = mapper.Map<AdsPage>(page);
+
+            return Json( adsPage );
         }
 
-        [HttpPost("{adId}")]
+        [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Reply(int adId)
+        public async Task<IActionResult> Create( 
+            [FromBody] AdViewModel model 
+            )
+        {
+            int authorId = GetCommitterId();
+            Ad ad = mapper.Map<Ad>(model);
+            ad = await adService.CreateAsync( ad, authorId );
+            return Json( ad );
+        }
+
+        [Authorize]
+        [HttpPost( "{adId}" )]
+        public async Task<IActionResult> Reply( int adId )
         {
             int userId = GetCommitterId();
             Ad ad = await adService.FindByIdAsync(adId);
-
-            return Json(await adService.ReplyOnAdAsync(ad, userId));
+            return Json( await adService.ReplyOnAdAsync( ad, userId ) );
         }
 
-        [HttpDelete("{adId}")]
         [Authorize]
-        public async Task<IActionResult> Delete(int adId)
+        [HttpDelete( "{adId}" )]
+        public async Task<IActionResult> Delete( int adId )
         {
             int userId = GetCommitterId();
-            await adService.DeleteAsync(adId, userId);
+            await adService.DeleteAsync( adId, userId );
             return Ok();
         }
 
         [Authorize]
-        public async Task<IActionResult> Update([FromBody] Ad ad)
+        [HttpPost]
+        public async Task<IActionResult> Update( 
+            [FromBody] UpdateAdViewModel model
+            )
         {
             int userId = GetCommitterId();
-            await adService.UpdateAsync(ad, userId);
+            Ad ad = mapper.Map<Ad>(model);
+            await adService.UpdateAsync( ad, userId );
 
             return Ok();
         }

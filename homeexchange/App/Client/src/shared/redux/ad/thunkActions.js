@@ -7,7 +7,7 @@ import {
   enableAdLoader,
 } from "shared/redux/loader/actions";
 import { toastrNotifier } from "shared/redux/tostrNotifier";
-import { setAdAction, setAdsAction } from './actions';
+import { setAdAction, setAdsAction } from "./actions";
 
 export function createNewAd(ad) {
   return async (dispatch) => {
@@ -30,7 +30,7 @@ export function createNewAd(ad) {
 
 export function getAd(adId) {
   return async (dispatch) => {
-      dispatch(enableAdFromtActin());
+    dispatch(enableAdFromtActin());
     try {
       const url = pathApi.ad.get(adId);
       const response = await requestWrapper.get(url);
@@ -44,7 +44,7 @@ export function getAd(adId) {
       }
     } catch (e) {
       toastrNotifier.tryAgainLater();
-    }finally{
+    } finally {
       dispatch(disableAllAction());
     }
   };
@@ -55,7 +55,7 @@ export function updateAd(ad) {
     dispatch(enableAdFromtActin());
     try {
       const url = pathApi.ad.update();
-      
+
       const response = await requestWrapper.post(url, ad);
       if (response.ok) {
         dispatch(redirectToAction(path.profile));
@@ -64,7 +64,7 @@ export function updateAd(ad) {
       }
     } catch (e) {
       toastrNotifier.tryAgainLater();
-    }finally{
+    } finally {
       dispatch(disableAllAction());
     }
   };
@@ -100,8 +100,7 @@ export function getAds(page, type, searchString, authorId) {
       dispatch(enableAdLoader());
       const url = pathApi.ad.loadPage();
       const data = {
-        filter: { type, authorId },
-        searchString,
+        filter: { type, authorId, searchString },
         page,
       };
       const response = await requestWrapper.post(url, data);

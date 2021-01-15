@@ -60,12 +60,11 @@ namespace Homeexchange.Services
         {
             return await adCibtext.GetByIdAsync(adId);
         }
-        public async Task<AdsPage> GetAdsPageAsync(GetAdsPageRequest request)
+        public async Task<Page<Ad>> GetAdsPageAsync(int page, AdFilter adFilter)
         {
             const int pageSize = 4;
-            int pageNumber = request.Page;
-            AdFilter adFilter = request.Filter;
-            string searchString = request.SearchString;
+            int pageNumber =  page;
+            string searchString = adFilter.SearchString;
 
             var specification = new Specification<Ad>
             {
@@ -85,11 +84,10 @@ namespace Homeexchange.Services
                 await adCibtext.GetAsync(specification);
 
             var pageInfo = new PagingInfo(ads.Count(), pageNumber, pageSize);
-            var result = new AdsPage
+            var result = new Page<Ad>
             {
-                HasNext = pageInfo.HasNextPage,
-                HasPrevious = pageInfo.HasPreviousPage,
-                Ads = ads
+                Content = ads,
+                Info = pageInfo
             };
 
             return result;

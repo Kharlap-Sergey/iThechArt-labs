@@ -9,5 +9,7 @@ namespace Homeexchange.Models.Shared
         [JsonPropertyName("type")]
         public List<AdType> Types { set; get; }
         public int? AuthorId { set; get; }
+
+        public string SearchString { set; get; }
     }
 }
