@@ -47,32 +47,8 @@ namespace Homeexchange.Api
             services.AddDbContext<CustomDbContext>(options =>
               options.UseSqlServer(connection));
 
-            //Identity
-            services.Configure<IdentityOptions>(options =>
-            {
-                // Password settings.
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 1;
-
-                // Lockout settings.
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.AllowedForNewUsers = true;
-
-                // User settings.
-                options.User.AllowedUserNameCharacters =
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                options.User.RequireUniqueEmail = false;
-            });
-
-
-            services.AddIdentity<User, Role>()
-                    .AddEntityFrameworkStores<CustomDbContext>()
-                    .AddDefaultTokenProviders();
+            //Identity own extension
+            services.AddAndConfigureIdentity();
 
             //services.AddIdentityServer()
             //    // this adds the operational data from DB (codes, tokens, consents)
@@ -88,8 +64,8 @@ namespace Homeexchange.Api
             //    .AddInMemoryClients(Config.GetClients())
             //    .AddAspNetIdentity<User>();
 
-            //own extension to authentication
-            services.ConfigureAuthentication(Configuration);
+            //authentication own extension
+            services.AddAndConfigureAuthenticationThrowJwt(Configuration);
 
 
             services.Configure<IISServerOptions>(options =>

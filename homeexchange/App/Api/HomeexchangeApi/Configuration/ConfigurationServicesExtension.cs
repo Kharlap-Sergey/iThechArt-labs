@@ -1,20 +1,24 @@
 ﻿namespace Homeexchange.Api.Configuration
 {
+    using Homeexchange.Domain;
     using Homeexchange.Domain.Abstract;
     using Homeexchange.Domain.Concrete;
+    using Homeexchange.Models.Entities;
     using Homeexchange.Services.Infrastructure;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
+    using System;
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
 
     public static class ConfigurationServicesExtension
     {
-        public static void InjectDependencies(
+        public static IServiceCollection InjectDependencies(
             this IServiceCollection services,
             Assembly[] assemblies
             )
@@ -22,9 +26,11 @@
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             services.InjectServiсes(assemblies);
+
+            return services;
         }
 
-        public static void InjectServiсes(
+        public static IServiceCollection InjectServiсes(
             this IServiceCollection services,
             Assembly[] assemblies
             )
@@ -46,9 +52,11 @@
                     type.GetCustomAttribute<IsServiceImplementationAttribute>();
                 services.Add(new ServiceDescriptor(attr.ServiceType, type, attr.Lifetime));
             }
+
+            return services;
         }
 
-        public static void ConfigureAuthentication(
+        public static IServiceCollection AddAndConfigureAuthenticationThrowJwt(
             this IServiceCollection services,
             IConfiguration Configuration
             )
@@ -100,6 +108,40 @@
                             }
                         };
                     });
+
+            return services;
+        }
+
+        public static IServiceCollection AddAndConfigureIdentity(
+            this IServiceCollection services
+            )
+        {
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = false;
+            });
+
+            services.AddIdentity<User, Role>()
+                   .AddEntityFrameworkStores<CustomDbContext>()
+                   .AddDefaultTokenProviders();
+
+            return services;
         }
     }
 }
