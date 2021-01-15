@@ -31,7 +31,7 @@ namespace Homeexchange.Api.Hubs
                 string connectionId = Subscribers[notification.TargetUserId];
                 await hubContext.Clients.Client(connectionId).SendAsync("Notify", notification);
             }
-            finally
+            catch
             {
 
             }

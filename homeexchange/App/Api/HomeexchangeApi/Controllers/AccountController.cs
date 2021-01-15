@@ -34,11 +34,6 @@ namespace Homeexchange.Api.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-
-        public IActionResult  Login(string returnUrl = null)
-        {
-            return Redirect("~"+returnUrl);
-        }
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginUserViewModel model)
         { 
@@ -64,10 +59,9 @@ namespace Homeexchange.Api.Controllers
                 Nickname = model.Nickname,
                 City = model.City,
                 Country = model.Country,
-                //SecurityStamp = Guid.NewGuid().ToString()
             };
-            //user = await accounService.RegistrateAsync(user);
-            var result = await userManager.CreateAsync(user, model.Password);
+
+            user = await accounService.RegistrateAsync(user, model.Password);
             return Json(user);
         }
 
@@ -92,7 +86,16 @@ namespace Homeexchange.Api.Controllers
         public async Task<IActionResult> Get()
         {
             int userId = GetCommitterId();
-            LoginResponse response = await accounService.ReenterAsync(userId);
+
+            User user = await accounService.ReenterAsync(userId);
+            string encodedJwt = CustomJwtCreator.CreateJwt(user.Id);
+
+            var response = new LoginResponse
+            {
+                JWT = encodedJwt,
+                User = user
+            };
+
             return Json(response);
         }
 

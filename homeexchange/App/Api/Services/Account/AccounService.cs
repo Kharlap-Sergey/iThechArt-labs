@@ -50,24 +50,14 @@ namespace Homeexchange.Services
             User user = await userManager.FindByIdAsync(userId.ToString());
             return user;
         }
-        public async Task<User> RegistrateAsync(User user)
+        public async Task<User> RegistrateAsync(User user, string password)
         {
-            try
+            var result = await userManager.CreateAsync(user, password);
+            if (!result.Succeeded)
             {
-                return await userRepository.CreateAsync(user);
+                throw new System.Exception();
             }
-            catch (DbUpdateException e)
-            {
-                if (e.InnerException.Message.Contains("Email"))
-                {
-                    throw new DuplicateEmailException("try to registrate user");
-                }
-                else if (e.InnerException.Message.Contains("Nickname"))
-                {
-                    throw new DuplicateNicknameException("try to registrate user");
-                }
-                throw;
-            }
+            return await userManager.FindByNameAsync(user.UserName);
         }
     }
 }

@@ -4,6 +4,7 @@
     using Homeexchange.Domain.Abstract;
     using Homeexchange.Domain.Concrete;
     using Homeexchange.Models.Entities;
+    using Homeexchange.Services.Configuration;
     using Homeexchange.Services.Infrastructure;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Http;
