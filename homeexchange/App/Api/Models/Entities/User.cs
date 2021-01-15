@@ -9,21 +9,16 @@ namespace Homeexchange.Models.Entities
 {
     public sealed class User : IdentityUser<int>
     {
-        [JsonPropertyName("firstname")]
         [Required]
         public string Name { get; set; }
-        //[Required]
-        //[JsonPropertyName("lastname")]
-        //public string Lastname { get; set; }
+        [Required]
+        public string Lastname { get; set; }
         [Required]
         public string Nickname { get; set; }
-        //[Required]
-        //[JsonPropertyName("Language")]
-        //public string Languages { get; set; }
-
+        [Required]
+        public string Languages { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
-        //[Required]
         public int ProfileImgId { get; set; }
         [NotMapped]
         public Img ProfileImg { set; get; }
