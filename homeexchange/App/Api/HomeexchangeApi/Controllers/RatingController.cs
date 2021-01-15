@@ -25,9 +25,11 @@ namespace Homeexchange.Api.Controllers
             return Json(res);
         }
 
-        [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Set([FromBody] RatingRequest request)
+        [HttpPost]
+        public async Task<IActionResult> Set(
+            [FromBody] RatingRequest request
+            )
         {
             int committerId = GetCommitterId();
             var res = await ratingService.SetAsync(request, committerId);

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers
 {
-    [Route("[controller]/{action = GetChatList}")]
+    [Route( "[controller]/{action = GetChatList}" )]
     public sealed class ChatController : BaseController
     {
         private readonly IChatService chatService;
@@ -20,32 +20,39 @@ namespace Homeexchange.Api.Controllers
             this.chatService = chatService;
         }
 
-        [HttpGet]
         [Authorize]
+        [HttpGet]
         public async Task<IActionResult> GetChatList()
         {
             int userId = GetCommitterId();
-            IEnumerable<ChatListItemResponse> chatList = await chatService.GetChatResponsesListAsync(userId);
-            return Json(chatList);
+            IEnumerable<ChatListItemResponse> chatList =
+                await chatService.GetChatResponsesListAsync(userId);
+            return Json( chatList );
         }
 
+        [Authorize]
         [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> GetPrivateRoomId([FromBody] GetPrivateRoomIdRequest request)
+        public async Task<IActionResult> GetPrivateRoomId(
+            [FromBody] GetPrivateRoomIdRequest request
+            )
         {
-            Chat chat = 
-                await chatService.GetChatOrCreateForTowMembersAsync(request.Member1Id, request.Member2Id);
-            return Json(chat.Id);
+            Chat chat =
+                await chatService
+                    .GetChatOrCreateForTowMembersAsync(
+                        request.Member1Id,
+                        request.Member2Id);
+
+            return Json( chat.Id );
         }
 
-        [HttpGet("{chatId}")]
         [Authorize]
-        public async Task<IActionResult> GetChatMessages(int chatId)
+        [HttpGet( "{chatId}" )]
+        public async Task<IActionResult> GetChatMessages( int chatId )
         {
             int committerId = GetCommitterId();
-            IEnumerable<ChatMessage> chatMessages = 
+            IEnumerable<ChatMessage> chatMessages =
                 await chatService.GetChatMessagesAsync(chatId, committerId);
-            return Json(chatMessages);
+            return Json( chatMessages );
         }
 
     }

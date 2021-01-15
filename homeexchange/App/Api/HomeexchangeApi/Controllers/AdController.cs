@@ -38,7 +38,7 @@ namespace Homeexchange.Api.Controllers
             )
         {
             Page<Ad> page = await adService.GetAdsPageAsync(request.Page, request.Filter);
-            var adsPage = mapper.Map<AdsPage>(page);
+            var adsPage = mapper.Map<AdsPageViewModel>(page);
 
             return Json( adsPage );
         }

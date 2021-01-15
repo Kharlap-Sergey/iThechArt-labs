@@ -1,16 +1,10 @@
 ﻿using Homeexchange.Domain.Abstract;
 using Homeexchange.Models.Entities;
 using Homeexchange.Models.Exceptions;
-using Homeexchange.Models.ViewModels;
-using Homeexchange.Responses;
 using Homeexchange.Services.Infrastructure;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Homeexchange.Services

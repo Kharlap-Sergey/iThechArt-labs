@@ -19,18 +19,19 @@ namespace Homeexchange.Api.Controllers
             this.notificationService = notificationService;
         }
 
-        [HttpGet]
         [Authorize]
+        [HttpGet]
         public async Task<IActionResult> GetNotifications()
         {
             int targetUserId = GetCommitterId();
             IEnumerable<Notification> notifications =
-                await notificationService.GetAllNotificationForUserByUserIdAsync(targetUserId);
+                await notificationService
+                        .GetAllNotificationForUserByUserIdAsync(targetUserId);
             return Json(notifications);
         }
 
-        [HttpDelete("{notificationId}")]
         [Authorize]
+        [HttpDelete("{notificationId}")]
         public async Task<IActionResult> DeleteNotificaton(int notificationId)
         {
             int commiterId = GetCommitterId();

@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Homeexchange.Models.ViewModels
 {
-    public sealed class UpdateAdViewModel : AdViewModel
+    public sealed class SetRatingViewModel
     {
-       public int Id {get; set;}
     }
 }
