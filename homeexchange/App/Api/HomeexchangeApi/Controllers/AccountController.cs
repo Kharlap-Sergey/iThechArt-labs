@@ -1,22 +1,16 @@
-﻿using AutoMapper;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using Homeexchange.Api.Infrastructure;
 using Homeexchange.Models.Entities;
 using Homeexchange.Models.ViewModels;
 using Homeexchange.Responses;
 using Homeexchange.Services;
-using Homeexchange.Services.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Homeexchange.Api.Controllers
 {
-    [Route("[controller]/{action}")]
+    [Route( "[controller]/{action}" )]
     public sealed class AccountController : BaseController
     {
         private readonly IAccounService accounService;
@@ -32,8 +26,9 @@ namespace Homeexchange.Api.Controllers
             this.accounService = accounService;
             this.mapper = mapper;
         }
+
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginUserViewModel model)
+        public async Task<IActionResult> Login( [FromBody] LoginUserViewModel model )
         {
             User user = await accounService.LoginAsync(model.Login, model.Password);
 
@@ -45,31 +40,32 @@ namespace Homeexchange.Api.Controllers
                 User = user
             };
 
-            return Json(response);
+            return Json( response );
         }
+
         [HttpPost]
-        public async Task<IActionResult> Registrate([FromBody] RegisterUserViewModel model)
+        public async Task<IActionResult> Registrate( [FromBody] RegisterUserViewModel model )
         {
             User user = mapper.Map<User>(model);
-            user = await accounService.RegistrateAsync(user, model.Password);
-            return Json(user);
+            user = await accounService.RegistrateAsync( user, model.Password );
+            return Json( user );
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Update([FromBody] UpdateUserViewModel model)
+        public async Task<IActionResult> Update( [FromBody] UpdateUserViewModel model )
         {
             int commiterId = GetCommitterId();
             var user = mapper.Map<User>(model);
-            user = await accounService.Edit(user, commiterId);
-            return Json(user);
+            user = await accounService.Edit( user, commiterId );
+            return Json( user );
         }
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> Get(int userId)
+        [HttpGet( "{userId}" )]
+        public async Task<IActionResult> Get( int userId )
         {
             User user = await userService.GetProfileAsync(userId);
-            return Json(user);
+            return Json( user );
         }
 
         [HttpGet]
@@ -87,7 +83,7 @@ namespace Homeexchange.Api.Controllers
                 User = user
             };
 
-            return Json(response);
+            return Json( response );
         }
 
     }
