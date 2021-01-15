@@ -7,6 +7,7 @@ using Homeexchange.Services.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -30,6 +31,22 @@ namespace Homeexchange.Services
             this.userRepository = userRepository;
             this.userManager = userManager;
             this.signInManager = signInManager;
+        }
+
+        public async Task<User> Edit(User user, int committerId)
+        {
+            if(user.Id != committerId)
+            {
+                throw new PermissionException("data can't be updated");
+            }
+            User current = await userManager.FindByIdAsync(user.Id.ToString());
+            current.Update(user);
+            var result = await userManager.UpdateAsync(current);
+            if (!result.Succeeded)
+            {
+                throw new Exception("some error");
+            }
+            return current;
         }
 
         public async Task<User> LoginAsync(string login, string password)

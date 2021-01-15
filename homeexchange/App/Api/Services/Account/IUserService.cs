@@ -8,7 +8,6 @@ namespace Homeexchange.Services
     {
         public Task<User> FindByIdAsync(int userId);
         public Task<User> CreateAsync(User user);
-        public Task<User> UpdateAsync(User user, int commiterId);
         public Task<User> GetProfileAsync(int userId);
     }
 }

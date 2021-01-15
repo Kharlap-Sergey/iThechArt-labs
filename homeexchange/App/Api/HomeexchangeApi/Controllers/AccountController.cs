@@ -19,20 +19,14 @@ namespace Homeexchange.Api.Controllers
     public sealed class AccountController : BaseController
     {
         private readonly IAccounService accounService;
-        private readonly UserManager<User> userManager;
-        private readonly SignInManager<User> signInManager;
         private readonly IUserService userService;
         public AccountController(
              IUserService userService,
-             IAccounService accounService,
-             UserManager<User> userManager,
-             SignInManager<User> signInManager
+             IAccounService accounService
             )
         {
             this.userService = userService;
             this.accounService = accounService;
-            this.userManager = userManager;
-            this.signInManager = signInManager;
         }
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginUserViewModel model)
@@ -70,7 +64,7 @@ namespace Homeexchange.Api.Controllers
         public async Task<IActionResult> Update([FromBody] User user)
         {
             int commiterId = GetCommitterId();
-            user = await userService.UpdateAsync(user, commiterId);
+            user = await accounService.Edit(user, commiterId);
             return Json(user);
         }
 

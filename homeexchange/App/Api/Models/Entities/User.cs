@@ -15,12 +15,8 @@ namespace Homeexchange.Models.Entities
         //[Required]
         //[JsonPropertyName("lastname")]
         //public string Lastname { get; set; }
-        //[Required]
-        //public string Email { get; set; }
         [Required]
         public string Nickname { get; set; }
-        //[Required]
-        //public string Password { get; set; }
         //[Required]
         //[JsonPropertyName("Language")]
         //public string Languages { get; set; }
@@ -31,5 +27,16 @@ namespace Homeexchange.Models.Entities
         public int ProfileImgId { get; set; }
         [NotMapped]
         public Img ProfileImg { set; get; }
+
+        public User Update(User from)
+        {
+            this.Name = from.Name;
+            //this.Lastname = from.Lastname;
+            //this.Languages = from.Languages;
+            this.Nickname = from.Nickname;
+            this.Country = from.Country;
+            this.City = from.City;
+            return this;
+        }
     }
 }
