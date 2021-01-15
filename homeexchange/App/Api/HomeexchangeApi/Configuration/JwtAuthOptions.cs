@@ -1,9 +1,9 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace Homeexchange.Services.Infrastructure
+namespace Homeexchange.Services.Configuration
 {
-    public sealed class JwtAuthOptions
+    public static class JwtAuthOptions
     {
         public const string SectionName = "JwtAuthOptions";
         public static string ISSUER = "Default";

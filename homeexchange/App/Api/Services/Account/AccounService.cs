@@ -4,6 +4,7 @@ using Homeexchange.Models.Exceptions;
 using Homeexchange.Models.ViewModels;
 using Homeexchange.Responses;
 using Homeexchange.Services.Infrastructure;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
@@ -17,45 +18,37 @@ namespace Homeexchange.Services
     public sealed class AccounService : IAccounService
     {
         private readonly IGenericRepository<User> userRepository;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
+
         public AccounService(
-            IGenericRepository<User> userRepository
+            IGenericRepository<User> userRepository,
+            UserManager<User> userManager,
+             SignInManager<User> signInManager
             )
         {
             this.userRepository = userRepository;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
-        public async Task<LoginResponse> LoginAsync(Account account)
+        public async Task<User> LoginAsync(string login, string password)
         {
-            User user = (await userRepository.GetAsync
-                (
-                    u => u.Email == account.Login
-                         //&& u.Password == account.Password
-                )).FirstOrDefault();
+            var result =
+                await signInManager.PasswordSignInAsync(login, password, true, false);
 
-            if (user == null)
+            if (!result.Succeeded)
             {
                 throw new InvalidCredentialExeption("The user name or password is not correct");
             }
 
-            ClaimsIdentity identity = GetIdentity(user);
-            string encodedJwt = CustomJWTCreator.CreateJWT(identity);
-
-            var response = new LoginResponse
-            {
-                JWT = encodedJwt,
-                User = user
-            };
-            return response;
+            User user = await userManager.FindByNameAsync(login);
+            return user;
         }
-        public async Task<LoginResponse> ReenterAsync(int userId)
+        public async Task<User> ReenterAsync(int userId)
         {
-            User user = await userRepository.GetByIdAsync(userId);
-            var account = new Account
-            {
-                Login = user.Email,
-                //Password = user.Password
-            };
-            return await LoginAsync(account);
+            User user = await userManager.FindByIdAsync(userId.ToString());
+            return user;
         }
         public async Task<User> RegistrateAsync(User user)
         {
@@ -75,23 +68,6 @@ namespace Homeexchange.Services
                 }
                 throw;
             }
-        }
-        private ClaimsIdentity GetIdentity(User person)
-        { 
-            var claims = new List<Claim>
-                {
-                    new Claim(
-                        ClaimsIdentity.DefaultNameClaimType,
-                        person.Id.ToString()),
-                };
-
-            ClaimsIdentity claimsIdentity =
-            new ClaimsIdentity(
-                claims,
-                "Token",
-                ClaimsIdentity.DefaultNameClaimType,
-                ClaimsIdentity.DefaultRoleClaimType);
-            return claimsIdentity;
         }
     }
 }

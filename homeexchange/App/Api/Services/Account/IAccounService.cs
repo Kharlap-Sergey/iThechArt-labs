@@ -8,7 +8,7 @@ namespace Homeexchange.Services
     public interface IAccounService
     {
         public Task<User> RegistrateAsync(User user);
-        public Task<LoginResponse> LoginAsync(Account account);
-        public Task<LoginResponse> ReenterAsync(int userId);
+        public Task<User> LoginAsync(string login, string password);
+        public Task<User> ReenterAsync(int userId);
     }
 }

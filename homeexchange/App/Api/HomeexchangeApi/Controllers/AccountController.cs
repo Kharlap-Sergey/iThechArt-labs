@@ -1,4 +1,5 @@
-﻿using Homeexchange.Models.Entities;
+﻿using Homeexchange.Api.Infrastructure;
+using Homeexchange.Models.Entities;
 using Homeexchange.Models.ViewModels;
 using Homeexchange.Responses;
 using Homeexchange.Services;
@@ -39,46 +40,19 @@ namespace Homeexchange.Api.Controllers
             return Redirect("~"+returnUrl);
         }
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] Account account)
-        {
-            var result =
-                await signInManager.PasswordSignInAsync(account.Login, account.Password, true, false);
-            var user = userManager.FindByNameAsync(account.Login);
-            //LoginResponse result = await accounService.LoginAsync(account);
-            var userResult = user.Result;
+        public async Task<IActionResult> Login([FromBody] LoginUserViewModel model)
+        { 
+            User user = await accounService.LoginAsync(model.Login, model.Password);
 
-            //var authClaims = new List<Claim>
-            //    {
-            //        new Claim(ClaimTypes.Name, user.Id.ToString()),
-            //        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            //    };
-            ClaimsIdentity identity = GetIdentity(userResult.Id);
-            string encodedJwt = CustomJWTCreator.CreateJWT(identity);
+            string encodedJwt = CustomJwtCreator.CreateJwt(user.Id);
 
             var response = new LoginResponse
             {
                 JWT = encodedJwt,
-                User = userResult
+                User = user
             };
 
             return Json(response);
-        }
-        private ClaimsIdentity GetIdentity(int person)
-        {
-            var claims = new List<Claim>
-                {
-                    new Claim(
-                        ClaimsIdentity.DefaultNameClaimType,
-                        person.ToString()),
-                };
-
-            ClaimsIdentity claimsIdentity =
-            new ClaimsIdentity(
-                claims,
-                "Token",
-                ClaimsIdentity.DefaultNameClaimType,
-                ClaimsIdentity.DefaultRoleClaimType);
-            return claimsIdentity;
         }
         [HttpPost]
         public async Task<IActionResult> Registrate([FromBody] RegisterUserViewModel model)
@@ -90,7 +64,7 @@ namespace Homeexchange.Api.Controllers
                 Nickname = model.Nickname,
                 City = model.City,
                 Country = model.Country,
-                SecurityStamp = Guid.NewGuid().ToString()
+                //SecurityStamp = Guid.NewGuid().ToString()
             };
             //user = await accounService.RegistrateAsync(user);
             var result = await userManager.CreateAsync(user, model.Password);
