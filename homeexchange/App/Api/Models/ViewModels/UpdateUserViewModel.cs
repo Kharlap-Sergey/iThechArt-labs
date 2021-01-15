@@ -6,15 +6,16 @@ using System.Text.Json.Serialization;
 
 namespace Homeexchange.Models.ViewModels
 {
-    public sealed class RegisterUserViewModel
+    public sealed class UpdateUserViewModel
     {
+        [Required]
         public int Id { get; set; }
 
-        [JsonPropertyName("firstname")]
+        [JsonPropertyName( "firstname" )]
         [Required]
         public string Name { get; set; }
         [Required]
-        [JsonPropertyName("lastname")]
+        [JsonPropertyName( "lastname" )]
         public string Lastname { get; set; }
         [Required]
         public string Email { get; set; }
@@ -23,7 +24,7 @@ namespace Homeexchange.Models.ViewModels
         [Required]
         public string Password { get; set; }
         [Required]
-        [JsonPropertyName("Language")]
+        [JsonPropertyName( "Language" )]
         public string Languages { get; set; }
         public string Country { get; set; }
         public string City { get; set; }

@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Homeexchange.Models.Entities;
+using Homeexchange.Models.ViewModels;
 
 namespace Homeexchange.Api.Mapper
 {
@@ -10,7 +8,10 @@ namespace Homeexchange.Api.Mapper
     {
         public MappingProfile()
         {
-
+            CreateMap<RegisterUserViewModel, User>()
+                .ReverseMap();
+            CreateMap<UpdateUserViewModel, User>()
+                .ReverseMap();
         }
     }
 }

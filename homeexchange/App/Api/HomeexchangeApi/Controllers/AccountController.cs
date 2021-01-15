@@ -1,4 +1,5 @@
-﻿using Homeexchange.Api.Infrastructure;
+﻿using AutoMapper;
+using Homeexchange.Api.Infrastructure;
 using Homeexchange.Models.Entities;
 using Homeexchange.Models.ViewModels;
 using Homeexchange.Responses;
@@ -19,18 +20,21 @@ namespace Homeexchange.Api.Controllers
     public sealed class AccountController : BaseController
     {
         private readonly IAccounService accounService;
+        private readonly IMapper mapper;
         private readonly IUserService userService;
         public AccountController(
              IUserService userService,
-             IAccounService accounService
+             IAccounService accounService,
+             IMapper mapper
             )
         {
             this.userService = userService;
             this.accounService = accounService;
+            this.mapper = mapper;
         }
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginUserViewModel model)
-        { 
+        {
             User user = await accounService.LoginAsync(model.Login, model.Password);
 
             string encodedJwt = CustomJwtCreator.CreateJwt(user.Id);
@@ -46,24 +50,17 @@ namespace Homeexchange.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Registrate([FromBody] RegisterUserViewModel model)
         {
-            var user = new User {
-                Email = model.Email,
-                UserName = model.Email,
-                Name = model.Name,
-                Nickname = model.Nickname,
-                City = model.City,
-                Country = model.Country,
-            };
-
+            User user = mapper.Map<User>(model);
             user = await accounService.RegistrateAsync(user, model.Password);
             return Json(user);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Update([FromBody] User user)
+        public async Task<IActionResult> Update([FromBody] UpdateUserViewModel model)
         {
             int commiterId = GetCommitterId();
+            var user = mapper.Map<User>(model);
             user = await accounService.Edit(user, commiterId);
             return Json(user);
         }

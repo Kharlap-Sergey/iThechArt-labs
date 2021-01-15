@@ -1,5 +1,7 @@
+using AutoMapper;
 using Homeexchange.Api.Configuration;
 using Homeexchange.Api.Hubs;
+using Homeexchange.Api.Mapper;
 using Homeexchange.Domain;
 using Homeexchange.GlobalErrorHandling;
 using Homeexchange.Models.Entities;
@@ -67,6 +69,7 @@ namespace Homeexchange.Api
             //authentication own extension
             services.AddAndConfigureAuthenticationThrowJwt(Configuration);
 
+            services.AddAndConfigureAutoMapper();
 
             services.Configure<IISServerOptions>(options =>
             {

@@ -1,19 +1,22 @@
-﻿namespace Homeexchange.Api.Mapper
-{
-    using AutoMapper;
-    using Microsoft.Extensions.DependencyInjection;
+﻿using AutoMapper;
+using Homeexchange.Models.Entities;
+using Homeexchange.Models.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
+namespace Homeexchange.Api.Mapper
+{
     public static class MapperConfigurationExtension
     {
-        public static void AddAutomapper(this IServiceCollection services)
+        public static IServiceCollection AddAndConfigureAutoMapper(this IServiceCollection services)
         {
             var mapperConfig = new MapperConfiguration(mc =>
              {
                  mc.AddProfile(new MappingProfile());
              });
 
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddAutoMapper(typeof(MappingProfile));
+
+            return services;
         }
     }
 }
