@@ -19,6 +19,7 @@ namespace Homeexchange.Api.Controllers
             this.adService = adService;
         }
 
+        
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create([FromBody] Ad ad)

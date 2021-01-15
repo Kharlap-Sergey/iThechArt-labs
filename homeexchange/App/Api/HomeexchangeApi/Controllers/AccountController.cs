@@ -6,7 +6,9 @@ using Homeexchange.Services.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -45,12 +47,17 @@ namespace Homeexchange.Api.Controllers
             //LoginResponse result = await accounService.LoginAsync(account);
             var userResult = user.Result;
 
-            //ClaimsIdentity identity = GetIdentity(userResult.Id);
-            //string encodedJwt = CustomJWTCreator.CreateJWT(identity);
+            //var authClaims = new List<Claim>
+            //    {
+            //        new Claim(ClaimTypes.Name, user.Id.ToString()),
+            //        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            //    };
+            ClaimsIdentity identity = GetIdentity(userResult.Id);
+            string encodedJwt = CustomJWTCreator.CreateJWT(identity);
 
             var response = new LoginResponse
             {
-                JWT = "fds",
+                JWT = encodedJwt,
                 User = userResult
             };
 
@@ -76,13 +83,14 @@ namespace Homeexchange.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Registrate([FromBody] RegisterUserViewModel model)
         {
-            var user = new User { 
-                Email = model.Email, 
-                UserName = model.Email, 
+            var user = new User {
+                Email = model.Email,
+                UserName = model.Email,
                 Name = model.Name,
                 Nickname = model.Nickname,
                 City = model.City,
                 Country = model.Country,
+                SecurityStamp = Guid.NewGuid().ToString()
             };
             //user = await accounService.RegistrateAsync(user);
             var result = await userManager.CreateAsync(user, model.Password);

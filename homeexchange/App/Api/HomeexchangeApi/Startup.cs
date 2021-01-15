@@ -70,25 +70,26 @@ namespace Homeexchange.Api
             });
 
 
-            services.AddIdentity<User, IdentityRole<int>>()
+            services.AddIdentity<User, Role>()
                     .AddEntityFrameworkStores<CustomDbContext>()
                     .AddDefaultTokenProviders();
 
-            services.AddIdentityServer()
-                // this adds the operational data from DB (codes, tokens, consents)
-                .AddOperationalStore(options =>
-                {
-                    options.ConfigureDbContext = builder => builder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                    // this enables automatic token cleanup. this is optional.
-                    options.EnableTokenCleanup = true;
-                    options.TokenCleanupInterval = 30000; // interval in seconds
-                })
-                .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryClients(Config.GetClients())
-                .AddAspNetIdentity<User>();
+            //services.AddIdentityServer()
+            //    // this adds the operational data from DB (codes, tokens, consents)
+            //    .AddOperationalStore(options =>
+            //    {
+            //        options.ConfigureDbContext = builder => builder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            //        // this enables automatic token cleanup. this is optional.
+            //        options.EnableTokenCleanup = true;
+            //        options.TokenCleanupInterval = 30000; // interval in seconds
+            //    })
+            //    .AddInMemoryIdentityResources(Config.GetIdentityResources())
+            //    .AddInMemoryApiResources(Config.GetApiResources())
+            //    .AddInMemoryClients(Config.GetClients())
+            //    .AddAspNetIdentity<User>();
+
             //own extension to authentication
-            //services.ConfigureAuthentication(Configuration);
+            services.ConfigureAuthentication(Configuration);
 
 
             services.Configure<IISServerOptions>(options =>
@@ -121,7 +122,7 @@ namespace Homeexchange.Api
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseIdentityServer();
+            //app.UseIdentityServer();
 
             app.UseEndpoints(endpoints =>
             {

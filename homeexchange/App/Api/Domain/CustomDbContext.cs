@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Homeexchange.Domain
 {
-    public class CustomDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>,int>
+    public class CustomDbContext : IdentityDbContext<User, Role, int>
     {
         //public DbSet<User> Users { get; set; }
         public DbSet<Rating> Ratings { get; set; }

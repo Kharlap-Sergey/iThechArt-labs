@@ -60,9 +60,15 @@
             JwtAuthOptions.KEY = section["KEY"];
             JwtAuthOptions.LIFETIME = int.Parse(section["LIFETIME"]);
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(options =>
+                    {
+                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    })
                     .AddJwtBearer(options =>
                     {
+                        options.SaveToken = true; 
                         options.RequireHttpsMetadata = false;
 
                         options.TokenValidationParameters = new TokenValidationParameters
