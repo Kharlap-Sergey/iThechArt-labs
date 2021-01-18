@@ -34,15 +34,8 @@ namespace Homeexchange.Api
         public void ConfigureServices(IServiceCollection services)
         {
             //own extension to implement DI
-            IAdService adService;
-            var assemblies = AppDomain.CurrentDomain
-                                .GetAssemblies()
-                                .Where(a => a.GetName()
-                                            .Name
-                                            .ToLower()
-                                            .Contains("homeexchange"))
-                                .ToArray();
-            services.InjectDependencies(assemblies);
+          
+            services.InjectDependencies();
 
             //db connect
             string connection = Configuration.GetConnectionString("DefaultConnection");

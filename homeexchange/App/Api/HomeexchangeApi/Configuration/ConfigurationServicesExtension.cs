@@ -1,30 +1,36 @@
-﻿namespace Homeexchange.Api.Configuration
-{
-    using Homeexchange.Domain;
-    using Homeexchange.Domain.Abstract;
-    using Homeexchange.Domain.Concrete;
-    using Homeexchange.Models.Entities;
-    using Homeexchange.Services.Configuration;
-    using Homeexchange.Services.Infrastructure;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.IdentityModel.Tokens;
-    using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Threading.Tasks;
+﻿using Homeexchange.Domain;
+using Homeexchange.Domain.Abstract;
+using Homeexchange.Domain.Concrete;
+using Homeexchange.Models.Entities;
+using Homeexchange.Services.Configuration;
+using Homeexchange.Services.Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
+namespace Homeexchange.Api.Configuration
+{
     public static class ConfigurationServicesExtension
     {
         public static IServiceCollection InjectDependencies(
-            this IServiceCollection services,
-            Assembly[] assemblies
+            this IServiceCollection services
             )
         {
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            List<Assembly> assemblies = new List<Assembly>();
+            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            foreach ( string dll in Directory.GetFiles( path, "*homeexchange*.dll" ) )
+                assemblies.Add( Assembly.LoadFrom( dll ) );
 
             services.InjectServiсes(assemblies);
 
@@ -33,7 +39,7 @@
 
         public static IServiceCollection InjectServiсes(
             this IServiceCollection services,
-            Assembly[] assemblies
+            List<Assembly> assemblies
             )
         {
             var typesFromAssemblies = assemblies.SelectMany
@@ -46,7 +52,6 @@
                                 t.GetCustomAttribute(typeof(IsServiceImplementationAttribute)) != null
                         )
                 ).ToList();
-
             foreach (var type in typesFromAssemblies)
             {
                 IsServiceImplementationAttribute attr =
