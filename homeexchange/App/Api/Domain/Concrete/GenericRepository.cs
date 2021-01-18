@@ -55,18 +55,13 @@ namespace Homeexchange.Domain.Concrete
         }
         public async Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "")
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
+            )
         {
             IQueryable<TEntity> query = entities;
             if (filter != null)
             {
                 query = query.Where(filter);
-            }
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(includeProperty);
             }
             if (orderBy != null)
             {
