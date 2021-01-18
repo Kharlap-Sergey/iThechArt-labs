@@ -12,7 +12,6 @@ namespace Homeexchange.Models.Entities
         [Key]
         public int Id { get; set; }
         public string Title { get; set; }
-        [JsonPropertyName("description")]
         public string Desc { get; set; }
         public DateTime DateOfPublication { get; set; }
         public AdType Type { get; set; }

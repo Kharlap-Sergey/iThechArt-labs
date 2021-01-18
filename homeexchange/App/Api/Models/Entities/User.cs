@@ -26,8 +26,8 @@ namespace Homeexchange.Models.Entities
         public User Update(User from)
         {
             this.Name = from.Name;
-            //this.Lastname = from.Lastname;
-            //this.Languages = from.Languages;
+            this.Lastname = from.Lastname;
+            this.Languages = from.Languages;
             this.Nickname = from.Nickname;
             this.Country = from.Country;
             this.City = from.City;

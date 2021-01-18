@@ -15,7 +15,6 @@ namespace Homeexchange.Models.ViewModels
         [Required]
         public string Name { get; set; }
         [Required]
-        [JsonPropertyName( "lastname" )]
         public string Lastname { get; set; }
         [Required]
         public string Email { get; set; }
