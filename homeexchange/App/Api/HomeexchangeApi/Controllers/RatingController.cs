@@ -1,4 +1,7 @@
-﻿using Homeexchange.Models.Requests;
+﻿using AutoMapper;
+using Homeexchange.Api.ViewModels;
+using Homeexchange.Models.Entities;
+using Homeexchange.Models.Requests;
 using Homeexchange.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +14,15 @@ namespace Homeexchange.Api.Controllers
     public sealed class RatingController : BaseController
     {
         private readonly IRatingService ratingService;
+        private readonly IMapper mapper;
+
         public RatingController(
-            IRatingService ratingService
+            IRatingService ratingService,
+            IMapper mapper
             )
         {
             this.ratingService = ratingService;
+            this.mapper = mapper;
         }
 
         [HttpGet("{profileId}")]
@@ -28,11 +35,13 @@ namespace Homeexchange.Api.Controllers
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> Set(
-            [FromBody] RatingRequest request
+            [FromBody] SetRatingViewModel model
             )
         {
             int committerId = GetCommitterId();
-            var res = await ratingService.SetAsync(request, committerId);
+            Rating ratingRequest = mapper.Map<Rating>(model);
+            ratingRequest.CommitterId = committerId;
+            var res = await ratingService.SetAsync(ratingRequest);
             return Json(res);
         }
     }

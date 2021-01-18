@@ -26,25 +26,25 @@ namespace Homeexchange.Services
             return await ratingRepository.GetAsync(r => r.TargetId == targetId);
         }
 
-        public async Task<Rating> SetAsync(RatingRequest request, int committerId)
+        public async Task<Rating> SetAsync(Rating rateReques)
         {
             Rating rating =
                 (await ratingRepository
-                    .GetAsync(r => r.TargetId == request.TargetId && r.CommitterId == committerId))
+                    .GetAsync(r => r.TargetId == rateReques.TargetId && r.CommitterId == rateReques.CommitterId))
                 .FirstOrDefault();
 
             if (rating is null)
             {
                 rating = await ratingRepository.CreateAsync(new Rating
                 {
-                    TargetId = request.TargetId,
-                    CommitterId = committerId,
-                    Mark = request.Mark,
+                    TargetId = rateReques.TargetId,
+                    CommitterId = rateReques.CommitterId,
+                    Mark = rateReques.Mark,
                 });
             }
             else
             {
-                rating.Mark = request.Mark;
+                rating.Mark = rateReques.Mark;
                 rating = await ratingRepository.UpdateAsync(rating);
             }
             return rating;

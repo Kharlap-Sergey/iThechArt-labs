@@ -20,6 +20,8 @@ namespace Homeexchange.Api.Mapper
                 .ReverseMap();
             CreateMap<AdViewModel, Ad>()
                 .ReverseMap();
+            CreateMap<SetRatingViewModel, Rating>()
+                .ReverseMap();
             CreateMap<Page<Ad>, AdsPageViewModel>()
                 .ForMember(
                     dest => dest.Ads, 

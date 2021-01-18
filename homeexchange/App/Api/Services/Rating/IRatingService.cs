@@ -9,6 +9,6 @@ namespace Homeexchange.Services
     {
         public Task<IEnumerable<Rating>> GetAsync(int targetId);
 
-        public Task<Rating> SetAsync(RatingRequest request, int committerId);
+        public Task<Rating> SetAsync(Rating request);
     }
 }
