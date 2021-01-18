@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
-namespace Homeexchange.Models.Exceptions
+namespace Homeexchange.Api.Exceptions
 {
     [Serializable]
     public sealed class UnauthorizedException : Exception

@@ -1,4 +1,4 @@
-﻿namespace Homeexchange.Models.Exceptions
+﻿namespace Homeexchange.Api.Exceptions
 {
     public sealed class DuplicateNicknameException : DuplicateUniqueValueException
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Homeexchange.Models.Exceptions
+namespace Homeexchange.Api.Exceptions
 {
     public sealed class InvalidCredentialExeption : Exception
     {
