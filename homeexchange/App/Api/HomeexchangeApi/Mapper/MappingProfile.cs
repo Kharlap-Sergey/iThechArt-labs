@@ -9,6 +9,9 @@ namespace Homeexchange.Api.Mapper
         public MappingProfile()
         {
             CreateMap<RegisterUserViewModel, User>()
+                .ForMember(
+                    dest => dest.UserName,
+                    o => o.MapFrom( src => src.Email ) )
                 .ReverseMap();
             CreateMap<UpdateUserViewModel, User>()
                 .ReverseMap();
