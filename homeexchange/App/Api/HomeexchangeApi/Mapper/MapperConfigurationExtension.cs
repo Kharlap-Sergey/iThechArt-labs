@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Homeexchange.Models.Entities;
-using Homeexchange.Models.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Homeexchange.Api.Mapper

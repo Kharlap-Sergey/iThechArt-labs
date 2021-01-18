@@ -1,7 +1,7 @@
 ﻿using Homeexchange.Models.Entities;
 using System.Collections.Generic;
 
-namespace Homeexchange.Models.ViewModels
+namespace Homeexchange.Api.ViewModels
 {
     public sealed class AdsPageViewModel
     {

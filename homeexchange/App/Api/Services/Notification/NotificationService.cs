@@ -1,7 +1,5 @@
 ﻿using Homeexchange.Domain.Abstract;
 using Homeexchange.Models.Entities;
-using Homeexchange.Models.Exceptions;
-using Homeexchange.Models.ViewModels;
 using Homeexchange.Services.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using System;

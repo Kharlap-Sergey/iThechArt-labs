@@ -1,4 +1,4 @@
-﻿namespace Homeexchange.Models.ViewModels
+﻿namespace Homeexchange.Api.ViewModels
 {
     public sealed class LoginUserViewModel
     {

@@ -1,6 +1,5 @@
 ﻿using Homeexchange.Domain.Abstract;
 using Homeexchange.Models.Entities;
-using Homeexchange.Models.Exceptions;
 using Homeexchange.Services.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;

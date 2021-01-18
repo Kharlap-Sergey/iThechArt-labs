@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Homeexchange.Api.ViewModels;
 using Homeexchange.Models.Entities;
 using Homeexchange.Models.Requests;
 using Homeexchange.Models.Shared;

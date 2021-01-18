@@ -1,4 +1,4 @@
-﻿using Homeexchange.Models.Exceptions;
+﻿using Homeexchange.Api.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Homeexchange.Api.Controllers

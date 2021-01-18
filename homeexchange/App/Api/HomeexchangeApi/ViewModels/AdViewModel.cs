@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Homeexchange.Models.Shared;
+﻿using Homeexchange.Models.Shared;
 
-namespace Homeexchange.Models.ViewModels
+namespace Homeexchange.Api.ViewModels
 {
     public class AdViewModel
     {

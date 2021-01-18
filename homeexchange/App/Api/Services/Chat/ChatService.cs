@@ -1,10 +1,8 @@
 ﻿using Homeexchange.Domain.Abstract;
 using Homeexchange.Models.Entities;
-using Homeexchange.Models.Exceptions;
 using Homeexchange.Models.Requests;
 using Homeexchange.Models.Responses;
 using Homeexchange.Services.Infrastructure;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

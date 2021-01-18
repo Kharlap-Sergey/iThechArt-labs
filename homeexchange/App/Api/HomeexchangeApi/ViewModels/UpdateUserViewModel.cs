@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Homeexchange.Models.ViewModels
+namespace Homeexchange.Api.ViewModels
 {
     public sealed class UpdateUserViewModel
     {

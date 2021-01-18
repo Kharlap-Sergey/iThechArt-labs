@@ -1,4 +1,4 @@
-﻿using Homeexchange.Models.Exceptions;
+﻿using Homeexchange.Api.Exceptions;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Homeexchange.Api.Hubs

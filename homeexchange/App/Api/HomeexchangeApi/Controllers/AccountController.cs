@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
 using Homeexchange.Api.Infrastructure;
+using Homeexchange.Api.ViewModels;
 using Homeexchange.Models.Entities;
 using Homeexchange.Models.ViewModels;
 using Homeexchange.Responses;
